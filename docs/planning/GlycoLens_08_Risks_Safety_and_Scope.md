@@ -113,6 +113,8 @@ Only add graph technology if:
 2. a concrete retrieval question cannot be handled cleanly in Postgres
 3. advisor agrees it adds capstone value
 
+Developer note: a local Graphify repository knowledge graph may be used for code and documentation navigation. It is tooling only and must not be presented as the product's GraphRAG architecture or ingest secrets, health datasets, private CGM exports, model weights, or generated artifacts.
+
 ## 10. Mobile scope risk
 
 ### Risk

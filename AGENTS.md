@@ -40,6 +40,23 @@ Never commit secrets, OAuth tokens, API keys, identifiable health data, private 
 ## Working practices
 
 - Keep changes focused and reviewable.
+- Define acceptance criteria before editing and verify them before completion.
 - Add or update tests for behavior changes.
 - Record important architectural decisions in `docs/decisions/`.
 - Update the root README when setup or repository navigation changes.
+- Never push, merge, deploy, rotate credentials, or change external services without explicit authorization.
+
+## Repository skills
+
+Shared workflows live in `.agents/skills/`. Use the relevant skill for documentation governance, architecture review, change delivery, testing, pull-request review, impact measurement, or medical/data safety. Skill instructions supplement rather than replace this file and the planning source of truth.
+
+## Graphify lifecycle
+
+Graphify is an optional developer knowledge graph, not product GraphRAG, a product database, or a forecasting component.
+
+- Before a broad repository scan, unfamiliar-code exploration, impact analysis, or cross-document question, run `scripts/graphify/Get-GraphifyStatus.ps1`.
+- When a current graph exists, query it first and verify important claims against source files.
+- After supported files are added, edited, moved, or deleted, run `scripts/graphify/Update-Graphify.ps1` before completion. Documentation changes require an explicit update.
+- If Graphify is unavailable or stale, inspect source directly and disclose that the graph was not refreshed.
+- Never scan ignored secrets, health datasets, private CGM exports, model weights, databases, or generated artifacts. Preserve `.gitignore` and `.graphifyignore` exclusions.
+- Do not run semantic extraction that can send document content to a configured model backend without explicit approval and verified data boundaries.

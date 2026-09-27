@@ -49,9 +49,11 @@ data/processed/*
 !data/processed/.gitkeep
 
 # Model and experiment artifacts
+artifacts/benchmarks/*
 artifacts/models/*
 artifacts/forecasts/*
 artifacts/evaluation-results/*
+!artifacts/benchmarks/.gitkeep
 !artifacts/models/.gitkeep
 !artifacts/forecasts/.gitkeep
 !artifacts/evaluation-results/.gitkeep
@@ -68,3 +70,9 @@ wandb/
 *.sqlite
 *.sqlite3
 .cache/
+
+# Graphify developer knowledge graph and local state
+graphify-out/
+graph.json
+.graphify/
+.graphify_learning.json

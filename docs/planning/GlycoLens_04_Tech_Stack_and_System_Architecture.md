@@ -426,6 +426,12 @@ Secrets:
 - Model inference: local/RIT machine or low-cost backend
 - Demo fallback: local Docker Compose so the defense does not depend on external GPU availability
 
+## 14. Repository and developer-tooling boundaries
+
+The repository mirrors the modular-monolith design with separate `frontend/`, `backend/`, `research/`, `database/`, and cross-system `tests/` ownership. Repository-scoped Codex skills under `.agents/skills/` govern documentation, architecture, delivery, testing, review, measurement, and safety.
+
+Graphify may be used locally to understand source and documentation relationships. It is a developer-only knowledge tool: it is not product GraphRAG, does not store application data, does not participate in forecasting, and does not reverse the MVP decision to use PostgreSQL and pgvector for similar-meal retrieval.
+
 ## References
 
 - Next.js PWA: https://nextjs.org/docs/app/guides/progressive-web-apps

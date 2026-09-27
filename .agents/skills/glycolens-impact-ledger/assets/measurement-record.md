@@ -1,0 +1,22 @@
+# Measurement Record
+
+- Date:
+- Hypothesis:
+- Success threshold:
+- Primary metric and direction:
+- Branch and commits compared:
+- Environment and hardware:
+- Runtime, dependency, and model versions:
+- Dataset or workload:
+- Warm-up and sample count:
+- Exact commands/configuration:
+- Before result:
+- After result:
+- Absolute change:
+- Percentage change:
+- Variance or confidence interval:
+- Error rate and resource use:
+- Raw artifact locations:
+- Limitations:
+- Reproduction result:
+- Defensible summary:

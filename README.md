@@ -43,9 +43,12 @@ docs/presentations/    Capstone presentation and RIT template
 docs/architecture/     Architecture diagrams and technical notes
 docs/decisions/        Architecture decision records
 docs/reports/          Milestone and final reports
+.agents/skills/        Repository-scoped Codex workflows
 scripts/               Development and research utilities
 tests/                 Cross-system integration and end-to-end tests
 ```
+
+The repository currently contains documented ownership boundaries only. It does not yet contain generated Next.js or FastAPI applications.
 
 ## Documentation policy
 
@@ -58,6 +61,14 @@ Start with:
 - [Tech Stack and System Architecture](docs/planning/GlycoLens_04_Tech_Stack_and_System_Architecture.md)
 
 See [AGENTS.md](AGENTS.md) for the repository working rules.
+
+Developer setup and workflow documentation:
+
+- [Local development setup](docs/tooling/local-development-setup.md)
+- [Repository-scoped Codex skills](docs/tooling/codex-skills.md)
+- [Graphify integration](docs/tooling/graphify.md)
+- [Test strategy](docs/testing/test-strategy.md)
+- [Measurement protocol](docs/benchmarks/measurement-protocol.md)
 
 ## Data and secret handling
 
@@ -75,4 +86,4 @@ Use de-identified/public datasets, virtual-patient data, and the Dexcom sandbox 
 
 ## Status
 
-Repository initialized from the approved GlycoLens planning pack. Application implementation has not yet started.
+Repository initialized from the approved GlycoLens planning pack. The local development bootstrap and governance workflows are documented; application implementation has not yet started.
