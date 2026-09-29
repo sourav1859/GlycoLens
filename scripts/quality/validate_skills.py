@@ -11,6 +11,10 @@ from pathlib import Path
 
 NAME_PATTERN = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 PLACEHOLDER_PATTERN = re.compile(r"\b(?:TODO|TBD|FIXME|PLACEHOLDER)\b", re.IGNORECASE)
+EMAIL_PATTERN = re.compile(
+    r"\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b",
+    re.IGNORECASE,
+)
 
 
 def parse_frontmatter(text: str) -> tuple[dict[str, str] | None, str | None]:
@@ -74,6 +78,11 @@ def validate_skill(skill_dir: Path) -> list[str]:
             continue
         if PLACEHOLDER_PATTERN.search(candidate_text):
             errors.append(f"placeholder marker detected in {candidate.relative_to(skill_dir)}")
+        if EMAIL_PATTERN.search(candidate_text):
+            errors.append(
+                f"literal email address detected in {candidate.relative_to(skill_dir)}; "
+                "use private environment configuration"
+            )
     return errors
 
 

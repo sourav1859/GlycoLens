@@ -37,6 +37,8 @@ Implementation and documentation must not diverge. Documentation-only wording co
 
 Never commit secrets, OAuth tokens, API keys, identifiable health data, private CGM exports, downloaded research datasets, or model weights. Use environment variables and sanitized fixtures.
 
+Keep personal contact addresses in ignored environment configuration. Repository skills must reference environment-variable names rather than literal addresses; `scripts/quality/validate_skills.py` enforces this boundary.
+
 ## Working practices
 
 - Keep changes focused and reviewable.

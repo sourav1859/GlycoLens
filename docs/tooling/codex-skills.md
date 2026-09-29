@@ -8,6 +8,7 @@ GlycoLens keeps shared agent workflows under `.agents/skills/` so repository-spe
 | `glycolens-docs-governance` | Keep the ten planning documents and repository guidance synchronized with change. |
 | `glycolens-architecture-review` | Evaluate consequential architecture and integration decisions. |
 | `glycolens-change-delivery` | Deliver focused changes through acceptance criteria, tests, verification, and documentation. |
+| `glycolens-advisor-email` | Draft advisor emails using private runtime account configuration and require explicit approval immediately before sending. |
 | `glycolens-test-architect` | Derive risk-based test strategies and implementations. |
 | `glycolens-pr-guardian` | Review diffs and draft local commit or pull-request text without external mutation. |
 | `glycolens-impact-ledger` | Record reproducible before/after improvements and defensible portfolio claims. |
@@ -15,4 +16,4 @@ GlycoLens keeps shared agent workflows under `.agents/skills/` so repository-spe
 
 Each `SKILL.md` uses only `name` and `description` in YAML frontmatter. Supporting references contain project-specific maps and checklists; reusable output templates live in `assets/`.
 
-Validate all immediate skill directories with `python scripts/quality/validate_skills.py`. The command requires Python 3.10 or later.
+Validate all immediate skill directories with `python scripts/quality/validate_skills.py`. The command requires Python 3.10 or later and rejects literal email addresses in repository skills.

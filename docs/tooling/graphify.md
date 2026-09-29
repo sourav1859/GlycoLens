@@ -2,9 +2,9 @@
 
 ## Status
 
-**ACTIVE (code-only) as of September 27, 2026.** Graphify `0.9.69` is installed in an isolated pipx environment using Python `3.12.5`.
+**ACTIVE (code-only) as of September 28, 2026.** Graphify `0.9.69` is installed in an isolated pipx environment using Python `3.12.5`.
 
-The final local graph contains 578 nodes, 490 edges, and 94 communities after an explicit update and deterministic clustering refresh. The wiki export wrote 104 articles. A representative query completed successfully and its result was verified against the PowerShell source. Post-commit and post-checkout hooks plus the local merge driver are installed. Watch mode is available but is not left running.
+The refreshed local graph contains 696 nodes, 746 edges, and 100 communities after an explicit update and deterministic no-label clustering refresh. The wiki export wrote 110 articles. A representative query located the T1D-UOM meal-window implementation in `research/datasets/t1d_uom.py`, which was verified against the source. Post-commit and post-checkout hooks plus the local merge driver are installed. Watch mode is available but is not left running.
 
 Semantic documentation/media extraction is **not active**. The graph was intentionally built with `--code-only`, so no repository documents were sent to a model backend.
 

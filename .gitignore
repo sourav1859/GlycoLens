@@ -39,6 +39,7 @@ Thumbs.db
 .idea/
 .vscode/
 *.swp
+~$*.docx
 
 # Research data: never commit downloaded or derived health datasets
 data/raw/*
