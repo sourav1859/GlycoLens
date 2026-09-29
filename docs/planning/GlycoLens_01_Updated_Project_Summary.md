@@ -121,6 +121,8 @@ The selected application model will be chosen on the **accuracy + reliability + 
 
 T1D-UOM contains three months of real-world data from 17 people with T1D, including CGM, basal/bolus insulin, carbohydrates, protein, fat, fiber, physical activity and sleep. Its small number of participants is a limitation for large model training but is acceptable for **retrospective inference experiments, event-centered evaluation, and context-ablation studies**.
 
+GlycoLens pins the implementation to **T1D-UOM V1.0.4**, Zenodo DOI `10.5281/zenodo.17361905`, Git release commit `ea52718b41cd27286df46acf87825555d4ec0463`. The Milestone 1 audit confirmed 15 participants with CGM, nutrition, and at least one insulin modality and produced 927 eligible two-hour meal windows under the initial strict feasibility policy. Raw and derived row-level data remain outside Git.
+
 ### External/common-feature validation
 
 - **AZT1D:** 25 individuals, 6-8 weeks, CGM, insulin, carbohydrates, AID modes.
@@ -212,4 +214,4 @@ The contribution is the design and evaluation of an end-to-end system that:
 - CGMformer: https://github.com/YurunLu/CGMformer
 - GlucoFM: https://research.google/blog/glucofm-foundation-model-for-continuous-glucose-monitoring/
 - GlucoFM-Bench: https://arxiv.org/abs/2606.06881
-- T1D-UOM: https://zenodo.org/records/15806142
+- T1D-UOM V1.0.4: https://zenodo.org/records/17361905

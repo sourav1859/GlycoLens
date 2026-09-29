@@ -42,7 +42,7 @@ The revised plan is:
 | Domain-specific exploratory model | CGMformer |
 | Literature/reference model | GlucoFM |
 | Small learned baseline | Persistence + optional LightGBM |
-| Main rich dataset | T1D-UOM |
+| Main rich dataset | T1D-UOM V1.0.4, pinned to Zenodo DOI `10.5281/zenodo.17361905` |
 | External validation | AZT1D, HUPA-UCM |
 | Simulation | py-mgipsim |
 | CGM integration | Dexcom Developer Sandbox |

@@ -225,6 +225,8 @@ A Clarke/Surveillance Error Grid can be reported as a secondary analysis if used
 
 **Use:** rich meal-centered inference evaluation.
 
+**Pinned release:** V1.0.4, Zenodo DOI `10.5281/zenodo.17361905`, Git release commit `ea52718b41cd27286df46acf87825555d4ec0463`.
+
 Available:
 - CGM
 - basal insulin
@@ -249,6 +251,23 @@ Implication:
 - excellent for context experiments
 - weak basis for training a large deep model
 - use subject-aware / chronological splits
+
+### Milestone 1 implementation audit
+
+The executable audit covers the four core modalities required for initial forecasting feasibility: CGM, nutrition, bolus insulin, and basal insulin. It found 15 participants with CGM, nutrition, and at least one insulin stream; 13 contain all four streams.
+
+Important implementation findings and rules:
+
+- V1.0.4 values use day-first timestamps even though the upstream README describes month-first formatting; GlycoLens parses day-first first.
+- Source timestamps have no timezone offsets and remain timezone-naive pending an explicit cross-source/DST policy.
+- Rows with missing required model fields are reported and excluded.
+- Nutrition rows without a meal time are reported and excluded rather than assigned an artificial midnight timestamp.
+- Exact repeated CGM values collapse; conflicting values at the same timestamp are excluded rather than averaged.
+- Multiple nutrition rows at the same timestamp are aggregated as one meal event.
+- Initial windows use 120 minutes of pre-meal CGM, a five-minute grid, six hours of prior insulin context, and a separate 120-minute/24-point target.
+- Windows with another meal inside the target horizon or with CGM gaps beyond the configured interpolation boundary are rejected.
+
+Under this initial policy, 927 of 3,884 valid loaded meal events produced eligible windows. These rules are a feasibility configuration and require later sensitivity analysis; they are not clinical validation criteria.
 
 ### AZT1D
 
@@ -336,6 +355,7 @@ Do not jump directly to full fine-tuning.
 - GlucoFM: https://research.google/blog/glucofm-foundation-model-for-continuous-glucose-monitoring/
 - GlucoFM-Bench: https://arxiv.org/abs/2606.06881
 - EventGlucoseBench: https://github.com/JHU-CDHAI/EventGlucoseBench
-- T1D-UOM: https://www.nature.com/articles/s41597-025-05695-1
+- T1D-UOM V1.0.4: https://zenodo.org/records/17361905
+- T1D-UOM data descriptor: https://www.nature.com/articles/s41597-025-05695-1
 - AZT1D: https://data.mendeley.com/datasets/gk9m674wcx/1
 - HUPA-UCM: https://data.mendeley.com/datasets/3hbcscwz44/1

@@ -80,6 +80,28 @@ Future CGM or later events accidentally enter context.
 - chronological/subject-aware split
 - retrieval only from data available prior to the tested event
 
+Implemented Milestone 1 controls:
+
+- CGM history timestamps must be at or before the meal
+- target timestamps must be strictly after the meal
+- insulin context excludes post-meal events
+- another meal inside the two-hour target rejects the window
+- deterministic synthetic tests cover each boundary
+
+## 7A. Dataset timestamp and duplicate risk
+
+### Risk
+T1D-UOM V1.0.4 uses day-first timestamps despite month-first wording in its README, provides no timezone offsets, and contains repeated timestamps including conflicting CGM values.
+
+### Mitigation
+- pin the exact V1.0.4 DOI and release commit
+- parse the observed day-first format before fallback formats
+- keep timestamps timezone-naive until a documented DST/cross-source policy exists
+- collapse only exact repeated CGM values
+- exclude conflicting same-timestamp CGM values rather than silently selecting or averaging them
+- report missing and repeated records in aggregate
+- keep raw and derived row-level data outside Git
+
 ## 8. Counterfactual risk
 
 ### Risk

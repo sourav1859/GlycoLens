@@ -125,6 +125,22 @@ previous meal          |
 7. Store the true future CGM separately.
 8. Keep participant IDs for subject-aware evaluation.
 
+### Milestone 1 operational policy
+
+The first executable T1D-UOM V1.0.4 pipeline applies the following conservative feasibility policy:
+
+- interpret source dates day-first, because this matches the observed files despite contradictory upstream README wording
+- keep source timestamps timezone-naive and do not combine them with timezone-aware sources yet
+- exclude nutrition rows that contain a date but no meal time
+- use 120 minutes of CGM history and a 120-minute target on a five-minute grid
+- require at least one basal or bolus event during the six hours before or at the meal
+- aggregate nutrition components logged at the same timestamp
+- exclude conflicting duplicate CGM timestamps instead of choosing or averaging a value
+- reject gaps requiring interpolation across more than 15 minutes
+- reject windows containing another meal in the forecast horizon
+
+The resulting 927 eligible windows establish feasibility. Later experiments must report sensitivity to filtering, context length, missingness, and subject/time splits rather than treating this count as a fixed benchmark corpus.
+
 ## 9. Experiment A - model selection
 
 Run the same test events through:

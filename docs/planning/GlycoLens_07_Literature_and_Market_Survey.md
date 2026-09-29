@@ -255,6 +255,7 @@ https://github.com/JHU-CDHAI/EventGlucoseBench
 
 ## T1D-UOM
 
+- implementation release pinned to V1.0.4
 - 17 PwT1D
 - ~3 months
 - CGM
@@ -267,7 +268,7 @@ Role:
 - **primary rich-context retrospective evaluation**
 
 Sources:
-https://zenodo.org/records/15806142
+https://zenodo.org/records/17361905
 https://www.nature.com/articles/s41597-025-05695-1
 
 ## AZT1D

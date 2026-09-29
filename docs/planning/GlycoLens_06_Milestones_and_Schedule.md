@@ -147,6 +147,24 @@ Prove that the proposed architecture is technically feasible.
 - app can call backend
 - scope and model selection criteria are fixed
 
+### Progress snapshot - September 28, 2026
+
+Completed:
+
+- pinned and verified T1D-UOM V1.0.4 provenance
+- implemented an aggregate audit for CGM, nutrition, basal insulin, and bolus insulin
+- implemented and tested leakage-safe five-minute meal-window generation
+- demonstrated 927 eligible windows with 24 pre-meal CGM points, prior insulin context, full meal nutrition, and 24 held-out future CGM points
+
+Still required to close Milestone 1:
+
+- persistence and Chronos-2 smoke tests through the common forecast adapter
+- output/quantile and runtime/memory evidence
+- Next.js and FastAPI skeletons with one dummy end-to-end call
+- executable database migration corresponding to the documented schema
+- one py-mgipsim scenario
+- milestone presentation artifact
+
 ### What to present
 
 Course presentation guidance suggests:

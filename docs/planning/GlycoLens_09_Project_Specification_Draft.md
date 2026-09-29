@@ -53,7 +53,7 @@ The main experiment will compare progressively richer context:
 ### Data
 
 Primary:
-- T1D-UOM
+- T1D-UOM V1.0.4 (`10.5281/zenodo.17361905`), stored outside Git and processed through leakage-safe meal windows
 
 External/shared-feature validation:
 - AZT1D

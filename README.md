@@ -48,7 +48,7 @@ scripts/               Development and research utilities
 tests/                 Cross-system integration and end-to-end tests
 ```
 
-The repository currently contains documented ownership boundaries only. It does not yet contain generated Next.js or FastAPI applications.
+The repository contains the first executable research-data slice: a standard-library T1D-UOM V1.0.4 audit and leakage-safe meal-window generator. It does not yet contain generated Next.js or FastAPI applications.
 
 ## Documentation policy
 
@@ -70,6 +70,18 @@ Developer setup and workflow documentation:
 - [Test strategy](docs/testing/test-strategy.md)
 - [Measurement protocol](docs/benchmarks/measurement-protocol.md)
 
+## Milestone 1 data pipeline
+
+Set `GLYCOLENS_T1D_UOM_ROOT` to the extracted, ignored T1D-UOM V1.0.4 release and run:
+
+```powershell
+python -m research.pipelines.audit_t1d_uom
+python -m research.pipelines.build_meal_windows --limit 1
+python -m unittest tests.research.test_t1d_uom -v
+```
+
+The commands emit aggregate metadata only; they do not write row-level health data or generated windows into Git. See the [Milestone 1 data-pipeline report](docs/reports/milestone-1-data-pipeline-implementation.md).
+
 ## Data and secret handling
 
 Do not commit:
@@ -86,4 +98,4 @@ Use de-identified/public datasets, virtual-patient data, and the Dexcom sandbox 
 
 ## Status
 
-Repository initialized from the approved GlycoLens planning pack. The local development bootstrap and governance workflows are documented; application implementation has not yet started.
+Repository initialized from the approved GlycoLens planning pack. The T1D-UOM audit and meal-window preprocessing slice is implemented and verified; model smoke tests and application implementation remain pending.
