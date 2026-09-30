@@ -287,6 +287,17 @@ Model confidence: Moderate
 [ Save ]
 ```
 
+Milestone 1 Phase 4 implements the first read-only version of this result view. It plots 24
+five-minute history points, a 24-point median forecast, and a shaded q10-q90 interval, followed by
+30/60/120-minute value cards. The current endpoint is explicitly labeled synthetic and the chart
+uses relative minutes only. Confidence labels, portion comparison, similar meals, saving, and
+actual-versus-predicted overlays remain later work.
+
+Milestone 1 Phase 6 implements Persona A's simulator source as an offline research path. The fixed
+py-mgipsim scenario is deterministic and identifier-free, but is not yet connected to the home
+timeline or forecast endpoint. Live selection/execution in the PWA remains a Milestone 2
+integration task and must preserve an explicit `simulated` provenance label.
+
 ### Flow 8 - similar meals
 
 ```text

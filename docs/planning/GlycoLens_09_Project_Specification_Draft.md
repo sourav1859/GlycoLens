@@ -91,6 +91,15 @@ Core application flow:
 - PWA/backend skeleton
 - simulator feasibility
 
+Implemented Milestone 1 evidence now includes a pinned py-mgipsim ExtHovorka/OpenLoop synthetic
+day with 288 five-minute samples and byte-identical results across two executions. The simulator is
+isolated from the application environment and retained as synthetic feasibility evidence only.
+
+Milestone 1 is complete. The final closure audit maps every required research, data, model,
+application, database, simulation, safety, and presentation deliverable to executable evidence.
+The validated seven-slide RIT presentation reports aggregate/synthetic results and carries the
+same research-only, uncertainty, privacy, and no-dosing boundaries as the application.
+
 ### Milestone 2 - solve/prototype
 - benchmark core models
 - context-ablation experiment

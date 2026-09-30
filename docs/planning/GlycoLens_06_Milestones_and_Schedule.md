@@ -147,7 +147,7 @@ Prove that the proposed architecture is technically feasible.
 - app can call backend
 - scope and model selection criteria are fixed
 
-### Progress snapshot - September 28, 2026
+### Progress snapshot - September 29, 2026
 
 Completed:
 
@@ -155,15 +155,40 @@ Completed:
 - implemented an aggregate audit for CGM, nutrition, basal insulin, and bolus insulin
 - implemented and tested leakage-safe five-minute meal-window generation
 - demonstrated 927 eligible windows with 24 pre-meal CGM points, prior insulin context, full meal nutrition, and 24 held-out future CGM points
+- established reproducible Python 3.12/uv and Node.js 22/pnpm toolchains with project manifests
+  and lockfiles
+- added a buildable Next.js/TypeScript PWA with an accessible synthetic forecast chart, loading,
+  failure, and retry states
+- implemented and tested the common immutable forecast adapter contract with future truth kept
+  outside model requests
+- implemented the persistence baseline and verified a 24-point forecast with q10/q50/q90 on one
+  real eligible T1D-UOM V1.0.4 window
+- implemented C0, C1, and available C3 meal-window conversion for later context ablation
+- pinned `chronos-forecasting==2.3.2` and the exact `amazon/chronos-2` checkpoint revision
+- ran Chronos-2 end to end on a real eligible C0 window with 24 q10/q50/q90 output points,
+  finite/non-crossing validation, cached-load and repeated latency evidence, and memory evidence
+- implemented a typed FastAPI health route and synthetic forecast endpoint mapped from the common
+  contract, with explicit local CORS allowlisting and no identifiers or absolute timestamps
+- validated the running Next.js and FastAPI endpoints plus the browser fetch/component contract,
+  and added a separate ignored real Chronos-2 research graph with observed history, median
+  forecast, and q10-q90 interval
+- implemented the executable local Supabase migration with ten application tables, pgvector,
+  constraints, indexes, synthetic seed data, and denial-by-default RLS
+- passed a clean database reset, schema lint, 20 pgTAP database tests, and static checks preventing
+  committed connection details or credentials
+- pinned the official py-mgipsim source and its isolated dependency set, executed one fixed
+  ExtHovorka/OpenLoop synthetic day, validated 288 five-minute samples, and reproduced the exact
+  result across two real runs
+- created and validated a seven-slide RIT-branded milestone presentation with speaker notes, two
+  editable charts, an editable closure table, and explicit research/safety boundaries
+- completed the final closure audit: 73 Python tests passed with one explicit simulator opt-in
+  skip, the real simulator suite passed all 11 tests, all five frontend tests plus lint/type/build
+  passed, a clean database reset and all 20 pgTAP tests passed, and privacy scans found no private
+  academic-address domains or absolute local paths
 
-Still required to close Milestone 1:
-
-- persistence and Chronos-2 smoke tests through the common forecast adapter
-- output/quantile and runtime/memory evidence
-- Next.js and FastAPI skeletons with one dummy end-to-end call
-- executable database migration corresponding to the documented schema
-- one py-mgipsim scenario
-- milestone presentation artifact
+**Closure status:** Milestone 1 is complete. The pretrained-model, model-ready context, dummy
+app-to-backend, simulator, documentation, validation, and presentation criteria are satisfied.
+TimesFM remains a desirable comparison if time permits, not a blocker for Milestone 1 closure.
 
 ### What to present
 

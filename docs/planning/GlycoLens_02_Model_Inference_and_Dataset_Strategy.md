@@ -159,6 +159,39 @@ For the core offline experiment, no unknown future meal/activity event is inject
 
 GlycoLens will **not generate an insulin dose**. If a known insulin event exists at/before meal time, it can be used as context.
 
+### Implemented forecast-contract boundary
+
+Milestone 1 Phase 2 implements one immutable contract for baselines and pretrained models:
+
+- `ForecastRequest` contains only CGM history, past covariates, covariates known at forecast time,
+  the horizon, frequency, and requested quantiles.
+- Held-out future CGM is stored in a separate `ForecastTarget`; adapters cannot accept it.
+- `ForecastExample` joins request and target only for post-prediction evaluation and requires an
+  exact five-minute target grid.
+- The T1D-UOM converter supports C0 (CGM), C1 (CGM + insulin), and the currently available portion
+  of C3 (C1 + carbs/protein/fat/fiber). Calories are not invented when the source does not provide
+  them.
+- Persistence repeats the final observed CGM value. Its q10/q50/q90 are equal because the baseline
+  is deterministic and must not be interpreted as calibrated uncertainty.
+
+Requests reject non-finite values, irregular history grids, mixed timezone awareness, future
+values in past covariates, and duplicate covariate names. Results reject invalid shapes,
+non-finite values, irregular forecast grids, and crossing quantiles.
+
+### Implemented Chronos-2 feasibility boundary
+
+Milestone 1 Phase 3 pins `chronos-forecasting==2.3.2` and `amazon/chronos-2` revision
+`29ec3766d36d6f73f0696f85560a422f50e8498c`. The first adapter is intentionally C0/CGM-only and
+CPU-based. It transforms the 24 historical CGM values into the official tensor API, requests a
+24-step q10/q50/q90 forecast, and normalizes the result into `ForecastResult`.
+
+The adapter rejects C1/C3 requests rather than silently ignoring insulin or nutrition. One real
+T1D-UOM window completed successfully with finite, non-crossing output. Cached CPU measurements
+were 5.54 s model load, 56.04 ms first forecast, 54.63 ms warm p50, 61.26 ms warm p95, and
+810.83 MiB observed peak RSS. These measurements prove local feasibility only; model ranking
+still requires predefined subject/time splits and accuracy/calibration evaluation over many
+windows.
+
 ## 8. Main inference experiments
 
 ### Experiment 1 - model comparison

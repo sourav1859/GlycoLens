@@ -4,7 +4,7 @@
 
 **Scope:** Dataset provenance, aggregate audit, and first model-ready meal-window pipeline
 
-**Status:** Implemented and verified; pretrained-model smoke test remains next
+**Status:** Implemented and verified; Phase 3 pretrained-model smoke also passed
 
 ## Objective
 
@@ -127,7 +127,16 @@ No project formatter, linter, or type checker is configured yet, so those verifi
 
 - Timestamps remain timezone-naive because the source release lacks explicit offsets.
 - Eligibility rules are an initial feasibility policy and must be sensitivity-tested rather than treated as ground truth.
-- Insulin events are aligned but not yet transformed into model-specific covariates.
-- No pretrained model has run yet, so the full Milestone 1 success criterion remains open.
+- Insulin events are aligned and converted into model-independent covariate series; model-specific
+  tensor transformation remains adapter work.
+- The pinned Chronos-2 checkpoint now runs through the common contract on one eligible CGM-only
+  context; this proves technical feasibility but not forecast accuracy.
 
-The next implementation step is a common forecast-adapter contract plus persistence baseline, followed by a Chronos-2 smoke test on the generated 24-point context/target windows.
+The common forecast contract and persistence baseline were completed in Phase 2. Phase 3 then
+completed a pinned Chronos-2 24-point CPU smoke test. See
+`docs/reports/milestone-1-phase-3-chronos2-smoke.md` for runtime, memory, and safety evidence.
+Phase 4 added the typed synthetic API, accessible browser forecast chart, and ignored real-model
+research graph; see `docs/reports/milestone-1-phase-4-api-visualization.md`.
+Phases 5 and 6 then completed the executable local database and deterministic py-mgipsim
+feasibility path. The RIT-branded presentation and final closure audit complete Milestone 1; see
+`docs/reports/milestone-1-closure-audit.md`.

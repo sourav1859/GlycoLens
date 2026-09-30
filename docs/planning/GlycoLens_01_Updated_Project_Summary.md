@@ -123,6 +123,32 @@ T1D-UOM contains three months of real-world data from 17 people with T1D, includ
 
 GlycoLens pins the implementation to **T1D-UOM V1.0.4**, Zenodo DOI `10.5281/zenodo.17361905`, Git release commit `ea52718b41cd27286df46acf87825555d4ec0463`. The Milestone 1 audit confirmed 15 participants with CGM, nutrition, and at least one insulin modality and produced 927 eligible two-hour meal windows under the initial strict feasibility policy. Raw and derived row-level data remain outside Git.
 
+Milestone 1 now also demonstrates the application boundary: a typed FastAPI endpoint maps the
+common forecast contract into an identifier-free synthetic response, and the Next.js PWA renders
+history, median forecast, q10-q90 uncertainty, and 30/60/120-minute summaries. A separate local
+research command produces the same essential plot shape from the pinned Chronos-2 checkpoint on
+one eligible window; the image remains ignored and is not evidence of model accuracy.
+
+Milestone 1 Phase 5 implements the application database locally as a reproducible Supabase
+migration. Ten application tables, pgvector, integrity constraints, and denial-by-default RLS were
+validated with a clean reset, schema lint, and synthetic owner-isolation tests. Generated local
+connection details and credentials remain ignored, and no hosted Supabase project is required or
+modified for this phase.
+
+Milestone 1 Phase 6 pins the official source-only py-mgipsim repository at commit
+`b985f8c2ea385d1b2b8480957b730866e07772f1` in a separate ignored environment. One fixed
+ExtHovorka/OpenLoop synthetic virtual-patient day produced 288 five-minute glucose points and
+completed twice with byte-identical output. Only relative-time simulated glucose and aggregate
+meal metadata are retained locally. This proves simulator feasibility; it is not clinical or
+forecast-accuracy evidence.
+
+Milestone 1 is now closed. A seven-slide RIT-branded presentation summarizes the problem,
+architecture, quantified data/model evidence, executable app/database/simulator paths, closure
+matrix, and Milestone 2 plan. The final audit reran the dataset scan, pinned Chronos-2 smoke,
+complete Python/frontend suites, clean local database reset and 20 pgTAP tests, real simulator
+integration, privacy scans, and presentation validation. The result is technical-feasibility
+closure, not an accuracy or clinical-validity claim.
+
 ### External/common-feature validation
 
 - **AZT1D:** 25 individuals, 6-8 weeks, CGM, insulin, carbohydrates, AID modes.

@@ -2,11 +2,25 @@
 
 ## Status
 
-**ACTIVE (code-only) as of September 28, 2026.** Graphify `0.9.69` is installed in an isolated pipx environment using Python `3.12.5`.
+**ACTIVE (code-only) as of September 29, 2026.** Graphify `0.9.69` is available from the isolated
+user-tool launcher using Python `3.12.5`. On non-interactive Windows shells, add
+`%USERPROFILE%\.local\bin` to the process `PATH` when the wrapper cannot locate the executable; no
+repository or system-wide path change is required.
 
-The refreshed local graph contains 696 nodes, 746 edges, and 100 communities after an explicit update and deterministic no-label clustering refresh. The wiki export wrote 110 articles. A representative query located the T1D-UOM meal-window implementation in `research/datasets/t1d_uom.py`, which was verified against the source. Post-commit and post-checkout hooks plus the local merge driver are installed. Watch mode is available but is not left running.
+The refreshed local graph contains 1,293 nodes, 1,896 edges, and 166 communities after the final
+Milestone 1 code-only closure update. The closure query located the final audit, requirement matrix,
+test-strategy gate, dataset pipeline, forecast contracts, Chronos-2 runner, and related tests; those
+findings were verified against source. The earlier Phase 6 query also located the py-mgipsim
+runner, result contract, isolated bridge, exact-commit verification, validators, and
+reproducibility test.
+Post-commit and post-checkout hooks plus the local merge driver are installed. Watch mode is
+available but is not left running.
 
 Semantic documentation/media extraction is **not active**. The graph was intentionally built with `--code-only`, so no repository documents were sent to a model backend.
+
+The Phase 5 refresh reported that SQL AST extraction requires the optional `tree_sitter_sql`
+dependency. The migration and pgTAP files were therefore validated directly by Supabase reset,
+lint, and database tests rather than treated as Graphify evidence.
 
 ## Upstream findings
 
@@ -53,10 +67,12 @@ Graphify output is local and ignored. Never scan secrets, health data, private C
 
 - Python: `3.12.5` (64-bit)
 - pip: `24.2`
-- pipx: `1.7.1`
+- Isolated launcher: verified at the user-tool bin path; package-manager registry was unavailable
+  to the execution account during the Phase 1 refresh
 - Graphify: `0.9.69`
 - Readiness and exclusion checks: passed
-- Initial code-only extraction and explicit update: passed
+- Initial code-only extraction and Phase 1 explicit update: passed
+- Phase 2 through Phase 6 explicit code-only updates: passed
 - Deterministic clustering refresh: passed with `--no-label`
 - Wiki export: passed, 104 articles written
 - Query plus source verification: passed

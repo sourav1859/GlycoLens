@@ -141,6 +141,24 @@ The first executable T1D-UOM V1.0.4 pipeline applies the following conservative 
 
 The resulting 927 eligible windows establish feasibility. Later experiments must report sensitivity to filtering, context length, missingness, and subject/time splits rather than treating this count as a fixed benchmark corpus.
 
+Milestone 1 Phase 2 adds a structural leakage boundary: each window is converted into an immutable
+model request and a separate held-out target. Adapters receive only the request. The implemented
+persistence baseline carries the final pre-meal/current CGM observation across all 24 forecast
+points. Its identical q10/q50/q90 trajectories are deterministic placeholders, not probabilistic
+calibration. Accuracy metrics remain unreported until a defined evaluation split is executed.
+
+Milestone 1 Phase 3 runs the pinned Chronos-2 model on C0 only. A real eligible 24-point history
+produced a finite, non-crossing 24-point q10/q50/q90 forecast with the target withheld. This is an
+interface/resource smoke test, not a comparison with persistence: no MAE, RMSE, CRPS, coverage, or
+clinical metric is claimed from a single window. Chronos C1/C3 remain unavailable until explicit
+covariate alignment and ablation tests are implemented.
+
+Milestone 1 Phase 6 executes one pinned py-mgipsim ExtHovorka/OpenLoop synthetic day twice with a
+fixed seed. Both 288-point, five-minute outputs are byte-identical and pass finite/range/grid and
+aggregate-consistency checks. This is a reproducibility and software-feasibility result only.
+Simulation trajectories must remain labeled synthetic and must not enter T1D-UOM accuracy metrics,
+subject-level splits, or clinical claims.
+
 ## 9. Experiment A - model selection
 
 Run the same test events through:

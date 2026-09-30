@@ -87,6 +87,44 @@ Implemented Milestone 1 controls:
 - insulin context excludes post-meal events
 - another meal inside the two-hour target rejects the window
 - deterministic synthetic tests cover each boundary
+- model adapters accept `ForecastRequest`, which has no held-out target or participant-ID field
+- future truth is stored separately in `ForecastTarget` and paired only for evaluation
+- past covariates extending beyond context end fail validation
+- non-finite values, irregular grids, and crossing output quantiles fail closed
+- Chronos-2 receives only the CGM-only `ForecastRequest`; held-out target data and participant IDs
+  are structurally unavailable to the adapter
+- Chronos-2 requests containing covariates fail explicitly in Phase 3 instead of silently dropping
+  insulin or nutrition
+- the package and checkpoint revision are pinned, and downloaded weights/aggregate measurements
+  remain in ignored artifact directories
+- real-checkpoint execution requires explicit download opt-in; ordinary tests remain offline
+- the public Phase 4 demo response is deterministic synthetic data and is labeled
+  `synthetic_demo`; it contains relative minutes rather than absolute timestamps and contains no
+  participant or user identifiers
+- FastAPI CORS is an explicit local-origin allowlist and rejects wildcard configuration
+- transport and browser validators reject malformed shapes, non-finite values, unordered time
+  grids, and crossing quantiles
+- the UI presents uncertainty as a q10-q90 interval and repeats that forecasts are uncertain, are
+  not clinical guidance, and must not be used for insulin dosing or treatment decisions
+- real-data forecast figures are confined to ignored `artifacts/forecasts/`; held-out future truth
+  is excluded by default and requires an explicit local-only flag
+- the Phase 5 application schema is reproducible from migrations and stores no research dataset;
+  its committed seed is explicitly synthetic and contains no account or health record
+- every exposed application table has RLS enabled; anonymous table access is revoked and
+  authenticated owner isolation is tested against two synthetic users
+- invalid glucose values and crossing forecast quantiles fail database constraints
+- generated local Supabase configuration, endpoints, project references, connection strings, and
+  credentials remain ignored; Phase 5 does not create or modify a hosted project
+- py-mgipsim source and its 68-package environment are isolated under ignored `.cache/` paths and
+  verified against exact commit `b985f8c2ea385d1b2b8480957b730866e07772f1`
+- the Phase 6 protocol is fixed, synthetic, explicitly opt-in, and reproduced across two runs
+- simulator exports use relative minutes and omit real identifiers, absolute timestamps,
+  individual insulin values, and dose fields
+- simulated glucose is labeled feasibility/demo evidence and is not used as clinical truth or a
+  substitute for held-out T1D-UOM evaluation
+
+The implemented persistence q10/q50/q90 trajectories are equal because the baseline is
+deterministic. They are not presented as uncertainty estimates or clinical confidence.
 
 ## 7A. Dataset timestamp and duplicate risk
 

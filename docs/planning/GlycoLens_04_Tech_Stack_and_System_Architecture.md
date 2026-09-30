@@ -32,6 +32,33 @@ Reason:
 | Testing | Pytest + Playwright | backend + critical UX flows |
 | Packaging | Docker | reproducible backend/model environment |
 
+Milestone 1 pins the local development toolchains to Python 3.12.5 managed by uv and Node.js 22
+managed as a pnpm workspace. Exact resolved dependencies are recorded in `uv.lock` and
+`pnpm-lock.yaml`. Backend and model packages are added only alongside exercised implementation and
+tests, avoiding a large speculative environment.
+
+Milestone 1 Phase 3 adds an optional `chronos` dependency group with
+`chronos-forecasting==2.3.2` and `psutil==7.2.2`. The exact `amazon/chronos-2` checkpoint revision
+is pinned in the adapter. Checkpoints and benchmark records remain under ignored `artifacts/`
+directories and are never application/database assets.
+
+Milestone 1 Phase 4 adds FastAPI/Pydantic transport dependencies and a lightweight Matplotlib
+research-plot dependency group. The Next.js app adds Vitest and Testing Library for executable
+component and API-client behavior. The browser demonstration remains independent of model loading:
+it consumes a deterministic synthetic response mapped through the canonical forecast contract.
+
+Milestone 1 Phase 5 implements the database contract in the standard `supabase/` CLI layout. The
+initial migration creates ten application tables, installs pgvector, applies integrity constraints
+and indexes, and enables RLS in the same transaction. Generated local configuration and connection
+details are ignored. The migration is validated locally before any hosted project is linked.
+
+Milestone 1 Phase 6 integrates the source-only py-mgipsim repository at exact commit
+`b985f8c2ea385d1b2b8480957b730866e07772f1`. Its 68 resolved packages use a separate lock and
+ignored Python environment under `.cache/`. GlycoLens invokes it as an opt-in subprocess and
+normalizes only relative-time simulated glucose plus aggregate metadata into ignored
+`artifacts/simulation/`. It is deliberately not imported into FastAPI or persisted to Supabase in
+Milestone 1; live application integration remains Milestone 2 work.
+
 ## 3. Why a PWA instead of native iOS/Android
 
 Next.js now documents a direct PWA path supporting home-screen installation and app-like behavior without separate codebases or app-store approval.
@@ -127,25 +154,24 @@ flowchart TB
 
 The backend should not hard-code Chronos or TimesFM logic into routes.
 
-Conceptual interface:
+Implemented interface:
 
 ```python
 class ForecastModelAdapter:
     model_id: str
+    model_version: str
 
     def load(self) -> None:
         ...
 
-    def predict(
-        self,
-        target_history,
-        past_covariates,
-        known_covariates,
-        prediction_length,
-        quantiles,
-    ) -> ForecastResult:
+    def predict(self, request: ForecastRequest) -> ForecastResult:
         ...
 ```
+
+`ForecastRequest` is the only object accepted by model code. It contains target history, past
+covariates, known-at-forecast covariates, prediction length, frequency, and quantiles. It cannot
+contain held-out future CGM or participant identifiers. `ForecastTarget` remains separate and is
+paired with the request only inside an evaluation-only `ForecastExample`.
 
 `ForecastResult`:
 
@@ -161,6 +187,12 @@ quantile_90[]
 latency_ms
 metadata
 ```
+
+All values and shapes are validated before a result crosses the adapter boundary. Forecast
+timestamps must be strictly future and regular; q10 <= q50 <= q90 is enforced pointwise. The
+canonical contract lives under `research/models/adapters/`. The Phase 4 Pydantic transport schemas
+map `ForecastResult` into relative-minute history, q10/q50/q90 bands, and 30/60/120-minute summaries
+rather than duplicate inference behavior in routes or backend models.
 
 Benefits:
 - simple model swapping
@@ -205,9 +237,14 @@ app/
 - `GET /api/timeline?from=&to=`
 
 ### Forecast
+- `GET /api/v1/forecasts/demo` - implemented M1 synthetic, identifier-free visualization contract
 - `POST /api/forecast`
 - `GET /api/forecast/{id}`
 - `POST /api/forecast/compare-portions`
+
+The implemented demo route never loads the Chronos checkpoint and does not accept user input. It
+exists to prove the browser-to-API contract quickly and safely. Real authenticated forecast routes
+remain future work and must use the same canonical adapter boundary.
 
 ### Personalization
 - `GET /api/meals/{id}/similar`
@@ -225,7 +262,7 @@ app/
 
 ### `users`
 ```text
-id
+id                # UUID; references auth.users(id)
 display_name
 mode              # demo / sandbox
 created_at
@@ -235,10 +272,11 @@ created_at
 ```text
 id
 user_id
-timestamp
+recorded_at       # timestamptz
 glucose_mg_dl
 trend
 source             # dataset / dexcom / simulation
+created_at
 ```
 
 Indexes:
@@ -248,21 +286,23 @@ Indexes:
 ```text
 id
 user_id
-timestamp
+recorded_at       # timestamptz
 event_type         # bolus / basal
 units
 source
+created_at
 ```
 
 ### `activity_events`
 ```text
 id
 user_id
-timestamp
+recorded_at       # timestamptz
 steps
 met
 intensity
 source
+created_at
 ```
 
 ### `foods`
@@ -279,13 +319,14 @@ protein_g
 fat_g
 fiber_g
 raw_payload
+created_at
 ```
 
 ### `meals`
 ```text
 id
 user_id
-timestamp
+recorded_at       # timestamptz
 name
 meal_type
 portion_multiplier
@@ -296,6 +337,7 @@ fat_g
 fiber_g
 nutrition_provenance
 embedding           # pgvector
+created_at
 ```
 
 ### `meal_items`
@@ -324,7 +366,7 @@ created_at
 ### `forecast_points`
 ```text
 forecast_id
-timestamp
+forecast_at         # timestamptz
 q10
 q50
 q90
@@ -337,7 +379,31 @@ actual_30
 actual_60
 actual_120
 trajectory_metrics_json
+created_at
 ```
+
+### Phase 5 authorization and migration boundary
+
+- RLS is enabled on every exposed application table.
+- `public.users` is linked to Supabase Auth, and direct ownership policies use `auth.uid()`.
+- Child rows such as meal items, forecast points, and meal outcomes inherit authorization through
+  their owned parent.
+- Anonymous table privileges are revoked. Authenticated clients may read the shared food catalog
+  but cannot write it directly.
+- The embedding column uses unconstrained `vector` until the embedding model and dimension are
+  selected; a vector index is therefore deferred.
+- `supabase/config.toml`, endpoints, keys, and runtime state are local and ignored. Only migrations,
+  pgTAP tests, and synthetic seed data are versioned.
+
+### Phase 6 simulator boundary
+
+- The official source commit is verified before every execution.
+- The simulator dependency graph is isolated from the main application/model environment.
+- Only one reviewed one-day ExtHovorka/OpenLoop scenario is supported in Milestone 1.
+- Execution requires explicit opt-in and generated trajectories remain ignored local artifacts.
+- Normalized output contains relative minutes, simulated glucose, meal count/total, and source
+  provenance; it excludes absolute timestamps, real identifiers, and individual insulin values.
+- The simulator is a demo/stress source, not formal forecast ground truth or clinical evidence.
 
 ## 9. Research data vs app database
 

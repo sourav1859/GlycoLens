@@ -48,7 +48,31 @@ scripts/               Development and research utilities
 tests/                 Cross-system integration and end-to-end tests
 ```
 
-The repository contains the first executable research-data slice: a standard-library T1D-UOM V1.0.4 audit and leakage-safe meal-window generator. It does not yet contain generated Next.js or FastAPI applications.
+The repository contains an executable T1D-UOM V1.0.4 audit and leakage-safe meal-window generator,
+common forecast adapters, a pinned Chronos-2 smoke path, a typed FastAPI demonstration endpoint,
+and a mobile-first Next.js forecast chart. A pinned, isolated py-mgipsim scenario also provides a
+deterministic virtual-patient feasibility path. The browser flow uses deterministic synthetic data;
+real-data and simulator artifacts remain separate local-only commands.
+
+## Reproducible development setup
+
+Supported Milestone 1 runtimes are Python 3.12.5, Node.js 22, uv, and pnpm 10.0.0.
+
+```powershell
+uv sync --frozen
+uv run ruff check .
+uv run ruff format --check backend research tests scripts
+uv run pytest -q
+
+pnpm install --frozen-lockfile
+pnpm frontend:lint
+pnpm frontend:test
+pnpm frontend:typecheck
+pnpm frontend:build
+```
+
+The main lockfiles are authoritative. The source-only py-mgipsim tool uses a separate committed
+requirements lock and ignored environment so its dependencies cannot change the application stack.
 
 ## Documentation policy
 
@@ -77,10 +101,44 @@ Set `GLYCOLENS_T1D_UOM_ROOT` to the extracted, ignored T1D-UOM V1.0.4 release an
 ```powershell
 python -m research.pipelines.audit_t1d_uom
 python -m research.pipelines.build_meal_windows --limit 1
-python -m unittest tests.research.test_t1d_uom -v
+uv run python -m research.pipelines.run_persistence_baseline
+uv run --all-groups python -m research.pipelines.run_chronos2_smoke --allow-model-download
+uv run --all-groups python -m research.pipelines.render_chronos2_forecast --allow-model-download
+./scripts/simulation/Install-PyMgipsim.ps1
+uv run python -m research.pipelines.run_pymgipsim_scenario --allow-upstream-execution
+uv run pytest -q
 ```
 
-The commands emit aggregate metadata only; they do not write row-level health data or generated windows into Git. See the [Milestone 1 data-pipeline report](docs/reports/milestone-1-data-pipeline-implementation.md).
+The commands emit aggregate metadata only; they do not write row-level health data or generated
+windows into Git. See the [Milestone 1 data-pipeline report](docs/reports/milestone-1-data-pipeline-implementation.md),
+[Phase 2 forecast-contract report](docs/reports/milestone-1-phase-2-forecast-contract.md),
+[Phase 3 Chronos-2 smoke report](docs/reports/milestone-1-phase-3-chronos2-smoke.md),
+[Phase 4 API and visualization report](docs/reports/milestone-1-phase-4-api-visualization.md),
+[Phase 5 local-database report](docs/reports/milestone-1-phase-5-local-database.md), and
+[Phase 6 py-mgipsim report](docs/reports/milestone-1-phase-6-pymgipsim-scenario.md). The final
+[Milestone 1 closure audit](docs/reports/milestone-1-closure-audit.md) maps every requirement to
+evidence. The [project-specification presentation](docs/presentations/Sourav%20Patil-GlycoLens_Project_Specification.pptx)
+and validated [Milestone 1 presentation](docs/presentations/GlycoLens_Milestone_1_Closure.pptx)
+are available in the presentation inventory. The
+Chronos commands require the local dataset-root environment variable and explicit model-download
+acknowledgement. Checkpoints and generated figures remain in ignored artifact directories.
+
+Run the local demonstration flow in two terminals:
+
+```powershell
+uv run uvicorn backend.app.main:app --reload
+pnpm frontend:dev
+```
+
+Open `http://localhost:3000`. The browser calls `GET /api/v1/forecasts/demo`, which deliberately
+returns a synthetic, identifier-free 24-point history and 24-point forecast for UI validation.
+
+Validate the local database without printing generated connection details:
+
+```powershell
+supabase init  # once per clone; generated config is ignored
+./scripts/database/Test-LocalSupabase.ps1
+```
 
 ## Data and secret handling
 
@@ -98,4 +156,14 @@ Use de-identified/public datasets, virtual-patient data, and the Dexcom sandbox 
 
 ## Status
 
-Repository initialized from the approved GlycoLens planning pack. The T1D-UOM audit and meal-window preprocessing slice is implemented and verified; model smoke tests and application implementation remain pending.
+Repository initialized from the approved GlycoLens planning pack. The T1D-UOM audit and meal-window
+preprocessing slice is implemented and verified. Reproducible Python and frontend toolchains and a
+mobile-first Next.js app are implemented. The common forecast contract, leakage-safe T1D-UOM
+converter, and persistence baseline are implemented and tested on a real eligible window;
+the pinned Chronos-2 model also completes a validated 24-point CPU smoke forecast and produces a
+local research graph. A typed FastAPI endpoint and accessible browser forecast chart complete the
+dummy browser-to-API criterion. The executable local Supabase migration, constraints, pgvector
+extension, synthetic seed, and RLS isolation tests are also complete. The simulator demonstration
+is installed through an isolated pinned environment and completes deterministically. The validated
+RIT-branded presentation and final closure audit are complete. **Milestone 1 is closed; Milestone 2
+benchmarking, context ablation, and nutrition-flow implementation are next.**
