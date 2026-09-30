@@ -39,9 +39,7 @@ def _build_fixture(root: Path, *, second_meal: bool = False, target_gap: bool = 
     while current <= end:
         if not (
             target_gap
-            and MEAL_TIME + timedelta(minutes=40)
-            <= current
-            <= MEAL_TIME + timedelta(minutes=60)
+            and MEAL_TIME + timedelta(minutes=40) <= current <= MEAL_TIME + timedelta(minutes=60)
         ):
             glucose_rows.append(
                 {"bg_ts": _timestamp(current), "value": f"{6.0 + len(glucose_rows) * 0.01:.2f}"}
@@ -82,8 +80,14 @@ def _build_fixture(root: Path, *, second_meal: bool = False, target_gap: bool = 
         root / "Insulin Data" / "Bolus Data" / "UoMBolus9999.csv",
         ["bolus_ts", "bolus_dose"],
         [
-            {"bolus_ts": (MEAL_TIME - timedelta(minutes=10)).strftime("%m/%d/%Y %H:%M"), "bolus_dose": "3.5"},
-            {"bolus_ts": (MEAL_TIME + timedelta(minutes=5)).strftime("%m/%d/%Y %H:%M"), "bolus_dose": "1.0"},
+            {
+                "bolus_ts": (MEAL_TIME - timedelta(minutes=10)).strftime("%m/%d/%Y %H:%M"),
+                "bolus_dose": "3.5",
+            },
+            {
+                "bolus_ts": (MEAL_TIME + timedelta(minutes=5)).strftime("%m/%d/%Y %H:%M"),
+                "bolus_dose": "1.0",
+            },
         ],
     )
     _write_csv(
@@ -132,9 +136,15 @@ class T1DUOMPipelineTests(unittest.TestCase):
 
             self.assertEqual(len(window.cgm_history), 24)
             self.assertEqual(len(window.target_cgm), 24)
-            self.assertTrue(all(point.timestamp <= window.meal.timestamp for point in window.cgm_history))
-            self.assertTrue(all(point.timestamp > window.meal.timestamp for point in window.target_cgm))
-            self.assertTrue(all(event.timestamp <= window.meal.timestamp for event in window.insulin_history))
+            self.assertTrue(
+                all(point.timestamp <= window.meal.timestamp for point in window.cgm_history)
+            )
+            self.assertTrue(
+                all(point.timestamp > window.meal.timestamp for point in window.target_cgm)
+            )
+            self.assertTrue(
+                all(event.timestamp <= window.meal.timestamp for event in window.insulin_history)
+            )
             self.assertAlmostEqual(window.cgm_history[0].glucose_mg_dl, 6.0 * 18.0182, places=4)
 
     def test_follow_up_meal_inside_horizon_is_rejected(self) -> None:
@@ -188,7 +198,9 @@ class T1DUOMPipelineTests(unittest.TestCase):
             participant = load_participant(root, "UoM9999")
 
             self.assertEqual(audit.conflicting_glucose_timestamp_count, 1)
-            self.assertNotIn(conflicting_timestamp, {point.timestamp for point in participant.glucose})
+            self.assertNotIn(
+                conflicting_timestamp, {point.timestamp for point in participant.glucose}
+            )
 
     def test_same_timestamp_nutrition_components_are_aggregated(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_directory:
@@ -197,7 +209,15 @@ class T1DUOMPipelineTests(unittest.TestCase):
             nutrition_path = root / "Nutrition Data" / "UoMNutrition9999.csv"
             with nutrition_path.open("a", newline="", encoding="utf-8") as handle:
                 csv.writer(handle).writerow(
-                    [MEAL_TIME.strftime("%m/%d/%Y %H:%M"), "Lunch", "synthetic side", "5", "2", "1", "1"]
+                    [
+                        MEAL_TIME.strftime("%m/%d/%Y %H:%M"),
+                        "Lunch",
+                        "synthetic side",
+                        "5",
+                        "2",
+                        "1",
+                        "1",
+                    ]
                 )
 
             participant = load_participant(root, "UoM9999")
@@ -225,7 +245,11 @@ class T1DUOMPipelineTests(unittest.TestCase):
             root = Path(temporary_directory)
             _build_fixture(root)
             glucose_path = root / "Glucose Data" / "UoMGlucose9999.csv"
-            _write_csv(glucose_path, ["wrong_timestamp", "value"], [{"wrong_timestamp": "x", "value": "6.0"}])
+            _write_csv(
+                glucose_path,
+                ["wrong_timestamp", "value"],
+                [{"wrong_timestamp": "x", "value": "6.0"}],
+            )
 
             with self.assertRaisesRegex(DatasetValidationError, "missing required columns"):
                 audit_dataset(root)

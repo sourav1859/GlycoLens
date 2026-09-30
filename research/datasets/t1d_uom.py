@@ -151,11 +151,7 @@ class DatasetAudit:
             payload.pop("full_multimodal_participants", None)
             if include_files:
                 payload["files"] = tuple(
-                    {
-                        key: value
-                        for key, value in file_summary.items()
-                        if key != "participant_id"
-                    }
+                    {key: value for key, value in file_summary.items() if key != "participant_id"}
                     for file_summary in payload["files"]
                 )
         return payload
@@ -280,9 +276,15 @@ def _require_dataset_root(dataset_root: Path | str) -> Path:
     root = Path(dataset_root).expanduser().resolve()
     if not root.is_dir():
         raise DatasetValidationError(f"dataset root does not exist: {root}")
-    missing = [spec.relative_directory for spec in MODALITY_SPECS if not (root / spec.relative_directory).is_dir()]
+    missing = [
+        spec.relative_directory
+        for spec in MODALITY_SPECS
+        if not (root / spec.relative_directory).is_dir()
+    ]
     if missing:
-        raise DatasetValidationError(f"dataset root is missing required directories: {', '.join(missing)}")
+        raise DatasetValidationError(
+            f"dataset root is missing required directories: {', '.join(missing)}"
+        )
     return root
 
 
@@ -394,7 +396,9 @@ def audit_dataset(dataset_root: Path | str) -> DatasetAudit:
     nutrition = participants_by_modality["nutrition"]
     any_insulin = participants_by_modality["bolus"] | participants_by_modality["basal"]
     core = glucose & nutrition & any_insulin
-    full = glucose & nutrition & participants_by_modality["bolus"] & participants_by_modality["basal"]
+    full = (
+        glucose & nutrition & participants_by_modality["bolus"] & participants_by_modality["basal"]
+    )
     file_counts = Counter(audit.modality for audit in file_audits)
     row_counts = Counter()
     for item in file_audits:
@@ -541,7 +545,9 @@ def load_participant(dataset_root: Path | str, participant_id: str) -> Participa
     except KeyError as error:
         raise DatasetValidationError(f"participant not found: {participant_id}") from error
     if files.glucose is None or files.nutrition is None:
-        raise DatasetValidationError(f"participant {participant_id} lacks glucose or nutrition data")
+        raise DatasetValidationError(
+            f"participant {participant_id} lacks glucose or nutrition data"
+        )
     if files.bolus is None and files.basal is None:
         raise DatasetValidationError(f"participant {participant_id} lacks insulin data")
 
@@ -616,12 +622,18 @@ def build_meal_window(
     history_timestamps = tuple(
         meal.timestamp - frequency * offset for offset in range(history_count - 1, -1, -1)
     )
-    target_timestamps = tuple(meal.timestamp + frequency * offset for offset in range(1, target_count + 1))
-    premeal_readings = tuple(point for point in participant.glucose if point.timestamp <= meal.timestamp)
+    target_timestamps = tuple(
+        meal.timestamp + frequency * offset for offset in range(1, target_count + 1)
+    )
+    premeal_readings = tuple(
+        point for point in participant.glucose if point.timestamp <= meal.timestamp
+    )
     target_readings = tuple(
         point
         for point in participant.glucose
-        if meal.timestamp < point.timestamp <= horizon_end + timedelta(minutes=effective.max_edge_gap_minutes)
+        if meal.timestamp
+        < point.timestamp
+        <= horizon_end + timedelta(minutes=effective.max_edge_gap_minutes)
     )
     maximum_interpolation_gap = timedelta(minutes=effective.max_interpolation_gap_minutes)
     maximum_edge_gap = timedelta(minutes=effective.max_edge_gap_minutes)

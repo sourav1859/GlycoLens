@@ -20,7 +20,9 @@ def _dataset_root(argument: str | None) -> Path:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--dataset-root", help="Path to the extracted T1D-UOM release")
-    parser.add_argument("--include-file-details", action="store_true", help="Include per-file aggregate checks")
+    parser.add_argument(
+        "--include-file-details", action="store_true", help="Include per-file aggregate checks"
+    )
     parser.add_argument(
         "--include-participant-ids",
         action="store_true",

@@ -21,7 +21,9 @@ def _dataset_root(argument: str | None) -> Path:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--dataset-root", help="Path to the extracted T1D-UOM release")
-    parser.add_argument("--limit", type=int, default=1, help="Stop after this many eligible windows")
+    parser.add_argument(
+        "--limit", type=int, default=1, help="Stop after this many eligible windows"
+    )
     parser.add_argument("--history-minutes", type=int, default=120)
     parser.add_argument("--horizon-minutes", type=int, default=120)
     parser.add_argument("--frequency-minutes", type=int, default=5)
