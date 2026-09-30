@@ -1,0 +1,9 @@
+# Generated local Supabase configuration and runtime state.
+# These may contain machine-specific endpoint or connection details.
+/config.toml
+/.branches/
+/.temp/
+.env
+.env.keys
+.env.local
+.env.*.local

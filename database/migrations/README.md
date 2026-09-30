@@ -1,3 +1,4 @@
 # Database Migrations
 
-Store ordered application-schema migrations here after the database tooling is selected. Migrations must be reversible or include an explicit recovery plan.
+Executable migrations live in `supabase/migrations/`, the standard path required by the Supabase
+CLI. This directory remains as a navigation placeholder for the original repository layout.

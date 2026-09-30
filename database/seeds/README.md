@@ -1,3 +1,4 @@
 # Database Seeds
 
-Store deterministic demo seeds only. Seeds must use synthetic or demonstrably de-identified records and must never contain credentials or private CGM exports.
+The executable synthetic-only seed is `supabase/seed.sql`, the standard path used by the Supabase
+CLI. Never add real CGM, insulin, meal, activity, OAuth, contact, or user-identifying records.

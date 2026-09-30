@@ -1,0 +1,1 @@
+"""Static database contract tests."""
