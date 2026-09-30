@@ -54,10 +54,12 @@ artifacts/benchmarks/*
 artifacts/models/*
 artifacts/forecasts/*
 artifacts/evaluation-results/*
+artifacts/simulation/*
 !artifacts/benchmarks/.gitkeep
 !artifacts/models/.gitkeep
 !artifacts/forecasts/.gitkeep
 !artifacts/evaluation-results/.gitkeep
+!artifacts/simulation/.gitkeep
 *.ckpt
 *.pt
 *.pth
