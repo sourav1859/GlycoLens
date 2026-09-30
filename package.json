@@ -1,0 +1,16 @@
+{
+  "name": "glycolens-workspace",
+  "private": true,
+  "packageManager": "pnpm@10.0.0",
+  "engines": {
+    "node": ">=22 <23"
+  },
+  "scripts": {
+    "frontend:dev": "pnpm --dir frontend dev",
+    "frontend:lint": "pnpm --dir frontend lint",
+    "frontend:test": "pnpm --dir frontend test",
+    "frontend:typecheck": "pnpm --dir frontend typecheck",
+    "frontend:build": "pnpm --dir frontend build",
+    "frontend:check": "pnpm --dir frontend check"
+  }
+}
