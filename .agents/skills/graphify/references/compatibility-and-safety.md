@@ -2,12 +2,12 @@
 
 ## Current project status
 
-See `docs/tooling/graphify.md` for the inspected upstream ref and current machine blocker. The expected official package is `graphifyy`, while the executable is `graphify`.
+See `docs/tooling/graphify.md` for the inspected upstream ref and current local installation evidence. The expected official package is `graphifyy`, while the executable is `graphify`. The project wrappers may use an explicitly configured executable, the ignored repository-local virtual environment, or a compatible executable on `PATH`.
 
 ## Required checks
 
 - Python is 3.10 or later.
-- An isolated installer such as `pipx` or `uv` is available.
+- Graphify is installed in an isolated environment, such as `pipx`, `uv`, or the ignored repository-local virtual environment.
 - `graphify --version` and `graphify --help` succeed.
 - `.gitignore` and `.graphifyignore` exclude sensitive and generated paths.
 - The graph root resolves to the GlycoLens repository.

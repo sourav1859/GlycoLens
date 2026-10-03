@@ -2,13 +2,15 @@
 
 ## Status
 
-**ACTIVE (code-only) as of September 29, 2026.** Graphify `0.9.69` is available from the isolated
-user-tool launcher using Python `3.12.5`. On non-interactive Windows shells, add
-`%USERPROFILE%\.local\bin` to the process `PATH` when the wrapper cannot locate the executable; no
-repository or system-wide path change is required.
+**ACTIVE (code-only) as of October 1, 2026.** Graphify `0.9.69` is available from the ignored,
+repository-local `.cache/graphify-venv` environment using Python `3.12.14`. The wrappers prefer an
+explicit `GLYCOLENS_GRAPHIFY_EXECUTABLE`, then the repository-local executable, and finally a
+`graphify` command on `PATH`. This fallback keeps the workflow operational if an older global
+launcher points to a removed Python installation; no credentials or endpoint values are stored in
+the repository.
 
-The refreshed local graph contains 1,293 nodes, 1,896 edges, and 166 communities after the final
-Milestone 1 code-only closure update. The closure query located the final audit, requirement matrix,
+The refreshed local graph contains 1,293 nodes, 1,896 edges, and 166 communities after the October
+1 Milestone 1 current-state update. The closure query located the final audit, requirement matrix,
 test-strategy gate, dataset pipeline, forecast contracts, Chronos-2 runner, and related tests; those
 findings were verified against source. The earlier Phase 6 query also located the py-mgipsim
 runner, result contract, isolated bridge, exact-commit verification, validators, and
@@ -39,7 +41,7 @@ No upstream skill or source text is vendored here. The GlycoLens skill and wrapp
 ## Safe installation procedure
 
 1. Recheck the official repository, package name, version, license, Python requirement, Windows notes, and `graphify --help`.
-2. Install a specific verified version with `pipx install graphifyy==<version>` or the equivalent pinned `uv tool install` command. The current installation uses `graphifyy==0.9.69`.
+2. Install a specific verified version with `pipx install graphifyy==<version>` or the equivalent pinned `uv tool install` command. A repository-local virtual environment is also supported. The current installation uses `graphifyy==0.9.69` in `.cache/graphify-venv`, which is ignored by Git.
 3. Do not run `graphify install --project` without reviewing its proposed changes; it can write `.agents/skills/graphify/SKILL.md` and `AGENTS.md`, which are maintained by GlycoLens.
 4. Run `scripts/graphify/Test-GraphifyReadiness.ps1` and inspect `.gitignore` plus `.graphifyignore`.
 5. Build a local code-only graph first. Enable semantic document extraction only with explicit approval and a verified backend/data boundary.
@@ -65,16 +67,15 @@ Graphify output is local and ignored. Never scan secrets, health data, private C
 
 ## Installation evidence
 
-- Python: `3.12.5` (64-bit)
-- pip: `24.2`
-- Isolated launcher: verified at the user-tool bin path; package-manager registry was unavailable
-  to the execution account during the Phase 1 refresh
+- Python: `3.12.14` (64-bit, repository-local virtual environment)
+- Graphify executable resolution: repository-local launcher verified; environment-variable and
+  `PATH` fallbacks remain available
 - Graphify: `0.9.69`
 - Readiness and exclusion checks: passed
 - Initial code-only extraction and Phase 1 explicit update: passed
 - Phase 2 through Phase 6 explicit code-only updates: passed
 - Deterministic clustering refresh: passed with `--no-label`
-- Wiki export: passed, 104 articles written
+- Wiki export: passed, 175 generated articles plus the wiki index
 - Query plus source verification: passed
 - Hooks and merge driver: installed and verified
 - Git merge attribute: `.gitattributes` contains `graphify-out/graph.json merge=graphify`

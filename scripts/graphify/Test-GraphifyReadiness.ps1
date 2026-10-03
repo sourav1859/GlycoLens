@@ -7,26 +7,36 @@ $ErrorActionPreference = 'Stop'
 $repositoryRoot = Get-GlycoLensRepositoryRoot -ScriptDirectory $PSScriptRoot
 $problems = @()
 
-$pythonCommand = Get-Command python -ErrorAction SilentlyContinue | Select-Object -First 1
-if ($null -eq $pythonCommand) {
-    $pythonCommand = Get-Command py -ErrorAction SilentlyContinue | Select-Object -First 1
+$localPython = Join-Path $repositoryRoot '.cache\graphify-venv\Scripts\python.exe'
+$pythonExecutable = if (Test-Path -LiteralPath $localPython) {
+    $localPython
+} else {
+    $command = Get-Command python -ErrorAction SilentlyContinue | Select-Object -First 1
+    if ($null -ne $command) { $command.Source }
 }
-if ($null -eq $pythonCommand) {
+if ([string]::IsNullOrWhiteSpace($pythonExecutable)) {
+    $command = Get-Command py -ErrorAction SilentlyContinue | Select-Object -First 1
+    if ($null -ne $command) { $pythonExecutable = $command.Source }
+}
+if ([string]::IsNullOrWhiteSpace($pythonExecutable)) {
     $problems += 'Python 3.10+ is not available on PATH.'
 } else {
-    $pythonVersion = & $pythonCommand.Source --version 2>&1
+    $pythonVersion = & $pythonExecutable --version 2>&1
     Write-Output "Python: $pythonVersion"
 }
 
-if ($null -eq (Get-Command pipx -ErrorAction SilentlyContinue) -and $null -eq (Get-Command uv -ErrorAction SilentlyContinue)) {
+if (-not (Test-Path -LiteralPath $localPython) -and $null -eq (Get-Command pipx -ErrorAction SilentlyContinue) -and $null -eq (Get-Command uv -ErrorAction SilentlyContinue)) {
     $problems += 'Neither pipx nor uv is available for isolated installation.'
 }
 
-$graphifyCommand = Get-Command graphify -ErrorAction SilentlyContinue | Select-Object -First 1
-if ($null -eq $graphifyCommand) {
+$graphifyCommand = $null
+try {
+    $graphifyCommand = Get-GraphifyExecutable -RepositoryRoot $repositoryRoot
+} catch {
     $problems += 'The graphify command is not installed.'
-} else {
-    Write-Output "Graphify: $(& $graphifyCommand.Source --version 2>&1)"
+}
+if ($null -ne $graphifyCommand) {
+    Write-Output "Graphify: $(& $graphifyCommand --version 2>&1)"
 }
 
 try {

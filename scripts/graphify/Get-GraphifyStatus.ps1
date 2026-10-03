@@ -6,7 +6,7 @@ $ErrorActionPreference = 'Stop'
 
 $repositoryRoot = Get-GlycoLensRepositoryRoot -ScriptDirectory $PSScriptRoot
 try {
-    $graphify = Get-GraphifyExecutable
+    $graphify = Get-GraphifyExecutable -RepositoryRoot $repositoryRoot
 } catch {
     Write-Output "Graphify status: BLOCKED - $($_.Exception.Message)"
     exit 2

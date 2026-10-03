@@ -10,7 +10,7 @@ $ErrorActionPreference = 'Stop'
 
 $repositoryRoot = Get-GlycoLensRepositoryRoot -ScriptDirectory $PSScriptRoot
 Assert-GlycoLensGraphifyExclusions -RepositoryRoot $repositoryRoot
-$graphify = Get-GraphifyExecutable
+$graphify = Get-GraphifyExecutable -RepositoryRoot $repositoryRoot
 
 if ($IncludeDocumentation) {
     if ([string]::IsNullOrWhiteSpace($Backend)) {

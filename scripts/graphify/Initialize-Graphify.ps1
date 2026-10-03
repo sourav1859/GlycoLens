@@ -9,7 +9,7 @@ $repositoryRoot = Get-GlycoLensRepositoryRoot -ScriptDirectory $PSScriptRoot
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
 Assert-GlycoLensGraphifyExclusions -RepositoryRoot $repositoryRoot
-$graphify = Get-GraphifyExecutable
+$graphify = Get-GraphifyExecutable -RepositoryRoot $repositoryRoot
 Write-Output 'Building a local code-only graph. Semantic document extraction is intentionally disabled.'
 & $graphify extract $repositoryRoot --code-only --out $repositoryRoot
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
