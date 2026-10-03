@@ -12,4 +12,6 @@ Available Milestone 1 artifacts:
 - [Phase 5 local Supabase database](milestone-1-phase-5-local-database.md)
 - [Phase 6 py-mgipsim virtual-patient scenario](milestone-1-phase-6-pymgipsim-scenario.md)
 - [Final Milestone 1 closure audit](milestone-1-closure-audit.md)
-- [Advisor-ready dataset audit and progress report](GlycoLens_Milestone_1_Dataset_Audit_and_Progress_Report.docx)
+- [Advisor-ready Milestone 1 progress and results report](GlycoLens_Milestone_1_Advisor_Progress_Report.docx)
+- [One-page Milestone 1 advisor summary](GlycoLens_Milestone_1_One_Page_Summary.docx)
+- [Detailed dataset audit with final Milestone 1 status](GlycoLens_Milestone_1_Dataset_Audit_and_Progress_Report.docx)
