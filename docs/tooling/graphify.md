@@ -18,7 +18,18 @@ reproducibility test.
 Post-commit and post-checkout hooks plus the local merge driver are installed. Watch mode is
 available but is not left running.
 
+For each focused task, check status once before the first broad exploration or impact analysis and
+reuse that result until relevant files change. Query cross-file relationships; use direct targeted
+search for known files and symbols. After final supported edits, check whether a hook refreshed the
+graph and perform at most one explicit code-only update if still needed.
+
 Semantic documentation/media extraction is **not active**. The graph was intentionally built with `--code-only`, so no repository documents were sent to a model backend.
+
+In installed Graphify `0.9.69`, `query` loads `graph.json` and performs local BFS/DFS traversal; it
+does not expose a model-backend option. `graphify query --help` is not a help path in this version:
+the token `--help` is treated as the question. Backend use belongs to semantic extraction, not the
+query command. This was verified from the installed CLI source without transmitting repository
+content.
 
 The Phase 5 refresh reported that SQL AST extraction requires the optional `tree_sitter_sql`
 dependency. The migration and pgTAP files were therefore validated directly by Supabase reset,

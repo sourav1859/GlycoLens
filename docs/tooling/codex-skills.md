@@ -2,6 +2,8 @@
 
 GlycoLens keeps shared agent workflows under `.agents/skills/` so repository-specific decisions remain reviewable with the project.
 
+Project defaults and three narrow custom-agent configurations live under `.codex/`. See the [token-efficient workflow](codex-token-efficiency.md) for model routing, delegation boundaries, evidence reuse, and session handoffs.
+
 | Skill | Use |
 |---|---|
 | `graphify` | Check, build, update, and query the local repository knowledge graph safely. |
@@ -16,4 +18,4 @@ GlycoLens keeps shared agent workflows under `.agents/skills/` so repository-spe
 
 Each `SKILL.md` uses only `name` and `description` in YAML frontmatter. Supporting references contain project-specific maps and checklists; reusable output templates live in `assets/`.
 
-Validate all immediate skill directories with `python scripts/quality/validate_skills.py`. The command requires Python 3.10 or later and rejects literal email addresses in repository skills.
+Validate all immediate skill directories with `python scripts/quality/validate_skills.py`. Validate project configuration and custom agents with `python scripts/quality/validate_codex_config.py`. Both require Python 3.10 or later and reject configured privacy or safety hazards within their scope.

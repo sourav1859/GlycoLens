@@ -34,6 +34,8 @@ uv run ruff format --check backend research tests scripts
 uv run pytest -q
 uv run python -m compileall -q backend research tests scripts
 uv run python scripts/quality/validate_skills.py
+uv run python scripts/quality/validate_codex_config.py
+uv run pytest -q tests/quality/test_validate_codex_config.py
 
 pnpm install --frozen-lockfile
 pnpm frontend:lint

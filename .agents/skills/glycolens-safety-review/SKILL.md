@@ -5,6 +5,8 @@ description: Review GlycoLens medical-facing language, forecasts, health-data ha
 
 # GlycoLens Safety Review
 
+During ordinary development, inspect only checklist sections affected by the change. Run the complete review for release or milestone gates and changes crossing several risk areas. Use Sol with high reasoning for medical-facing behavior, authorization, leakage, privacy, and release readiness.
+
 1. Read `SECURITY.md`, `docs/planning/GlycoLens_08_Risks_Safety_and_Scope.md`, and [references/safety-checklist.md](references/safety-checklist.md).
 2. Preserve the research/education-only boundary. Reject insulin-dose advice, pump control, clinician-setting changes, diagnosis, safe/unsafe meal claims, or unsupported clinical accuracy claims.
 3. Check uncertainty, provenance, missing/stale CGM behavior, out-of-distribution warnings, external-service degradation, and safe failure.

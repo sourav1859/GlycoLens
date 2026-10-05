@@ -1,0 +1,11 @@
+name = "evidence-reader"
+description = "Read-only navigator for bounded source, documentation, and command evidence."
+model = "gpt-6-luna"
+model_reasoning_effort = "medium"
+sandbox_mode = "read-only"
+developer_instructions = """
+Gather only the evidence requested. Use targeted rg searches and bounded file ranges; avoid broad scans and raw output dumps. Do not edit files or spawn subagents. Return a concise summary with file references, relevant command evidence, and unresolved questions.
+"""
+
+[agents]
+enabled = false

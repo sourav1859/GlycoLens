@@ -1,0 +1,25 @@
+# Normal GlycoLens development starts with the balanced Sol preset.
+model = "gpt-6.1-sol"
+model_reasoning_effort = "medium"
+
+# Bound each retained tool result so logs and broad reads do not dominate context.
+tool_output_token_limit = 4000
+
+[agents]
+# Delegation is reserved for independent, bounded work.
+max_concurrent_threads_per_session = 2
+default_subagent_model = "gpt-6-luna"
+default_subagent_reasoning_effort = "medium"
+interrupt_message = false
+
+[agents.evidence-reader]
+description = "Gather concise, read-only evidence with targeted navigation."
+config_file = "./agents/evidence-reader.toml"
+
+[agents.routine-worker]
+description = "Perform small, unambiguous implementation or documentation changes."
+config_file = "./agents/routine-worker.toml"
+
+[agents.critical-reviewer]
+description = "Review consequential architecture, science, authorization, privacy, security, or medical-safety decisions."
+config_file = "./agents/critical-reviewer.toml"

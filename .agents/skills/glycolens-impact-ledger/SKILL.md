@@ -5,6 +5,8 @@ description: Measure and record reproducible GlycoLens improvements in performan
 
 # GlycoLens Impact Ledger
 
+Activate this workflow when an improvement claim will be made or reproduced. Do not benchmark ordinary changes that make no measurable improvement claim. Use deterministic scripts for calculations and model reasoning for experimental design, interpretation, and limitations.
+
 1. Define a hypothesis, primary metric, and success threshold before optimization.
 2. Read [references/measurement-rules.md](references/measurement-rules.md) and copy [assets/measurement-record.md](assets/measurement-record.md) for the experiment.
 3. Measure before and after under equivalent environment, dataset, workload, warm-up, and sample-count conditions.

@@ -17,6 +17,8 @@ Resolve both addresses from the process environment or the repository's ignored 
 
 ## Workflow
 
+Use Luna low or medium for factual drafting from already-approved content. Escalate when the message requires interpreting new scientific results, unresolved risk, or conflicting evidence. Do not spawn a subagent merely to draft a short email; this guidance does not switch the active model.
+
 1. Prepare a concise, professional, human-friendly draft using only information relevant to the user's request. Verify requested repository links and attachment paths before including them.
 2. Prefer an authenticated email connector for the resolved sender account. Otherwise, use an already signed-in webmail session. Do not install software, change accounts, enter credentials, or alter authentication settings on the user's behalf.
 3. Before sending, present the complete final preview to the user: From, To, Subject, body, and every attachment. Ask for explicit approval to send that exact email.

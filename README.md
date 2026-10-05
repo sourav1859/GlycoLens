@@ -44,6 +44,7 @@ docs/architecture/     Architecture diagrams and technical notes
 docs/decisions/        Architecture decision records
 docs/reports/          Milestone and final reports
 .agents/skills/        Repository-scoped Codex workflows
+.codex/                Project Codex defaults and narrow custom agents
 scripts/               Development and research utilities
 tests/                 Cross-system integration and end-to-end tests
 ```
@@ -90,6 +91,7 @@ Developer setup and workflow documentation:
 
 - [Local development setup](docs/tooling/local-development-setup.md)
 - [Repository-scoped Codex skills](docs/tooling/codex-skills.md)
+- [Codex token-efficient workflow](docs/tooling/codex-token-efficiency.md)
 - [Graphify integration](docs/tooling/graphify.md)
 - [Test strategy](docs/testing/test-strategy.md)
 - [Measurement protocol](docs/benchmarks/measurement-protocol.md)

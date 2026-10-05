@@ -9,10 +9,10 @@ Treat Graphify as an optional developer navigation aid. Never equate it with pro
 
 ## Workflow
 
-1. Run `scripts/graphify/Get-GraphifyStatus.ps1` before a broad scan, unfamiliar-code exploration, impact analysis, or cross-document question.
-2. If a current graph exists, ask a scoped question with `scripts/graphify/Invoke-GraphifyQuery.ps1`, then verify important claims against source files.
+1. Check status once before the first eligible broad exploration or impact-analysis step; reuse it until relevant repository files change.
+2. Query a current graph for cross-file relationships and impact questions. Use direct targeted source search for a known file or single symbol, and do not query merely to confirm the current diff. Verify important findings against source.
 3. If the graph is missing, stale, or blocked, inspect source normally and state that Graphify was not used or refreshed.
-4. After supported files are added, changed, moved, or deleted, run `scripts/graphify/Update-Graphify.ps1`. Run an explicit update for documentation changes.
+4. After final supported edits, check whether a hook already refreshed the graph, then update once if needed. Documentation changes require an explicit update.
 5. Report graph readiness, freshness, command evidence, and any blocker without fabricating success.
 
 Before building or updating a graph, read [references/compatibility-and-safety.md](references/compatibility-and-safety.md) and verify `.gitignore` plus `.graphifyignore`. Never scan secrets, environment files, ignored health datasets, private CGM exports, local databases, model weights, or generated artifacts.
