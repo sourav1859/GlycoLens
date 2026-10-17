@@ -1,5 +1,5 @@
 [CmdletBinding()]
-param()
+param([string]$SupabaseExecutable = 'supabase')
 
 $ErrorActionPreference = 'Stop'
 $repositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
@@ -7,7 +7,7 @@ $localConfig = Join-Path $repositoryRoot 'supabase\config.toml'
 
 Push-Location $repositoryRoot
 try {
-    if (-not (Get-Command supabase -ErrorAction SilentlyContinue)) {
+    if (-not (Get-Command $SupabaseExecutable -ErrorAction SilentlyContinue)) {
         throw 'Supabase CLI is required.'
     }
     if (-not (Get-Command docker -ErrorAction SilentlyContinue)) {
@@ -18,7 +18,7 @@ try {
     }
 
     $ErrorActionPreference = 'Continue'
-    $startOutput = & supabase start 2>&1
+    $startOutput = & $SupabaseExecutable start 2>&1
     $startExitCode = $LASTEXITCODE
     $ErrorActionPreference = 'Stop'
     if ($startExitCode -ne 0 -and $startOutput -notmatch 'already running') {
@@ -27,7 +27,7 @@ try {
     Write-Host 'Local Supabase started; generated connection details were suppressed.'
 
     $ErrorActionPreference = 'Continue'
-    $resetOutput = & supabase db reset --local 2>&1
+    $resetOutput = & $SupabaseExecutable db reset --local 2>&1
     $resetExitCode = $LASTEXITCODE
     $ErrorActionPreference = 'Stop'
     if ($resetExitCode -ne 0) {
@@ -35,12 +35,12 @@ try {
     }
     Write-Host 'Migration and synthetic seed applied from a clean database.'
 
-    & supabase db lint --local
+    & $SupabaseExecutable db lint --local
     if ($LASTEXITCODE -ne 0) {
         throw 'Database lint failed.'
     }
 
-    & supabase test db
+    & $SupabaseExecutable test db
     if ($LASTEXITCODE -ne 0) {
         throw 'Database tests failed.'
     }

@@ -128,10 +128,117 @@ deterministic. They are not presented as uncertainty estimates or clinical confi
 
 ## 7A. Dataset timestamp and duplicate risk
 
+### M2 implementation safeguards and observed limitations
+
+The actual app uses verified session identity and owner-token RLS; no client-supplied
+owner is trusted. Provider keys and privileged catalog writes stay server-side.
+Recipe-model requests contain recipe text only, not CGM/insulin/participant context,
+and provider retention is disabled in the prepared Responses request. Structured
+extraction requires confirmation and deterministic food-fact calculations.
+
+The public M1 simulator export remains dose-free. M2 adds a separate ignored,
+server-internal synthetic context export and privately owned application insulin
+history for inference; it is never a dose recommendation. Only pre-origin simulated
+CGM is imported. SQL retrieval excludes outcomes unavailable at the query origin.
+Future-event leakage, invalid grids, owner isolation, retry behavior and atomicity
+have scoped tests. No real-user data, hosted deployment or clinical claims were added.
+
+The observed pretrained errors do not beat persistence, and nominal q10-q90 intervals
+are under-covered. These are explicit research limitations, not reasons to change
+the frozen test selection or silently clip/repair outputs. Live nutrition credentials,
+provider validation and physical camera capture remain unresolved closure evidence.
+
 ### Risk
 T1D-UOM V1.0.4 uses day-first timestamps despite month-first wording in its README, provides no timezone offsets, and contains repeated timestamps including conflicting CGM values.
 
-### Mitigation
+### October 16 refinement safeguards
+
+Small Ridge/LightGBM heads may improve average validation errors while still failing
+often at +/-10 or producing large errors. The tolerance is aspirational. Original
+test results are preserved but reused only diagnostically. Separate calibration
+does not ensure conditional/clinical coverage, especially under AZT1D source shift.
+Validation selection is optimistic; report independent results before app promotion.
+The application model remains unchanged in this research cycle.
+
+AZT1D downloads and row-level forecasts/model states stay ignored. Only canonical
+CGM files are ingested; serial-number Visual Statistics exports are excluded. Missing
+nutrients are not observed zero predictors. Conflicting CGM timestamps and duplicate
+rows have tested rules; ambiguous basal units are not converted. Exact trajectory
+checks cannot establish cross-source subject identity. External selection is frozen
+before prediction, and the resulting test cannot support subsequent untouched-test
+claims. Joblib state is trusted-local only. No patient uploads, paid calls, dosing
+or pump control. See ADR 0010 and the refinement report for measured limitations.
+
+### MetaboNet intake safeguards - October 16
+
+The aggregate intake reads test metadata only; no test glucose/insulin/carbohydrate
+values, clinical outcomes or forecasts. Raw IDs are reused across sources: namespace
+IDs before joins/splitting and check cross-source aliases rather than assuming unique
+people. Supplied train/test has 169 overlapping source-qualified IDs, mostly without
+a horizon buffer. Freeze a new protocol and purge target boundaries before training.
+AZT1D/UOM copies must not return as new development or independent-test evidence.
+Preserve event missingness and interval-time semantics; source-local offsets are not
+automatically bad cadence. OhioT1DM use rights require current release confirmation;
+quarantine that source from training while preparing other documented cohorts.
+Parquet/scratch/aggregate JSON remain ignored; only sanitized report aggregates enter
+Git. No paid compute, model training, app promotion, patient upload or medical advice.
+
+Saved-dictionary definitions resolve insulin as prior-five-minute IU amounts; avoid
+hourly-rate conversion and counting total insulin again with its components. IOBP2
+encodes all delivery as bolus, so it cannot silently become a conventional meal-bolus
+input. Some timezone/zero-null semantics remain ambiguous. The dictionary is not a
+licence grant or proof of unique global IDs. Saved HTML/resources stay under ignored
+raw data and are parsed as inert text, never executed, uploaded or included in Graphify.
+
+Phase 2 preparation now enforces metadata-only test reservation, source-qualified
+whole-subject roles, capped deterministic candidates, immutable request/target separation
+and corruption/replay checks. All subject manifests, projections, windows and source
+snapshots stay ignored. The selected pilot uses only Loop/ReplaceBG; 104 unseen test
+identities and 65 PEDAP identities are reserved. PEDAP is a separate pediatric shift,
+not interchangeable with adult development. There were no partial exact fingerprint
+matches among selected development IDs; aliases are still possible. Five-minute
+meal availability is an assumption. Missing masks cannot establish complete logging
+or undo upstream processing, and retrospective future-meal exclusion narrows the
+evaluated population. Retain these limitations with future scores. No accuracy or
+clinical guarantee follows from the successful build. See
+[the frozen protocol](GlycoLens_12_MetaboNet_Experiment.md).
+
+Phase 3 uses cached weights offline and only validation examples. It preserves every
+attempt, including invalid native model outputs, and permits only failure-free options
+in full-cohort selection. Resume requires unchanged input/configuration/source hashes
+and checksummed records; completed output cannot be replayed. Do not turn a native
+quantile-contract failure into an apparently successful median by silently repairing
+bands or dropping cases. Raw coverage is not interval calibration, and validation
+ranking is not external confirmation. C1/C2 comparisons are predictive, not causal
+nutrient/insulin effects. No application promotion or clinical guarantee follows.
+See [protocol 13](GlycoLens_13_MetaboNet_Frozen_Inference.md).
+
+Executed evidence reinforces the boundary: persistence beat eligible frozen Chronos
+options; Chronos native 80% bands covered only 49.42-64.08%, negative median predictions
+occurred, and longer histories had contract failures. Failure-free means a software
+contract passed, not physiological plausibility or clinical adequacy. Preserve these
+negative outputs for unbiased research metrics; do not present them as acceptable
+clinical forecasts. Accuracy remains far from the +/-10 aspiration. Research-only
+results authorize neither treatment use nor automatic application promotion.
+
+Phase 4 adds explicit training-only whole-subject CV, train-fold transformations,
+participant-balanced weights and origin-only native-unit/mask features. Model bundles
+remain ignored and are hash-checked before trusted local deserialization. A numeric
+scoring interruption was repaired with a separate archived completion step: original
+CV choices/model bytes were verified unchanged, and only the scalar-conversion line
+could differ from the frozen runner. No hidden retraining or outcome-based retry.
+
+LightGBM's validation MAE fell 16.03% to 31.17 mg/dL, but within +/-10 is just 26.84%,
+whole-curve success 0.52% and maximum error 235.38 mg/dL. Ridge has better within-10;
+both learned models have lower whole-curve success than persistence. A passed MAE
+gate is not uniform improvement or clinical adequacy. Direct equal quantiles are
+deterministic placeholders, not calibrated uncertainty; never report their coverage
+as confidence. At Phase 4 completion calibration/reserved tests were untouched; Phase 6 below now records their use. Phase 6 independent evaluation is still required. See
+[protocol 14](GlycoLens_14_MetaboNet_Direct_Models.md) and
+[results](../reports/metabonet-phase4-training-2026-10-16.md).
+
+### T1D-UOM timestamp mitigation
+
 - pin the exact V1.0.4 DOI and release commit
 - parse the observed day-first format before fallback formats
 - keep timestamps timezone-naive until a documented DST/cross-source policy exists
@@ -278,3 +385,31 @@ Only:
 - fix
 - document
 - improve presentation
+
+
+## MetaboNet Phase 5 completion
+
+The first PowerShell launcher stopped on a retained numerical warning, before
+validation or completed CV candidates. Resume preserved the frozen model design;
+interruption evidence is retained. Late-loaded numerical libraries were not fully
+limited by the requested two-thread context, so runtime claims carry that caveat.
+
+**Phase 5 was complete before the Phase 6 evaluation recorded below.** Frozen C2
+generated 6,756 training forecasts; 6,756 usable meals / 196 identities supported six CV
+configurations / 18 fold fits and four final refits, with exactly matched direct
+controls. Neither correction passed the predeclared incremental gate; retain Phase 4
+LightGBM. Lowest-MAE eligible option: `ridge_residual_1000`; advancement candidate:
+`lightgbm_direct` (macro MAE 31.17 mg/dL, within +/-10 26.84%). These are
+reused-validation findings, not independent confirmation. At Phase 5 completion, calibration/reserved outcomes were untouched.
+Phase 6 below supersedes that access status; app inference remains unchanged.
+See [protocol 15](GlycoLens_15_MetaboNet_Chronos_Correction.md) and [results](../reports/metabonet-phase5-correction-2026-10-16.md).
+
+Saved heads contain no live foundation model; verify trusted local bytes before deserialization. Frozen baseline outputs are predictions, not future observations. Retain failed attempts and denominator integrity. No calibrated uncertainty or clinical/maximum-error claim; corrections still require backbone computation.
+
+## MetaboNet Phase 6 completion - current status
+
+**The broader-data model-refinement sequence, Phases 1-6, is complete.** Separate calibration used 48 participant representatives from 1,488 eligible meals. Frozen LightGBM scored 29.91 mg/dL macro trajectory MAE / 28.20% within +/-10 on 3,533 primary-test meals (102 IDs), and 40.92 / 19.57% on 2,177 PEDAP meals (64 IDs). Both predeclared point-improvement gates passed, with zero failed forecasts; tight precision remains poor. Nominal 80% marginal coverage was 79.05% primary and 63.94% PEDAP. Both test cohorts are now consumed; no test-based reselection, point refit, app promotion or full-M2 closure.
+
+The +/-10 aspiration is unmet: complete-curve within-10 is 0.94% primary / 0.18% PEDAP, and maximum primary error is 264.87 mg/dL. PEDAP within-10 is essentially unchanged versus persistence (19.57%/19.56%). Primary marginal bands average 96.73 mg/dL wide and under-cover some early horizons; pediatric undercoverage blocks broad reliability claims. No dosing/clinical assurance or automatic app switch.
+
+See [protocol 16](GlycoLens_16_MetaboNet_Independent_Evaluation.md), [independent results](../reports/metabonet-phase6-independent-2026-10-16.md) and [verification handoff](../tooling/metabonet-phase6-handoff-2026-10-16.md).

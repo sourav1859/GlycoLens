@@ -43,10 +43,12 @@ class ForecastResponse(BaseModel):
     model_config = ConfigDict(frozen=True)
 
     schema_version: Literal["1.0"] = "1.0"
-    data_mode: Literal["synthetic_demo"]
+    data_mode: Literal["synthetic_demo", "simulated"]
     model_id: str = Field(min_length=1)
     model_version: str = Field(min_length=1)
-    context_configuration: Literal["cgm_only"]
+    context_configuration: Literal[
+        "cgm_only", "cgm_insulin", "cgm_insulin_carbohydrates", "cgm_insulin_nutrition"
+    ]
     unit: Literal["mg/dL"] = "mg/dL"
     history: tuple[HistoryPoint, ...] = Field(min_length=2)
     forecast: tuple[ForecastBandPoint, ...] = Field(min_length=1)

@@ -328,7 +328,7 @@ def test_converter_supports_context_ablation_and_aggregates_same_time_insulin() 
     assert cgm_only.past_covariates == ()
     assert cgm_only.known_covariates == ()
     assert {series.name for series in insulin.past_covariates} == {
-        "insulin_basal",
+        "insulin_basal_kind_synthetic",
         "insulin_bolus",
     }
     bolus = next(series for series in insulin.past_covariates if series.name == "insulin_bolus")

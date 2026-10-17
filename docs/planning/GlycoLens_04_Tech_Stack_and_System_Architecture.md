@@ -200,7 +200,40 @@ Benefits:
 - easy research mode
 - clean separation between app and model logic
 
+MetaboNet Phase 4 adds a research-only `MetaboNetTabularAdapter` under that contract
+([ADR 0012](../decisions/0012-metabonet-direct-model-selection.md)). Request-only
+features preserve recorded five-minute IU/gram amounts and masks. Ridge uses
+train-only imputation/scaling and 24 joint delta outputs; LightGBM is a pooled-horizon
+delta regressor, expanded only after subject splitting. The experiment runner freezes
+training-CV choices before validation and keeps checksummed trusted model bundles
+under ignored artifacts. Equal quantile fields are explicitly deterministic;
+calibration remains separate. Research data/models do not enter the app database
+or replace its inference service through this experiment.
+
 ## 6. Backend modules
+
+### M2 implemented boundary - October 14
+
+Authenticated routes share `/api/v1`: demo/session, timeline, meals (save/read/similar),
+foods/search, foods/usda/{id}, foods/barcode/{code}, meals/parse-recipe,
+simulation/scenario, and forecasts (create/read). The M1 forecasts/demo route remains
+identifier-free. Tokens are verified through local Supabase Auth; user-token PostgREST
+and SECURITY INVOKER RPCs preserve RLS. Privileged catalog access is limited to
+provider-fetched food facts, never meal/timeline requests.
+
+Forward local migrations add explicit 100-g nutrient basis, source snapshots, input
+metadata, idempotency keys, forecast origin/provenance and outcome available_at.
+Atomic RPCs calculate totals from food facts, aggregate repeated ingredients, serialize
+idempotent operations and reject malformed forecast grids. Retrieval uses same-user
+past meals with completed outcomes, then fixed-scale numeric macro distance.
+
+The default model is validation-frozen Chronos C3 with process caching and a bounded
+inference lock. Live simulator execution remains an isolated fixed-protocol subprocess
+with timeout/lock. A separate private synthetic context export preserves source insulin
+units; the public response excludes insulin values. Only pre-origin CGM enters app
+storage. Simulation uses an explicitly labeled January 1, 2026 UTC fixture clock,
+not a reinterpretation of timezone-naive research records. Recipe extraction uses
+configurable OpenAI Responses structured output; live keys/model are prerequisites.
 
 ```text
 app/
@@ -508,3 +541,31 @@ Graphify may be used locally to understand source and documentation relationship
 - Dexcom developer overview: https://ui-g7int-us.platform.dexcomdev.com/docs/
 - USDA: https://fdc.nal.usda.gov/api-guide/
 - Open Food Facts: https://openfoodfacts.github.io/documentation/docs/Product-Opener/api/
+
+
+## MetaboNet Phase 5 completion
+
+An isolated resource audit found that entering the thread-limit context before
+loading SciPy/OpenMP can leave those later libraries at 16 threads. The configured
+two-thread request is not proof of universal enforcement. Preload numerical
+libraries before limits in future profiling; Phase 5 model sources were preserved.
+
+**Phase 5 was complete before the Phase 6 evaluation recorded below.** Frozen C2
+generated 6,756 training forecasts; 6,756 usable meals / 196 identities supported six CV
+configurations / 18 fold fits and four final refits, with exactly matched direct
+controls. Neither correction passed the predeclared incremental gate; retain Phase 4
+LightGBM. Lowest-MAE eligible option: `ridge_residual_1000`; advancement candidate:
+`lightgbm_direct` (macro MAE 31.17 mg/dL, within +/-10 26.84%). These are
+reused-validation findings, not independent confirmation. At Phase 5 completion, calibration/reserved outcomes were untouched.
+Phase 6 below supersedes that access status; app inference remains unchanged.
+See [protocol 15](GlycoLens_15_MetaboNet_Chronos_Correction.md) and [results](../reports/metabonet-phase5-correction-2026-10-16.md).
+
+The common-contract residual adapter saves only head state and explicitly attaches a frozen backbone after reload. Shared regression helpers preserve prior direct predictions. Two source freezes separate training forecast caching from head fitting; labels are absent from the backbone cache. No API/database changes. See [ADR 0013](../decisions/0013-frozen-chronos-correction-and-matched-controls.md).
+
+## MetaboNet Phase 6 completion - current status
+
+**The broader-data model-refinement sequence, Phases 1-6, is complete.** Separate calibration used 48 participant representatives from 1,488 eligible meals. Frozen LightGBM scored 29.91 mg/dL macro trajectory MAE / 28.20% within +/-10 on 3,533 primary-test meals (102 IDs), and 40.92 / 19.57% on 2,177 PEDAP meals (64 IDs). Both predeclared point-improvement gates passed, with zero failed forecasts; tight precision remains poor. Nominal 80% marginal coverage was 79.05% primary and 63.94% PEDAP. Both test cohorts are now consumed; no test-based reselection, point refit, app promotion or full-M2 closure.
+
+A symmetric interval wrapper preserves the immutable common adapter and unchanged point state. A dedicated reserved reader requires verified calibration completion; development-window role guards remain intact. Two source/configuration freezes form a hash chain. No API, database or frontend changes.
+
+See [protocol 16](GlycoLens_16_MetaboNet_Independent_Evaluation.md), [independent results](../reports/metabonet-phase6-independent-2026-10-16.md) and [verification handoff](../tooling/metabonet-phase6-handoff-2026-10-16.md).

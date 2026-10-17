@@ -1,4 +1,5 @@
 import { ForecastResponse } from "../types/forecast";
+import { useEffect, useRef } from "react";
 
 type ChartPoint = { x: number; y: number };
 
@@ -11,6 +12,11 @@ function polyline(points: ChartPoint[]): string {
 }
 
 export function ForecastChart({ data }: { data: ForecastResponse }) {
+  const chartContainer = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const container = chartContainer.current;
+    if (container) container.scrollLeft = container.scrollWidth - container.clientWidth;
+  }, [data]);
   const allMinutes = [...data.history.map((point) => point.minute), ...data.forecast.map((point) => point.minute)];
   const allValues = [
     ...data.history.map((point) => point.value_mg_dl),
@@ -55,13 +61,13 @@ export function ForecastChart({ data }: { data: ForecastResponse }) {
     <section className="forecast-card" aria-labelledby="forecast-heading">
       <div className="forecast-heading-row">
         <div>
-          <p className="eyebrow">Synthetic API demonstration</p>
+          <p className="eyebrow">{data.data_mode === "simulated" ? "Simulated patient · Pretrained model forecast" : "Synthetic API demonstration"}</p>
           <h2 id="forecast-heading">Two-hour glucose forecast</h2>
         </div>
         <span className="model-badge">{data.model_id}</span>
       </div>
 
-      <div className="chart-wrap">
+      <div className="chart-wrap" ref={chartContainer} tabIndex={0} aria-label="Glucose chart; scroll horizontally to inspect history and forecast">
         <svg
           viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
           role="img"
@@ -122,9 +128,9 @@ export function ForecastChart({ data }: { data: ForecastResponse }) {
       </div>
 
       <dl className="forecast-summary">
-        <div><dt>30 min</dt><dd>{data.summary.minute_30_mg_dl} mg/dL</dd></div>
-        <div><dt>60 min</dt><dd>{data.summary.minute_60_mg_dl} mg/dL</dd></div>
-        <div><dt>120 min</dt><dd>{data.summary.minute_120_mg_dl} mg/dL</dd></div>
+        <div><dt>30 min</dt><dd>{Math.round(data.summary.minute_30_mg_dl)} mg/dL</dd></div>
+        <div><dt>60 min</dt><dd>{Math.round(data.summary.minute_60_mg_dl)} mg/dL</dd></div>
+        <div><dt>120 min</dt><dd>{Math.round(data.summary.minute_120_mg_dl)} mg/dL</dd></div>
       </dl>
       <p className="safety-notice">{data.notice}</p>
     </section>

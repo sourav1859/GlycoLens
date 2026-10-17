@@ -207,8 +207,55 @@ Course presentation guidance suggests:
 ## Work deadline: Oct 16
 ## Presentations: Oct 27 / Nov 3
 
+### Approved implementation sequence - October 14, 2026
+
+Full scope was approved with py-mgipsim first and API-backed editable recipe parsing.
+The implementation estimate is 13-22 focused working days, subject to re-estimation
+after covariate validation. This does not revise official course deadlines or imply
+an advisor extension. Overlap with the November 13 M3 deadline is an explicit risk.
+Track actual phases and evidence in [the M2 ledger](GlycoLens_10_Milestone_2_Implementation.md).
+
 ### Goal
 Have a usable model pipeline and a working application prototype.
+
+### Additional approved research - October 16
+
+The user approved the refinement phases in [planning document 11](GlycoLens_11_Model_Refinement.md):
+protocol/error audit, external-data preparation, frozen history comparison, small direct
+models, frozen-Chronos residual heads and independent verification. Local data comes
+first; larger MetaboNet training is deferred. Files were subsequently received and
+audited on October 16 (metadata-only test access); data preparation/split repair and
+terms confirmation precede a new CPU pilot. Report execution evidence in the dated
+refinement report and preserve original M2 results. This work does not close live
+nutrition/camera/presentation gates, revise the October 16 deadline, imply an advisor
+extension, or authorize deployment. Schedule remaining work from measured outcomes;
+foundation-model training is a separate later decision.
+
+**Historical development results through Phase 5; Phase 6 completion is recorded below.**
+The real Loop/ReplaceBG pilot produced 8,973 training / 2,000 validation /
+1,948 calibration six-hour windows. Frozen protocol, metadata-only test reservations,
+integrity checks and six new synthetic tests are recorded in
+[document 12](GlycoLens_12_MetaboNet_Experiment.md) and the
+[preparation report](../reports/metabonet-phase2-preparation-2026-10-16.md).
+At Phase 2 completion the 104 primary-test and 65 PEDAP reservations were unscored, with test eligibility deferred; Phase 6 below now records their use. Preparation took 4.69 minutes locally;
+this does not predict inference/training effort or revise official deadlines.
+Initial UOM phases 3-6 and their failed external improvement gate remain historical
+evidence. The subsequent Phase 6 completed the broader sequence, while the +/-10 precision objective remains unmet. Phase 3 ran seven comparisons on 1,509 matched events in 28.86 minutes
+of inference/aggregation. Persistence beat eligible Chronos options; the improvement
+gate failed. Two-hour C0 is the sole failure-free C0; longer histories have better
+conditional accuracy but output failures. No training/test access or official deadline
+change. See [protocol 13 and ledger](GlycoLens_13_MetaboNet_Frozen_Inference.md).
+
+Phase 4 trained 32 candidates / 96 fold fits, then two 24-hour-event refits on
+6,794 meals / 197 identities. LightGBM reached validation MAE 31.17 versus 37.12
+persistence (16.03% lower; gate passes). Within +/-10 remains poor at 26.84%.
+Measured wall time was 9.26 minutes from execution freeze through completion,
+including an audited scoring-only repair, not a later-phase estimate. Calibration
+and the 104 primary-test / 65 PEDAP reservations were untouched at Phase 4 completion;
+Phase 6 below now records their use. Phase 4 did not close all M2 gates, change a
+deadline or demonstrate independently tested accuracy.
+See [protocol 14](GlycoLens_14_MetaboNet_Direct_Models.md) and
+[results](../reports/metabonet-phase4-training-2026-10-16.md).
 
 ### Model/inference deliverables
 
@@ -261,6 +308,14 @@ At least one:
 Ideally both by the end of the milestone.
 
 ### Milestone 2 success criteria
+
+October 14 progress: phases 0-4 and 6-7 have executable evidence; the core browser
+flow and numeric retrieval are implemented and verified using a confirmed fixture
+food, actual local Auth, live simulator and pretrained model. Both pretrained
+benchmarks and C0-C3 validation/test comparisons are complete. Phase 5 live nutrition
+checks await API configuration, and Phase 8 live nutrition input verification follows.
+Phase 9 has model results and core checks but full closure/presentation is pending.
+Do not present fixture recipe/barcode responses as live provider evidence.
 
 A user can:
 
@@ -421,3 +476,26 @@ Each milestone deck can follow:
 7. Schedule/risks/help needed
 
 The course materials specify a roughly 5-6 minute milestone presentation, so the slides should remain concise.
+
+
+## MetaboNet Phase 5 completion
+
+**Phase 5 was complete before the Phase 6 evaluation recorded below.** Frozen C2
+generated 6,756 training forecasts; 6,756 usable meals / 196 identities supported six CV
+configurations / 18 fold fits and four final refits, with exactly matched direct
+controls. Neither correction passed the predeclared incremental gate; retain Phase 4
+LightGBM. Lowest-MAE eligible option: `ridge_residual_1000`; advancement candidate:
+`lightgbm_direct` (macro MAE 31.17 mg/dL, within +/-10 26.84%). These are
+reused-validation findings, not independent confirmation. At Phase 5 completion, calibration/reserved outcomes were untouched.
+Phase 6 below supersedes that access status; app inference remains unchanged.
+See [protocol 15](GlycoLens_15_MetaboNet_Chronos_Correction.md) and [results](../reports/metabonet-phase5-correction-2026-10-16.md).
+
+Measured backbone time: 41.20 minutes; resumed head CV/refit/validation: 1.99 minutes. CPU limit two was requested, but late-loaded numerical libraries were not universally limited. No official deadline revision or M2 closure.
+
+## MetaboNet Phase 6 completion - current status
+
+**The broader-data model-refinement sequence, Phases 1-6, is complete.** Separate calibration used 48 participant representatives from 1,488 eligible meals. Frozen LightGBM scored 29.91 mg/dL macro trajectory MAE / 28.20% within +/-10 on 3,533 primary-test meals (102 IDs), and 40.92 / 19.57% on 2,177 PEDAP meals (64 IDs). Both predeclared point-improvement gates passed, with zero failed forecasts; tight precision remains poor. Nominal 80% marginal coverage was 79.05% primary and 63.94% PEDAP. Both test cohorts are now consumed; no test-based reselection, point refit, app promotion or full-M2 closure.
+
+Actual Phase 6 calibration took 3.35 seconds and reserved preparation/scoring 217.72 seconds, excluding initial prior/raw hashing. No official course deadline was revised. This completes the approved research sequence, not the remaining M2 application deliverables.
+
+See [protocol 16](GlycoLens_16_MetaboNet_Independent_Evaluation.md), [independent results](../reports/metabonet-phase6-independent-2026-10-16.md) and [verification handoff](../tooling/metabonet-phase6-handoff-2026-10-16.md).

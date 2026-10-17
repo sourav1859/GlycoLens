@@ -178,6 +178,7 @@ def run_pymgipsim_scenario(
     output_json: Path,
     scenario: PyMgipsimScenario | None = None,
     timeout_seconds: int = 180,
+    internal_context_output: Path | None = None,
 ) -> PyMgipsimResult:
     """Run the fixed scenario in the isolated upstream environment."""
 
@@ -204,6 +205,12 @@ def run_pymgipsim_scenario(
         "--random-seed",
         str(scenario.random_seed),
     ]
+    if internal_context_output is not None:
+        internal_context_output = internal_context_output.resolve()
+        allowed = Path(__file__).resolve().parents[2] / "artifacts/simulation"
+        if not internal_context_output.is_relative_to(allowed.resolve()):
+            raise PyMgipsimError("Internal context must stay inside ignored simulation artifacts")
+        command += ["--internal-context-output", str(internal_context_output)]
     environment = os.environ.copy()
     existing_python_path = environment.get("PYTHONPATH")
     environment["PYTHONPATH"] = str(source_directory)

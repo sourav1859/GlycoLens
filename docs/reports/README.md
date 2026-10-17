@@ -1,5 +1,32 @@
 # Reports
 
+Milestone 2 current evidence:
+
+- [MetaboNet Phase 5 correction results](metabonet-phase5-correction-2026-10-16.md)
+- [Phase 5 protocol and ledger](../planning/GlycoLens_15_MetaboNet_Chronos_Correction.md)
+- [Phase 5 verification handoff](../tooling/metabonet-phase5-handoff-2026-10-16.md)
+
+- [October 16 MetaboNet Phase 4 trained direct-model results](metabonet-phase4-training-2026-10-16.md)
+- [MetaboNet Phase 4 protocol and ledger](../planning/GlycoLens_14_MetaboNet_Direct_Models.md)
+- [MetaboNet Phase 4 verification handoff](../tooling/metabonet-phase4-handoff-2026-10-16.md)
+
+- [Implementation verification and remaining gates](milestone-2-implementation-verification.md)
+- [Model comparison/context ablation](milestone-2-model-results.md)
+- [October 15 model improvement and external dataset review](model-improvement-and-dataset-review-2026-10-15.md)
+- [October 16 executed model refinement and independent AZT1D results](model-refinement-results-2026-10-16.md)
+- [October 16 MetaboNet v1.2 download, schema, quality and split audit](metabonet-intake-audit-2026-10-16.md)
+- [October 16 saved MetaboNet dictionary review and resolved definitions](metabonet-dictionary-review-2026-10-16.md)
+- [October 16 executed MetaboNet Phase 2 preparation and exclusions](metabonet-phase2-preparation-2026-10-16.md)
+- [October 16 MetaboNet Phase 3 frozen-inference results](metabonet-phase3-inference-2026-10-16.md)
+- [MetaboNet Phase 3 comparison protocol](../planning/GlycoLens_13_MetaboNet_Frozen_Inference.md)
+- [MetaboNet Phase 3 verification handoff](../tooling/metabonet-phase3-handoff-2026-10-16.md)
+- [MetaboNet frozen protocol and phase gate](../planning/GlycoLens_12_MetaboNet_Experiment.md)
+- [MetaboNet Phase 2 verification handoff](../tooling/metabonet-phase2-handoff-2026-10-16.md)
+- [Refinement phase ledger](../planning/GlycoLens_11_Model_Refinement.md)
+- [Refinement reproducibility and verification handoff](../tooling/model-refinement-session-handoff-2026-10-16.md)
+- [Presentation evidence outline](milestone-2-presentation-outline.md)
+- [Approved phase ledger](../planning/GlycoLens_10_Milestone_2_Implementation.md)
+
 Milestone reports, benchmark summaries, evaluation results, and the final capstone report belong here when available.
 
 Available Milestone 1 artifacts:
@@ -14,4 +41,10 @@ Available Milestone 1 artifacts:
 - [Final Milestone 1 closure audit](milestone-1-closure-audit.md)
 - [Advisor-ready Milestone 1 progress and results report](GlycoLens_Milestone_1_Advisor_Progress_Report.docx)
 - [One-page Milestone 1 advisor summary](GlycoLens_Milestone_1_One_Page_Summary.docx)
+- [Current detailed Milestone 1 presentation notes in Word](GlycoLens_Milestone_1_Presentation_Notes_v2.docx)
+- [Current Milestone 1 notes PDF reading copy](GlycoLens_Milestone_1_Presentation_Notes_v2.pdf)
+- [Current Milestone 1 notes Markdown source](GlycoLens_Milestone_1_Presentation_Notes_v2.md)
+- [Earlier Milestone 1 presentation notes in Word](GlycoLens_Milestone_1_Presentation_Notes.docx)
+- [Earlier Milestone 1 notes PDF reading copy](GlycoLens_Milestone_1_Presentation_Notes.pdf)
 - [Detailed dataset audit with final Milestone 1 status](GlycoLens_Milestone_1_Dataset_Audit_and_Progress_Report.docx)
+- [MetaboNet Phase 6 independent results and uncertainty](metabonet-phase6-independent-2026-10-16.md)

@@ -8,6 +8,7 @@ dependencies = [
     "fastapi==0.142.1",
     "pydantic==2.13.5",
     "uvicorn==0.54.0",
+    "httpx==0.28.1",
 ]
 
 [dependency-groups]
@@ -22,6 +23,16 @@ chronos = [
 ]
 plotting = [
     "matplotlib==3.11.2",
+]
+timesfm = [
+    "timesfm[torch]==3.0.2",
+]
+refinement = [
+    "scikit-learn==1.7.2",
+    "lightgbm==4.6.0",
+]
+data-audit = [
+    "duckdb==1.4.4",
 ]
 
 [tool.pytest.ini_options]

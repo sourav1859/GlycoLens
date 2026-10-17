@@ -23,7 +23,7 @@ class CodexConfigValidationTests(unittest.TestCase):
             (root / ".agents" / "skills").mkdir(parents=True)
             (root / ".codex" / "config.toml").write_text(
                 'model="gpt-6.1-sol"\nmodel_reasoning_effort="medium"\n'
-                'tool_output_token_limit=4000\n[agents]\nmax_concurrent_threads_per_session=2\n'
+                "tool_output_token_limit=4000\n[agents]\nmax_concurrent_threads_per_session=2\n"
                 'default_subagent_model="gpt-6-luna"\ndefault_subagent_reasoning_effort="medium"\n',
                 encoding="utf-8",
             )

@@ -1,5 +1,20 @@
 # GlycoLens Test Strategy
 
+## Milestone 2 executable checks
+
+The offline suite covers split purging, immutable input/target separation, C2 membership,
+kind-separated basal semantics, metrics/failure accounting, actual model input delivery,
+recipe structured extraction, provider basis/missingness, app origin boundaries and owner
+validation. Real local Supabase tests cover atomicity, retries, source snapshots and
+retrieval outcome chronology. Real simulator/model execution remains an explicit opt-in.
+
+`python -m scripts.dev.check_m2_application --allow-live-local` tests actual local Auth,
+simulator execution, meal save/retry, Chronos C3, persisted read/retry, cross-user denial
+and numeric history. Playwright tests separately identify fixture input contracts and
+opt-in real desktop/mobile flows; both verify no page-wide horizontal overflow.
+Physical camera capture and live USDA/recipe-provider tests are still outstanding.
+See the M2 evidence ledger; do not claim mocked providers as live integration passes.
+
 ## Principles
 
 - Derive tests from requirements, risks, and safety boundaries before enumerating cases.
@@ -139,7 +154,90 @@ Coverage includes fixed-protocol enforcement, exact upstream provenance, opt-in 
 five-minute grid and finite-value validation, aggregate consistency, forbidden privacy/clinical
 fields, real simulator execution, and byte-for-byte reproducibility across two runs.
 
-## Final Milestone 1 closure gate
+## October 16 model refinement checks
+
+Synthetic tests cover inclusive +/-10, outlier/tail and whole-curve semantics,
+participant versus pooled weighting, failures in attempted-event denominators,
+unaltered original identities and purged calibration cuts, origin-only features,
+future target/meal invariance, small-head fit/calibration, immutable selection,
+CGM-only backbone cache identity, duplicate/conflicting external rows and archive
+path traversal. Run `pytest -q`; the actual CPU study is separate from unit tests.
+The execution report records real cohorts, candidate predictions, original-result
+reproduction and post-freeze external testing. No app/database/frontend behavior
+changed in this refinement cycle; existing full Python regression remains required.
+
+## MetaboNet Phase 2 preparation checks
+
+Run `pytest -q tests/research/test_metabonet_preparation.py`. Six tests cover causal
+history fill and masks, target separation, native IU/fractional grams, shifted relative
+cadence, nearby meals, stable origin hashes and source-qualified subject splits.
+The DuckDB integration fixture deliberately omits all outcome columns from test and
+includes a reserved-source poison value; preparation must still pass without reading
+either. Corrupted protocol/split metadata/window artifacts fail verification, reserved
+test iteration is blocked, completed output cannot be overwritten, and injected
+integrity failure cannot publish a completed directory.
+
+The October 16 real build is separate evidence: audited input hashes, frozen source
+ZIP/protocol, verified development/test roles, per-variant counts/exclusions and a
+real reader/contract check. All four histories share 1,509 eligible validation events;
+no inference or fitting occurred. Final Python suite: 117 passed, one opt-in real
+simulator test skipped; one upstream TestClient deprecation warning. Research subset:
+92 passed, the same one skipped. See the
+[handoff](../tooling/metabonet-phase2-handoff-2026-10-16.md). No frontend/database
+behavior changed, so their integration checks were not rerun for this preparation.
+
+## MetaboNet Phase 3 inference checks
+
+Five synthetic tests in `tests/research/test_metabonet_inference.py` cover matching
+validation-only IDs/targets, native-unit context/masks without total-insulin duplication,
+request fingerprints independent of future truth/identity, failure persistence without
+retry, corrupted/mismatched progress, complete-cohort selection despite another
+candidate's failures, the exact 10% improvement boundary, frozen execution and replay
+protection. Research suite: 97 passed, one opt-in simulator skip. Full Python suite:
+122 passed, the same skip and one upstream TestClient deprecation warning.
+
+Actual CPU inference is distinct evidence, under a pre-execution source/configuration
+freeze. The aggregate report includes matched/attempted/success denominators, failures,
+native uncertainty/tails and source subgroups. No future values enter adapter requests.
+See [protocol 13](../planning/GlycoLens_13_MetaboNet_Frozen_Inference.md) and the
+[handoff](../tooling/metabonet-phase3-handoff-2026-10-16.md). App/database/frontend
+checks are not repeated for this offline research-only orchestration.
+
+## MetaboNet Phase 4 direct-training checks
+
+`tests/research/test_metabonet_models.py` adds 12 synthetic checks for native units,
+fractional carbs, missing versus recorded-zero masks, request-only/identity-free
+features, training-only readers, deterministic subject folds/equal weights, both
+adapter lifecycles, immutable prediction state/reloads, failure-ineligible CV ranking,
+actual fit/held-subject separation, verified CV resume, rejection of changed model
+bytes before deserialization, truthful training verification flags, native-float
+batch validation and a scoring-repair guard rejecting any additional code change.
+
+The numeric regression was confirmed failing before its fix. All 12 focused tests
+and the full 134-test Python suite pass; one opt-in simulator test is skipped and one
+existing TestClient dependency warning remains. Ruff lint/format passed for changed
+Python files. Research-only changes do not require frontend/database/live simulator
+checks to be repeated.
+
+Real evidence: 32 candidates/96 subject-fold fits, two final refits, same 1,509-event
+validation comparisons against seven verified saved baselines. Independent checks
+reproduce every CV/validation macro score, verify all row/source/model hashes,
+check public/batch/saved prediction equivalence and unchanged model state, and
+confirm prior prepared outputs/checkpoint files unchanged. All OOF predictions and
+saved Ridge scaler/coefficients are finite despite logged scaling warnings. A
+scoring-only completion archive preserves original fits/choices and the zero-row
+interruption evidence. No calibration/reserved outcomes read. See
+[protocol 14](../planning/GlycoLens_14_MetaboNet_Direct_Models.md),
+[report](../reports/metabonet-phase4-training-2026-10-16.md) and
+[handoff](../tooling/metabonet-phase4-handoff-2026-10-16.md).
+
+## MetaboNet Phase 5 correction checks
+
+Ten focused synthetic tests cover exact C2 request equivalence/label isolation, training-only roles, failure persistence without retry/tamper rejection, both correction families, no foundation serialization, explicit backbone attachment and latency metadata, train-fold baseline alignment/subject separation, native-float validation/reload/corrupt-byte checks, failed-backbone denominators and the exact 5% gate with point-winner/advancement separation.
+
+Full Python suite:144 passed, one opt-in simulator skip, one existing TestClient dependency warning. Ruff lint/format pass across seven affected Python files. Real frozen-backbone inference, six CV configurations/ 18 fold fits, four refits and all 13 same-event validation comparisons are separate evidence. Independent checks reproduce all macro scores and public/batch/saved predictions without changing model state, and verify input/source/row/model hashes plus original artifacts/checkpoints. No calibration/reserved outcomes read. See [protocol 15](../planning/GlycoLens_15_MetaboNet_Chronos_Correction.md), [report](../reports/metabonet-phase5-correction-2026-10-16.md) and [handoff](../tooling/metabonet-phase5-handoff-2026-10-16.md).
+
+## Historical Milestone 1 closure gate
 
 The September 29, 2026 closure audit reran the complete offline suite and the explicitly opted-in
 real feasibility checks:
@@ -155,3 +253,21 @@ real feasibility checks:
 
 See [`milestone-1-closure-audit.md`](../reports/milestone-1-closure-audit.md) for the exact results,
 claim boundaries, residual limitations, and Milestone 2 entry plan.
+
+## MetaboNet Phase 6 independent-evaluation verification
+
+Eleven synthetic tests in `tests/research/test_metabonet_independent.py` cover
+calibration-only roles, value-independent participant representatives, exact finite
+ranks, separate marginal/curve radii, immutable wrapper/point state, attempted failure
+yields, corruption/replay, missing-gate projection denial and publisher-file boundaries.
+The preflight full Python suite passed 155 tests, one opt-in simulator skip and one
+existing TestClient dependency warning. No app/database/frontend behavior changed.
+
+Actual calibration was frozen before reserved outcome projection. All 17,130 test
+prediction records and the original point models remained intact. Independent NumPy
+checks reproduced macro accuracy, pooled tails, band bounds/coverage, 19 subgroup
+counts/MAEs, finite calibration ranks and 18 public/batch/wrapper prediction samples.
+Source/input/row/model/prior/checkpoint hashes and both completion manifests passed.
+Actual loaded numerical pools reported two threads. Test-data access is truthfully
+recorded as consumed; successful point gates do not establish clinical or pediatric
+uncertainty reliability. See [Phase 6 traceability and evidence](../tooling/metabonet-phase6-handoff-2026-10-16.md).

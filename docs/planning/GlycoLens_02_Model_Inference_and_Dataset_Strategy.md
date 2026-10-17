@@ -169,7 +169,8 @@ Milestone 1 Phase 2 implements one immutable contract for baselines and pretrain
 - `ForecastExample` joins request and target only for post-prediction evaluation and requires an
   exact five-minute target grid.
 - The T1D-UOM converter supports C0 (CGM), C1 (CGM + insulin), and the currently available portion
-  of C3 (C1 + carbs/protein/fat/fiber). Calories are not invented when the source does not provide
+  of C3 (C1 + carbs/protein/fat/fiber). M2 adds C2 (C1 + carbohydrate) and separates basal
+  observations by insulin kind. Calories are not invented when the source does not provide
   them.
 - Persistence repeats the final observed CGM value. Its q10/q50/q90 are equal because the baseline
   is deterministic and must not be interpreted as calibrated uncertainty.
@@ -185,7 +186,7 @@ Milestone 1 Phase 3 pins `chronos-forecasting==2.3.2` and `amazon/chronos-2` rev
 CPU-based. It transforms the 24 historical CGM values into the official tensor API, requests a
 24-step q10/q50/q90 forecast, and normalizes the result into `ForecastResult`.
 
-The adapter rejects C1/C3 requests rather than silently ignoring insulin or nutrition. One real
+The M1 adapter rejected C1/C3 requests rather than silently ignoring insulin or nutrition. One real
 T1D-UOM window completed successfully with finite, non-crossing output. Cached CPU measurements
 were 5.54 s model load, 56.04 ms first forecast, 54.63 ms warm p50, 61.26 ms warm p95, and
 810.83 MiB observed peak RSS. These measurements prove local feasibility only; model ranking
@@ -193,6 +194,34 @@ still requires predefined subject/time splits and accuracy/calibration evaluatio
 windows.
 
 ## 8. Main inference experiments
+
+### Milestone 2 implementation - October 14, 2026
+
+`research/evaluation/protocol.py` implements target-purged temporal 60/20/20 cuts and
+explicit subject holdouts. The real scan reproduces 927 events: 536 development,
+177 validation, 211 test and three purged. Twelve of fifteen participants have both
+validation and test events. Manifests stay ignored. The evaluator reports failures,
+matched successful events and participant-macro metrics. The original validation
+selection was frozen before final test execution (see the original M2 results report).
+
+#### Approved refinement - October 16
+
+The new [refinement protocol](GlycoLens_11_Model_Refinement.md) preserves that M2
+evidence and treats its inspected test as diagnostic. Development is subdivided into
+training and separate calibration with target purging. History variants inherit the
+original split identities. Frozen C0 Chronos is compared at 2/6/12/24 hours on the
+130 common eligible events (129 common successful forecasts); available-event
+sensitivity and the failed 24-hour request are reported separately.
+Six hours was selected before the small-model grid. Train-only weighted Ridge and
+LightGBM direct/residual heads use origin-known CGM, recorded bolus, clock and meals.
+Shared and full-nutrient variants are separate; ambiguous basal values are omitted.
+Foundation weights remain frozen. All results, including baseline wins or failed
+gates, belong in the [execution report](../reports/model-refinement-results-2026-10-16.md).
+
+Chronos covariate input and TimesFM 3.0.2 implement `recorded_events_v1`: kind-separated
+insulin values/masks, older-context descriptors, and meal-origin impulses. These are
+source-record features, not insulin-action estimates. See ADR 0008 and the milestone
+ledger for real validation status. Offline tests alone do not establish efficacy.
 
 ### Experiment 1 - model comparison
 
@@ -306,6 +335,20 @@ Under this initial policy, 927 of 3,884 valid loaded meal events produced eligib
 
 **Use:** external validation with common features.
 
+October 16 acquisition: V1 archive SHA-256
+`2c6b4183fdc729c708c1b3230ab1988d2c9006dd35729537f2de07f649f0d113`,
+776,131,685 bytes, CC BY 4.0. The tested loader restricts ingestion to 25 canonical
+CGM Records files (306,712 source rows), excluding five Visual Statistics exports.
+Exact duplicate rows collapse; conflicting CGM timestamps are excluded; only finite
+positive glucose is retained. Carbohydrate events use CarbSize (g); bolus uses total
+delivered units without adding correction twice. Missing full nutrients never enter
+shared features. One glucose header also mentions BGM, a retained modality caveat.
+Same source-local timestamps, CGM-gap and follow-up-meal exclusions apply. At six
+hours, 2,610 events from 24 participants are eligible. Exact aligned trajectory
+fingerprints check overlap but cannot prove subject disjointness across sources.
+Selection is immutable before external scoring. Later tuning must treat this test
+as consumed. MetaboNet was deferred for the first run; its later intake is recorded below.
+
 Available:
 - 25 T1D participants
 - 6-8 weeks
@@ -316,6 +359,96 @@ Available:
 
 Not available in same detail:
 - full protein/fat/fiber meal composition
+
+### MetaboNet v1.2 intake - October 16
+
+The user supplied both Parquet files and portal release notes for v1.2 (October 5).
+Local hashes/footers identify 132,811,004 training and 22,069,548 test rows, matching
+37-column schemas. Training has 1,730 source-qualified IDs across 15 studies; raw IDs
+are reused across studies. There are 169 source-qualified IDs in both files and 182
+test-only combinations before exclusions. Most shared boundaries have a five-minute
+gap, not a 24-hour purge. No test outcome columns were read; only schema, IDs/source,
+date and split flags. No new training or predictive evaluation has occurred.
+
+Exclude AZT1D/UOM copies from development. Separate meal-bearing studies from those
+without carbohydrate entries; missing sparse events are not confirmed zeros. BrisT1D
+and CTR3 have merged insulin without separate bolus/basal. SIESTA has five-minute cadence
+with per-subject wall-clock offsets; preserve that grid. OhioT1DM needs current terms
+confirmation because the publication lists it as DUA-governed. The remaining sources
+can proceed through documented preparation independently. See the
+[audit](../reports/metabonet-intake-audit-2026-10-16.md) for all counts and limitations.
+
+The subsequent saved dictionary documents all 37 fields and confirms all 15 actual
+training source labels. CGM is mg/dL; carbs are grams; basal/bolus/total insulin are IU
+delivered in the previous five minutes, not hourly rates. Total is basal plus bolus;
+do not double-count. In IOBP2, all insulin is encoded as bolus. Keep that exception
+separate from conventional bolus channels. Source zero/null differences, ambiguous
+timezones and physical DOUBLE columns must be preserved rather than normalized by
+assumption. Carb availability/bin endpoints are not explicit. The dictionary does
+not grant use rights or replace observed identity/split checks. See the
+[dictionary review](../reports/metabonet-dictionary-review-2026-10-16.md).
+
+The approved Phase 2 loader is now implemented in `research/datasets/metabonet.py`
+and `research/pipelines/prepare_metabonet.py`. A bounded DuckDB projection of selected
+publisher-training rows is followed by one-subject streaming. Loop/ReplaceBG supply
+100/25/25 preselected subjects per source after a source-stratified 70/15/15 subject
+split. Candidate meals are capped at 100 per subject using stable hashes, before
+target inspection. The primary six-hour sets contain 8,973/2,000/1,948 windows across
+197/48/48 usable IDs. Histories 2/6/12/24 hours and five-/zero-minute carb-availability
+variants share candidate IDs; compare only matched eligible events later.
+
+Keep unknown event entries and source-present masks; insulin is not forward-filled.
+History permits at most ten minutes of past-only fill with >=90% source-present CGM;
+all 24 targets must be finite positive source values. Reject clustered/follow-up
+meals under the predeclared retrospective isolated-meal task. Immutable requests
+exclude future truth. Primary reserved test is 104 test-only Loop/ReplaceBG identities;
+the separate PEDAP holdout is 65 identities. Their eligibility is intentionally unknown
+until selection freezes. Exclude consumed cohorts and OhioT1DM; partial exact CGM
+duplicate screening found no candidates, not proof of globally distinct people.
+Frozen sources/hashes and replay/integrity checks preserve evidence. No model fitting
+or app change. See [document 12](GlycoLens_12_MetaboNet_Experiment.md),
+[ADR 0011](../decisions/0011-metabonet-development-and-reserved-tests.md) and
+[executed counts](../reports/metabonet-phase2-preparation-2026-10-16.md).
+
+### MetaboNet frozen-inference comparison
+
+The authorized Phase 3 experiment is fixed in
+[document 13](GlycoLens_13_MetaboNet_Frozen_Inference.md). It consumes validation only,
+matching 1,509 events across all four history lengths before prediction. Seven runs
+compare persistence, C0 at 2/6/12/24 hours and C1/C2 at a fixed six-hour reference.
+C1 uses recorded bolus/basal amounts and masks; C2 adds logged carbs. Total insulin
+is omitted when components are used. The existing Chronos adapter/alignment and
+checkpoint remain unchanged. No full nutrients or physiological insulin activity
+are inferred. Failed native outputs are counted, not repaired/retried. History and
+context selection are validation decisions, not independent performance confirmation.
+See the [results](../reports/metabonet-phase3-inference-2026-10-16.md) for execution.
+
+Executed result: persistence is the best failure-free option (macro MAE 37.12,
+within-10 25.47%); C2 is 37.61/25.98%, while C0 two hours is 42.52/23.52%.
+Six-/twelve-/24-hour C0 have 2/11/15 native-output failures; C1 has one, C2 none.
+On the 1,487-event all-option common-success set, 24-hour C0 has MAE 33.50 versus
+36.84 persistence, showing useful longer-history signal conditional on valid output.
+It still fails the frozen reliability rule. The Phase 4 history artifact records two
+hours as the only failure-free C0; train-only CV may assess longer-history features
+for small models without rewriting that decision. No frozen option passed the gate.
+
+### MetaboNet direct-model training
+
+Executed [Phase 4](GlycoLens_14_MetaboNet_Direct_Models.md): a dedicated common-contract
+adapter preserves native amount units and missingness masks. Training-only three-fold
+subject CV compares 32 fixed history/profile/parameter candidates on 6,756 meals from
+196 identities. Both families select 24-hour event features: Ridge alpha 1000 and one
+pooled-horizon LightGBM with31 leaves/160 trees. Refit 6,794 eligible training meals
+from 197 identities, freezing train-only imputation/scaling before validation.
+
+On the same 1,509 validation meals, LightGBM wins the predeclared MAE-first rule:
+31.17 mg/dL versus persistence 37.12, 16.03% improvement, gate passes. Ridge has
+MAE 31.36 and higher within-10 (28.85% versus 26.84%); retain it as a tolerance
+challenger rather than claim LightGBM dominates every metric. Both have zero failed
+forecasts/negative predictions here, but tight-tolerance/whole-curve performance is
+still weak. At Phase 4 completion there were no calibrated bands or reserved-test results. Phases 5 and 6 subsequently completed; see the current ledger below. Original CV/model bytes and frozen baselines were preserved through a
+documented scoring-only numeric-conversion repair. See
+[results](../reports/metabonet-phase4-training-2026-10-16.md) and ADR 0012.
 
 ### HUPA-UCM
 
@@ -392,3 +525,24 @@ Do not jump directly to full fine-tuning.
 - T1D-UOM data descriptor: https://www.nature.com/articles/s41597-025-05695-1
 - AZT1D: https://data.mendeley.com/datasets/gk9m674wcx/1
 - HUPA-UCM: https://data.mendeley.com/datasets/3hbcscwz44/1
+
+
+## MetaboNet Phase 5 completion
+
+**Phase 5 was complete before the Phase 6 evaluation recorded below.** Frozen C2
+generated 6,756 training forecasts; 6,756 usable meals / 196 identities supported six CV
+configurations / 18 fold fits and four final refits, with exactly matched direct
+controls. Neither correction passed the predeclared incremental gate; retain Phase 4
+LightGBM. Lowest-MAE eligible option: `ridge_residual_1000`; advancement candidate:
+`lightgbm_direct` (macro MAE 31.17 mg/dL, within +/-10 26.84%). These are
+reused-validation findings, not independent confirmation. At Phase 5 completion, calibration/reserved outcomes were untouched.
+Phase 6 below supersedes that access status; app inference remains unchanged.
+See [protocol 15](GlycoLens_15_MetaboNet_Chronos_Correction.md) and [results](../reports/metabonet-phase5-correction-2026-10-16.md).
+
+## MetaboNet Phase 6 completion - current status
+
+**The broader-data model-refinement sequence, Phases 1-6, is complete.** Separate calibration used 48 participant representatives from 1,488 eligible meals. Frozen LightGBM scored 29.91 mg/dL macro trajectory MAE / 28.20% within +/-10 on 3,533 primary-test meals (102 IDs), and 40.92 / 19.57% on 2,177 PEDAP meals (64 IDs). Both predeclared point-improvement gates passed, with zero failed forecasts; tight precision remains poor. Nominal 80% marginal coverage was 79.05% primary and 63.94% PEDAP. Both test cohorts are now consumed; no test-based reselection, point refit, app promotion or full-M2 closure.
+
+Retain original Phase 4 LightGBM as the frozen research candidate. Ridge remains a diagnostic tolerance challenger. Phase 5 correction heads did not advance. New tuning needs development-only selection and fresh confirmation.
+
+See [protocol 16](GlycoLens_16_MetaboNet_Independent_Evaluation.md), [independent results](../reports/metabonet-phase6-independent-2026-10-16.md) and [verification handoff](../tooling/metabonet-phase6-handoff-2026-10-16.md).

@@ -2,14 +2,14 @@
 
 ## Status
 
-**ACTIVE (code-only) as of October 1, 2026.** Graphify `0.9.69` is available from the ignored,
+**Local code-only graph; use Get-GraphifyStatus for current freshness.** Graphify `0.9.69` is available from the ignored,
 repository-local `.cache/graphify-venv` environment using Python `3.12.14`. The wrappers prefer an
 explicit `GLYCOLENS_GRAPHIFY_EXECUTABLE`, then the repository-local executable, and finally a
 `graphify` command on `PATH`. This fallback keeps the workflow operational if an older global
 launcher points to a removed Python installation; no credentials or endpoint values are stored in
 the repository.
 
-The refreshed local graph contains 1,293 nodes, 1,896 edges, and 166 communities after the October
+The historical local graph contained 1,293 nodes, 1,896 edges, and 166 communities after the October
 1 Milestone 1 current-state update. The closure query located the final audit, requirement matrix,
 test-strategy gate, dataset pipeline, forecast contracts, Chronos-2 runner, and related tests; those
 findings were verified against source. The earlier Phase 6 query also located the py-mgipsim
@@ -24,6 +24,28 @@ search for known files and symbols. After final supported edits, check whether a
 graph and perform at most one explicit code-only update if still needed.
 
 Semantic documentation/media extraction is **not active**. The graph was intentionally built with `--code-only`, so no repository documents were sent to a model backend.
+
+M2 delivery uses an explicit code-only update after final implementation/documentation
+edits. New modules include evaluation/splits/metrics, covariate adapters, Auth-backed
+application routes, nutrition, simulation and numeric retrieval. Graph claims must be
+verified against source and the phase ledger; semantic documentation refresh remains
+disabled. Graph output/counts are ignored local artifacts, not scientific evidence.
+
+October 16 MetaboNet Phase 2 added native-unit windows, streaming preparation, the
+aggregate reporter and acceptance tests. One final code-only update wrote a graph
+containing all four modules (1,906 nodes / 3,422 edges); a read-only freshness check
+returned ACTIVE. Its PowerShell wrapper exited 1 on the known optional
+`tree_sitter_sql` warning, although graph output was written. Seven SQL files were
+skipped; no SQL changed in this phase. No retry/semantic extraction or dataset upload.
+See the [Phase 2 handoff](metabonet-phase2-handoff-2026-10-16.md) for command evidence.
+
+The subsequent Phase 3 update exited 0 and returned ACTIVE on freshness verification:
+1,964 nodes / 3,601 edges / 213 communities, including the inference runner, aggregate
+reporter and acceptance tests. The existing optional SQL-parser warning still skips
+seven SQL files; no SQL changed in this phase. Some community names are hub-derived
+after grouping changes. Semantic relabeling/document extraction remains disabled.
+See [Phase 3 evidence](metabonet-phase3-handoff-2026-10-16.md). Ignored predictions,
+prepared data and checkpoint files were excluded; no dataset was uploaded.
 
 In installed Graphify `0.9.69`, `query` loads `graph.json` and performs local BFS/DFS traversal; it
 does not expose a model-backend option. `graphify query --help` is not a help path in this version:
@@ -91,3 +113,16 @@ Graphify output is local and ignored. Never scan secrets, health data, private C
 - Hooks and merge driver: installed and verified
 - Git merge attribute: `.gitattributes` contains `graphify-out/graph.json merge=graphify`
 - Watcher: available, not running
+
+## MetaboNet Phase 6 verification records
+
+The Phase 6 closing workflow checks hook/freshness status and performs at most one
+explicit local code-only refresh after the final supported edits. It covers the
+independent runner, uncertainty module, aggregate reporter and acceptance tests.
+Command/status and graph-content evidence are retained under ignored
+`.cache/model-refinement-preflight/phase6-graph-{before,update,after}.log` and
+`phase6-graph-verification.json`. Read those records for actual readiness and counts.
+The existing seven optional SQL-parser omissions are outside this Python-only change.
+Semantic documentation extraction/relabeling remains disabled; planning claims and
+cross-links are verified directly against source. No health data, weights, ignored
+artifacts or secrets are graph inputs, and no dataset is uploaded.

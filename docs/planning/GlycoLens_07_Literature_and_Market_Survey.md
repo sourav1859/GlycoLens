@@ -286,6 +286,46 @@ Role:
 Source:
 https://data.mendeley.com/datasets/gk9m674wcx/1
 
+October 16 implementation verified public V1 access and CC BY 4.0 licensing against
+this source, downloaded/checksummed the archive and audited 25 canonical CGM files.
+The 6-hour shared-feature window policy yields 2,610 eligible meals/24 participants.
+Detailed protein/fat/fibre is unavailable; one source glucose column mentions CGM/BGM.
+The external test is reserved until selection, then consumed for subsequent tuning.
+The [refinement execution report](../reports/model-refinement-results-2026-10-16.md)
+separates locally observed scores from literature claims. Published results on other
+cohorts/horizons are not evidence of +/-10 maximum error for GlycoLens.
+
+## MetaboNet intake evidence
+
+October 16 local files contain 15 training sources including AZT1D/UOM copies and
+OhioT1DM. The user-provided v1.2 release notes (October 5) describe five SIESTA training
+participants, confirmed locally. The [publication](https://arxiv.org/html/2601.11505v2)
+documents standardized units, missing/zero ambiguity, mixed subject/time splits and
+source-dependent rights; it lists OhioT1DM as DUA-governed. Confirm current release
+terms for that source before training. Do not assume all consolidated data has the
+same licence or that the publication's 30-minute scores apply to this two-hour task.
+See the [local audit](../reports/metabonet-intake-audit-2026-10-16.md); local counts
+and the screenshot release date are distinct from publication-wide historical counts.
+
+## MetaboNet frozen-inference evidence
+
+The [October 16 local experiment](../reports/metabonet-phase3-inference-2026-10-16.md)
+compared frozen Chronos histories/context on 1,509 matched validation meals. No eligible
+Chronos option beat persistence (macro MAE 37.12 mg/dL; C2 37.61). Longer histories
+lowered error among valid outputs but had native contract failures; nominal 80% bands
+covered only 49.42-64.08% of points across Chronos options. This is local conditional
+validation evidence, not a new literature result or a comparison of every available
+model. It supports testing small trained competitors, not claiming +/-10 performance.
+
+The subsequent [Phase 4 local study](../reports/metabonet-phase4-training-2026-10-16.md)
+trained Ridge/LightGBM with training-only subject CV. On the same 1,509 validation
+meals, 24-hour event LightGBM reduced macro MAE from 37.12 to 31.17 mg/dL (16.03%),
+passing the research gate, with zero failed forecasts. Within +/-10 remained only
+26.84%; Ridge had a higher 28.85% with slightly larger MAE. This is local selected
+validation evidence, not a literature benchmark, a causal feature effect or external
+confirmation. It motivates the planned correction/independent-testing stages and
+does not establish dependable +/-10 predictions.
+
 ## HUPA-UCM
 
 - 25 people with T1D
@@ -399,3 +439,24 @@ Recommended Background subsections:
 6. Event-aware/context-aware forecasting
 7. Existing diabetes applications
 8. Gap addressed by GlycoLens
+
+
+## MetaboNet Phase 5 completion
+
+**Phase 5 was complete before the Phase 6 evaluation recorded below.** Frozen C2
+generated 6,756 training forecasts; 6,756 usable meals / 196 identities supported six CV
+configurations / 18 fold fits and four final refits, with exactly matched direct
+controls. Neither correction passed the predeclared incremental gate; retain Phase 4
+LightGBM. Lowest-MAE eligible option: `ridge_residual_1000`; advancement candidate:
+`lightgbm_direct` (macro MAE 31.17 mg/dL, within +/-10 26.84%). These are
+reused-validation findings, not independent confirmation. At Phase 5 completion, calibration/reserved outcomes were untouched.
+Phase 6 below supersedes that access status; app inference remains unchanged.
+See [protocol 15](GlycoLens_15_MetaboNet_Chronos_Correction.md) and [results](../reports/metabonet-phase5-correction-2026-10-16.md).
+
+## MetaboNet Phase 6 completion - current status
+
+**The broader-data model-refinement sequence, Phases 1-6, is complete.** Separate calibration used 48 participant representatives from 1,488 eligible meals. Frozen LightGBM scored 29.91 mg/dL macro trajectory MAE / 28.20% within +/-10 on 3,533 primary-test meals (102 IDs), and 40.92 / 19.57% on 2,177 PEDAP meals (64 IDs). Both predeclared point-improvement gates passed, with zero failed forecasts; tight precision remains poor. Nominal 80% marginal coverage was 79.05% primary and 63.94% PEDAP. Both test cohorts are now consumed; no test-based reselection, point refit, app promotion or full-M2 closure.
+
+The independent primary MAE reduction is 18.74%, versus persistence 36.81; PEDAP reduction is 16.10%, versus 48.77. These results compare fixed small models on the same eligible meals, not all architectures or studies. The split-conformal rank is motivated by Angelopoulos and Bates (https://arxiv.org/abs/2107.07511); dependence and study shift limit guarantees.
+
+See [protocol 16](GlycoLens_16_MetaboNet_Independent_Evaluation.md), [independent results](../reports/metabonet-phase6-independent-2026-10-16.md) and [verification handoff](../tooling/metabonet-phase6-handoff-2026-10-16.md).

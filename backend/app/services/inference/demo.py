@@ -29,11 +29,12 @@ def forecast_to_response(
     result: ForecastResult,
     *,
     data_mode: str = "synthetic_demo",
+    context_configuration: str = "cgm_only",
 ) -> ForecastResponse:
     """Map the canonical model contract to relative-time chart transport data."""
 
-    if data_mode != "synthetic_demo":
-        raise ValueError("Phase 4 supports synthetic_demo transport only")
+    if data_mode not in ("synthetic_demo", "simulated"):
+        raise ValueError("unsupported forecast data provenance")
     q10 = result.quantile_values(0.1)
     q50 = result.quantile_values(0.5)
     q90 = result.quantile_values(0.9)
@@ -55,10 +56,10 @@ def forecast_to_response(
     )
     lookup = {point.minute: point.q50_mg_dl for point in forecast}
     return ForecastResponse(
-        data_mode="synthetic_demo",
+        data_mode=data_mode,
         model_id=result.model_id,
         model_version=result.model_version,
-        context_configuration="cgm_only",
+        context_configuration=context_configuration,
         history=history,
         forecast=forecast,
         summary=ForecastSummary(
@@ -66,7 +67,9 @@ def forecast_to_response(
             minute_60_mg_dl=lookup[60],
             minute_120_mg_dl=lookup[120],
         ),
-        notice=DEMO_NOTICE,
+        notice=DEMO_NOTICE
+        if data_mode == "synthetic_demo"
+        else "Simulated patient context. Model forecasts are uncertain research estimates, not clinical guidance or insulin-dosing advice.",
     )
 
 

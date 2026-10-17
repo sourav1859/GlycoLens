@@ -1,5 +1,14 @@
 # GlycoLens Capstone Planning Pack
 
+
+## Current model-refinement status - Phase 6 complete
+
+**The broader-data model-refinement sequence, Phases 1-6, is complete.** Separate calibration used 48 participant representatives from 1,488 eligible meals. Frozen LightGBM scored 29.91 mg/dL macro trajectory MAE / 28.20% within +/-10 on 3,533 primary-test meals (102 IDs), and 40.92 / 19.57% on 2,177 PEDAP meals (64 IDs). Both predeclared point-improvement gates passed, with zero failed forecasts; tight precision remains poor. Nominal 80% marginal coverage was 79.05% primary and 63.94% PEDAP. Both test cohorts are now consumed; no test-based reselection, point refit, app promotion or full-M2 closure.
+
+Current research evidence and the remaining M2 live-nutrition/presentation work must be tracked separately.
+
+See [protocol 16](GlycoLens_16_MetaboNet_Independent_Evaluation.md), [independent results](../reports/metabonet-phase6-independent-2026-10-16.md) and [verification handoff](../tooling/metabonet-phase6-handoff-2026-10-16.md).
+
 **Project:** GlycoLens: AI-Assisted Meal Understanding and Personalized Glucose Response Prediction for Type 1 Diabetes  
 **Prepared:** September 7, 2026  
 **Status:** Revised after advisor feedback
@@ -50,6 +59,11 @@ The revised plan is:
 
 ## Files in this pack
 
+The user approved full Milestone 2 implementation on October 14, 2026, with
+py-mgipsim first, Dexcom deferred, and API-backed recipe extraction followed by
+ingredient editing/confirmation. The phase gates and live evidence ledger are in
+[Milestone 2 Implementation](GlycoLens_10_Milestone_2_Implementation.md).
+
 1. `GlycoLens_01_Updated_Project_Summary.md` - revised project specification.
 2. `GlycoLens_02_Model_Inference_and_Dataset_Strategy.md` - model shortlist, dataset fit, experiment plan.
 3. `GlycoLens_03_App_Product_Spec_and_UX.md` - features and end-to-end user experience.
@@ -59,6 +73,58 @@ The revised plan is:
 7. `GlycoLens_07_Literature_and_Market_Survey.md` - categorized literature and competing-app review.
 8. `GlycoLens_08_Risks_Safety_and_Scope.md` - risks, safety boundaries, fallback plan and scope controls.
 9. `GlycoLens_09_Project_Specification_Draft.md` - concise project-spec draft matching the course guidance.
+10. `GlycoLens_10_Milestone_2_Implementation.md` - approved implementation and closure evidence.
+11. `GlycoLens_11_Model_Refinement.md` - approved October 16 refinement protocol, phases and results.
+12. `GlycoLens_12_MetaboNet_Experiment.md` - frozen broader-data preparation and reserved-test protocol.
+13. `GlycoLens_13_MetaboNet_Frozen_Inference.md` - validation-only frozen history/context comparison.
+14. `GlycoLens_14_MetaboNet_Direct_Models.md` - train-only small-model CV, paired validation and completion evidence.
+15. `GlycoLens_15_MetaboNet_Chronos_Correction.md` - frozen C2 correction, matched direct controls and incremental gate.
+
+The user approved local model refinement after the original pretrained comparison failed
+to beat persistence. This includes small trained direct/residual models, separate calibration,
+and an independent common-feature AZT1D test; foundation weights remain frozen. +/-10 mg/dL
+is an aspirational tolerance. Original M2 results remain intact; no research winner is
+automatically promoted into the app. See the [refinement report](../reports/model-refinement-results-2026-10-16.md).
+
+Subsequent October 16 intake: the user supplied MetaboNet train/test Parquet files
+and v1.2 release-note evidence. A metadata/training-quality audit is complete;
+No fitting or test-outcome reading occurred during that intake audit. See
+[the intake audit and next steps](../reports/metabonet-intake-audit-2026-10-16.md).
+
+Phase 2 preparation is now executed and verified: the Loop/ReplaceBG pilot has
+8,973 training, 2,000 validation and 1,948 calibration six-hour windows. Source-qualified
+subjects are split before target inspection. Primary test (104 identities) and PEDAP
+source test (65 identities) remain metadata-only reservations. See the
+[preparation report](../reports/metabonet-phase2-preparation-2026-10-16.md) and document 12.
+
+**Phase 3 is complete.** Seven frozen comparisons
+on 1,509 matched validation events found no eligible Chronos winner over persistence
+(macro MAE 37.12 mg/dL versus 37.61 for six-hour C2). The improvement gate failed.
+The two-hour C0 history is the only failure-free C0, not the point-accuracy optimum;
+longer histories have lower conditional errors but native-output failures. No weights
+were fitted in Phase 3 and its reserved tests were untouched then. Phase 6 below
+now records independent testing. See
+[the results](../reports/metabonet-phase3-inference-2026-10-16.md) and document 13.
+
+**Phase 4 is complete.** Thirty-two training-only
+CV candidates selected 24-hour event features for both small models. LightGBM reached
+31.17 mg/dL macro MAE versus persistence 37.12 on the same 1,509 validation meals:
+16.03% lower, passing the research gate. Tight-tolerance accuracy is still poor:
+within +/-10 is 26.84% (Ridge 28.85%), not an 80% result or maximum-error guarantee.
+No calibration/reserved-test outcomes or app model switch. See
+[Phase 4 results](../reports/metabonet-phase4-training-2026-10-16.md) and document 14.
+
+
+
+**Phase 5 was complete before the Phase 6 evaluation recorded below.** Frozen C2
+generated 6,756 training forecasts; 6,756 usable meals / 196 identities supported six CV
+configurations / 18 fold fits and four final refits, with exactly matched direct
+controls. Neither correction passed the predeclared incremental gate; retain Phase 4
+LightGBM. Lowest-MAE eligible option: `ridge_residual_1000`; advancement candidate:
+`lightgbm_direct` (macro MAE 31.17 mg/dL, within +/-10 26.84%). These are
+reused-validation findings, not independent confirmation. At Phase 5 completion, calibration/reserved outcomes were untouched.
+Phase 6 below supersedes that access status; app inference remains unchanged.
+See [protocol 15](GlycoLens_15_MetaboNet_Chronos_Correction.md) and [results](../reports/metabonet-phase5-correction-2026-10-16.md).
 
 ## Three decisions to confirm with the advisor/user
 

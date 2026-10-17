@@ -25,6 +25,7 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument("--output-json", type=Path, required=True)
     parser.add_argument("--upstream-commit", required=True)
     parser.add_argument("--random-seed", type=int, required=True)
+    parser.add_argument("--internal-context-output", type=Path)
     return parser.parse_args()
 
 
@@ -55,7 +56,9 @@ def _scenario_args(random_seed: int) -> argparse.Namespace:
     return args
 
 
-def _run(random_seed: int, upstream_commit: str) -> dict[str, object]:
+def _run(
+    random_seed: int, upstream_commit: str, internal_context_output: Path | None = None
+) -> dict[str, object]:
     Path(results_path).mkdir(parents=True, exist_ok=True)
     _, _, _, work_directory = simulation_folder.create_simulation_results_folder(results_path)
     scenario = load_scenario(str(Path(default_settings_path) / "scenario_default.json"))
@@ -75,6 +78,50 @@ def _run(random_seed: int, upstream_commit: str) -> dict[str, object]:
     meal_magnitudes = np.asarray(scenario.inputs.meal_carb.magnitude, dtype=float)[0]
     meal_count = int(np.count_nonzero(meal_magnitudes > 0))
     values = glucose.astype(float)
+
+    if internal_context_output is not None:
+        # Reviewed server-internal synthetic data; public M1 exports stay dose-free.
+        meal_times = np.asarray(scenario.inputs.meal_carb.start_time, dtype=float)[0]
+        positive_meals = [
+            (float(t), float(v)) for t, v in zip(meal_times, meal_magnitudes) if v > 0
+        ]
+        origin = int(np.ceil(positive_meals[1][0] / 5) * 5)
+        events = []
+        for event_type, signal, source_unit, kind in (
+            ("basal", scenario.inputs.basal_insulin, "U/h", "R"),
+            ("bolus", scenario.inputs.bolus_insulin, "U", "R"),
+        ):
+            for at, amount in zip(
+                np.asarray(signal.start_time)[0], np.asarray(signal.magnitude)[0]
+            ):
+                if float(at) <= origin:
+                    events.append(
+                        {
+                            "minute": float(at),
+                            "event_type": event_type,
+                            "source_value": float(amount),
+                            "source_unit": source_unit,
+                            "insulin_kind": kind,
+                        }
+                    )
+        internal_context_output.parent.mkdir(parents=True, exist_ok=True)
+        internal_context_output.write_text(
+            json.dumps(
+                {
+                    "source": "py-mgipsim_internal_synthetic",
+                    "upstream_commit": upstream_commit,
+                    "origin_minute": origin,
+                    "insulin_events": events,
+                    "meal_events": [
+                        {"minute": at, "carbs_g": carbs}
+                        for at, carbs in positive_meals
+                        if at <= origin
+                    ],
+                }
+            )
+            + "\n",
+            encoding="utf-8",
+        )
 
     return {
         "schema_version": "1.0",
@@ -105,7 +152,7 @@ def _run(random_seed: int, upstream_commit: str) -> dict[str, object]:
 
 def main() -> None:
     args = _parse_args()
-    payload = _run(args.random_seed, args.upstream_commit)
+    payload = _run(args.random_seed, args.upstream_commit, args.internal_context_output)
     args.output_json.parent.mkdir(parents=True, exist_ok=True)
     args.output_json.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
 

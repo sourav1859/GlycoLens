@@ -12,7 +12,6 @@ from research.models.adapters import (
     Chronos2ForecastAdapter,
     CovariateSeries,
     ForecastRequest,
-    ForecastValidationError,
     ModelInferenceError,
     ModelLoadError,
     ModelNotLoadedError,
@@ -124,16 +123,20 @@ def test_predict_passes_only_history_horizon_and_quantiles_to_backend() -> None:
     assert result.latency_ms >= 0
 
 
-def test_covariates_are_rejected_instead_of_silently_ignored() -> None:
+def test_covariates_are_aligned_and_delivered_to_backend() -> None:
     covariate = CovariateSeries(
         name="insulin_bolus",
         points=(TimePoint(timestamp=CONTEXT_END, value=2.0),),
     )
-    adapter = _adapter(_FakePipeline())
+    pipeline = _FakePipeline()
+    adapter = _adapter(pipeline)
     adapter.load()
 
-    with pytest.raises(ForecastValidationError, match="CGM-only"):
-        adapter.predict(_request(past_covariates=(covariate,)))
+    adapter.predict(_request(past_covariates=(covariate,)))
+    delivered = pipeline.calls[0]["inputs"][0]
+    assert delivered["past_covariates"]["insulin_bolus"][-1] == 2.0
+    assert delivered["past_covariates"]["insulin_bolus_observed"][-1] == 1.0
+    assert not hasattr(delivered, "target_cgm")
 
 
 @pytest.mark.parametrize(

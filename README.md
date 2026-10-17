@@ -6,6 +6,47 @@ GlycoLens is an inference-first, application-first capstone project. It combines
 
 > **Research and education only:** GlycoLens does not recommend insulin doses, change clinician settings, or control an insulin pump. Forecasts are estimates and are not medical advice.
 
+The approved October 16 model-refinement work is tracked in
+[protocol and phase ledger](docs/planning/GlycoLens_11_Model_Refinement.md),
+[execution results](docs/reports/model-refinement-results-2026-10-16.md) and
+[research commands](research/README.md#approved-model-refinement). It compares longer
+frozen Chronos histories with small trained direct/residual models and a separately
+reserved AZT1D test. +/-10 mg/dL is aspirational. Original M2 results remain intact;
+the application model is not automatically replaced. MetaboNet v1.2 files have now
+been received and [audited](docs/reports/metabonet-intake-audit-2026-10-16.md);
+Small-model training is now complete. The supplied test mixes shared and unseen participants.
+The approved [Phase 2 preparation](docs/reports/metabonet-phase2-preparation-2026-10-16.md)
+is now complete: fixed Loop/ReplaceBG subject roles, 8,973/2,000/1,948 six-hour
+training/validation/calibration windows and metadata-only reserved tests. See the
+[new experiment protocol](docs/planning/GlycoLens_12_MetaboNet_Experiment.md) and
+[preparation commands](research/README.md#metabonet-phase-2-preparation).
+Phase 3 frozen-inference validation is now complete on 1,509 matched events.
+Persistence won among failure-free options (macro MAE 37.12 mg/dL; six-hour C2 37.61),
+so the improvement gate failed. Longer histories improved conditional point accuracy
+but had native-output failures. The original Phase 3 evidence is preserved. See
+[the results](docs/reports/metabonet-phase3-inference-2026-10-16.md),
+[protocol 13](docs/planning/GlycoLens_13_MetaboNet_Frozen_Inference.md) and
+[commands](research/README.md#metabonet-phase-3-frozen-inference). No reserved test
+values were used and no app model switch follows from these validation scores.
+
+**Phase 4 is complete.** Training-only CV chose
+24-hour event features for Ridge and LightGBM. On the same 1,509 validation meals,
+LightGBM reduced macro MAE to **31.17 mg/dL**, 16.03% below persistence, passing the
+research gate. Within +/-10 remains poor at **26.84%** (Ridge 28.85%); the maximum
+error was 235.38 mg/dL. At Phase 4 completion calibration/reserved tests were untouched; Phase 6 below now records their use. See
+[Phase 4 results](docs/reports/metabonet-phase4-training-2026-10-16.md),
+[protocol 14](docs/planning/GlycoLens_14_MetaboNet_Direct_Models.md) and
+[commands](research/README.md#metabonet-phase-4-direct-training).
+
+**Historical Phase 5 result, before Phase 6 below.** Frozen C2 generated 6,756 training forecasts;
+6,756 usable meals / 196 identities supported six CV configurations / 18 fold fits and
+four final refits, with exactly matched direct controls. Neither correction passed the
+predeclared incremental gate; retain Phase 4 LightGBM. Lowest-MAE eligible option:
+`ridge_residual_1000`; advancement candidate: `lightgbm_direct` (macro MAE 31.17 mg/dL,
+within +/-10 26.84%). These are reused-validation findings, not independent
+confirmation. At Phase 5 completion calibration/reserved outcomes were untouched; Phase 6 below supersedes that access status. App inference is unchanged; +/-10 precision remains weak.
+See [Phase 5 results](docs/reports/metabonet-phase5-correction-2026-10-16.md), [protocol 15](docs/planning/GlycoLens_15_MetaboNet_Chronos_Correction.md) and [commands](research/README.md#metabonet-phase-5-chronos-correction).
+
 ## Core questions
 
 GlycoLens helps explore:
@@ -52,8 +93,10 @@ tests/                 Cross-system integration and end-to-end tests
 The repository contains an executable T1D-UOM V1.0.4 audit and leakage-safe meal-window generator,
 common forecast adapters, a pinned Chronos-2 smoke path, a typed FastAPI demonstration endpoint,
 and a mobile-first Next.js forecast chart. A pinned, isolated py-mgipsim scenario also provides a
-deterministic virtual-patient feasibility path. The browser flow uses deterministic synthetic data;
-real-data and simulator artifacts remain separate local-only commands.
+deterministic virtual-patient path. The browser now supports authenticated live simulation,
+confirmed meal persistence, a real Chronos-2 nutrition-context forecast, and numeric historical
+retrieval. USDA/barcode and structured recipe adapters are implemented; live nutrition validation
+awaits private API configuration. Research datasets/results remain separate from the app database.
 
 ## Reproducible development setup
 
@@ -120,8 +163,11 @@ windows into Git. See the [Milestone 1 data-pipeline report](docs/reports/milest
 [Phase 6 py-mgipsim report](docs/reports/milestone-1-phase-6-pymgipsim-scenario.md). The final
 [Milestone 1 closure audit](docs/reports/milestone-1-closure-audit.md) maps every requirement to
 evidence. The [project-specification presentation](docs/presentations/Sourav%20Patil-GlycoLens_Project_Specification.pptx)
-and validated [Milestone 1 presentation](docs/presentations/GlycoLens_Milestone_1_Closure.pptx)
-are available in the presentation inventory. The
+and revised eight-slide [Milestone 1 presentation](docs/presentations/GlycoLens_Milestone_1_Presentation_v2.pptx)
+are available in the presentation inventory. The [detailed presentation notes](docs/reports/GlycoLens_Milestone_1_Presentation_Notes_v2.docx),
+[PDF reading copy](docs/reports/GlycoLens_Milestone_1_Presentation_Notes_v2.pdf), and
+[Markdown source](docs/reports/GlycoLens_Milestone_1_Presentation_Notes_v2.md) provide the timed speech, detailed preparation, and 22 question answers.
+The original closure deck remains available as historical evidence. The
 Chronos commands require the local dataset-root environment variable and explicit model-download
 acknowledgement. Checkpoints and generated figures remain in ignored artifact directories.
 
@@ -158,6 +204,16 @@ Use de-identified/public datasets, virtual-patient data, and the Dexcom sandbox 
 
 ## Status
 
+The additional model-refinement sequence is complete through Phase 6; see the [independent results](docs/reports/metabonet-phase6-independent-2026-10-16.md). LightGBM improves average error, but +/-10 precision and pediatric uncertainty remain poor.
+
+Milestone 2 phasewise implementation is approved and underway. See the
+[implementation and evidence ledger](docs/planning/GlycoLens_10_Milestone_2_Implementation.md).
+Run `python scripts/dev/check_m2_prerequisites.py` for a read-only report that
+shows configuration presence without revealing secret values. Sandbox permission
+errors must be distinguished from missing local tools; the normal M1 environments
+remain operational. USDA and recipe API configuration are prerequisites for live
+nutrition integration.
+
 Repository initialized from the approved GlycoLens planning pack. The T1D-UOM audit and meal-window
 preprocessing slice is implemented and verified. Reproducible Python and frontend toolchains and a
 mobile-first Next.js app are implemented. The common forecast contract, leakage-safe T1D-UOM
@@ -167,5 +223,18 @@ local research graph. A typed FastAPI endpoint and accessible browser forecast c
 dummy browser-to-API criterion. The executable local Supabase migration, constraints, pgvector
 extension, synthetic seed, and RLS isolation tests are also complete. The simulator demonstration
 is installed through an isolated pinned environment and completes deterministically. The validated
-RIT-branded presentation and final closure audit are complete. **Milestone 1 is closed; Milestone 2
-benchmarking, context ablation, and nutrition-flow implementation are next.**
+RIT-branded presentation and final closure audit are complete. **Milestone 1 is closed. Milestone 2
+benchmarks, C0-C3 ablation and the live simulator/pretrained application flow are implemented.
+Full M2 closure awaits live nutrition/recipe verification and presentation preparation.**
+
+M2 results and checks:
+
+- [Model comparison and limitations](docs/reports/milestone-2-model-results.md)
+- [Implementation verification](docs/reports/milestone-2-implementation-verification.md)
+
+Initialize only the local demo configuration with `scripts/dev/Configure-LocalDemo.ps1`
+after Supabase is running; restart the local stack to apply anonymous Auth. Keep USDA
+and recipe keys in ignored `.env`. Run the real acceptance command from the root:
+`python -m scripts.dev.check_m2_application --allow-live-local`.
+
+The additional broader-data model-refinement sequence is complete through Phase 6. Frozen LightGBM's independent primary MAE is 29.91 mg/dL (18.74% below persistence), but only 28.20% of points are within +/-10. PEDAP MAE is 40.92 / within-10 19.57%, with nominal 80% marginal coverage only 63.94%. No app model switch or full-M2 closure. See [independent results](docs/reports/metabonet-phase6-independent-2026-10-16.md) and [current protocol](docs/planning/GlycoLens_16_MetaboNet_Independent_Evaluation.md).

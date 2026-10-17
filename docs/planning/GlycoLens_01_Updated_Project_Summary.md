@@ -1,5 +1,14 @@
 # GlycoLens: Updated Project Summary
 
+
+## Current model-refinement status - Phase 6 complete
+
+**The broader-data model-refinement sequence, Phases 1-6, is complete.** Separate calibration used 48 participant representatives from 1,488 eligible meals. Frozen LightGBM scored 29.91 mg/dL macro trajectory MAE / 28.20% within +/-10 on 3,533 primary-test meals (102 IDs), and 40.92 / 19.57% on 2,177 PEDAP meals (64 IDs). Both predeclared point-improvement gates passed, with zero failed forecasts; tight precision remains poor. Nominal 80% marginal coverage was 79.05% primary and 63.94% PEDAP. Both test cohorts are now consumed; no test-based reselection, point refit, app promotion or full-M2 closure.
+
+The two-hour endpoint MAE is 40.90 primary / 52.91 PEDAP; trajectory MAE averages all 24 future points. This is useful average-error evidence, not an 80%-within-10 result.
+
+See [protocol 16](GlycoLens_16_MetaboNet_Independent_Evaluation.md), [independent results](../reports/metabonet-phase6-independent-2026-10-16.md) and [verification handoff](../tooling/metabonet-phase6-handoff-2026-10-16.md).
+
 ## Title
 
 **GlycoLens: AI-Assisted Meal Understanding and Personalized Glucose Response Prediction for Type 1 Diabetes**
@@ -142,9 +151,11 @@ completed twice with byte-identical output. Only relative-time simulated glucose
 meal metadata are retained locally. This proves simulator feasibility; it is not clinical or
 forecast-accuracy evidence.
 
-Milestone 1 is now closed. A seven-slide RIT-branded presentation summarizes the problem,
-architecture, quantified data/model evidence, executable app/database/simulator paths, closure
-matrix, and Milestone 2 plan. The final audit reran the dataset scan, pinned Chronos-2 smoke,
+Milestone 1 is now closed. The original seven-slide closure presentation is preserved. An
+eight-slide RIT presentation revised on October 5 adds course-aligned literature findings,
+meal-window eligibility evidence, obstacles and personal assessment, and the Milestone 2
+schedule. It separates real-model research execution from the synthetic application demo and
+includes a timed script in Word and PDF. The final audit reran the dataset scan, pinned Chronos-2 smoke,
 complete Python/frontend suites, clean local database reset and 20 pgTAP tests, real simulator
 integration, privacy scans, and presentation validation. The result is technical-feasibility
 closure, not an accuracy or clinical-validity claim.
@@ -167,6 +178,21 @@ These datasets do not contain the same full nutritional feature set, so they wil
 - **py-mgipsim:** controlled virtual T1D scenarios and demo/stress testing; not real-patient ground truth.
 
 ## 8. App-first scope
+
+October 14 implementation now includes both pinned pretrained model evaluations,
+C0-C3 recorded-event ablation, frozen validation selection and held-out results.
+Chronos C3 is the application choice; persistence remains more accurate on test
+participant-average MAE, and forecast intervals are under-covered. The real local
+authenticated simulator/meal/forecast/retrieval workflow is verified on desktop
+and mobile. Nutrition adapters and recipe editing are implemented, but live USDA
+and recipe-provider verification await private configuration. Full M2 closure is
+pending, as tracked in the phase ledger and model-results report.
+
+Milestone 2 implementation was approved on October 14, 2026. Full scope remains
+required; py-mgipsim is the first app integration and Dexcom is deferred. Recipe
+extraction uses an API-backed model with editable ingredients and deterministic
+database-grounded nutrition. See the phase evidence ledger in
+`GlycoLens_10_Milestone_2_Implementation.md`. Course deadlines have not changed.
 
 ### Required patient-facing features
 
@@ -220,6 +246,55 @@ The data is naturally structured: users, CGM samples, meals, insulin events, for
 GraphRAG would add a graph database, graph construction, graph retrieval and LLM orchestration without a clear benefit to the core forecasting problem. Neo4j AuraDB Free could be explored later, but only as a stretch goal if the main application is complete.
 
 ## 11. Expected contribution
+
+### Approved local refinement - October 16, 2026
+
+The user approved the phasewise model-improvement plan and chose local data first,
+initially deferring MetaboNet acquisition. The user subsequently supplied v1.2
+train/test files on October 16; at that intake stage, training and test predictions
+had not started. The later approved Phase 2 implementation
+prepared a fixed Loop/ReplaceBG pilot: 8,973/2,000/1,948 six-hour training/validation/
+calibration windows across 197/48/48 eligible source-qualified identities. Reserve
+104 unseen publisher-test identities and 65 PEDAP identities separately; no test
+outcome values were projected. [Document 12](GlycoLens_12_MetaboNet_Experiment.md)
+freezes native units, causal fill, missingness, timing, exclusions and artifact hashes.
+Phase 3 frozen inference is now complete on 1,509 matched validation events. Persistence
+won among failure-free options (macro MAE 37.12 mg/dL; six-hour C2 37.61); the improvement
+gate failed. The only failure-free C0 was two hours, with MAE 42.52; 24-hour C0 had
+better conditional point accuracy but 15 invalid outputs. This is not evidence that
+two hours is optimal for trained models. Native intervals undercovered and negative
+forecasts occurred. No weights were fitted in Phase 3. See
+[document 13](GlycoLens_13_MetaboNet_Frozen_Inference.md).
+Phase 4 is now complete: 32 training-only subject-CV candidates, then two refits on
+6,794 training meals/197 identities, compared on those same 1,509 validation meals.
+Both families selected 24-hour event features. LightGBM has macro MAE 31.17 mg/dL
+versus persistence 37.12, a 16.03% reduction passing the research gate. Within +/-10
+is still poor at 26.84%; Ridge reaches 28.85% with MAE 31.36. Whole-curve tolerance
+success decreased despite lower average errors. At Phase 4 completion calibration/reserved outcomes were untouched; Phase 6 below now records their use. See
+[document 14](GlycoLens_14_MetaboNet_Direct_Models.md) and
+[results](../reports/metabonet-phase4-training-2026-10-16.md).
+**Phase 5 was complete before the Phase 6 evaluation recorded below.** Frozen C2
+generated 6,756 training forecasts; 6,756 usable meals / 196 identities supported six CV
+configurations / 18 fold fits and four final refits, with exactly matched direct
+controls. Neither correction passed the predeclared incremental gate; retain Phase 4
+LightGBM. Lowest-MAE eligible option: `ridge_residual_1000`; advancement candidate:
+`lightgbm_direct` (macro MAE 31.17 mg/dL, within +/-10 26.84%). These are
+reused-validation findings, not independent confirmation. At Phase 5 completion, calibration/reserved outcomes were untouched.
+Phase 6 below supersedes that access status; app inference remains unchanged.
+See [protocol 15](GlycoLens_15_MetaboNet_Chronos_Correction.md) and [results](../reports/metabonet-phase5-correction-2026-10-16.md).
+
+The two-hour/24-point task remains. +/-10 mg/dL
+is aspirational, not a maximum-error acceptance condition. Frozen Chronos history
+experiments precede train-only Ridge/LightGBM and frozen-backbone residual heads.
+Separate calibration uses original development data; original validation selects
+models. The previously inspected original test is diagnostic. AZT1D is scored only
+after selection is frozen and cannot then be reused as an untouched test for tuning.
+These small learned heads fit the existing fallback strategy; no foundation-model
+training or automatic application model replacement is authorized by their scores.
+The original development/calibration and consumed AZT1D rules above describe the
+initial UOM pilot; the new MetaboNet roles in document 12 supersede them only for
+the new experiment. See [protocol and phases](GlycoLens_11_Model_Refinement.md) and
+[execution evidence](../reports/model-refinement-results-2026-10-16.md).
 
 GlycoLens is an **applied AI systems capstone**, not a new foundation-model paper.
 

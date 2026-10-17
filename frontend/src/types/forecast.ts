@@ -12,10 +12,10 @@ export type ForecastBandPoint = {
 
 export type ForecastResponse = {
   schema_version: "1.0";
-  data_mode: "synthetic_demo";
+  data_mode: "synthetic_demo" | "simulated";
   model_id: string;
   model_version: string;
-  context_configuration: "cgm_only";
+  context_configuration: "cgm_only" | "cgm_insulin" | "cgm_insulin_carbohydrates" | "cgm_insulin_nutrition";
   unit: "mg/dL";
   history: HistoryPoint[];
   forecast: ForecastBandPoint[];
@@ -36,8 +36,8 @@ export function isForecastResponse(value: unknown): value is ForecastResponse {
   const candidate = value as Partial<ForecastResponse>;
   if (
     candidate.schema_version !== "1.0" ||
-    candidate.data_mode !== "synthetic_demo" ||
-    candidate.context_configuration !== "cgm_only" ||
+    !["synthetic_demo", "simulated"].includes(candidate.data_mode ?? "") ||
+    !["cgm_only", "cgm_insulin", "cgm_insulin_carbohydrates", "cgm_insulin_nutrition"].includes(candidate.context_configuration ?? "") ||
     candidate.unit !== "mg/dL" ||
     typeof candidate.model_id !== "string" ||
     typeof candidate.model_version !== "string" ||

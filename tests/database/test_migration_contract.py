@@ -40,7 +40,9 @@ def test_migration_declares_expected_tables_and_rls() -> None:
 def test_committed_database_files_exclude_connection_details_and_credentials() -> None:
     committed_contract = "\n".join(
         (
-            MIGRATION.read_text(encoding="utf-8"),
+            "\n".join(
+                path.read_text(encoding="utf-8") for path in sorted(MIGRATION.parent.glob("*.sql"))
+            ),
             SEED.read_text(encoding="utf-8"),
         )
     )

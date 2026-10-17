@@ -248,3 +248,20 @@ button:focus-visible {
     grid-template-columns: 1fr;
   }
 }
+/* Meal workflow uses the existing project palette and responsive card structure. */
+.meal-workflow { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.2rem; width: min(100%, 64rem); margin-inline: auto; }
+.meal-workflow > * { min-width: 0; }
+.workflow-panel svg { display: block; width: 100%; height: auto; }
+.workflow-panel { background: white; padding: 1.3rem; border-radius: 16px; border: 1px solid #dce7e3; }
+.workflow-panel label { display: grid; gap: .35rem; margin: .7rem 0; }
+.workflow-panel input, .workflow-panel textarea { width: 100%; padding: .65rem; border: 1px solid #afc3bb; border-radius: 8px; font: inherit; }
+.workflow-panel textarea { min-height: 110px; }
+.workflow-panel video { width: 100%; max-width: 400px; }
+.meal-tabs, .ingredient-row, .food-result { display: flex; gap: .65rem; align-items: center; flex-wrap: wrap; margin: .8rem 0; }
+.ingredient-row input { max-width: 180px; }
+.nutrition-totals { display: flex; gap: 1rem; flex-wrap: wrap; }
+.nutrition-totals dd { margin: .3rem 0; font-weight: 700; }
+.workflow-panel .confirmation { display: flex; align-items: center; gap: .6rem; }
+.confirmation input { width: auto; }
+.error-message { color: #9d2424; }
+button:disabled { opacity: .55; cursor: not-allowed; }

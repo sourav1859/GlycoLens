@@ -9,7 +9,7 @@ import tomllib
 from pathlib import Path
 
 EMAIL = re.compile(r"\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b", re.I)
-FORBIDDEN = ("danger-full-access", "service_tier = \"fast\"", "service_tier = \"ultrafast\"")
+FORBIDDEN = ("danger-full-access", 'service_tier = "fast"', 'service_tier = "ultrafast"')
 
 
 def load_toml(path: Path) -> tuple[dict, list[str]]:
@@ -28,14 +28,20 @@ def validate(root: Path) -> list[str]:
         return errors
     if config.get("model") != "gpt-6.1-sol" or config.get("model_reasoning_effort") != "medium":
         errors.append("project default must be gpt-6.1-sol with medium reasoning")
-    if not isinstance(config.get("tool_output_token_limit"), int) or config["tool_output_token_limit"] > 4000:
+    if (
+        not isinstance(config.get("tool_output_token_limit"), int)
+        or config["tool_output_token_limit"] > 4000
+    ):
         errors.append("tool_output_token_limit must be an integer no greater than 4000")
     if "profiles" in config or "profile" in config:
         errors.append("deprecated repository profile structures are not allowed")
     agents = config.get("agents", {})
     if agents.get("max_concurrent_threads_per_session", 99) > 2:
         errors.append("agent concurrency must not exceed 2")
-    if agents.get("default_subagent_model") != "gpt-6-luna" or agents.get("default_subagent_reasoning_effort") != "medium":
+    if (
+        agents.get("default_subagent_model") != "gpt-6-luna"
+        or agents.get("default_subagent_reasoning_effort") != "medium"
+    ):
         errors.append("bounded subagents must default to gpt-6-luna with medium reasoning")
 
     names: set[str] = set()
@@ -45,7 +51,13 @@ def validate(root: Path) -> list[str]:
         errors.extend(agent_errors)
         if agent_errors:
             continue
-        for field in ("name", "description", "developer_instructions", "model", "model_reasoning_effort"):
+        for field in (
+            "name",
+            "description",
+            "developer_instructions",
+            "model",
+            "model_reasoning_effort",
+        ):
             if not isinstance(data.get(field), str) or not data[field].strip():
                 errors.append(f"{path}: missing non-empty {field}")
         name = data.get("name")

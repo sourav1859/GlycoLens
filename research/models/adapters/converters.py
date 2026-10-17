@@ -5,6 +5,7 @@ from __future__ import annotations
 from collections import defaultdict
 from datetime import datetime
 from enum import Enum
+import re
 
 from research.datasets.t1d_uom import MealWindow
 from research.models.adapters.base import (
@@ -18,35 +19,58 @@ from research.models.adapters.base import (
 
 
 class ContextConfiguration(str, Enum):
-    """Implemented Milestone 1 input ablations."""
+    """Explicit C0-C3 input ablations; unsupported models must fail closed."""
 
     CGM_ONLY = "cgm_only"
     CGM_INSULIN = "cgm_insulin"
+    CGM_INSULIN_CARBOHYDRATES = "cgm_insulin_carbohydrates"
     CGM_INSULIN_NUTRITION = "cgm_insulin_nutrition"
 
 
 def _insulin_covariates(window: MealWindow) -> tuple[CovariateSeries, ...]:
     grouped: dict[str, dict[datetime, float]] = defaultdict(lambda: defaultdict(float))
+    units: dict[str, str] = {}
     for event in window.insulin_history:
-        grouped[event.event_type][event.timestamp] += event.dose
+        if event.event_type == "bolus":
+            name, unit = "insulin_bolus", "U"
+            grouped[name][event.timestamp] += event.dose
+        elif event.event_type == "basal":
+            kind = event.insulin_kind or "unknown"
+            if not re.fullmatch(r"[A-Za-z0-9_-]{1,40}", kind):
+                raise ForecastValidationError(
+                    "basal insulin kind is not a valid channel identifier"
+                )
+            name, unit = f"insulin_basal_kind_{kind}", "source_U_or_U_per_hour"
+            # A basal observation may be a rate, not an additive dose. Preserve
+            # kind; collapse exact repeats and reject contradictory observations.
+            if event.timestamp in grouped[name] and grouped[name][event.timestamp] != event.dose:
+                raise ForecastValidationError("conflicting same-time basal observations")
+            grouped[name][event.timestamp] = event.dose
+        else:
+            raise ForecastValidationError("unsupported insulin event type")
+        if event.dose < 0:
+            raise ForecastValidationError("insulin observations cannot be negative")
+        units[name] = unit
 
     series: list[CovariateSeries] = []
-    for event_type in sorted(grouped):
+    for name in sorted(grouped):
         points = tuple(
             TimePoint(timestamp=timestamp, value=value)
-            for timestamp, value in sorted(grouped[event_type].items())
+            for timestamp, value in sorted(grouped[name].items())
         )
         series.append(
             CovariateSeries(
-                name=f"insulin_{event_type}",
+                name=name,
                 points=points,
-                unit="dataset_source_value",
+                unit=units[name],
             )
         )
     return tuple(series)
 
 
-def _nutrition_covariates(window: MealWindow) -> tuple[CovariateSeries, ...]:
+def _nutrition_covariates(
+    window: MealWindow, *, carbohydrates_only: bool = False
+) -> tuple[CovariateSeries, ...]:
     meal = window.meal
     return tuple(
         CovariateSeries(
@@ -60,6 +84,7 @@ def _nutrition_covariates(window: MealWindow) -> tuple[CovariateSeries, ...]:
             ("meal_fat", meal.fat_g),
             ("meal_fiber", meal.fiber_g),
         )
+        if not carbohydrates_only or name == "meal_carbohydrates"
     )
 
 
@@ -100,6 +125,7 @@ def meal_window_to_forecast_example(
     known_covariates: tuple[CovariateSeries, ...] = ()
     if context_configuration in (
         ContextConfiguration.CGM_INSULIN,
+        ContextConfiguration.CGM_INSULIN_CARBOHYDRATES,
         ContextConfiguration.CGM_INSULIN_NUTRITION,
     ):
         if not window.insulin_history:
@@ -107,8 +133,15 @@ def meal_window_to_forecast_example(
                 "insulin context was requested but the meal window contains no insulin events"
             )
         past_covariates = _insulin_covariates(window)
-    if context_configuration is ContextConfiguration.CGM_INSULIN_NUTRITION:
-        known_covariates = _nutrition_covariates(window)
+    if context_configuration in (
+        ContextConfiguration.CGM_INSULIN_CARBOHYDRATES,
+        ContextConfiguration.CGM_INSULIN_NUTRITION,
+    ):
+        known_covariates = _nutrition_covariates(
+            window,
+            carbohydrates_only=context_configuration
+            is ContextConfiguration.CGM_INSULIN_CARBOHYDRATES,
+        )
 
     request = ForecastRequest(
         target_history=history,

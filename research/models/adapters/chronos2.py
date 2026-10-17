@@ -1,4 +1,4 @@
-"""Pinned Chronos-2 adapter for CPU-first, CGM-only Milestone 1 inference."""
+"""Pinned CPU Chronos-2 adapter with explicit recorded-event covariates."""
 
 from __future__ import annotations
 
@@ -18,6 +18,7 @@ from research.models.adapters.base import (
     ModelNotLoadedError,
     QuantileForecast,
 )
+from research.models.adapters.covariates import FEATURE_VERSION, aligned_covariates
 
 
 CHRONOS2_MODEL_ID = "amazon/chronos-2"
@@ -98,7 +99,7 @@ def _normalize_quantile_matrix(
 
 
 class Chronos2ForecastAdapter(ForecastModelAdapter):
-    """Run the exact pinned Chronos-2 checkpoint on one univariate CGM history."""
+    """Run the pinned checkpoint on CGM and validated origin-known context."""
 
     model_id = CHRONOS2_MODEL_ID
     model_version = CHRONOS2_MODEL_REVISION
@@ -146,13 +147,19 @@ class Chronos2ForecastAdapter(ForecastModelAdapter):
             raise ModelNotLoadedError("Chronos-2 adapter must be loaded before prediction")
         if not isinstance(request, ForecastRequest):
             raise TypeError("request must be a ForecastRequest")
-        if request.past_covariates or request.known_covariates:
-            raise ForecastValidationError(
-                "the Phase 3 Chronos-2 adapter supports CGM-only requests"
-            )
-
         try:
             model_input = self._tensor_factory([point.value for point in request.target_history])
+            if request.past_covariates or request.known_covariates:
+                past, future = aligned_covariates(request)
+                model_input = {
+                    "target": model_input,
+                    "past_covariates": {
+                        name: self._tensor_factory(values) for name, values in past.items()
+                    },
+                    "future_covariates": {
+                        name: self._tensor_factory(values) for name, values in future.items()
+                    },
+                }
         except ModelLoadError:
             raise
         except Exception as error:
@@ -197,9 +204,20 @@ class Chronos2ForecastAdapter(ForecastModelAdapter):
                 quantiles=quantile_forecasts,
                 latency_ms=latency_ms,
                 metadata=(
-                    ("adapter", "chronos2_univariate"),
+                    (
+                        "adapter",
+                        "chronos2_covariates"
+                        if request.past_covariates or request.known_covariates
+                        else "chronos2_univariate",
+                    ),
+                    ("feature_representation", FEATURE_VERSION),
                     ("chronos_forecasting_version", _package_version()),
-                    ("context_configuration", "cgm_only"),
+                    (
+                        "context_configuration",
+                        "covariate_informed"
+                        if request.past_covariates or request.known_covariates
+                        else "cgm_only",
+                    ),
                     ("device", self.device_map),
                     ("target_unit", "mg/dL"),
                 ),

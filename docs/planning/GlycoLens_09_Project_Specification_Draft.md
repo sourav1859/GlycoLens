@@ -82,6 +82,36 @@ Core application flow:
 
 ## Work Plan
 
+October 16 addition: the user approved local model refinement with frozen Chronos
+history comparisons, modest trained Ridge/LightGBM direct/residual heads and separate
+calibration. +/-10 mg/dL is aspirational; no clinical/max-error claim is made. The
+original test is now diagnostic; AZT1D external scores follow immutable selection.
+MetaboNet training was deferred in favor of local data first. Subsequent v1.2
+downloads now have an intake audit and executed Phase 2 preparation, with no new
+training/test predictions. A fixed Loop/ReplaceBG pilot supplies 8,973/2,000/1,948
+six-hour training/validation/calibration windows. Native units, causal fill, masks,
+timing, isolated-meal exclusions and frozen hashes are defined in
+[document 12](GlycoLens_12_MetaboNet_Experiment.md). Metadata-only reservations cover
+104 unseen test identities and 65 PEDAP source-test identities; test eligibility
+waits until selection freezes. Phase 3 is now complete: seven runs on 1,509 matched
+validation events found persistence best among failure-free options (macro MAE 37.12
+versus six-hour C2 37.61), failing the improvement gate. Two-hour C0 is the only
+failure-free C0, not the lowest-error history among valid outputs. Native intervals
+undercovered and negative forecasts occurred.
+no fitting, calibration or reserved-test access occurred in Phase 3. See
+[protocol/results 13](GlycoLens_13_MetaboNet_Frozen_Inference.md).
+Phase 4 direct training is now complete: training-only subject CV selected 24-hour
+event Ridge/LightGBM, refitted on 6,794 training meals/197 identities. On the same
+1,509 validation meals, LightGBM macro MAE 31.17 versus 37.12 persistence passes the
+16.03% improvement gate. Within +/-10 remains poor at 26.84% (Ridge 28.85%); this
+does not establish a maximum-error guarantee or independently tested performance.
+At Phase 4 completion calibration/reserved outcomes were untouched; Phase 6 below now records their use. See [protocol 14](GlycoLens_14_MetaboNet_Direct_Models.md) and
+[report](../reports/metabonet-phase4-training-2026-10-16.md).
+The two-hour task, application
+boundaries and official deadlines remain. No automatic app model promotion or large
+foundation-model training. See [the approved protocol](GlycoLens_11_Model_Refinement.md)
+and [execution results](../reports/model-refinement-results-2026-10-16.md).
+
 ### Milestone 1 - understanding and feasibility
 - literature survey
 - dataset audit
@@ -97,10 +127,18 @@ isolated from the application environment and retained as synthetic feasibility 
 
 Milestone 1 is complete. The final closure audit maps every required research, data, model,
 application, database, simulation, safety, and presentation deliverable to executable evidence.
-The validated seven-slide RIT presentation reports aggregate/synthetic results and carries the
-same research-only, uncertainty, privacy, and no-dosing boundaries as the application.
+The original seven-slide closure presentation is preserved. The revised eight-slide RIT
+presentation reports aggregate/synthetic results, separates the research and application paths,
+and carries the same research-only, uncertainty, privacy, and no-dosing boundaries as the
+application. It includes meal-window eligibility evidence, lessons learned, and timed Word/PDF
+presentation notes.
 
 ### Milestone 2 - solve/prototype
+
+The full phase implementation was approved October 14, 2026: py-mgipsim first,
+Dexcom later, API-backed recipe extraction with ingredient confirmation. Progress
+and verification are tracked in `GlycoLens_10_Milestone_2_Implementation.md`; this
+approval is not a change to course dates or a claim of milestone completion.
 - benchmark core models
 - context-ablation experiment
 - implement nutrition pipeline
@@ -110,6 +148,12 @@ same research-only, uncertainty, privacy, and no-dosing boundaries as the applic
 - simulator/Dexcom integration
 
 ### Milestone 3 - implementation and analysis
+
+M2 current evidence includes real Chronos/TimesFM/persistence C0-C3 comparisons,
+frozen validation selection and held-out results; the selected Chronos C3 does not
+beat persistence and uncertainty is under-covered. The real local simulated meal
+workflow is verified on desktop/mobile. Live nutrition/recipe validation and M2
+presentation preparation remain pending, so full milestone closure is not asserted.
 - final model selection
 - uncertainty UI
 - Meal Passport
@@ -148,3 +192,24 @@ The project is a research prototype. It will not:
 - TimesFM: https://github.com/google-research/timesfm
 - CGMformer: https://github.com/YurunLu/CGMformer
 - T1D-UOM: https://www.nature.com/articles/s41597-025-05695-1
+
+
+## MetaboNet Phase 5 completion
+
+**Phase 5 was complete before the Phase 6 evaluation recorded below.** Frozen C2
+generated 6,756 training forecasts; 6,756 usable meals / 196 identities supported six CV
+configurations / 18 fold fits and four final refits, with exactly matched direct
+controls. Neither correction passed the predeclared incremental gate; retain Phase 4
+LightGBM. Lowest-MAE eligible option: `ridge_residual_1000`; advancement candidate:
+`lightgbm_direct` (macro MAE 31.17 mg/dL, within +/-10 26.84%). These are
+reused-validation findings, not independent confirmation. At Phase 5 completion, calibration/reserved outcomes were untouched.
+Phase 6 below supersedes that access status; app inference remains unchanged.
+See [protocol 15](GlycoLens_15_MetaboNet_Chronos_Correction.md) and [results](../reports/metabonet-phase5-correction-2026-10-16.md).
+
+## MetaboNet Phase 6 completion - current status
+
+**The broader-data model-refinement sequence, Phases 1-6, is complete.** Separate calibration used 48 participant representatives from 1,488 eligible meals. Frozen LightGBM scored 29.91 mg/dL macro trajectory MAE / 28.20% within +/-10 on 3,533 primary-test meals (102 IDs), and 40.92 / 19.57% on 2,177 PEDAP meals (64 IDs). Both predeclared point-improvement gates passed, with zero failed forecasts; tight precision remains poor. Nominal 80% marginal coverage was 79.05% primary and 63.94% PEDAP. Both test cohorts are now consumed; no test-based reselection, point refit, app promotion or full-M2 closure.
+
+The app specification and safety boundary are unchanged. The completed research experiment does not prove causal nutrient effects or authorize clinical use, application replacement or release. Live recipe/nutrition verification and presentation remain separate M2 work.
+
+See [protocol 16](GlycoLens_16_MetaboNet_Independent_Evaluation.md), [independent results](../reports/metabonet-phase6-independent-2026-10-16.md) and [verification handoff](../tooling/metabonet-phase6-handoff-2026-10-16.md).

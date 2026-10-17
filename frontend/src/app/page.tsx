@@ -1,17 +1,16 @@
-import { ForecastDemo } from "../features/forecast/ForecastDemo";
+import { MealWorkflow } from "../features/meal/MealWorkflow";
 
 export default function Home() {
   return (
     <main>
       <section className="hero" aria-labelledby="page-title">
-        <p className="eyebrow">Milestone 1 API + visualization</p>
+        <p className="eyebrow">Meal understanding · Virtual-patient research prototype</p>
         <h1 id="page-title">GlycoLens</h1>
         <p>
-          Explore how a probabilistic glucose forecast can be presented clearly while the full
-          meal workflow is still under development.
+          Review meal nutrition and explore an uncertain glucose forecast with a simulated patient.
         </p>
       </section>
-      <ForecastDemo />
+      <MealWorkflow />
     </main>
   );
 }

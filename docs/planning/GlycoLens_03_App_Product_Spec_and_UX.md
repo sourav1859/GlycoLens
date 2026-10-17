@@ -39,6 +39,11 @@ A native React Native/Expo app is a reasonable alternative only if:
 
 ## 3. Personas
 
+October 14 implementation approval prioritizes Persona A with live py-mgipsim.
+Dexcom remains later work. Recipe extraction is API-backed; user confirmation and
+deterministic nutrition grounding remain mandatory. No M2 screens are claimed
+complete by this approval alone.
+
 ### Persona A - Demo / virtual patient
 Used for capstone development and presentation.
 
@@ -54,6 +59,19 @@ Used to demonstrate Dexcom OAuth and EGV retrieval.
 Product vision only. Real-user healthcare deployment is not required for the capstone.
 
 ## 4. MVP feature set
+
+### October 14 implemented prototype
+
+The default browser page now selects an authenticated virtual-patient session,
+runs live py-mgipsim or labeled replay, shows only glucose available by the simulation
+clock, captures search/barcode/recipe inputs, confirms grams/servings and food sources,
+saves a meal, runs the selected Chronos C3 model, and shows earlier same-session
+numeric matches. Two real browser flows and four fixture input contracts pass.
+Recipe output remains editable and never supplies nutrition. All required nutrients
+must be resolved before saving. Live USDA/recipe-provider validation and physical
+camera exercise are still pending; the fixture path is not proof of those integrations.
+Forecast summaries round for readability, and mobile chart scrolling stays inside
+its card. Under-covered model intervals are not clinical confidence labels.
 
 ### F1. Home / glucose context
 

@@ -136,5 +136,57 @@ Never place credentials, private health records, downloaded datasets, model weig
 python scripts/quality/validate_skills.py
 ```
 
-Frontend component tests are now part of the standard validation. Playwright remains future work
-for the complete meal-to-forecast flow.
+Frontend component tests and executable Playwright desktop/mobile flows are configured.
+See the M2 instructions below for opt-in real simulator/model browser checks.
+
+## Milestone 2 local application
+
+After starting local Supabase, run `scripts/dev/Configure-LocalDemo.ps1`. This writes
+ignored server `.env` and frontend `.env.local`, preserving unrelated entries, and
+enables local anonymous Auth. Restart only the local stack to apply this setting.
+Do not copy generated values to documentation or ChatGPT. Configure USDA_FDC_API_KEY,
+LLM_API_KEY and LLM_MODEL privately; recipe extraction uses the prepared OpenAI
+Responses adapter. No recipe model default or paid call is selected automatically.
+OPEN_FOOD_FACTS_USER_AGENT defaults to GlycoLens/0.1; add contact identification privately.
+The dataset root may be passed explicitly to research commands without writing a public path.
+
+The working runtimes are Python 3.12.5, Node 22.14.0, pnpm 10.0.0 and uv 0.9.18.
+M2 adds timesfm[torch]==3.0.2 in a locked optional group; use `uv sync --all-groups --frozen`.
+Normal Python/pnpm access can fail in a restricted execution sandbox even when the
+user environment is intact; do not rebuild environments based only on that symptom.
+
+The workspace can use Supabase 2.118.0 from ignored `.cache/local-tools`:
+install its npm package there and pass the executable to
+`Test-LocalSupabase.ps1 -SupabaseExecutable ./.cache/local-tools/node_modules/.bin/supabase.cmd`.
+No global CLI replacement is required. That wrapper resets the local synthetic database.
+Back up any non-synthetic local work before deliberately reusing it on such a database.
+
+October 14 Docker restart exposed PostgreSQL collation metadata 153.120 versus 153.121.
+The reviewed repair rebuilt indexes and refreshed metadata in template1 as its owner
+supabase_admin and in postgres as postgres; the full local stack then started.
+Do not repeatedly reinstall tools or delete volumes for this failure. Confirm the
+specific mismatch before any metadata repair. The auxiliary Docker vector log shipper
+is distinct from PostgreSQL pgvector and from product retrieval.
+
+Run from the repository root:
+
+```powershell
+uv run python scripts/dev/check_m2_prerequisites.py
+uv run python -m research.pipelines.build_benchmark_manifest
+uv run --all-groups python -m research.pipelines.run_m2_benchmark --allow-model-download --contexts cgm_only cgm_insulin cgm_insulin_carbohydrates cgm_insulin_nutrition
+uv run --all-groups python -m research.pipelines.summarize_m2_benchmark artifacts/evaluation-results/m2-validation.json --freeze-run chronos2:cgm_insulin_nutrition
+uv run --all-groups python -m research.pipelines.run_m2_benchmark --split test --frozen-selection artifacts/evaluation-results/m2-selection.json --contexts cgm_only cgm_insulin cgm_insulin_carbohydrates cgm_insulin_nutrition --output artifacts/evaluation-results/m2-test.json
+uv run python -m research.pipelines.report_m2_results
+uv run --all-groups python -m scripts.dev.check_m2_application --allow-live-local
+```
+
+Set GLYCOLENS_T1D_UOM_ROOT privately or use --dataset-root for research commands.
+Test evaluation must follow validation selection; never use test errors to reselect.
+
+The frontend uses local public Supabase configuration for Auth, and the backend verifies
+the user token. Launch FastAPI/pnpm dev with the existing commands. The M1 synthetic
+endpoint remains available for contract tests; the default page is the real simulated flow.
+For browser tests, install Chromium into an ignored workspace cache and set
+PLAYWRIGHT_BROWSERS_PATH to that directory. Run `pnpm --dir frontend e2e`; add
+GLYCOLENS_LIVE_E2E=1 for real local Auth/simulator/model flows. Playwright starts and
+stops its own local servers, uses one worker, and generates ignored screenshots/traces.
