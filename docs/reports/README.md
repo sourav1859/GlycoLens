@@ -1,5 +1,22 @@
 # Reports
 
+Milestone 2 presentation prepared November 2 and revised November 3 with a
+7–8 minute speech (target 7:30) at the user’s request. The latest revision follows
+the Milestone 1 style and briefly explains technical terms:
+
+- [Timed speaking notes, emphasis, references and question preparation](GlycoLens_Milestone_2_Presentation_Notes.md)
+- [Matching PowerPoint draft](../presentations/GlycoLens_Milestone_2_Presentation_2026-11-03_v4.pptx)
+
+Advisor update prepared October 26, 2026:
+
+- [Milestone 2 progress and experimentation report in Word](GlycoLens_Milestone_2_Advisor_Report_2026-10-26.docx)
+- [Matching Markdown report](GlycoLens_Milestone_2_Advisor_Report_2026-10-26.md)
+- [Advisor email draft](GlycoLens_Milestone_2_Advisor_Email_Draft_2026-10-26.md)
+
+The report consolidates completed prototype/research evidence, remaining M2 gates,
+limitations, proposed next steps and questions for the advisor. It does not declare
+full milestone closure or change the application model.
+
 Milestone 2 current evidence:
 
 - [MetaboNet Phase 5 correction results](metabonet-phase5-correction-2026-10-16.md)

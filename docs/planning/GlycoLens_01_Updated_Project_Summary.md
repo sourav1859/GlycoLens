@@ -7,6 +7,13 @@
 
 The two-hour endpoint MAE is 40.90 primary / 52.91 PEDAP; trajectory MAE averages all 24 future points. This is useful average-error evidence, not an 80%-within-10 result.
 
+The November 3 [M2 presentation draft](../presentations/GlycoLens_Milestone_2_Presentation_2026-11-03_v4.pptx)
+and [matching timed notes](../reports/GlycoLens_Milestone_2_Presentation_Notes.md) are
+prepared. They report the connected prototype, original failed pretrained comparison,
+later LightGBM research result and precision limitations. Live nutrition/recipe and
+physical camera verification plus final acceptance remain pending. No app model or
+scientific protocol changed for the presentation.
+
 See [protocol 16](GlycoLens_16_MetaboNet_Independent_Evaluation.md), [independent results](../reports/metabonet-phase6-independent-2026-10-16.md) and [verification handoff](../tooling/metabonet-phase6-handoff-2026-10-16.md).
 
 ## Title

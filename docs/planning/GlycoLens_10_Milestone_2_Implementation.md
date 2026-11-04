@@ -4,6 +4,22 @@ Approved by the user on October 14, 2026. Full milestone scope; py-mgipsim first
 Dexcom later; API-backed recipe extraction with editable confirmed ingredients.
 Research/education only. No dosing, pump control, real-user study, or hosted deployment.
 
+The October 26 [advisor report](../reports/GlycoLens_Milestone_2_Advisor_Report_2026-10-26.md)
+consolidates prototype verification, all model experiments, current limitations and
+proposed next steps. Its [Word copy](../reports/GlycoLens_Milestone_2_Advisor_Report_2026-10-26.docx)
+and [email draft](../reports/GlycoLens_Milestone_2_Advisor_Email_Draft_2026-10-26.md) do not
+change these acceptance gates or claim full M2 closure.
+
+November 2 update: the user approved ten main presentation slides plus four backups
+and confirmed November 3 with 5–6 minutes plus questions. The
+[RIT PowerPoint draft](../presentations/GlycoLens_Milestone_2_Presentation_2026-11-03_v4.pptx)
+and [matching notes](../reports/GlycoLens_Milestone_2_Presentation_Notes.md) are prepared,
+originally targeting 5:30. On November 3 the user requested plain-language speaking
+material lasting 7–8 minutes. The current v4 deck and notes target 7:30, with the
+requested presentation wording removed. This edits presentation content only.
+Application requirements, recorded checks and acceptance gates remain unchanged.
+No new application/model runs or full closure are claimed.
+
 ## Delivery contract
 
 The required flow is demo patient -> timeline -> meal entry -> nutrition review -> saved
@@ -28,7 +44,7 @@ The October 16 M2 and November 13 M3 course dates remain unchanged; overlap is a
 | 6 | Live py-mgipsim | Authenticated bounded execution; simulated clock; past-only internal context; labeled replay | Complete |
 | 7 | Forecast API | Real selected model, validated and persisted 24-point forecasts; safe failures | Complete |
 | 8 | Screens and numeric retrieval | All required input paths, mobile flow, same-user past-outcome retrieval | Implemented; real fixture-food flow and browser input contracts pass; live nutrition paths await Phase 5 |
-| 9 | Verification and closure | Held-out results, full acceptance evidence, report and presentation | Held-out evaluation and core checks complete; full closure pending live nutrition and presentation |
+| 9 | Verification and closure | Held-out results, full acceptance evidence, report and presentation | Held-out evaluation, core checks, report and presentation draft ready; full closure pending live providers, camera and final acceptance |
 
 Each phase updates affected planning documents, tests, ADRs and this ledger. Evidence
 must distinguish implemented code, offline tests, real integrations and scientific results.

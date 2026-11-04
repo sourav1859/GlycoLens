@@ -225,10 +225,14 @@ extension, synthetic seed, and RLS isolation tests are also complete. The simula
 is installed through an isolated pinned environment and completes deterministically. The validated
 RIT-branded presentation and final closure audit are complete. **Milestone 1 is closed. Milestone 2
 benchmarks, C0-C3 ablation and the live simulator/pretrained application flow are implemented.
-Full M2 closure awaits live nutrition/recipe verification and presentation preparation.**
+The November 3 presentation draft and timed notes are revised in plain language for a 7–8 minute talk (target 7:30). Full M2 closure still
+awaits live nutrition/recipe verification, physical camera testing and final acceptance.**
 
 M2 results and checks:
 
+- [November 3 Milestone 2 PowerPoint draft](docs/presentations/GlycoLens_Milestone_2_Presentation_2026-11-03_v4.pptx)
+- [Matching timed speech and question preparation](docs/reports/GlycoLens_Milestone_2_Presentation_Notes.md)
+- [October 26 advisor progress and experimentation report](docs/reports/GlycoLens_Milestone_2_Advisor_Report_2026-10-26.md) ([Word](docs/reports/GlycoLens_Milestone_2_Advisor_Report_2026-10-26.docx))
 - [Model comparison and limitations](docs/reports/milestone-2-model-results.md)
 - [Implementation verification](docs/reports/milestone-2-implementation-verification.md)
 

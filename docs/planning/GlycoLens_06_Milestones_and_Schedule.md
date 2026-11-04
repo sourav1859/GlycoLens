@@ -6,6 +6,15 @@ This plan uses the **current CSCI-788 schedule PDF** for Fall 2026 dates. Older 
 
 The course schedule is provisional and the advisor may set earlier deadlines.
 
+November 3 presentation revision: after the earlier November 3 date/shorter-slot
+confirmation, the user requested an extended 7–8 minute suggested speech in plain
+language. The [revised PowerPoint](../presentations/GlycoLens_Milestone_2_Presentation_2026-11-03_v4.pptx)
+and [matching notes](../reports/GlycoLens_Milestone_2_Presentation_Notes.md) now target
+7:30 across ten main slides, with four hidden backups. This replaces the earlier
+5:30 script and records the requested speaking material, not a change to course policy.
+Preparation does not change official deadlines, establish that the talk was delivered,
+or close remaining live verification and acceptance gates.
+
 ### Current course dates
 
 | Item | Current schedule |

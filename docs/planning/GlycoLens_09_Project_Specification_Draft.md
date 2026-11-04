@@ -152,8 +152,11 @@ approval is not a change to course dates or a claim of milestone completion.
 M2 current evidence includes real Chronos/TimesFM/persistence C0-C3 comparisons,
 frozen validation selection and held-out results; the selected Chronos C3 does not
 beat persistence and uncertainty is under-covered. The real local simulated meal
-workflow is verified on desktop/mobile. Live nutrition/recipe validation and M2
-presentation preparation remain pending, so full milestone closure is not asserted.
+workflow is verified on desktop/mobile. Live nutrition/recipe and physical camera
+verification plus final acceptance remain pending, so full milestone closure is not asserted.
+The November 3 [M2 presentation draft](../presentations/GlycoLens_Milestone_2_Presentation_2026-11-03_v4.pptx)
+and [timed notes](../reports/GlycoLens_Milestone_2_Presentation_Notes.md) were prepared
+November 2 and retain the research and application limitations.
 - final model selection
 - uncertainty UI
 - Meal Passport
@@ -210,6 +213,6 @@ See [protocol 15](GlycoLens_15_MetaboNet_Chronos_Correction.md) and [results](..
 
 **The broader-data model-refinement sequence, Phases 1-6, is complete.** Separate calibration used 48 participant representatives from 1,488 eligible meals. Frozen LightGBM scored 29.91 mg/dL macro trajectory MAE / 28.20% within +/-10 on 3,533 primary-test meals (102 IDs), and 40.92 / 19.57% on 2,177 PEDAP meals (64 IDs). Both predeclared point-improvement gates passed, with zero failed forecasts; tight precision remains poor. Nominal 80% marginal coverage was 79.05% primary and 63.94% PEDAP. Both test cohorts are now consumed; no test-based reselection, point refit, app promotion or full-M2 closure.
 
-The app specification and safety boundary are unchanged. The completed research experiment does not prove causal nutrient effects or authorize clinical use, application replacement or release. Live recipe/nutrition verification and presentation remain separate M2 work.
+The app specification and safety boundary are unchanged. The completed research experiment does not prove causal nutrient effects or authorize clinical use, application replacement or release. The November 3 presentation draft is prepared. Live recipe/nutrition and physical camera verification plus final acceptance remain separate M2 work.
 
 See [protocol 16](GlycoLens_16_MetaboNet_Independent_Evaluation.md), [independent results](../reports/metabonet-phase6-independent-2026-10-16.md) and [verification handoff](../tooling/metabonet-phase6-handoff-2026-10-16.md).

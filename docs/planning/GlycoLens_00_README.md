@@ -7,6 +7,18 @@
 
 Current research evidence and the remaining M2 live-nutrition/presentation work must be tracked separately.
 
+The [Milestone 2 PowerPoint draft](../presentations/GlycoLens_Milestone_2_Presentation_2026-11-03_v4.pptx)
+and [timed speaking notes](../reports/GlycoLens_Milestone_2_Presentation_Notes.md) were
+prepared November 2 and revised November 3. At the user’s request, the current
+plain-language speech targets 7:30 within 7–8 minutes, replacing the earlier shorter
+script. Ten main slides and four hidden backup slides remain. Remaining live checks and final
+acceptance still prevent full milestone closure.
+
+The October 26 [advisor report in Markdown](../reports/GlycoLens_Milestone_2_Advisor_Report_2026-10-26.md)
+and [Word](../reports/GlycoLens_Milestone_2_Advisor_Report_2026-10-26.docx) consolidate this
+evidence with proposed next steps and advisor questions. The accompanying
+[email draft](../reports/GlycoLens_Milestone_2_Advisor_Email_Draft_2026-10-26.md) is prepared for review.
+
 See [protocol 16](GlycoLens_16_MetaboNet_Independent_Evaluation.md), [independent results](../reports/metabonet-phase6-independent-2026-10-16.md) and [verification handoff](../tooling/metabonet-phase6-handoff-2026-10-16.md).
 
 **Project:** GlycoLens: AI-Assisted Meal Understanding and Personalized Glucose Response Prediction for Type 1 Diabetes  
