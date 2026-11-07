@@ -6,7 +6,7 @@ November 6 catalog proposal: [ADR 0015](../decisions/0015-corrected-nutrition-ca
 and the [measured migration strategy](../reports/azure-to-supabase-catalog-migration-strategy-2026-11-06.md)
 describe a compact, corrected Azure food-data copy into a separate Supabase catalog schema.
 Recipe data remains deferred until correction and validation. No source writes, cloud
-import, provider replacement or application-schema implementation has occurred. The
+import, nutrition-provider replacement or application-schema implementation has occurred. The
 modular monolith and private application/research boundaries remain intact.
 
 Use a **modular monolith + separate model adapters**, not microservices.
@@ -38,6 +38,7 @@ Reason:
 | Simulation | py-mgipsim | controlled virtual T1D data |
 | Testing | Pytest + Playwright | backend + critical UX flows |
 | Packaging | Docker | reproducible backend/model environment |
+| Initial hosting | Hostinger KVM 2 + managed Supabase | user-selected November 7 target; hosted acceptance pending |
 
 Milestone 1 pins the local development toolchains to Python 3.12.5 managed by uv and Node.js 22
 managed as a pnpm workspace. Exact resolved dependencies are recorded in `uv.lock` and
@@ -524,13 +525,64 @@ Secrets:
 
 ## 13. Deployment
 
-### Recommended development/demo deployment
+### Accepted initial deployment - November 7, 2026
 
-- Frontend: hosted PWA
-- Backend: Dockerized FastAPI
-- DB: Supabase
-- Model inference: local/RIT machine or low-cost backend
-- Demo fallback: local Docker Compose so the defense does not depend on external GPU availability
+The user selected **Hostinger KVM 2 with managed Supabase**. This replaces the
+previous provider-unspecified recommendation; it does not establish that deployment
+is implemented or tested. See [ADR 0016](../decisions/0016-initial-hostinger-kvm2-managed-supabase.md).
+
+| Component | Initial placement |
+|---|---|
+| Next.js PWA and HTTPS reverse proxy | Hostinger KVM 2: 2 vCPU, 8 GB RAM, 100 GB NVMe |
+| FastAPI, current Chronos-2 C3 CPU adapter | Same VPS, one backend worker initially |
+| py-mgipsim | Same VPS, pinned isolated subprocess environment |
+| PostgreSQL, Auth, PostgREST/RPC, RLS, pgvector | Managed Supabase; Free initially if measured usage fits |
+| Nutrition and recipe-parser APIs | Existing external providers with private configuration |
+| Research datasets, batch experiments and Graphify | Local/RIT development environment |
+
+```mermaid
+flowchart LR
+    Browser[Browser PWA] --> Proxy
+    subgraph VPS[Hostinger KVM 2]
+        Proxy[HTTPS reverse proxy] --> Web[Next.js]
+        Proxy --> API[FastAPI modular monolith]
+        API --> Model[Chronos-2 CPU adapter]
+        API --> Simulator[Isolated py-mgipsim process]
+    end
+    subgraph Managed[Managed Supabase]
+        Auth[Auth]
+        DB[PostgreSQL / PostgREST / pgvector]
+    end
+    Browser --> Auth
+    API --> Auth
+    API --> DB
+```
+
+No separate forecasting microservice or automatic research-model promotion is
+introduced. Frontend API/Auth environment settings and explicit backend CORS must
+match the deployed HTTPS origins. Existing user-token database calls preserve RLS.
+
+### Preparation and acceptance still required
+
+- Add reproducible Linux containers, the Chronos runtime dependencies and portable
+  simulator interpreter/source configuration; the current simulator path is Windows-specific.
+- Persist model cache and simulator/replay artifacts; warm the model and validate
+  readiness beyond the current basic `/health` response.
+- Configure DNS/HTTPS, private secrets, managed Supabase migrations/Auth and owner isolation.
+- Verify bounded overlapping requests; process-local locks currently return 429
+  while the model/simulator is busy. Profile CPU threads before adding workers.
+- Measure full-stack latency, memory, CPU credits, quotas and restart/restore behavior
+  on the actual VPS. The 810.83 MiB local model smoke peak is not a hosted capacity result.
+- Retain the working local demo and add reproducible Compose fallback packaging;
+  no Compose file currently exists. Keep bulk research off the app VPS.
+
+Hostinger's CPU credits can limit sustained heavy processing. KVM 4 is an upgrade
+option when actual workload evidence justifies it; managed Supabase capacity and
+recipe-model API charges remain separate. Pricing/operational assumptions are in
+ADR 0016. Self-hosted Supabase, Vercel, Railway and Render are not required initial
+services. Corrected Azure data remains subject to ADR 0015 and its capacity gate.
+
+Execution is tracked in the [M3 deployment checklist](GlycoLens_06_Milestones_and_Schedule.md#initial-hostinger-kvm-2-deployment).
 
 ## 14. Repository and developer-tooling boundaries
 

@@ -1,9 +1,18 @@
 # GlycoLens: Updated Project Summary
 
+November 7 initial deployment choice: the user accepted Hostinger KVM 2 for the
+Next.js PWA, FastAPI modular monolith, current CPU Chronos adapter and isolated
+py-mgipsim runtime, with managed Supabase for database/Auth/pgvector. Start with
+Supabase Free while measured capacity permits. [ADR 0016](../decisions/0016-initial-hostinger-kvm2-managed-supabase.md)
+records pending Linux/container preparation, persistence, HTTPS, concurrency and
+hosted verification. No purchase, public endpoint or hosted migration is claimed.
+The local demo fallback and deferred corrected-catalog gates remain in place.
+
 November 6 nutrition-source planning: Azure recipe data remains on hold while its owner
 corrects it. Future use of a corrected release is intended; a compact export/import is
 proposed in the [Supabase migration strategy](../reports/azure-to-supabase-catalog-migration-strategy-2026-11-06.md).
-Application providers, forecasting behavior and existing acceptance gates are unchanged.
+This nutrition proposal leaves food providers, forecasting behavior and existing
+acceptance gates unchanged.
 The audit and strategy provide M2 evidence; the
 [M3 migration checklist](GlycoLens_06_Milestones_and_Schedule.md#corrected-nutrition-catalog-migration-from-milestone-2)
 tracks corrected-data export/import and application verification.

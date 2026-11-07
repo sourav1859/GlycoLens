@@ -4,6 +4,13 @@ Approved by the user on October 14, 2026. Full milestone scope; py-mgipsim first
 Dexcom later; API-backed recipe extraction with editable confirmed ingredients.
 Research/education only. No dosing, pump control, real-user study, or hosted deployment.
 
+November 7 deployment follow-up: the user selected Hostinger KVM 2 with managed
+Supabase as the initial target in [ADR 0016](../decisions/0016-initial-hostinger-kvm2-managed-supabase.md).
+Implementation and hosted acceptance are tracked in the [M3 deployment checklist](GlycoLens_06_Milestones_and_Schedule.md#initial-hostinger-kvm-2-deployment).
+The October 14 implementation boundary and recorded local evidence above remain
+historical; no hosted deployment has been executed, and M2 live-provider/camera
+checks and final acceptance remain open.
+
 The October 26 [advisor report](../reports/GlycoLens_Milestone_2_Advisor_Report_2026-10-26.md)
 consolidates prototype verification, all model experiments, current limitations and
 proposed next steps. Its [Word copy](../reports/GlycoLens_Milestone_2_Advisor_Report_2026-10-26.docx)

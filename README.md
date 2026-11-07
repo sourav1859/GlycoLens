@@ -6,6 +6,12 @@ GlycoLens is an inference-first, application-first capstone project. It combines
 
 > **Research and education only:** GlycoLens does not recommend insulin doses, change clinician settings, or control an insulin pump. Forecasts are estimates and are not medical advice.
 
+The user selected **Hostinger KVM 2 with managed Supabase** for initial deployment on
+November 7. The VPS will host the PWA, FastAPI, CPU forecasting and simulator;
+Supabase remains managed externally. [ADR 0016](docs/decisions/0016-initial-hostinger-kvm2-managed-supabase.md)
+records the decision, cost assumptions and readiness gates. Implementation and
+hosted verification are pending in the [M3 deployment checklist](docs/planning/GlycoLens_06_Milestones_and_Schedule.md#initial-hostinger-kvm-2-deployment).
+
 The November 6 [Azure to Supabase catalog strategy](docs/reports/azure-to-supabase-catalog-migration-strategy-2026-11-06.md)
 records measured storage and a proposed compact food-data copy. The user confirmed that
 recipe data is being corrected upstream; recipe use and migration remain deferred until
@@ -74,6 +80,7 @@ GlycoLens helps explore:
 - **Simulation:** py-mgipsim
 - **Testing:** Pytest and Playwright
 - **Packaging:** Docker
+- **Initial deployment:** Hostinger KVM 2 for app/inference/simulation; managed Supabase for database/Auth
 
 The system is designed as a modular monolith with replaceable forecasting-model adapters.
 

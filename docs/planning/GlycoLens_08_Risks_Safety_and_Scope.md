@@ -5,7 +5,8 @@ The [migration strategy](../reports/azure-to-supabase-catalog-migration-strategy
 requires corrected source mappings, energy/serving semantics, explicit missingness and
 provenance before activation. Export/import planning preserves read-only Azure access,
 excludes customer/health records, keeps credentials private and requires target capacity
-and access checks. No new provider, cloud deployment or clinical claim is established.
+and access checks. These catalog findings do not establish a new nutrition provider,
+cloud deployment or clinical claim.
 
 ## 1. Core safety boundary
 
@@ -326,12 +327,29 @@ Mitigation:
 
 ## 12. Cloud/inference cost risk
 
+### Accepted initial host and remaining operational risks
+
+The November 7 user decision selects Hostinger KVM 2 with managed Supabase,
+initially Free subject to measured capacity. [ADR 0016](../decisions/0016-initial-hostinger-kvm2-managed-supabase.md)
+records the prepaid commitment, renewal, separate API/database costs and pending
+hosted verification. Resource specifications do not establish smooth concurrent
+operation: sustained CPU use can exhaust Hostinger credits, model workers duplicate
+memory, and current model/simulator locks return busy responses on overlap.
+
+Keep one backend worker initially, bound simulator work, configure CPU threads,
+warm/persist the model and measure the complete deployment. The VPS is self-managed;
+patching, HTTPS, firewall, monitoring and recovery need explicit ownership. Supabase
+quotas/inactivity and its backup/restore plan remain separate from VPS disk/backups.
+Keep research datasets private/off the app host and preserve user-token RLS.
+Linux simulator paths and reproducible containers remain deployment prerequisites.
+Provider selection does not authorize real-user data or establish clinical readiness.
+
 ### Mitigation
 - models selected partly for practical inference
-- local inference for defense
+- verified local inference/demo fallback for defense
 - cache model in process
 - do not depend on expensive managed GPU service
-- PWA/backend can run with a local Docker stack if needed
+- retain the working local app workflow and package a reproducible Docker/Compose fallback
 
 ## 13. Privacy risk
 

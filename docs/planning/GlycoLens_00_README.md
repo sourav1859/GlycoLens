@@ -1,5 +1,13 @@
 # GlycoLens Capstone Planning Pack
 
+November 7 deployment decision: the user selected **Hostinger KVM 2 with managed
+Supabase** as the initial target. [ADR 0016](../decisions/0016-initial-hostinger-kvm2-managed-supabase.md)
+and [architecture section 13](GlycoLens_04_Tech_Stack_and_System_Architecture.md#13-deployment)
+define the topology; the [M3 deployment checklist](GlycoLens_06_Milestones_and_Schedule.md#initial-hostinger-kvm-2-deployment)
+tracks implementation and hosted acceptance. Provider selection is complete;
+provisioning and deployment are pending. Model selection, catalog correction gates
+and course deadlines are unchanged.
+
 November 6 catalog update: the user confirmed that Azure recipe corrections are ongoing
 and the data will be used after correction. The [migration strategy](../reports/azure-to-supabase-catalog-migration-strategy-2026-11-06.md)
 measures a proposed compact Supabase copy; [ADR 0015](../decisions/0015-corrected-nutrition-catalog-migration.md)
@@ -65,6 +73,7 @@ The revised plan is:
 | Frontend | Next.js + TypeScript |
 | Backend | FastAPI + Python |
 | App database | Supabase PostgreSQL |
+| Initial deployment | **Hostinger KVM 2** for PWA/API/CPU inference/simulator; **managed Supabase**, initially Free subject to measured capacity |
 | Similar-meal personalization | SQL + pgvector; **not GraphRAG for MVP** |
 | Primary model candidates | Chronos-2 and TimesFM-3 |
 | Domain-specific exploratory model | CGMformer |

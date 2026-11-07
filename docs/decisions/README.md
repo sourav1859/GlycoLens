@@ -17,3 +17,4 @@ Use this directory for concise records of important technical decisions. Name re
 - [0013 - Frozen Chronos correction and matched controls](0013-frozen-chronos-correction-and-matched-controls.md)
 - [0014 - Independent testing and participant calibration](0014-independent-testing-and-participant-calibration.md)
 - [0015 - Corrected nutrition catalog migration proposal](0015-corrected-nutrition-catalog-migration.md)
+- [0016 - Initial Hostinger KVM 2 deployment with managed Supabase](0016-initial-hostinger-kvm2-managed-supabase.md)

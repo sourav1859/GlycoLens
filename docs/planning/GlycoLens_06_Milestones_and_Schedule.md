@@ -354,6 +354,31 @@ Because Milestone 3 A is Nov 10 and the work deadline is Nov 13, aim for an **in
 ### Goal
 Turn the prototype into the final evaluated capstone system.
 
+### Initial Hostinger KVM 2 deployment
+
+On November 7, the user selected **Hostinger KVM 2 with managed Supabase** for the
+initial application deployment. [ADR 0016](../decisions/0016-initial-hostinger-kvm2-managed-supabase.md)
+and [architecture section 13](GlycoLens_04_Tech_Stack_and_System_Architecture.md#13-deployment)
+define the target and acceptance requirements. This is M3 integration/verification
+work; provider selection does not close M2's live-provider/camera acceptance gates.
+
+- [x] Select KVM 2 for the PWA, FastAPI, CPU model and simulator, retaining managed Supabase.
+- [ ] Provision the selected host/project and record private DNS, region, subscription
+  and capacity settings when execution is authorized; no purchase or deployment is recorded yet.
+- [ ] Add pinned Linux containers, portable simulator configuration, CPU thread
+  limits, persistent caches/replays and model/simulator readiness checks.
+- [ ] Configure HTTPS, frontend/API origins, private secrets and managed Supabase
+  migrations/Auth/RLS; verify cross-user isolation and recovery before publication.
+- [ ] Verify overlap/busy handling and the complete desktop/mobile meal-to-forecast
+  workflow, measuring cold/warm/p95 latency, full-stack memory, CPU credits and quotas.
+- [ ] Verify restart recovery, database backup/restore and the local demo fallback;
+  retain the previous compatible application release and record hosted acceptance.
+
+Start with Supabase Free only while measured requirements fit. Upgrade the VPS or
+database independently when evidence requires it. Keep bulk research and Graphify
+local; retain the current application model and deferred catalog-correction gates.
+The November 7 internal feature freeze and official course deadlines are unchanged.
+
 ### Corrected nutrition catalog migration from Milestone 2
 
 Track the [migration strategy and measured storage budget](../reports/azure-to-supabase-catalog-migration-strategy-2026-11-06.md)

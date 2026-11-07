@@ -77,6 +77,13 @@ A mobile-first PWA will be built using:
 - PostgreSQL/Supabase
 - pgvector for similar-meal personalization
 
+For initial deployment, the user selected **Hostinger KVM 2 with managed Supabase**
+on November 7. The PWA, FastAPI, current CPU model and isolated simulator share the
+VPS; database/Auth remain managed externally. [ADR 0016](../decisions/0016-initial-hostinger-kvm2-managed-supabase.md)
+and the [M3 deployment checklist](GlycoLens_06_Milestones_and_Schedule.md#initial-hostinger-kvm-2-deployment)
+record pending implementation and hosted verification. Retain the local demo and
+current research/safety boundaries; no deployed endpoint is claimed.
+
 Core application flow:
 `meal -> nutrition -> T1D context -> pretrained inference -> uncertainty -> personal history -> portion comparison`
 
