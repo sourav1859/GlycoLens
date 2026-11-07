@@ -1,5 +1,9 @@
 # Reports
 
+- [November 6 Azure to Supabase catalog migration strategy](azure-to-supabase-catalog-migration-strategy-2026-11-06.md): measured source sizes, sample-based export estimates, current Free plan limits and a migration runbook. Recipe use is deferred until upstream correction and validation; no migration was executed.
+
+- [November 6 Azure nutrition catalog read-only assessment](azure-nutrition-catalog-assessment-2026-11-06.md): access confirmed, recipe/ingredient/product coverage, confirmed data-quality findings and proposed GlycoLens integration. No source adoption or database changes are implied.
+
 Milestone 2 presentation prepared November 2 and revised November 3 with a
 7–8 minute speech (target 7:30) at the user’s request. The latest revision follows
 the Milestone 1 style and briefly explains technical terms:

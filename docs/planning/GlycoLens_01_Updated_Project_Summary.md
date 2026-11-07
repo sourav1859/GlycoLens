@@ -1,5 +1,13 @@
 # GlycoLens: Updated Project Summary
 
+November 6 nutrition-source planning: Azure recipe data remains on hold while its owner
+corrects it. Future use of a corrected release is intended; a compact export/import is
+proposed in the [Supabase migration strategy](../reports/azure-to-supabase-catalog-migration-strategy-2026-11-06.md).
+Application providers, forecasting behavior and existing acceptance gates are unchanged.
+The audit and strategy provide M2 evidence; the
+[M3 migration checklist](GlycoLens_06_Milestones_and_Schedule.md#corrected-nutrition-catalog-migration-from-milestone-2)
+tracks corrected-data export/import and application verification.
+
 
 ## Current model-refinement status - Phase 6 complete
 

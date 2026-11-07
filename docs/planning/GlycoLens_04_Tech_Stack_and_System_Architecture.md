@@ -2,6 +2,13 @@
 
 ## 1. Architecture principle
 
+November 6 catalog proposal: [ADR 0015](../decisions/0015-corrected-nutrition-catalog-migration.md)
+and the [measured migration strategy](../reports/azure-to-supabase-catalog-migration-strategy-2026-11-06.md)
+describe a compact, corrected Azure food-data copy into a separate Supabase catalog schema.
+Recipe data remains deferred until correction and validation. No source writes, cloud
+import, provider replacement or application-schema implementation has occurred. The
+modular monolith and private application/research boundaries remain intact.
+
 Use a **modular monolith + separate model adapters**, not microservices.
 
 Reason:

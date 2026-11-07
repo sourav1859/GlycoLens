@@ -1,5 +1,12 @@
 # GlycoLens Risks, Safety Boundaries, and Scope Controls
 
+November 6 catalog boundary: recipe data remains deferred during upstream correction.
+The [migration strategy](../reports/azure-to-supabase-catalog-migration-strategy-2026-11-06.md)
+requires corrected source mappings, energy/serving semantics, explicit missingness and
+provenance before activation. Export/import planning preserves read-only Azure access,
+excludes customer/health records, keeps credentials private and requires target capacity
+and access checks. No new provider, cloud deployment or clinical claim is established.
+
 ## 1. Core safety boundary
 
 GlycoLens is a research prototype.

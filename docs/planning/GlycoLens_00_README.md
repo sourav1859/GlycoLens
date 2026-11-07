@@ -1,5 +1,12 @@
 # GlycoLens Capstone Planning Pack
 
+November 6 catalog update: the user confirmed that Azure recipe corrections are ongoing
+and the data will be used after correction. The [migration strategy](../reports/azure-to-supabase-catalog-migration-strategy-2026-11-06.md)
+measures a proposed compact Supabase copy; [ADR 0015](../decisions/0015-corrected-nutrition-catalog-migration.md)
+records the design. No current recipe activation, full export, cloud import or M2 closure is claimed.
+The [milestone schedule](GlycoLens_06_Milestones_and_Schedule.md#corrected-nutrition-catalog-migration-from-milestone-2)
+tracks execution under M3, with the completed audit/strategy retained as M2 evidence.
+
 
 ## Current model-refinement status - Phase 6 complete
 

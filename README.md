@@ -6,6 +6,13 @@ GlycoLens is an inference-first, application-first capstone project. It combines
 
 > **Research and education only:** GlycoLens does not recommend insulin doses, change clinician settings, or control an insulin pump. Forecasts are estimates and are not medical advice.
 
+The November 6 [Azure to Supabase catalog strategy](docs/reports/azure-to-supabase-catalog-migration-strategy-2026-11-06.md)
+records measured storage and a proposed compact food-data copy. The user confirmed that
+recipe data is being corrected upstream; recipe use and migration remain deferred until
+a corrected release passes validation. No application integration or cloud import is complete.
+The [Milestone 3 checklist](docs/planning/GlycoLens_06_Milestones_and_Schedule.md#corrected-nutrition-catalog-migration-from-milestone-2)
+tracks migration execution; the completed audit and strategy remain Milestone 2 evidence.
+
 The approved October 16 model-refinement work is tracked in
 [protocol and phase ledger](docs/planning/GlycoLens_11_Model_Refinement.md),
 [execution results](docs/reports/model-refinement-results-2026-10-16.md) and

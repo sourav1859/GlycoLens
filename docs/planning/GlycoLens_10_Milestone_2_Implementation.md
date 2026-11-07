@@ -97,6 +97,18 @@ screenshots and research result artifacts remain ignored.
 
 ## Remaining prerequisites for full closure
 
+November 6 user direction: Azure recipe data is being corrected and is not yet to be
+used. The [catalog migration strategy](../reports/azure-to-supabase-catalog-migration-strategy-2026-11-06.md)
+plans a compact corrected copy after validation. No export/import or provider switch
+has occurred. Existing live nutrition, recipe-input and final acceptance requirements
+remain open until the adopted source is deliberately integrated and verified.
+
+Milestone placement: the catalog audit and strategy are M2 feasibility/planning
+evidence. Corrected-release export, local sizing, Supabase import and application
+acceptance are listed as M3 carry-forward work in the
+[milestone schedule](GlycoLens_06_Milestones_and_Schedule.md#corrected-nutrition-catalog-migration-from-milestone-2).
+This placement preserves the unresolved M2 nutrition gates and the correction hold.
+
 The user must privately configure USDA_FDC_API_KEY, LLM_API_KEY and LLM_MODEL and
 confirm the recipe provider/model. An OpenAI Responses adapter is prepared; another
 provider requires its supported structured-output adapter. Open Food Facts and local

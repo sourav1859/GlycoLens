@@ -224,6 +224,12 @@ after covariate validation. This does not revise official course deadlines or im
 an advisor extension. Overlap with the November 13 M3 deadline is an explicit risk.
 Track actual phases and evidence in [the M2 ledger](GlycoLens_10_Milestone_2_Implementation.md).
 
+November 6 carry-forward: the read-only Azure catalog audit and
+[Azure to Supabase migration strategy](../reports/azure-to-supabase-catalog-migration-strategy-2026-11-06.md)
+provide M2 feasibility/planning evidence. Executing the corrected-data migration and
+verifying its application integration are tracked under M3 below. This does not close
+the outstanding M2 live-nutrition requirements or revise course deadlines.
+
 ### Goal
 Have a usable model pipeline and a working application prototype.
 
@@ -347,6 +353,33 @@ Because Milestone 3 A is Nov 10 and the work deadline is Nov 13, aim for an **in
 
 ### Goal
 Turn the prototype into the final evaluated capstone system.
+
+### Corrected nutrition catalog migration from Milestone 2
+
+Track the [migration strategy and measured storage budget](../reports/azure-to-supabase-catalog-migration-strategy-2026-11-06.md)
+and [ADR 0015](../decisions/0015-corrected-nutrition-catalog-migration.md) as M3
+integration and verification work. The Azure audit and strategy are complete;
+recipe use, full export, cloud import and application integration remain pending.
+Upstream recipe corrections are a dependency, not evidence that the data is ready.
+
+- [ ] Receive a corrected release/manifest and verify food mappings, energy units,
+  recipe yields, ingredient quantities, missing values and source provenance.
+- [ ] Export the approved catalog and dependency closure from a consistent
+  read-only Azure snapshot, preserving stable IDs, checksums and a release manifest.
+- [ ] Restore the compact schema locally; verify counts, relationships, nutrition
+  calculations and actual size with required indexes. Check the target baseline and
+  the strategy's Free plan operating budget before a cloud import.
+- [ ] Import the validated compact catalog into Supabase with appropriate access
+  controls, bounded staging and a retained rollback package.
+- [ ] Connect the application food adapter, resolve gram/serving compatibility and
+  preserve source snapshots without changing the forecasting model.
+- [ ] Pass desktop/mobile search, barcode and recipe-review meal-to-forecast
+  acceptance, including safe failures, persistence and rollback evidence.
+
+If a corrected release is unavailable before the feature freeze, keep migration
+deferred and record the dependency explicitly. Preserve a reliable local demo with
+reviewed food facts; do not claim live provider or catalog acceptance from fixtures.
+The existing November 7 internal freeze and November 13 course deadline are unchanged.
 
 ### Required features
 

@@ -97,6 +97,12 @@ Stretch:
 
 ### F3. Nutrition resolution
 
+November 6 source proposal: a corrected Azure catalog could support existing recipe
+selection, ingredient search and packaged-food lookup. Recipe use is deferred while
+upstream corrections continue. The [migration strategy](../reports/azure-to-supabase-catalog-migration-strategy-2026-11-06.md)
+preserves explicit serving bases, editable confirmation and provenance; it does not
+implement these paths or replace arbitrary recipe-text extraction.
+
 Packaged food:
 - search USDA FoodData Central
 - fallback to Open Food Facts
