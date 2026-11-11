@@ -71,11 +71,29 @@ Nutrition:
 
 ### App
 
+The current [implementation plan](GlycoLens_17_Webapp_Implementation_Plan.md) uses
+one repo and a dedicated cloud Supabase development project, confirmed by the user
+in [ADR 0018](../decisions/0018-cloud-supabase-and-staged-webapp-delivery.md).
+Email/password verification/reset, staged full-feature delivery and named
+test/evidence gates are the implementation contract. Historical local results do
+not establish cloud schema or integration acceptance; the environment/scientific
+boundaries and official course dates remain distinct.
+
+November 10 UI specification update: [ADR 0017](../decisions/0017-responsive-webapp-and-figma-reference-boundary.md)
+and the [responsive architecture](../architecture/responsive-webapp-ui.md) define
+an incremental shared shell for mobile/tablet/desktop, informed by the
+[44-node Figma audit](../reports/figma-reference-review-2026-11-10.md). The target
+includes permanent Auth, minimal resumable onboarding, Home/Search/Meal log/
+Forecasts/Nutrition, catalog details, favorites, profile/settings and nonclinical
+notifications. The current executable app remains the integrated demo workflow;
+new pages, tables and APIs require staged implementation/acceptance. Research
+methods, model selection, safety boundaries and official dates are unchanged.
+
 A mobile-first PWA will be built using:
 - Next.js/TypeScript
 - FastAPI/Python
 - PostgreSQL/Supabase
-- pgvector for similar-meal personalization
+- SQL numeric similar-meal retrieval currently; pgvector semantic extension deferred
 
 For initial deployment, the user selected **Hostinger KVM 2 with managed Supabase**
 on November 7. The PWA, FastAPI, current CPU model and isolated simulator share the

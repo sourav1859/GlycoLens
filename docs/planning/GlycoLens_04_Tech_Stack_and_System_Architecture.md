@@ -1,5 +1,32 @@
 # GlycoLens Tech Stack and System Architecture
 
+November 11 integration preparation: cloud MCP access and private environment
+configuration are verified; hosted application schema/Auth remain pending.
+Privileged food caching now prefers `SUPABASE_SECRET_KEY` on the `apikey` header
+without a bearer JWT. Legacy `SUPABASE_SERVICE_ROLE_KEY` retains its original
+headers only as a fallback. Ordinary user operations still use the user's JWT/RLS.
+Public environment names retaining `ANON_KEY` accept the project's modern
+publishable key. Eight focused offline tests passed; this is not cloud-user/RLS,
+SMTP or live-provider acceptance. The user-selected recipe model is now
+`gpt-6-luna`, replacing the earlier `gpt-5-mini` setting. It uses the existing
+Responses API strict JSON schema, validation and editable ingredient contract;
+forecasting adapters and nutrition-source authority are unchanged. A user-approved
+USD 5 total cap covered a 16-call synthetic comparison: both models passed eight
+cases after a documented offline oracle correction. Live access and token usage
+are verified; representative accuracy and production cost remain unproven. See
+[recipe validation](../reports/recipe-model-validation-2026-11-11.md) and
+[setup evidence](../reports/cloud-env-and-email-setup-2026-11-11.md).
+
+Current environment decision: [ADR 0018](../decisions/0018-cloud-supabase-and-staged-webapp-delivery.md)
+sets **dedicated cloud Supabase development** as the application DB/Auth and hosted
+integration-test target from now on. The one-repo modular monolith remains.
+[Plan 17](GlycoLens_17_Webapp_Implementation_Plan.md) specifies reviewed hosted
+migration creation, modern API-key compatibility, trusted writes, phase deliverables
+and 144-case validation. Historical local stack setup/reset instructions are not
+the new workflow; no hosted schema has yet been applied by this planning update.
+
+November 10 UI architecture update: [ADR 0017](../decisions/0017-responsive-webapp-and-figma-reference-boundary.md) adopts an incremental responsive Next.js shell around the existing authenticated meal/forecast workflow. The [detailed UI architecture](../architecture/responsive-webapp-ui.md) defines routes, component boundaries, minimal onboarding, proposed schema/API additions and responsive acceptance. The [44-node Figma audit](../reports/figma-reference-review-2026-11-10.md) supplies reference evidence. These are design/documentation changes; no new route, migration, cloud connection or runtime UI is claimed.
+
 ## 1. Architecture principle
 
 November 6 catalog proposal: [ADR 0015](../decisions/0015-corrected-nutrition-catalog-migration.md)
@@ -23,8 +50,8 @@ Reason:
 | Layer | Technology | Why |
 |---|---|---|
 | Client | **Next.js + TypeScript** | Fast web development; PWA support; laptop + mobile |
-| UI | Tailwind CSS + component library | Fast consistent UI |
-| Charts | Recharts or Plotly | CGM + forecast timelines |
+| UI | Plain CSS and reusable React components currently; shared design tokens/components planned | Keep existing stack; no Tailwind/component-library migration required |
+| Charts | SVG forecast chart currently; responsive summary/table extension planned | Preserve validated contract and accessible data; no chart-library dependency assumed |
 | Barcode | Browser barcode library (ZXing browser layer or equivalent) | Camera-based UPC/EAN capture |
 | Backend | **FastAPI + Python** | Natural fit for model inference/data science |
 | Validation | Pydantic | Typed API contracts |
@@ -84,10 +111,14 @@ If later moved to native:
 
 ## 4. High-level architecture
 
+This is the target system decomposition, not a deployment or feature-completion diagram. Dexcom, semantic vectors, optional models/object storage and new responsive routes are planned or separately gated. Current app inference is Chronos C3; research adapters/evaluations are not all selectable application services. See section 6 for the implemented boundary.
+
 ```mermaid
 flowchart TB
-    subgraph Client["Mobile-first PWA"]
-      UI[Next.js UI]
+    subgraph Client["Responsive PWA - target shell"]
+      UI[Next.js shared route shell]
+      NAV[Home / Search / Meal log / Forecasts / Nutrition]
+      ACCOUNT[Account / Onboarding / Preferences]
       CAM[Camera / Barcode]
       CHART[CGM + Forecast Charts]
     end
@@ -99,6 +130,9 @@ flowchart TB
       TL[Timeline Service]
       INF[Inference Orchestrator]
       RET[Personal Retrieval]
+      ME[Profile and onboarding - planned]
+      DASH[Consumed nutrition aggregates - planned]
+      CAT[Validated catalog - gated]
       SIM[Simulation Adapter]
       DEX[Dexcom Adapter]
     end
@@ -114,6 +148,7 @@ flowchart TB
       PG[(PostgreSQL)]
       VEC[(pgvector)]
       OBJ[(Object Storage)]
+      CATDB[(Corrected catalog schema - gated)]
     end
 
     subgraph External["External APIs"]
@@ -122,9 +157,13 @@ flowchart TB
       DX[Dexcom Sandbox]
       MG[py-mgipsim]
       LLM[LLM Recipe Parser]
+      SUPAUTH[Managed Supabase Auth]
     end
 
     UI --> API
+    UI --> NAV
+    UI --> ACCOUNT
+    ACCOUNT --> SUPAUTH
     CAM --> UI
     CHART --> UI
 
@@ -133,6 +172,9 @@ flowchart TB
     API --> TL
     API --> INF
     API --> RET
+    API --> ME
+    API --> DASH
+    API --> CAT
 
     NUT --> USDA
     NUT --> OFF
@@ -153,7 +195,10 @@ flowchart TB
     TL --> DEX
     TL --> SIM
 
-    AUTH --> PG
+    AUTH --> SUPAUTH
+    ME --> PG
+    DASH --> PG
+    CAT --> CATDB
     NUT --> PG
     UI --> OBJ
 ```
@@ -243,63 +288,45 @@ storage. Simulation uses an explicitly labeled January 1, 2026 UTC fixture clock
 not a reinterpretation of timezone-naive research records. Recipe extraction uses
 configurable OpenAI Responses structured output; live keys/model are prerequisites.
 
+Current source boundaries:
+
 ```text
-app/
-├── api/
-│   ├── meals.py
-│   ├── forecasts.py
-│   ├── timeline.py
-│   ├── dexcom.py
-│   └── research.py
-├── services/
-│   ├── nutrition/
-│   ├── inference/
-│   ├── retrieval/
-│   ├── timeline/
-│   └── simulation/
-├── models/
-│   ├── chronos2.py
-│   ├── timesfm.py
-│   ├── cgmformer.py
-│   └── persistence.py
-├── preprocessing/
-└── db/
+frontend/src/app/                       Next.js entry, layout and CSS
+frontend/src/features/meal/             current integrated MealWorkflow
+frontend/src/components/ForecastChart.tsx
+frontend/src/lib/                       typed application/forecast clients
+backend/app/api/                        meals, foods, forecasts, simulation routes
+backend/app/core/                       server configuration
+backend/app/db/                         verified user session and owner-token access
+backend/app/services/                   nutrition, inference, retrieval, simulation
+research/models/adapters/              canonical forecast contract/adapters
+research/simulation/                   isolated simulator adapter
+supabase/migrations/                   executable application schema/RPCs
 ```
 
-## 7. Suggested API surface
+The new shell extracts the current workflow into route-level features rather than creating another inference backend. Proposed Auth/onboarding, dashboard, catalog and account modules remain inside this modular monolith. Frontend client validation supplements server validation and RLS; it never replaces either. Research data and generated artifacts remain outside application storage.
 
-### Meal APIs
-- `POST /api/meals/parse-recipe`
-- `GET /api/foods/barcode/{code}`
-- `POST /api/meals`
-- `GET /api/meals/{id}`
+## 7. API surface: implemented versus proposed
 
-### Timeline
-- `GET /api/timeline?from=&to=`
+All current application routes are versioned under `/api/v1`. Verify the handlers in `backend/app/api/`; do not use the earlier unversioned suggested URLs as executable contracts.
 
-### Forecast
-- `GET /api/v1/forecasts/demo` - implemented M1 synthetic, identifier-free visualization contract
-- `POST /api/forecast`
-- `GET /api/forecast/{id}`
-- `POST /api/forecast/compare-portions`
+| Current endpoint | Boundary |
+|---|---|
+| `POST /api/v1/demo/session` | Verified anonymous Auth session; initialize virtual-patient profile |
+| `GET /api/v1/timeline` | Authenticated owner/source context |
+| `GET /api/v1/foods/search`, `GET /api/v1/foods/usda/{identifier}`, `GET /api/v1/foods/barcode/{barcode}` | Prepared food-provider paths; live validation gates remain |
+| `POST /api/v1/meals/parse-recipe` | Editable structured extraction; deterministic food grounding still required |
+| `POST /api/v1/meals`, `GET /api/v1/meals/{meal_id}` | Confirmed atomic/idempotent save and owned read |
+| `GET /api/v1/meals/{meal_id}/similar` | Same-owner numeric matches with available past outcomes |
+| `POST /api/v1/simulation/scenario` | Authenticated bounded simulator/replay execution |
+| `POST /api/v1/forecasts`, `GET /api/v1/forecasts/{forecast_id}` | Validated selected-model create/persist/read |
+| `GET /api/v1/forecasts/demo` | M1 identifier-free synthetic visualization; no real model loading |
 
-The implemented demo route never loads the Chronos checkpoint and does not accept user input. It
-exists to prove the browser-to-API contract quickly and safely. Real authenticated forecast routes
-remain future work and must use the same canonical adapter boundary.
-
-### Personalization
-- `GET /api/meals/{id}/similar`
-
-### Integrations
-- `GET /api/dexcom/authorize`
-- `GET /api/dexcom/callback`
-- `POST /api/simulation/scenario`
-
-### Research mode
-- `POST /api/research/run`
-- `GET /api/research/results`
+The [UI API contract](../architecture/responsive-webapp-ui.md#7-application-api-additions-and-connection-boundary) proposes `/me` preferences/onboarding, dashboard/nutrition aggregates, validated catalog detail/search, meal/forecast lists, versioned edits, favorites, notifications and portion comparison. These endpoints do not yet exist. Permanent-account Auth uses Supabase SDK flows, not custom password APIs. Dexcom OAuth and restricted research operations remain deferred; do not expose public batch execution to satisfy a route diagram.
 
 ## 8. Database schema
+
+The table sketches below describe the original application entities, not the complete current SQL contract. Four checked-in migrations under `supabase/migrations/` define the implemented schema, RPCs, constraints and RLS, including M2 source basis/snapshots and chronology changes. Proposed preferences/onboarding/acknowledgements, optional goals, typed favorites, meal revisions/consumed state and notifications are specified in [UI architecture section 6](../architecture/responsive-webapp-ui.md#6-data-semantics-and-proposed-schema-changes). They require forward migrations and verification; this documentation does not create them.
 
 ### `users`
 ```text
@@ -480,7 +507,7 @@ A single database can therefore support:
 - timeline queries
 - personalization retrieval
 
-Current Supabase documentation provides pgvector in Postgres, and its free tier includes a 500 MB database, which is likely sufficient for the capstone app if large research corpora remain outside the app DB.
+Current retrieval is SQL numeric distance; installing pgvector does not mean semantic retrieval is active. Embedding model/dimension/index selection remains deferred. Capacity acceptance follows the measured catalog budget in ADR 0015 and hosting decision in ADR 0016; do not infer capacity from a prototype schema alone.
 
 ## 11. GraphRAG decision
 
@@ -507,7 +534,7 @@ MealInstance
   -> HAS_OUTCOME -> GlucoseWindow
 ```
 
-Neo4j AuraDB Free is currently $0 with limited node/relationship capacity, which is enough for a small capstone graph. But adding it should require a demonstrated user benefit.
+A separate graph service remains a stretch proposal requiring a demonstrated user benefit and a separate cost/capacity decision. It is not a dependency of this UI plan.
 
 ## 12. Security
 
@@ -587,6 +614,16 @@ Execution is tracked in the [M3 deployment checklist](GlycoLens_06_Milestones_an
 ## 14. Repository and developer-tooling boundaries
 
 The repository mirrors the modular-monolith design with separate `frontend/`, `backend/`, `research/`, `database/`, and cross-system `tests/` ownership. Repository-scoped Codex skills under `.agents/skills/` govern documentation, architecture, delivery, testing, review, measurement, and safety.
+
+The November 10 [repository strategy/readiness assessment](../reports/repository-strategy-and-development-readiness-2026-11-10.md)
+reaffirms one Git repository. Web/API builds and deployments can be separate;
+forecasting currently shares the canonical adapter library rather than a separate
+network service. A future worker/service can remain in the same repository.
+Independent code-access, team ownership or release requirements would justify
+revisiting Git boundaries. Standard Supabase migrations remain in `supabase/`;
+`database/` documents that contract rather than owning a second migration history.
+The assessment records current CI, packaging, portability and contract gaps without
+changing the accepted architecture or performing implementation.
 
 Graphify may be used locally to understand source and documentation relationships. It is a developer-only knowledge tool: it is not product GraphRAG, does not store application data, does not participate in forecasting, and does not reverse the MVP decision to use PostgreSQL and pgvector for similar-meal retrieval.
 

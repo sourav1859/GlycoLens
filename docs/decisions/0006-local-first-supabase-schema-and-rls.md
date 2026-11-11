@@ -3,6 +3,11 @@
 - **Status:** Accepted
 - **Date:** September 29, 2026
 
+November 10 update: [ADR 0018](0018-cloud-supabase-and-staged-webapp-delivery.md)
+supersedes the local-first **target for new application work** with a dedicated
+cloud development project. Migration/RLS principles and historical local evidence
+remain valid; the local start/reset workflow below is not the new default.
+
 ## Context
 
 Milestone 1 requires an executable PostgreSQL/Supabase schema. Creating tables manually in a

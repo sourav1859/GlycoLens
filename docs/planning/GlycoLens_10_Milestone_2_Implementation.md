@@ -1,5 +1,20 @@
 # Milestone 2 approved implementation and evidence ledger
 
+Current follow-up: the user selected **cloud Supabase from now on** for new
+application work, with a dedicated development project and verified email/password
+accounts. [Plan 17](GlycoLens_17_Webapp_Implementation_Plan.md) and
+[ADR 0018](../decisions/0018-cloud-supabase-and-staged-webapp-delivery.md) define the
+staged implementation and future cloud tests. The local M2 results/commands below
+are historical evidence; they are not the new cloud setup path or fresh acceptance.
+No recorded phase status, model result, course date or M2 closure changes here.
+
+November 10 documentation follow-up: the [Figma review](../reports/figma-reference-review-2026-11-10.md)
+and [responsive UI architecture](../architecture/responsive-webapp-ui.md) define
+future account/onboarding and multi-page UI extraction. This is a design update,
+not a new executable M2 feature or acceptance result. The existing phase ledger
+below remains the evidence boundary; implementation is staged in the M3 checklist,
+without changing course dates, model behavior or open provider/camera gates.
+
 Approved by the user on October 14, 2026. Full milestone scope; py-mgipsim first,
 Dexcom later; API-backed recipe extraction with editable confirmed ingredients.
 Research/education only. No dosing, pump control, real-user study, or hosted deployment.

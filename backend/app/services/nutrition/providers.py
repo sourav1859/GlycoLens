@@ -83,15 +83,19 @@ def provider_request(url: str, **kwargs) -> dict:
 def store_provider_food(food: dict) -> dict:
     """Privileged access is restricted to facts fetched by trusted provider adapters."""
     try:
-        key = required_setting("SUPABASE_SERVICE_ROLE_KEY")
+        secret_key = os.environ.get("SUPABASE_SECRET_KEY", "").strip()
+        key = secret_key or required_setting("SUPABASE_SERVICE_ROLE_KEY")
+        headers = {
+            "apikey": key,
+            "Prefer": "resolution=merge-duplicates,return=representation",
+        }
+        # Modern API keys are not JWTs. Only the legacy fallback is a bearer token.
+        if not secret_key:
+            headers["Authorization"] = "Bearer " + key
         response = httpx.post(
             required_setting("SUPABASE_URL").rstrip("/")
             + "/rest/v1/foods?on_conflict=source,source_food_id",
-            headers={
-                "apikey": key,
-                "Authorization": "Bearer " + key,
-                "Prefer": "resolution=merge-duplicates,return=representation",
-            },
+            headers=headers,
             json=food,
             timeout=12,
         )

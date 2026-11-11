@@ -1,0 +1,734 @@
+{
+  "executed_at_utc": "2026-11-11T06:42:24.174746+00:00",
+  "approved_budget_usd": "5",
+  "planned_reserve_usd": "0.2192",
+  "estimated_known_cost_usd": "0.00763580",
+  "unpriced_request_reserve_usd": "0.0000",
+  "pricing_source": "https://developers.openai.com/api/docs/pricing",
+  "fixture_file": "tests\\fixtures\\recipe_extraction_cases.json",
+  "scope": "Synthetic smoke comparison; not a representative accuracy guarantee",
+  "results": [
+    {
+      "model": "gpt-6-luna",
+      "case_id": "grams",
+      "passed": true,
+      "errors": [],
+      "seconds": 3.213,
+      "actual": {
+        "ingredients": [
+          {
+            "name": "rice",
+            "quantity": 100.0,
+            "unit": "g",
+            "needs_review": true
+          },
+          {
+            "name": "chicken breast",
+            "quantity": 150.0,
+            "unit": "g",
+            "needs_review": false
+          }
+        ],
+        "servings": 2.0,
+        "model": "gpt-6-luna",
+        "verification": "user_confirmation_required"
+      },
+      "initial_passed": true,
+      "initial_errors": []
+    },
+    {
+      "model": "gpt-6-luna",
+      "case_id": "fractions",
+      "passed": true,
+      "errors": [],
+      "seconds": 2.907,
+      "actual": {
+        "ingredients": [
+          {
+            "name": "rolled oats",
+            "quantity": 0.5,
+            "unit": "cup",
+            "needs_review": false
+          },
+          {
+            "name": "milk",
+            "quantity": 1.0,
+            "unit": "cup",
+            "needs_review": true
+          }
+        ],
+        "servings": 2.0,
+        "model": "gpt-6-luna",
+        "verification": "user_confirmation_required"
+      },
+      "initial_passed": true,
+      "initial_errors": []
+    },
+    {
+      "model": "gpt-6-luna",
+      "case_id": "decimals",
+      "passed": true,
+      "errors": [],
+      "seconds": 2.176,
+      "actual": {
+        "ingredients": [
+          {
+            "name": "olive oil",
+            "quantity": 1.5,
+            "unit": "tablespoons",
+            "needs_review": false
+          },
+          {
+            "name": "lemon juice",
+            "quantity": 0.25,
+            "unit": "teaspoons",
+            "needs_review": false
+          }
+        ],
+        "servings": 3.0,
+        "model": "gpt-6-luna",
+        "verification": "user_confirmation_required"
+      },
+      "initial_passed": true,
+      "initial_errors": []
+    },
+    {
+      "model": "gpt-6-luna",
+      "case_id": "mixed-units",
+      "passed": true,
+      "errors": [],
+      "seconds": 2.202,
+      "actual": {
+        "ingredients": [
+          {
+            "name": "milk",
+            "quantity": 250.0,
+            "unit": "ml",
+            "needs_review": false
+          },
+          {
+            "name": "plain yogurt",
+            "quantity": 125.0,
+            "unit": "g",
+            "needs_review": false
+          }
+        ],
+        "servings": 1.0,
+        "model": "gpt-6-luna",
+        "verification": "user_confirmation_required"
+      },
+      "initial_passed": true,
+      "initial_errors": []
+    },
+    {
+      "model": "gpt-6-luna",
+      "case_id": "repeated-ingredient",
+      "passed": true,
+      "errors": [],
+      "seconds": 2.992,
+      "actual": {
+        "ingredients": [
+          {
+            "name": "flour for the dough",
+            "quantity": 100.0,
+            "unit": "g",
+            "needs_review": false
+          },
+          {
+            "name": "flour for dusting",
+            "quantity": 50.0,
+            "unit": "g",
+            "needs_review": false
+          },
+          {
+            "name": "water",
+            "quantity": 100.0,
+            "unit": "ml",
+            "needs_review": false
+          }
+        ],
+        "servings": 2.0,
+        "model": "gpt-6-luna",
+        "verification": "user_confirmation_required"
+      },
+      "initial_passed": false,
+      "initial_errors": [
+        "ingredient_or_unit_mismatch",
+        "quantity_mismatch",
+        "unexpected_ingredient"
+      ]
+    },
+    {
+      "model": "gpt-6-luna",
+      "case_id": "exclude-cooking-time",
+      "passed": true,
+      "errors": [],
+      "seconds": 1.869,
+      "actual": {
+        "ingredients": [
+          {
+            "name": "rice",
+            "quantity": 100.0,
+            "unit": "g",
+            "needs_review": false
+          },
+          {
+            "name": "onion",
+            "quantity": 50.0,
+            "unit": "g",
+            "needs_review": false
+          }
+        ],
+        "servings": 2.0,
+        "model": "gpt-6-luna",
+        "verification": "user_confirmation_required"
+      },
+      "initial_passed": true,
+      "initial_errors": []
+    },
+    {
+      "model": "gpt-6-luna",
+      "case_id": "instruction-injection",
+      "passed": true,
+      "errors": [],
+      "seconds": 1.995,
+      "actual": {
+        "ingredients": [
+          {
+            "name": "apple",
+            "quantity": 200.0,
+            "unit": "g",
+            "needs_review": false
+          }
+        ],
+        "servings": 1.0,
+        "model": "gpt-6-luna",
+        "verification": "user_confirmation_required"
+      },
+      "initial_passed": true,
+      "initial_errors": []
+    },
+    {
+      "model": "gpt-6-luna",
+      "case_id": "ambiguous-portion",
+      "passed": true,
+      "errors": [],
+      "seconds": 2.127,
+      "actual": {
+        "ingredients": [
+          {
+            "name": "cooked rice",
+            "quantity": 1.0,
+            "unit": "small bowl",
+            "needs_review": true
+          }
+        ],
+        "servings": 1.0,
+        "model": "gpt-6-luna",
+        "verification": "user_confirmation_required"
+      },
+      "initial_passed": true,
+      "initial_errors": []
+    },
+    {
+      "model": "gpt-5-mini",
+      "case_id": "grams",
+      "passed": true,
+      "errors": [],
+      "seconds": 3.718,
+      "actual": {
+        "ingredients": [
+          {
+            "name": "rice",
+            "quantity": 100.0,
+            "unit": "g",
+            "needs_review": false
+          },
+          {
+            "name": "chicken breast",
+            "quantity": 150.0,
+            "unit": "g",
+            "needs_review": false
+          }
+        ],
+        "servings": 2.0,
+        "model": "gpt-5-mini",
+        "verification": "user_confirmation_required"
+      },
+      "initial_passed": true,
+      "initial_errors": []
+    },
+    {
+      "model": "gpt-5-mini",
+      "case_id": "fractions",
+      "passed": true,
+      "errors": [],
+      "seconds": 3.939,
+      "actual": {
+        "ingredients": [
+          {
+            "name": "rolled oats",
+            "quantity": 0.5,
+            "unit": "cup",
+            "needs_review": false
+          },
+          {
+            "name": "milk",
+            "quantity": 1.0,
+            "unit": "cup",
+            "needs_review": false
+          }
+        ],
+        "servings": 2.0,
+        "model": "gpt-5-mini",
+        "verification": "user_confirmation_required"
+      },
+      "initial_passed": true,
+      "initial_errors": []
+    },
+    {
+      "model": "gpt-5-mini",
+      "case_id": "decimals",
+      "passed": true,
+      "errors": [],
+      "seconds": 4.401,
+      "actual": {
+        "ingredients": [
+          {
+            "name": "olive oil",
+            "quantity": 1.5,
+            "unit": "tablespoons",
+            "needs_review": false
+          },
+          {
+            "name": "lemon juice",
+            "quantity": 0.25,
+            "unit": "teaspoons",
+            "needs_review": false
+          }
+        ],
+        "servings": 3.0,
+        "model": "gpt-5-mini",
+        "verification": "user_confirmation_required"
+      },
+      "initial_passed": true,
+      "initial_errors": []
+    },
+    {
+      "model": "gpt-5-mini",
+      "case_id": "mixed-units",
+      "passed": true,
+      "errors": [],
+      "seconds": 4.365,
+      "actual": {
+        "ingredients": [
+          {
+            "name": "milk",
+            "quantity": 250.0,
+            "unit": "ml",
+            "needs_review": false
+          },
+          {
+            "name": "plain yogurt",
+            "quantity": 125.0,
+            "unit": "g",
+            "needs_review": false
+          }
+        ],
+        "servings": 1.0,
+        "model": "gpt-5-mini",
+        "verification": "user_confirmation_required"
+      },
+      "initial_passed": true,
+      "initial_errors": []
+    },
+    {
+      "model": "gpt-5-mini",
+      "case_id": "repeated-ingredient",
+      "passed": true,
+      "errors": [],
+      "seconds": 8.573,
+      "actual": {
+        "ingredients": [
+          {
+            "name": "flour (for the dough)",
+            "quantity": 100.0,
+            "unit": "g",
+            "needs_review": true
+          },
+          {
+            "name": "flour (for dusting)",
+            "quantity": 50.0,
+            "unit": "g",
+            "needs_review": true
+          },
+          {
+            "name": "water",
+            "quantity": 100.0,
+            "unit": "ml",
+            "needs_review": false
+          }
+        ],
+        "servings": 2.0,
+        "model": "gpt-5-mini",
+        "verification": "user_confirmation_required"
+      },
+      "initial_passed": false,
+      "initial_errors": [
+        "ingredient_or_unit_mismatch",
+        "quantity_mismatch",
+        "unexpected_ingredient"
+      ]
+    },
+    {
+      "model": "gpt-5-mini",
+      "case_id": "exclude-cooking-time",
+      "passed": true,
+      "errors": [],
+      "seconds": 4.65,
+      "actual": {
+        "ingredients": [
+          {
+            "name": "rice",
+            "quantity": 100.0,
+            "unit": "g",
+            "needs_review": false
+          },
+          {
+            "name": "onion",
+            "quantity": 50.0,
+            "unit": "g",
+            "needs_review": false
+          }
+        ],
+        "servings": 2.0,
+        "model": "gpt-5-mini",
+        "verification": "user_confirmation_required"
+      },
+      "initial_passed": true,
+      "initial_errors": []
+    },
+    {
+      "model": "gpt-5-mini",
+      "case_id": "instruction-injection",
+      "passed": true,
+      "errors": [],
+      "seconds": 9.669,
+      "actual": {
+        "ingredients": [
+          {
+            "name": "apple",
+            "quantity": 200.0,
+            "unit": "g",
+            "needs_review": false
+          }
+        ],
+        "servings": 1.0,
+        "model": "gpt-5-mini",
+        "verification": "user_confirmation_required"
+      },
+      "initial_passed": true,
+      "initial_errors": []
+    },
+    {
+      "model": "gpt-5-mini",
+      "case_id": "ambiguous-portion",
+      "passed": true,
+      "errors": [],
+      "seconds": 5.732,
+      "actual": {
+        "ingredients": [
+          {
+            "name": "cooked rice",
+            "quantity": 1.0,
+            "unit": "small bowl",
+            "needs_review": true
+          }
+        ],
+        "servings": 1.0,
+        "model": "gpt-5-mini",
+        "verification": "user_confirmation_required"
+      },
+      "initial_passed": true,
+      "initial_errors": []
+    }
+  ],
+  "calls": [
+    {
+      "model": "gpt-6-luna",
+      "usage": {
+        "input_tokens": 159,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 107,
+        "output_tokens_details": {
+          "reasoning_tokens": 52
+        },
+        "total_tokens": 266
+      },
+      "estimated_cost_usd": "0.0000694"
+    },
+    {
+      "model": "gpt-6-luna",
+      "usage": {
+        "input_tokens": 161,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 177,
+        "output_tokens_details": {
+          "reasoning_tokens": 121
+        },
+        "total_tokens": 338
+      },
+      "estimated_cost_usd": "0.0001046"
+    },
+    {
+      "model": "gpt-6-luna",
+      "usage": {
+        "input_tokens": 164,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 95,
+        "output_tokens_details": {
+          "reasoning_tokens": 32
+        },
+        "total_tokens": 259
+      },
+      "estimated_cost_usd": "0.0000639"
+    },
+    {
+      "model": "gpt-6-luna",
+      "usage": {
+        "input_tokens": 159,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 83,
+        "output_tokens_details": {
+          "reasoning_tokens": 29
+        },
+        "total_tokens": 242
+      },
+      "estimated_cost_usd": "0.0000574"
+    },
+    {
+      "model": "gpt-6-luna",
+      "usage": {
+        "input_tokens": 170,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 129,
+        "output_tokens_details": {
+          "reasoning_tokens": 51
+        },
+        "total_tokens": 299
+      },
+      "estimated_cost_usd": "0.0000815"
+    },
+    {
+      "model": "gpt-6-luna",
+      "usage": {
+        "input_tokens": 164,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 92,
+        "output_tokens_details": {
+          "reasoning_tokens": 38
+        },
+        "total_tokens": 256
+      },
+      "estimated_cost_usd": "0.0000624"
+    },
+    {
+      "model": "gpt-6-luna",
+      "usage": {
+        "input_tokens": 176,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 72,
+        "output_tokens_details": {
+          "reasoning_tokens": 36
+        },
+        "total_tokens": 248
+      },
+      "estimated_cost_usd": "0.0000536"
+    },
+    {
+      "model": "gpt-6-luna",
+      "usage": {
+        "input_tokens": 165,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 86,
+        "output_tokens_details": {
+          "reasoning_tokens": 47
+        },
+        "total_tokens": 251
+      },
+      "estimated_cost_usd": "0.0000595"
+    },
+    {
+      "model": "gpt-5-mini",
+      "usage": {
+        "input_tokens": 159,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 289,
+        "output_tokens_details": {
+          "reasoning_tokens": 192
+        },
+        "total_tokens": 448
+      },
+      "estimated_cost_usd": "0.00061775"
+    },
+    {
+      "model": "gpt-5-mini",
+      "usage": {
+        "input_tokens": 161,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 304,
+        "output_tokens_details": {
+          "reasoning_tokens": 192
+        },
+        "total_tokens": 465
+      },
+      "estimated_cost_usd": "0.00064825"
+    },
+    {
+      "model": "gpt-5-mini",
+      "usage": {
+        "input_tokens": 164,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 409,
+        "output_tokens_details": {
+          "reasoning_tokens": 256
+        },
+        "total_tokens": 573
+      },
+      "estimated_cost_usd": "0.000859"
+    },
+    {
+      "model": "gpt-5-mini",
+      "usage": {
+        "input_tokens": 159,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 410,
+        "output_tokens_details": {
+          "reasoning_tokens": 320
+        },
+        "total_tokens": 569
+      },
+      "estimated_cost_usd": "0.00085975"
+    },
+    {
+      "model": "gpt-5-mini",
+      "usage": {
+        "input_tokens": 170,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 666,
+        "output_tokens_details": {
+          "reasoning_tokens": 576
+        },
+        "total_tokens": 836
+      },
+      "estimated_cost_usd": "0.0013745"
+    },
+    {
+      "model": "gpt-5-mini",
+      "usage": {
+        "input_tokens": 164,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 380,
+        "output_tokens_details": {
+          "reasoning_tokens": 320
+        },
+        "total_tokens": 544
+      },
+      "estimated_cost_usd": "0.000801"
+    },
+    {
+      "model": "gpt-5-mini",
+      "usage": {
+        "input_tokens": 176,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 490,
+        "output_tokens_details": {
+          "reasoning_tokens": 448
+        },
+        "total_tokens": 666
+      },
+      "estimated_cost_usd": "0.001024"
+    },
+    {
+      "model": "gpt-5-mini",
+      "usage": {
+        "input_tokens": 165,
+        "input_tokens_details": {
+          "cache_write_tokens": 0,
+          "cached_tokens": 0
+        },
+        "output_tokens": 429,
+        "output_tokens_details": {
+          "reasoning_tokens": 384
+        },
+        "total_tokens": 594
+      },
+      "estimated_cost_usd": "0.00089925"
+    }
+  ],
+  "original_evidence_file": "docs/reports/recipe-model-validation-2026-11-11.json",
+  "scoring_note": "Initial exact-name oracle rejected source-derived flour role labels for both models. Allowed aliases were corrected after reviewing the saved outputs. This is offline rescoring; no new model calls or prompt changes occurred.",
+  "summary": {
+    "gpt-6-luna": {
+      "passed": 8,
+      "cases": 8,
+      "estimated_cost_usd": "0.0005523",
+      "input_tokens": 1318,
+      "output_tokens": 841,
+      "mean_seconds": 2.435
+    },
+    "gpt-5-mini": {
+      "passed": 8,
+      "cases": 8,
+      "estimated_cost_usd": "0.00708350",
+      "input_tokens": 1318,
+      "output_tokens": 3377,
+      "mean_seconds": 5.631
+    }
+  }
+}

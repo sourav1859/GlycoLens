@@ -2,7 +2,7 @@
 
 ## Status
 
-**Local code-only graph; use Get-GraphifyStatus for current freshness.** Graphify `0.9.69` is available from the ignored,
+**Local developer graph; use Get-GraphifyStatus for current code freshness.** Graphify `0.9.69` is available from the ignored,
 repository-local `.cache/graphify-venv` environment using Python `3.12.14`. The wrappers prefer an
 explicit `GLYCOLENS_GRAPHIFY_EXECUTABLE`, then the repository-local executable, and finally a
 `graphify` command on `PATH`. This fallback keeps the workflow operational if an older global
@@ -23,7 +23,36 @@ reuse that result until relevant files change. Query cross-file relationships; u
 search for known files and symbols. After final supported edits, check whether a hook refreshed the
 graph and perform at most one explicit code-only update if still needed.
 
-Semantic documentation/media extraction is **not active**. The graph was intentionally built with `--code-only`, so no repository documents were sent to a model backend.
+The historical graph was built with `--code-only`. The user authorized a documentation
+and semantic refresh on November 11; the scoped assistant-assisted procedure below
+supersedes that code-only status. Media extraction remains disabled.
+
+### November 11 documentation and semantic checkpoint
+
+Refresh local code ASTs and Markdown structure/links, then merge source-backed
+semantic concepts for the current responsive UI, monorepo/cloud decisions,
+P00-P10 plan/dependencies, onboarding, meal/nutrition/forecast contracts, provider
+configuration and validation gates. The running assistant extracts these concepts
+from reviewed source; no separate paid API backend is selected or invoked.
+
+Keep document headings/links (structural evidence) distinct from assistant-curated
+concept relationships (semantic evidence). Every semantic node/edge carries its
+source file and line; explicit statements are EXTRACTED, and cross-document
+inferences are INFERRED. Planned features and unexecuted tests retain that status.
+This is scoped coverage of the current webapp decisions, not a claim that all
+historical papers, images or documents received a complete semantic analysis.
+
+Use Graphify's local extraction/build/cache/export interfaces, preserve the
+existing graph and its shrink guard, check edge endpoints and source paths, and
+export the graph/wiki. Record counts, scope and source hashes in ignored
+`graphify-out/semantic-refresh-evidence.json`; retain the curated fragment in
+`graphify-out/.graphify_semantic.json`. `Get-GraphifyStatus` alone does not prove
+semantic completeness: verify that evidence and representative queries as well.
+
+Private environment files, ignored caches, research datasets, model weights and
+generated artifacts remain excluded. Generated graph, HTML and wiki files remain
+local and ignored by Git. Future external semantic backends still require explicit
+approval and verified input boundaries; this refresh does not enable one by default.
 
 M2 delivery uses an explicit code-only update after final implementation/documentation
 edits. New modules include evaluation/splits/metrics, covariate adapters, Auth-backed

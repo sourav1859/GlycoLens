@@ -354,6 +354,44 @@ Because Milestone 3 A is Nov 10 and the work deadline is Nov 13, aim for an **in
 ### Goal
 Turn the prototype into the final evaluated capstone system.
 
+### Responsive UI architecture and page extraction - November 10
+
+The user subsequently confirmed the full phased implementation in
+[plan 17](GlycoLens_17_Webapp_Implementation_Plan.md) and dedicated **cloud Supabase
+development from now on**, with email/password verification/reset. Its P00-P10
+phases refine the A-D checklist below; [ADR 0018](../decisions/0018-cloud-supabase-and-staged-webapp-delivery.md)
+records the environment decision. The 27-46 focused-day estimate excludes external
+waits and is not a revision of course dates or a promise to finish the expanded
+scope by November 13. The linked 144 cases begin NOT_RUN. No phase/migration/cloud
+acceptance is complete merely because its plan is drafted.
+
+The user requested a Figma-informed documentation and architecture update. The
+[44-node audit](../reports/figma-reference-review-2026-11-10.md),
+[ADR 0017](../decisions/0017-responsive-webapp-and-figma-reference-boundary.md) and
+[UI architecture](../architecture/responsive-webapp-ui.md) are the design baseline.
+No runtime UI change, migration, hosted verification or M2 closure follows from
+this documentation. Official dates and the November 7 internal freeze are unchanged;
+the expanded page inventory requires staged delivery rather than a new deadline promise.
+
+- [x] Inspect all supplied Figma nodes and record source/adaptation boundaries.
+- [x] Define shared routes/components, minimal onboarding, responsive behavior,
+  schema/API proposals and acceptance requirements in living documentation.
+- [ ] A: implement shared tokens/navigation, permanent Auth and minimal persisted
+  onboarding/preferences, basic account/source/help/privacy controls; retain demo fallback.
+- [ ] B: extract existing meal/scan/text-analysis/forecast workflows into routes;
+  add daily meal history, shared consumed-nutrition aggregate, Home and Nutrition.
+- [ ] C: after corrected-catalog acceptance, add catalog search/details and typed
+  favorites; add owned nonclinical in-app notifications with verified events.
+- [ ] D: complete original planned portion comparison and actual-vs-predicted
+  follow-up with immutable inputs/availability; keep deferred integrations explicit.
+- [ ] Verify each implemented slice at mobile/tablet/desktop widths, keyboard,
+  zoom, safe areas, source/account switching and two-user isolation. Preserve the
+  live-provider/camera gates; do not count mock screens as integration acceptance.
+
+If prerequisites or remaining course time prevent a slice, record it as pending
+and keep the reliable local meal-to-forecast demonstration. Household, shopping,
+AI planning, guided cooking and photo/URL inference are not added to this plan.
+
 ### Initial Hostinger KVM 2 deployment
 
 On November 7, the user selected **Hostinger KVM 2 with managed Supabase** for the
@@ -391,7 +429,8 @@ Upstream recipe corrections are a dependency, not evidence that the data is read
   recipe yields, ingredient quantities, missing values and source provenance.
 - [ ] Export the approved catalog and dependency closure from a consistent
   read-only Azure snapshot, preserving stable IDs, checksums and a release manifest.
-- [ ] Restore the compact schema locally; verify counts, relationships, nutrition
+- [ ] Stage the compact schema in the dedicated cloud development project after
+  reviewed target/migration preview; verify counts, relationships, nutrition
   calculations and actual size with required indexes. Check the target baseline and
   the strategy's Free plan operating budget before a cloud import.
 - [ ] Import the validated compact catalog into Supabase with appropriate access

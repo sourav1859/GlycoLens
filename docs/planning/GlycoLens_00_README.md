@@ -1,5 +1,41 @@
 # GlycoLens Capstone Planning Pack
 
+November 11 environment preparation: cloud MCP access and private environment
+configuration are verified. The backend now supports modern secret-key headers
+with a legacy fallback; eight focused offline nutrition/key tests passed. The user
+selected `gpt-6-luna` for recipe extraction, replacing the earlier `gpt-5-mini`
+selection. The user approved USD 5 total live testing; a bounded 16-call comparison
+verified inference access and passed eight synthetic recipes per model after a
+documented offline scoring correction. See [recipe validation](../reports/recipe-model-validation-2026-11-11.md).
+Representative accuracy, SMTP provider/domain setup, hosted schema
+and live application acceptance remain pending. See the
+[setup evidence](../reports/cloud-env-and-email-setup-2026-11-11.md). This does not
+close P00/P01 or any full-feature acceptance gate.
+
+Current delivery plan: the user confirmed **one repo, dedicated cloud Supabase
+development, email/password with verification/reset, and full features in stages**.
+[Plan 17](GlycoLens_17_Webapp_Implementation_Plan.md) contains prerequisites,
+11 implementation phases, test/evidence gates and the linked 144-case catalog.
+[ADR 0018](../decisions/0018-cloud-supabase-and-staged-webapp-delivery.md) supersedes
+local Supabase as the target for new app/integration work; historical results remain
+intact. AGENTS.md records this preference for future sessions. No cloud setup,
+schema application, live tests or milestone closure is claimed by this plan.
+
+November 10 UI planning: authenticated Figma MCP inspection covered 45 references
+(44 unique nodes). The [reference audit](../reports/figma-reference-review-2026-11-10.md)
+and [ADR 0017](../decisions/0017-responsive-webapp-and-figma-reference-boundary.md)
+support an incremental responsive shell. [Product UX](GlycoLens_03_App_Product_Spec_and_UX.md)
+and the [detailed UI architecture](../architecture/responsive-webapp-ui.md) define
+minimal onboarding, consistent routes/components, consumed-meal totals and
+mobile/tablet/desktop rules. New screens/schema/APIs are planned; existing code,
+model choice, corrected-catalog gates and course deadlines are unchanged.
+
+The [repository/readiness assessment](../reports/repository-strategy-and-development-readiness-2026-11-10.md)
+reaffirms the existing monorepo and modular-monolith boundaries. It distinguishes
+Git layout from runtime/deployment isolation and orders baseline/CI, contract,
+Auth/onboarding, workflow and hosted-readiness work. This is supporting analysis,
+not a new repository split, feature commitment or deployment decision.
+
 November 7 deployment decision: the user selected **Hostinger KVM 2 with managed
 Supabase** as the initial target. [ADR 0016](../decisions/0016-initial-hostinger-kvm2-managed-supabase.md)
 and [architecture section 13](GlycoLens_04_Tech_Stack_and_System_Architecture.md#13-deployment)

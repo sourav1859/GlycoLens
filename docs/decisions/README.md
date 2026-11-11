@@ -18,3 +18,5 @@ Use this directory for concise records of important technical decisions. Name re
 - [0014 - Independent testing and participant calibration](0014-independent-testing-and-participant-calibration.md)
 - [0015 - Corrected nutrition catalog migration proposal](0015-corrected-nutrition-catalog-migration.md)
 - [0016 - Initial Hostinger KVM 2 deployment with managed Supabase](0016-initial-hostinger-kvm2-managed-supabase.md)
+- [0017 - Responsive application shell and Figma reference boundary](0017-responsive-webapp-and-figma-reference-boundary.md)
+- [0018 - Cloud Supabase and staged web application delivery](0018-cloud-supabase-and-staged-webapp-delivery.md)

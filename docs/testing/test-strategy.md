@@ -1,5 +1,40 @@
 # GlycoLens Test Strategy
 
+## Current cloud implementation contract
+
+[Plan 17](../planning/GlycoLens_17_Webapp_Implementation_Plan.md), the
+[144-case catalog](webapp-cloud-test-cases.md) and
+[result ledger](webapp-validation-results.json) define current phase acceptance.
+Use dedicated cloud Supabase development for DB/Auth integration, protected explicit
+cloud jobs and run-scoped synthetic fixtures. Offline checks remain offline; a local
+Supabase stack is not required for the new application workflow. Existing local
+commands/results below are historical and must not be reused as cloud reset/config
+steps. All new cases begin NOT_RUN; actual/expected observations, revision/environment
+and redacted evidence are required for PASS. Fixture, real email/provider/model and
+physical-device evidence remain distinct. See the [cloud setup guide](../tooling/cloud-supabase-setup.md).
+
+## November 10 responsive UI acceptance plan
+
+The [UI architecture](../architecture/responsive-webapp-ui.md#8-delivery-and-acceptance)
+defines future slice acceptance, not new test passes. Existing 390px/1280px
+workflow checks do not cover the planned page inventory or tablet behavior.
+
+| Risk | Required verification when implemented |
+|---|---|
+| Layout/data loss | 320/360/390/430, 768/820/1024, 1280/1440/1920px; portrait/landscape, short height, long text/dense meals, unknown values, 200% text and 400% zoom |
+| Navigation/accessibility | Same destinations/deep links across sizes; keyboard, screen-reader labels, focus/escape/return in dialogs, safe areas and virtual keyboard; chart table/summary |
+| Account/onboarding | Registration/confirmation/recovery, expired/refresh/logout, resume/optional skip/server completion; anonymous upgrade/ownership; no private cache bleed |
+| Totals/revisions | Home/Meal log/Nutrition agree across pagination, timezone/DST, edits/cancel/retry and source switches; plans/copies/scenarios excluded; missingness and goal effective dates |
+| Authorization | New table/RPC grants and two-owner RLS; derived totals, forecasts and system events cannot be fabricated by browser writes |
+| Capture/catalog | Genuine empty vs unavailable, unsupported barcode/camera permission/manual fallback, partial recipe resolution, correct serving/source; physical device and live provider evidence separate |
+| Forecast/history | No missing/stale CGM fabrication, busy/timeout recovery, immutable inputs after edits, scenarios independent of consumption and actual outcomes available only after their timestamps |
+
+Use calculation/contract and database tests for invariants; use Playwright for the
+critical route journeys and representative viewport changes, with manual physical
+camera and accessibility checks where automation is insufficient. Do not multiply
+every endpoint test by every viewport. Keep fixtures synthetic and do not treat
+fixture nutrition or static Figma copy as live-provider acceptance.
+
 ## Milestone 2 executable checks
 
 The offline suite covers split purging, immutable input/target separation, C2 membership,

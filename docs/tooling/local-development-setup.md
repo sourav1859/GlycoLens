@@ -1,5 +1,16 @@
 # Local Development Setup
 
+## Current default - local app processes with cloud Supabase
+
+The user selected a dedicated **cloud Supabase development project from now on**.
+Follow [cloud setup](cloud-supabase-setup.md), [ADR 0018](../decisions/0018-cloud-supabase-and-staged-webapp-delivery.md)
+and [plan 17](../planning/GlycoLens_17_Webapp_Implementation_Plan.md). Local frontend/API
+development can use that project; a local Supabase stack is no longer required for
+new app integration. Docker remains useful for packaging, not a reason to start a
+local DB. The local Supabase start/reset/Configure-LocalDemo commands below are
+historical instructions and must not be used to replace cloud configuration.
+Cloud-safe setup/test runners are planned, not yet implemented.
+
 ## Current implementation scope
 
 The repository contains the research-data pipeline, common forecast adapters, a typed FastAPI

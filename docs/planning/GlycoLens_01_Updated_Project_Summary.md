@@ -1,5 +1,32 @@
 # GlycoLens: Updated Project Summary
 
+The user confirmed one repository and **cloud Supabase from now on**, using a
+dedicated development project and email/password with verification/reset. The
+[detailed implementation plan](GlycoLens_17_Webapp_Implementation_Plan.md) delivers
+the full agreed UI/features in stages, with 144 designed cases and evidence gates.
+The user selected OpenAI `gpt-6-luna` on November 11, replacing `gpt-5-mini` for
+structured recipe extraction, with a USD 5 total live-test cap. The bounded
+[smoke comparison](../reports/recipe-model-validation-2026-11-11.md) verified API
+access and eight synthetic cases per model, at an estimated combined USD 0.00763580.
+Representative extraction accuracy, corrected catalog release and VPS/domain
+remain prerequisites. Fixtures/providers support development while
+the catalog is corrected. [ADR 0018](../decisions/0018-cloud-supabase-and-staged-webapp-delivery.md)
+records the new environment default. Existing local implementation evidence is
+historical. November 11 preparation separately verified cloud MCP access and
+ignored local environment configuration, and eight focused offline tests passed
+for nutrition/server-key compatibility. Hosted schema, permanent Auth, SMTP and
+live-provider acceptance remain open; see the
+[setup evidence](../reports/cloud-env-and-email-setup-2026-11-11.md).
+
+November 10 responsive product design: the [44-node Figma audit](../reports/figma-reference-review-2026-11-10.md)
+informs a GlycoLens-specific [route/component/data architecture](../architecture/responsive-webapp-ui.md).
+The plan adds permanent-account and minimal resumable onboarding, a shared
+Home/Search/Meal log/Forecasts/Nutrition shell, catalog details, profile/settings,
+favorites and nonclinical notifications. It adapts reference patterns without
+adding household/shopping or health-safety claims. These are documented target
+capabilities, not delivered routes; the existing authenticated demo workflow and
+all research/catalog/hosting acceptance boundaries remain unchanged.
+
 November 7 initial deployment choice: the user accepted Hostinger KVM 2 for the
 Next.js PWA, FastAPI modular monolith, current CPU Chronos adapter and isolated
 py-mgipsim runtime, with managed Supabase for database/Auth/pgvector. Start with
@@ -232,6 +259,13 @@ database-grounded nutrition. See the phase evidence ledger in
 7. Similar historical meals / Meal Passport.
 8. What-if portion comparison.
 9. Later actual-vs-predicted view when post-meal CGM becomes available.
+
+The November 10 UI plan also defines permanent-account confirmation/recovery,
+minimal preferences/source onboarding, recipe/product details and search, daily
+consumed nutrition, favorites, profile/settings/privacy/help and nonclinical
+notifications. It is staged in the [M3 UI checklist](GlycoLens_06_Milestones_and_Schedule.md#responsive-ui-architecture-and-page-extraction---november-10).
+Scope and per-page implementation status are in product specification section 5;
+the full page list is not a promise to deliver every screen by the course deadline.
 
 ### Research/admin features
 

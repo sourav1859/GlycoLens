@@ -1,5 +1,14 @@
 # Reports
 
+Current delivery work is tracked in [implementation plan 17](../planning/GlycoLens_17_Webapp_Implementation_Plan.md)
+with dedicated cloud Supabase, [test cases](../testing/webapp-cloud-test-cases.md)
+and [actual-result ledger](../testing/webapp-validation-results.json). Earlier local
+prototype/review evidence below is historical, not current cloud acceptance.
+
+- [November 10 repository strategy and development readiness](repository-strategy-and-development-readiness-2026-11-10.md): source-backed monorepo recommendation, current gaps, preparation order, deployment gates and future forecast-service/repository extraction criteria.
+
+- [November 10 Nutri-App Figma reference review](figma-reference-review-2026-11-10.md): authenticated read of all 44 unique supplied nodes, representative visual review, classification corrections and GlycoLens adaptations/exclusions. Supports the responsive UI design; no new application screens are delivered.
+
 - [November 6 Azure to Supabase catalog migration strategy](azure-to-supabase-catalog-migration-strategy-2026-11-06.md): measured source sizes, sample-based export estimates, current Free plan limits and a migration runbook. Recipe use is deferred until upstream correction and validation; no migration was executed.
 
 - [November 6 Azure nutrition catalog read-only assessment](azure-nutrition-catalog-assessment-2026-11-06.md): access confirmed, recipe/ingredient/product coverage, confirmed data-quality findings and proposed GlycoLens integration. No source adoption or database changes are implied.

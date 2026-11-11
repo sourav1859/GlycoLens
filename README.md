@@ -1,5 +1,35 @@
 # GlycoLens
 
+Current implementation direction: **one repository and a dedicated cloud Supabase
+development project**, with email/password verification/reset and full features in
+staged releases. The [phase plan](docs/planning/GlycoLens_17_Webapp_Implementation_Plan.md)
+defines prerequisites, 11 phases and validation gates, supported by
+[144 test cases](docs/testing/webapp-cloud-test-cases.md) and a
+[NOT_RUN result ledger](docs/testing/webapp-validation-results.json).
+[ADR 0018](docs/decisions/0018-cloud-supabase-and-staged-webapp-delivery.md)
+and [cloud setup](docs/tooling/cloud-supabase-setup.md) supersede local Supabase as
+the target for new application work. November 11: MCP project/database access and
+ignored cloud environment configuration are verified; modern backend API-key
+headers have focused offline coverage. Schema application, permanent Auth, SMTP
+and live-provider acceptance remain pending. See the
+[environment setup evidence](docs/reports/cloud-env-and-email-setup-2026-11-11.md).
+Recipe extraction is configured for OpenAI `gpt-6-luna` through server-only
+`LLM_MODEL`. Under the approved USD 5 total cap, the bounded
+[live recipe comparison](docs/reports/recipe-model-validation-2026-11-11.md)
+verified access and passed eight synthetic cases per model. Representative
+accuracy and complete live application acceptance remain separate gates.
+
+November 10: the [Nutri-App Figma review](docs/reports/figma-reference-review-2026-11-10.md)
+covers all 44 unique supplied nodes. The [responsive UI architecture](docs/architecture/responsive-webapp-ui.md)
+and [ADR 0017](docs/decisions/0017-responsive-webapp-and-figma-reference-boundary.md)
+define the planned account/onboarding flow, shared navigation, page inventory,
+components and desktop/tablet/mobile acceptance. The executable app remains the
+existing meal-to-forecast workflow; this update delivers documentation, not new screens.
+
+The [repository strategy and development-readiness review](docs/reports/repository-strategy-and-development-readiness-2026-11-10.md)
+recommends retaining the monorepo and identifies the environment, CI, contract,
+schema and deployment work to complete as development proceeds.
+
 **AI-Assisted Meal Understanding and Personalized Glucose Response Prediction for Type 1 Diabetes**
 
 GlycoLens is an inference-first, application-first capstone project. It combines verified meal nutrition, recent Type 1 Diabetes context, pretrained time-series forecasting, and personal meal-history retrieval to help users understand possible post-meal glucose behavior.
@@ -88,9 +118,10 @@ The system is designed as a modular monolith with replaceable forecasting-model 
 
 ```text
 frontend/              Next.js mobile-first PWA
-backend/               FastAPI application and model adapters
-research/              Data preparation, experiments, and evaluation
-database/              Schema migrations and seed data
+backend/               FastAPI APIs and application service orchestration
+research/              Canonical model adapters, data preparation and evaluation
+supabase/              Executable app migrations, RLS tests and synthetic seed
+database/              Database notes and pointers to the Supabase contract
 data/                  Local data layout; sensitive/raw data is ignored
 artifacts/             Local model and experiment artifacts
 docs/planning/         Living source-of-truth project documents

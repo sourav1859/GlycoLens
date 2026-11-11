@@ -1,5 +1,45 @@
 # GlycoLens Risks, Safety Boundaries, and Scope Controls
 
+## Current cloud development and test boundary
+
+[ADR 0018](../decisions/0018-cloud-supabase-and-staged-webapp-delivery.md) and
+[plan 17](GlycoLens_17_Webapp_Implementation_Plan.md) set a dedicated cloud Supabase
+development project for new app/Auth/schema/integration work. Preserve historical
+local evidence without using local reset/key-writing scripts as cloud setup.
+Require exact target guards, version-verified migration preview, run-scoped synthetic
+owners and cleanup, trusted derived-write checks and separate authorized scratch
+restore/replay targets. Never reset production or infer API/RLS safety from admin
+SQL access alone. Modern API keys must use compatible headers; private keys remain
+server-side. Live email/LLM/provider/load checks need designated test identities and
+bounded limits. No real-patient research data is authorized by this cloud choice.
+All 144 planned cases start NOT_RUN and require actual evidence before PASS.
+
+## November 10 reference-design and responsive UI risks
+
+The [Figma audit](../reports/figma-reference-review-2026-11-10.md) observed condition-safe,
+family/allergen-safe and deficiency-style labels in the source designs. They are
+excluded from the [GlycoLens UI architecture](../architecture/responsive-webapp-ui.md).
+Use source facts, missingness and model uncertainty; no medical meal grade,
+clinical alarm, dosing action or default calorie prescription is introduced.
+
+Minimal onboarding collects account/app preferences and data-source/notice
+acknowledgements, with optional food preferences/goals. It does not require body
+metrics, diagnosis, medication or family/child records, nor authorize real-patient
+research. Optional avoidance preferences are not an allergy-safety guarantee.
+
+Prevent UI-induced data errors: only confirmed eaten meal revisions enter daily
+totals; planned/cancelled meals, copies, favorites and scenarios do not. Preserve
+unknown nutrients and immutable forecast/context/source snapshots. Respect local
+timezone/DST and the explicit simulated clock; source/account switches clear
+private caches and cannot mix timelines or expose previous-user content.
+
+Responsive failure can hide quantities, source labels or uncertainty. Require
+chart text/tables, keyboard/focus recovery, visible units, safe-area/keyboard
+clearance and 320px reflow. A screenshot or limited viewport test is not proof
+of accessibility or complete responsive acceptance. New schema/API features need
+grants/RLS, server-owned derived writes, idempotency and cross-user tests before use.
+These controls are design requirements; no new runtime verification is claimed.
+
 November 6 catalog boundary: recipe data remains deferred during upstream correction.
 The [migration strategy](../reports/azure-to-supabase-catalog-migration-strategy-2026-11-06.md)
 requires corrected source mappings, energy/serving semantics, explicit missingness and

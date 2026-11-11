@@ -1,5 +1,13 @@
 # GlycoLens App Product Specification and UX
 
+Implementation follows [plan 17](GlycoLens_17_Webapp_Implementation_Plan.md): one
+repo, dedicated cloud Supabase development, verified email/password accounts and
+the full feature set in staged releases. All routes/flows below map to its phase
+and test-case gates. This is the current target; the embedded anonymous/local
+prototype remains historical baseline evidence until cloud implementation passes.
+
+November 10 responsive UI design: authenticated Figma inspection covered all 44 unique supplied nodes. The [reference review](../reports/figma-reference-review-2026-11-10.md) records observations and exclusions. The [responsive UI architecture](../architecture/responsive-webapp-ui.md) defines the planned routes, shared components, onboarding, data contracts and acceptance; [ADR 0017](../decisions/0017-responsive-webapp-and-figma-reference-boundary.md) records the decision. This updates the design, not application code or completed milestone evidence.
+
 ## 1. Product principle
 
 The app should make the model output **easier, concrete, and useful**.
@@ -121,7 +129,7 @@ Show:
 - fat
 - fiber
 - source/provenance
-- confidence/verification state
+- source/verification and missing-data state; no medical confidence score
 
 ### F4. Forecast
 
@@ -140,7 +148,8 @@ Output:
 
 ### F5. Similar Meals / Meal Passport
 
-Show same user's past meal instances that are similar by:
+The current implementation uses same-owner, available-past-outcome filtering and fixed-scale numeric macro distance. Semantic/vector and additional contextual ranking remain planned. The target can consider:
+
 - meal/ingredient semantics
 - macros
 - pre-meal glucose context
@@ -191,176 +200,64 @@ Functions:
 
 ## 5. End-to-end user experience
 
-### Flow 1 - first launch
+### Implementation status and scope
 
-```text
-Welcome to GlycoLens
-        |
-        +-- Demo with virtual patient
-        |
-        +-- Connect Dexcom Sandbox
-        |
-        +-- Import/research mode
-```
+The executable entry remains one meal workflow at `/`. Its anonymous Supabase session is authenticated and owner-scoped; permanent-account login/registration and personal onboarding are not implemented. The local simulator/meal/Chronos/numeric-retrieval flow is integrated. Live nutrition-provider configuration and physical camera acceptance remain open. Do not describe the M1 synthetic-only screen or offline-only simulator as the current application.
 
-For capstone demos, default to **Demo with virtual patient**.
+The target page inventory and delivery order are defined in [architecture section 2](../architecture/responsive-webapp-ui.md#2-navigation-and-route-contract). New product pages are planned until their code and acceptance evidence exist.
 
-### Flow 2 - home
+| Area | Target experience | Current implementation boundary |
+|---|---|---|
+| Account/onboarding | Registration, confirmation/recovery, resumable preferences/source/review | Anonymous demo Auth only; permanent account UI/state missing |
+| Home | Source/clock, latest glucose, graph/forecast, eaten nutrition, daily meals and recipe discovery | Context and forecast embedded; dashboard/aggregate missing |
+| Search and details | Database recipe/product tabs, filters, details and source facts | Embedded provider food lookup; corrected catalog/details pending |
+| Meal log | Daily slots/history, reviewed entry, edit/cancel, source snapshots | Confirm/save/read embedded; list/edit/cancel/revisions pending |
+| Scan / analyze | Barcode plus manual fallback; editable recipe text resolved to food facts | Embedded input paths; dedicated pages pending; physical camera gate open |
+| Forecasts | History/detail, uncertainty, summaries, similar outcomes and scenario comparison | Create/read/chart/numeric matches exist; history page/compare/follow-up pending |
+| Nutrition | Shared daily totals, seven-day trend and optional goal display | Meal totals exist; consumed-day aggregate/page missing |
+| Profile/settings | Account, units/timezone, source, privacy, logout and preferences | Dedicated pages missing |
+| Favorites/notifications | Typed saved catalog items and owned nonclinical in-app events | Missing |
+| Help/privacy/errors | Accurate research/data explanations and recoverable route states | Basic embedded statuses; dedicated pages/boundaries pending |
 
-```text
-------------------------------------------------
-GlycoLens
+### Flow 1 - account and minimal onboarding
 
-Current glucose        112 mg/dL
-Trend                  slowly rising
-[ 2-hour CGM chart                         ]
+`Welcome -> choose demo or permanent-account path -> authenticate -> resume required setup -> review -> Home`.
 
-Recent context
-- insulin event: available
-- last meal: 3h 10m ago
-- activity: light
+Adapt the reference's progressive steps and editable review. Confirm timezone, glucose display unit, available data source and research/privacy acknowledgement. Nickname and food preferences/nutrition goals are optional. Do not require DOB, sex, height, weight, diagnosis, medication or family/child records. Complete onboarding server-side with versioned state; optional steps can be skipped. Keep identity separate from the virtual patient. The field and account migration contracts are in [architecture section 3](../architecture/responsive-webapp-ui.md#3-onboarding-and-account-state).
 
-[ + Plan / Log Meal ]
-------------------------------------------------
-```
+### Flow 2 - home and navigation
 
-### Flow 3 - meal capture
+Use **Home, Search, Meal log, Forecasts, Nutrition** consistently: bottom navigation on mobile, compact rail on tablet, labeled sidebar on desktop. Favorites, profile/settings, notifications and help are accessible account destinations. Add meal opens the common composer; scan and analyze are methods within that journey.
 
-```text
-How do you want to add the meal?
+Read Home in this order: source and simulated/real clock -> glucose history/latest eligible forecast -> meal action -> consumed nutrition and daily meal list -> catalog discovery. Never fabricate a forecast for a source without eligible inputs. Unknown nutrition is distinct from zero; a goal ring appears only with an explicitly configured goal. The reference's household, grocery, budget and AI-planning modules are excluded.
 
-[ Scan barcode ]
-[ Search food ]
-[ Enter home recipe ]
-```
+### Flow 3 - search, scan or recipe capture
 
-### Flow 4 - recipe
+`Search catalog / Scan barcode / Enter recipe / Favorites -> select source item -> confirm ingredients, grams/servings and provenance -> review meal`.
 
-```text
-"I made 2 cups basmati rice, 500 g chicken,
-one onion, 100 g yogurt and 2 tbsp olive oil"
+Recipe and product details have their own routes and lead to the same composer. Search the validated published catalog first; any external fallback is an explicit labeled source. Support filter reset, genuine empty results, unsupported barcode, permission denial, provider outage and partial extraction. Text extraction remains editable; it never supplies nutritional truth. Do not add URL/photo nutrient inference from the reference.
 
-               |
-               v
+### Flow 4 - review, log or plan
 
-Parsed ingredients
-[✓] basmati rice     2 cups
-[✓] chicken          500 g
-[?] onion            1 large
-[✓] yogurt           100 g
-[✓] olive oil        2 tbsp
+Review meal name, slot, quantity/basis, nutrition, timestamp, source and missing values. Keep **log as eaten**, **save planned meal** and **forecast scenario** distinct. Success follows a durable server acknowledgement, with idempotent retry after failure. Copying creates a new draft/planned instance without copying outcomes or claiming consumption. Editing/removing uses owner/version checks and preserves previous forecast inputs. Weekly/monthly calendar views and guided cooking are deferred.
 
-[ Edit ] [ Confirm ]
-```
+### Flow 5 - forecast and personal evidence
 
-### Flow 5 - nutrition review
+`Confirmed meal -> available pre-origin context -> selected adapter -> persisted forecast -> chart/summaries -> earlier same-owner outcomes`.
 
-```text
-Chicken rice recipe
-1 serving
+Show history versus prediction, origin/source/freshness, units, q10-q90 interval, 30/60/120-minute estimates and a chart table/summary. The current app uses Chronos C3 and bounded inference; UI work does not promote a research model or manufacture a confidence rating. Under-covered intervals and forecasts remain research estimates. Similar-meal evidence uses only outcomes available at the forecast origin.
 
-Calories       510 kcal
-Carbs           55 g
-Protein         29 g
-Fat             16 g
-Fiber            6 g
+### Flow 6 - portions and later feedback
 
-Sources:
-USDA: 4 ingredients
-Open Food Facts: 1 ingredient
+A future portion comparison recalculates grounded nutrition and requests scenarios at the same origin/context, labeled "model-predicted scenario". It never logs a second eaten meal or recommends a safe amount/dose. Later actual-versus-predicted feedback attaches only when genuine post-meal data is available, remains separate from inference inputs and records outcome availability. No future outcome enters retrieval before that time.
 
-[ Save meal ] [ Forecast this meal ]
-```
+### Flow 7 - daily nutrition, saved items and account
 
-### Flow 6 - context confirmation
+Home, Meal log and Nutrition read one timezone/source-scoped server aggregate of confirmed eaten meal revisions. Planned/cancelled entries, copied drafts and scenarios are excluded. Show per-nutrient coverage and optional goal history without inventing clinical targets. Favorites reference catalog items, not meal events. Notifications are private nonclinical application events, with read/unread and safe links; delivery reminders require their own opt-in implementation.
 
-```text
-Forecast context
+### Responsive acceptance
 
-Current glucose       112
-CGM history           12h
-Recent insulin        included
-Activity              included
-Meal                  confirmed
-
-[ Run Forecast ]
-```
-
-### Flow 7 - result
-
-```text
-2-hour model forecast
-
-180 |                ...
-160 |             ...
-140 |         ....
-120 |_____....
-
-      now  30  60  90  120 min
-
-30 min      127
-60 min      149
-120 min     136
-
-Prediction interval shown as shaded band
-
-Model confidence: Moderate
-
-[ Compare portion ]
-[ Similar meals ]
-[ Save ]
-```
-
-Milestone 1 Phase 4 implements the first read-only version of this result view. It plots 24
-five-minute history points, a 24-point median forecast, and a shaded q10-q90 interval, followed by
-30/60/120-minute value cards. The current endpoint is explicitly labeled synthetic and the chart
-uses relative minutes only. Confidence labels, portion comparison, similar meals, saving, and
-actual-versus-predicted overlays remain later work.
-
-Milestone 1 Phase 6 implements Persona A's simulator source as an offline research path. The fixed
-py-mgipsim scenario is deterministic and identifier-free, but is not yet connected to the home
-timeline or forecast endpoint. Live selection/execution in the PWA remains a Milestone 2
-integration task and must preserve an explicit `simulated` provenance label.
-
-### Flow 8 - similar meals
-
-```text
-Similar meals from your history: 6
-
-Chicken rice bowl       0.91
-Actual +60m change      +31
-Date                    ...
-
-Burrito bowl            0.85
-Actual +60m change      +38
-...
-```
-
-### Flow 9 - portion comparison
-
-```text
-              100%       75%        50%
-Carbs          55         41         28
-
-Forecast       [line A]   [line B]   [line C]
-
-This is a model-based comparison, not treatment advice.
-```
-
-### Flow 10 - later feedback
-
-```text
-Your actual response is now available.
-
-Predicted vs actual
-[overlaid chart]
-
-60-min error: 8 mg/dL
-Full 2h MAE: 10.4 mg/dL
-
-[ Add note ]
-[ Save to Meal Passport ]
-```
+Use fluid single-column mobile, adaptive one/two-column tablet and sidebar/grid desktop layouts. Reference widths are examples, not fixed canvases. Preserve every datum, unit and primary action at 320px; expose readable chart summaries/tables, handle virtual keyboards and safe areas, and verify focus/zoom/touch behavior. See [responsive rules](../architecture/responsive-webapp-ui.md#5-responsive-and-accessible-layout-contract) and [test strategy](../testing/test-strategy.md). Existing 390/1280 tests are baseline evidence, not proof of the expanded page inventory.
 
 ## 6. Personalization design
 
@@ -391,10 +288,12 @@ score =
 + w5 * time_of_day_similarity
 ```
 
-Implementation:
-- Postgres filters
-- pgvector for meal text/ingredient embeddings
-- numeric standardized distance for macros/context
+Current implementation: Postgres owner/chronology filters and fixed-scale numeric macro distance. The score above is a future design, not the shipped ranking.
+
+Potential extensions:
+
+- pgvector for meal text/ingredient embeddings after model/dimension selection
+- validated numeric context features with available-at-origin controls
 
 This is more transparent and cheaper than GraphRAG.
 

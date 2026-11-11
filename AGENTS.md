@@ -27,6 +27,18 @@ Implementation and documentation must not diverge. Documentation-only wording co
 
 ## Architecture constraints
 
+### Current web application decisions - November 10, 2026
+
+- Keep one repository for frontend, backend and forecasting code.
+- Use **managed cloud Supabase from now on**, with a **dedicated GlycoLens cloud development project** for application PostgreSQL/Auth and integration acceptance. Local web/API processes may connect to it; a local Supabase stack is not the new default or a required integration-test environment.
+- First-release Auth is email/password with verification and password reset. Deliver the full agreed feature set in staged releases.
+- Temporary development Auth exception, confirmed November 11: the user disabled email confirmation in the dedicated cloud development project. Live settings verified email/password and public signup enabled, with automatic email confirmation. Development can proceed without SMTP; this does not prove email ownership or waive verification/recovery delivery before public release. Keep tests synthetic and do not copy this exception to production.
+- Read `docs/planning/GlycoLens_17_Webapp_Implementation_Plan.md` and its linked test catalog/result ledger before current webapp implementation. Record actual expected/observed test results; planned, skipped or blocked tests are not passes.
+- Keep OpenAI Responses recipe extraction; the user selected `gpt-6-luna` on November 11, replacing `gpt-5-mini`. Keep the selected model in private server configuration and the environment template. The user approved a **USD 5 total live-test budget**; the bounded 16-call synthetic comparison has estimated token charges of USD 0.00763580. Account for prior spend before further paid tests; approval is not a fresh USD 5 allowance per run. Live access and smoke checks are verified; representative accuracy remains unproven. See `docs/reports/recipe-model-validation-2026-11-11.md`. Corrected catalog is not ready: use labeled fixtures/providers for development and activate only after validation. VPS/domain are pending.
+- Preserve versioned migrations under `supabase/migrations/`; inspect the exact cloud target and preview reviewed changes before controlled apply. Never reset a hosted database or run broad test cleanup. Use run-scoped synthetic fixtures and explicit cloud-target guards.
+- Historical local Supabase instructions/results remain historical. Do not run `Configure-LocalDemo.ps1`, local start/reset wrappers or overwrite cloud keys with local values as the new workflow. Offline unit/fixture tests remain allowed; they do not prove cloud integration acceptance.
+- Keep secret values in ignored/private configuration. No credentials or cloud schema are created merely by the plan. See ADR 0018 and the cloud setup guide for current prerequisites.
+
 - Preserve the modular-monolith architecture unless the planning documents are deliberately revised.
 - Keep forecasting models behind a common adapter interface.
 - Keep research datasets separate from the application database.

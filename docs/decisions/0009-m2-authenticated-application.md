@@ -2,6 +2,11 @@
 
 Status: Accepted, October 14, 2026 under the approved M2 plan.
 
+Current implementation target: [ADR 0018](0018-cloud-supabase-and-staged-webapp-delivery.md)
+uses dedicated cloud Supabase and verified email/password accounts for new work.
+The local/anonymous implementation recorded here is historical evidence, retained
+without claiming cloud setup or changing the model/scientific result.
+
 ## Decision
 
 Keep FastAPI as modular monolith and reuse the canonical research adapter. Use local

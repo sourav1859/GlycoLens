@@ -5,6 +5,11 @@
 **Status:** Accepted by the user as the initial deployment design. Provisioning,
 deployment implementation and hosted acceptance remain pending.
 
+November 10: [ADR 0018](0018-cloud-supabase-and-staged-webapp-delivery.md) confirms
+dedicated cloud Supabase development now, even while local web/API development
+continues. VPS/domain are still pending. [Plan 17](../planning/GlycoLens_17_Webapp_Implementation_Plan.md)
+tracks preparation and staged acceptance; no provisioning or public release is implied.
+
 ## Context
 
 The user selected Hostinger KVM 2 after reviewing separate frontend/backend hosting,

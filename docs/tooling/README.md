@@ -1,5 +1,11 @@
 # Developer Tooling
 
+- [Current cloud Supabase setup/prerequisites](cloud-supabase-setup.md) and [implementation planning handoff](cloud-webapp-plan-handoff-2026-11-10.md).
+
+- [November 10 repository strategy/readiness handoff](repository-strategy-readiness-handoff-2026-11-10.md): review scope, evidence, preparation order and unchanged project boundaries.
+
+- [November 10 responsive UI architecture handoff](responsive-ui-architecture-handoff-2026-11-10.md): scope, decisions, documentation traceability, checks and implementation dependencies.
+
 - [MetaboNet Phase 5 correction and verification handoff](metabonet-phase5-handoff-2026-10-16.md)
 
 Store local setup, repository-skill, validation, and developer-only knowledge-tool documentation here.
