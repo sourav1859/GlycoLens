@@ -1,0 +1,10 @@
+"use client";
+import Link from "next/link";
+import { useResource } from "../../lib/use-resource";
+import { PageIntro } from "../../components/layout/PageIntro";
+import { AsyncState } from "../../components/ui/AsyncState";
+import { useState } from "react";
+import { useAccount } from "../auth/AccountProvider";
+type Row={id:string;meal_revision:number;forecast_origin:string;model_id:string};
+function valid(value:unknown):value is {forecasts:Row[];has_more:boolean} {const v=value as {forecasts?:Row[];has_more?:boolean};return !!v&&typeof v.has_more==="boolean"&&Array.isArray(v.forecasts)&&v.forecasts.every(r=>typeof r.id==="string"&&typeof r.model_id==="string");}
+export function ForecastHistory() {const [offset,setOffset]=useState(0),{account}=useAccount(); const zone=account?.preferences.timezone??"UTC";const {data,error,reload}=useResource(`/forecasts?offset=${offset}`,valid);return <><PageIntro title="Forecasts" eyebrow="Frozen research estimates" description="Saved results in your current source session. A changed meal does not rewrite an earlier forecast."/><section className="surface">{error?<AsyncState title="Forecast history unavailable" message={error} error retry={reload}/>:!data?<AsyncState title="Loading forecasts…"/>:!data.forecasts.length?<AsyncState title="No saved forecasts" message="Prepare a source and save a reviewed meal to run the selected model."/>:<div className="meal-list">{data.forecasts.map(r=><Link href={`/forecasts/${r.id}`} className="meal-row" key={r.id}><div><strong>{r.model_id}</strong><p className="small muted">{new Date(r.forecast_origin).toLocaleString(undefined,{timeZone:zone})} ({zone}) · meal revision {r.meal_revision}</p></div><span>View result →</span></Link>)}</div>}<div className="intro-actions"><button className="button secondary" disabled={!offset} onClick={()=>setOffset(Math.max(0,offset-20))}>Previous</button><button className="button secondary" disabled={!data?.has_more} onClick={()=>setOffset(offset+20)}>Next</button></div></section></>;}

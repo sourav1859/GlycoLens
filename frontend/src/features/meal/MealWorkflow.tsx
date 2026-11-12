@@ -3,8 +3,10 @@
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { BrowserMultiFormatReader, IScannerControls } from "@zxing/browser";
 import { api, enterDemo } from "../../lib/application-api";
+import { expectedFacts, type Food as GroundedFood } from "../../lib/meal-facts";
 import { ForecastChart } from "../../components/ForecastChart";
 import { ForecastResponse, isForecastResponse } from "../../types/forecast";
+import { useAccount } from "../auth/AccountProvider";
 
 type Food = { id?: string; name: string; source: string; source_food_id: string; nutrient_basis_g?: number; calories?: number; carbs_g?: number; protein_g?: number; fat_g?: number; fiber_g?: number };
 type Item = { food: Food; grams: number };
@@ -13,8 +15,14 @@ type Similar = { id: string; name: string; similarity: number; actual_60: number
 type Reading = { recorded_at: string; glucose_mg_dl: number; source: string };
 
 export function MealWorkflow() {
+  const { session } = useAccount();
+  const [enteredUser, setEnteredUser] = useState("");
+  async function enter() { const result = await enterDemo(); setEnteredUser(result.user_id); }
+  return <Workflow key={session?.user.id ?? "guest"} ready={!!session && enteredUser === session.user.id} enter={enter} />;
+}
+
+function Workflow({ ready, enter }: { ready: boolean; enter: () => Promise<void> }) {
   const hydrated = useSyncExternalStore(() => () => {}, () => true, () => false);
-  const [ready, setReady] = useState(false);
   const [busy, setBusy] = useState("");
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
@@ -50,7 +58,7 @@ export function MealWorkflow() {
   async function runSimulation(replay = false) {
     const result = await api("/simulation/scenario", { method: "POST", body: JSON.stringify({ replay }) });
     setOrigin(result.forecast_origin);
-    setNotice(`${result.execution === "live" ? "Live simulator execution" : "Cached simulator replay"}. ${result.notice}`);
+    setNotice(`${result.execution === "live" ? "New simulation completed" : "Saved simulation replayed"}. ${result.notice}`);
     const timeline = await api("/timeline"); setReadings(timeline.cgm); changed();
   }
   async function lookupBarcode(barcode: string) { const food = await api(`/foods/barcode/${encodeURIComponent(barcode)}`); setFoods([food]); }
@@ -71,12 +79,13 @@ export function MealWorkflow() {
     <p>Research and education only. Forecasts are uncertain estimates and must not guide insulin dosing or treatment.</p>
     {error && <p role="alert" className="error-message">{error}</p>}
     <p role="status" aria-live="polite">{busy || notice}</p>
-    {!ready ? <button disabled={!hydrated || !!busy} onClick={() => void action("Entering demo", async () => { await enterDemo(); setReady(true); })}>Choose virtual patient</button> : <>
+    {!ready ? <button disabled={!hydrated || !!busy} onClick={() => void action("Entering demo", enter)}>Choose virtual patient</button> : <>
       <section className="workflow-panel">
         <h3>Glucose context</h3>
         <p>Source: py-mgipsim virtual patient. Clock: {origin ? new Date(origin).toUTCString() : "Run the scenario to begin"}</p>
-        <button disabled={!!busy} onClick={() => void action("Running fixed virtual-patient scenario", () => runSimulation())}>Run live scenario</button>{" "}
-        <button disabled={!!busy} onClick={() => void action("Loading reviewed replay", () => runSimulation(true))}>Use cached replay</button>
+        <button disabled={!!busy} onClick={() => void action("Running new simulation", () => runSimulation())}>Run new simulation</button>{" "}
+        <button disabled={!!busy} onClick={() => void action("Replaying saved simulation", () => runSimulation(true))}>Replay saved simulation</button>
+        <p className="small">Both use the fixed virtual-patient scenario and its simulation clock. Replay needs a simulation saved on this server.</p>
         {readings.length > 0 && <><p>Latest simulated glucose: {Number(readings[0].glucose_mg_dl).toFixed(0)} mg/dL</p>
           <svg viewBox="0 0 600 140" role="img" aria-label="Recent simulated glucose timeline"><polyline fill="none" stroke="#176b5d" strokeWidth="3" points={[...readings.slice(0, 24)].reverse().map((p, i) => `${i * 25},${130 - Math.max(0, Math.min(120, (Number(p.glucose_mg_dl) - 20) / 4))}`).join(" ")} /></svg></>}
       </section>
@@ -99,7 +108,7 @@ export function MealWorkflow() {
         <dl className="nutrition-totals">{fields.map(field => <div key={field}><dt>{field.replace("_g", "").replace("carbs", "Carbohydrates")}</dt><dd>{Number(totals[field]).toFixed(1)} {field === "calories" ? "kcal" : "g"}</dd></div>)}</dl>
         {!complete && <p>Choose food facts with all nutrients available and verify ingredient amounts.</p>}
         <label className="confirmation"><input type="checkbox" checked={confirmed} disabled={!complete} onChange={e => setConfirmed(e.target.checked)} />I reviewed the food matches, grams, servings and nutrition sources.</label>
-        <button disabled={!!busy || !confirmed || !origin} onClick={() => void action("Saving confirmed meal", async () => { if (!key.current) key.current = crypto.randomUUID(); const result = await api("/meals", { method: "POST", body: JSON.stringify({ name, recorded_at: origin, idempotency_key: key.current, items: items.map(item => ({ food_id: item.food.id, grams: item.grams / servings })), input_snapshot: { entry_method: mode, servings, confirmed: true } }) }); setMealId(result.meal_id); setNotice("Meal saved. Ready to run the selected pretrained model."); })}>Save meal</button>{" "}
+        <button disabled={!!busy || !confirmed || !origin} onClick={() => void action("Saving confirmed meal", async () => { if (!key.current) key.current = crypto.randomUUID(); const result = await api("/meals", { method: "POST", body: JSON.stringify({ name, recorded_at: origin, idempotency_key: key.current, items: items.map(item => ({ food_id: item.food.id, grams: item.grams / servings, expected_facts: expectedFacts({...item.food,nutrient_basis_g:item.food.nutrient_basis_g??100} as GroundedFood) })), input_snapshot: { entry_method: mode, servings, confirmed: true } }) }); setMealId(result.meal_id); setNotice("Meal saved. Ready to run the selected pretrained model."); })}>Save meal</button>{" "}
         <button disabled={!!busy || !mealId} onClick={() => void action("Running selected pretrained model", async () => { if (!forecastKey.current) forecastKey.current = crypto.randomUUID(); const result = await api("/forecasts", { method: "POST", body: JSON.stringify({ meal_id: mealId, idempotency_key: forecastKey.current }) }); const data = result.forecast ?? (await api(`/forecasts/${result.forecast_id}`)).forecast; if (!isForecastResponse(data)) throw new Error("Forecast response failed validation"); setForecast(data); const history = await api(`/meals/${mealId}/similar`); setSimilar(history.meals); })}>Run forecast</button>
       </section>
       {forecast && <ForecastChart data={forecast} />}

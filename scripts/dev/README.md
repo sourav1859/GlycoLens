@@ -1,9 +1,13 @@
-# Development Scripts
+# Guarded cloud development runners
 
-New application work targets dedicated cloud Supabase; follow the
-[cloud setup guide](../../docs/tooling/cloud-supabase-setup.md) and
-[phase plan](../../docs/planning/GlycoLens_17_Webapp_Implementation_Plan.md).
-Existing local-key/reset/live-local helpers are historical and must not be used
-as cloud setup or unguarded cloud test runners. Cloud-safe replacements are planned.
+Use `python -m scripts.dev.cloud_preflight` for a redacted read-only readiness report.
+The integration modules `cloud_integration`, `account_integration`, `meal_integration`,
+`source_integration`, `privacy_integration` and `scenario_integration` default to no
+network unless `--allow-cloud` is explicit. Each requires the exact development
+URL/ref and ignored credentials, run-tagged synthetic accounts, bounded requests
+and recorded-ID cleanup. Pass `--output <redacted-report.json>`. Source/scenario
+runners also require reviewed cached simulator/model runtimes; no paid LLM calls.
 
-Reserve this directory for repeatable local development commands after the frontend and backend toolchains exist.
+Never run historical local reset/Configure-LocalDemo/check_m2_application helpers
+against the cloud environment. See the implementation report and case ledger for
+actual coverage and limitations. New changes are local for review, not pushed.

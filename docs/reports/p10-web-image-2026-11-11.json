@@ -1,0 +1,12 @@
+{
+  "image_id": "sha256:11ea2fc8225754fdc5b53a5ba169ba099937e7a5f6ce4e0716fc9a261de763c8",
+  "public_build_configuration": "synthetic example.invalid only; never deploy this image",
+  "runtime_root_http_status": 200,
+  "runtime_inspection": {
+    "files_checked": 1676,
+    "private_findings": 0,
+    "uid": 1000
+  },
+  "temporary_container_cleaned": true,
+  "scope": "web runtime only; not complete image layer/API/simulator/hosted acceptance"
+}

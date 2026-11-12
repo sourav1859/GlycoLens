@@ -1,8 +1,8 @@
 # Cloud web application test-case catalog
 
-**Plan version:** 2026-11-10. **Status:** drafted test cases; all execution results initially NOT_RUN. These cases specify future automated/manual tests, not newly implemented test functions or passing integration evidence.
+**Plan version:** 2026-11-10. **Status:** cases remain the acceptance contract; actual checkpoint observations and unexecuted/blocked coverage are recorded in the linked ledger. A passing subset does not close a combined-layer case or phase.
 
-The [implementation plan](../planning/GlycoLens_17_Webapp_Implementation_Plan.md) defines phase work and gates. The machine-readable [validation results](webapp-validation-results.json) records every case. Each case requires actual observations and evidence before its result changes. 144 cases cover 11 phases.
+The [implementation plan](../planning/GlycoLens_17_Webapp_Implementation_Plan.md) defines phase work and gates. The machine-readable [validation results](webapp-validation-results.json) records every case. Each case requires actual observations and evidence before its result changes. 146 cases cover 11 phases.
 
 ## Execution and evidence rules
 
@@ -28,7 +28,7 @@ The [implementation plan](../planning/GlycoLens_17_Webapp_Implementation_Plan.md
 | P06 | Home feed and nutrition aggregation | 12 |
 | P07 | Validated catalog, search, detail and favorites | 15 |
 | P08 | Profile, settings, privacy and notifications | 13 |
-| P09 | Portion comparison and later actual outcomes | 10 |
+| P09 | Portion comparison and later actual outcomes | 12 |
 | P10 | Hosted deployment, resilience and release acceptance | 13 |
 
 ## P00 - Baseline, configuration and CI
@@ -188,7 +188,7 @@ The [implementation plan](../planning/GlycoLens_17_Webapp_Implementation_Plan.md
 | GL-P08-003 — Notice and optional preference updates | P1 | C | Versioned acknowledgements and food/notification preferences. Update/withdraw optional choice and review audit trail. | Required notice history retained appropriately; optional changes respected; no expanded medical collection. |
 | GL-P08-004 — Password change and sensitive actions | P0 | C+B | Signed-in synthetic user with recent-auth requirements. Change password and attempt stale-session sensitive action. | Supabase-approved verification/recovery used; failures safe and passwords never stored in app tables. |
 | GL-P08-005 — Privacy export scope | P0 | C | A/B synthetic records and documented export contract. Request A export and inspect sanitized payload/artifact. | Only A's permitted data with defined source/model metadata; no keys, B records or research dataset export. |
-| GL-P08-006 — Account deletion lifecycle | P0 | C+B | Synthetic account with linked children and documented retention policy. Reauthenticate, confirm deletion and retry safely. | Approved deletion/retention rules enforced with FK-safe cleanup, revoked access and no cross-user effect; unavailable lifecycle is not falsely advertised. |
+| GL-P08-006 — Account deletion lifecycle | P0 | C+B | Synthetic account with linked children and documented retention policy. Verify current password, exact DELETE and acknowledgement; delete immediately with no recovery window and retry safely. Inject private-file failure, test queue retry and A/B isolation, session/refresh denial and browser cleanup. | Approved deletion/retention rules enforced with FK-safe cleanup, revoked access and no cross-user effect; unavailable lifecycle is not falsely advertised. |
 | GL-P08-007 — Help/privacy/terms accuracy | P1 | M | Current product scope and configured providers. Review public pages and in-app notices. | Clear research/data-use/retention/source limitations and functioning support links; no unsupported security/medical claims. |
 | GL-P08-008 — Owned notification creation | P0 | C | Real app event and a browser fabrication attempt. Complete event and attempt direct custom system event insertion. | One trusted owned nonclinical event; browser cannot forge another owner or authoritative event. |
 | GL-P08-009 — Notification read state and pagination | P1 | C+B | Owned read/unread events across pages. Open, mark read, mark all read and retry. | Stable counts/state persist; operations idempotent and apply only to the correct owner/range. |
@@ -211,6 +211,8 @@ The [implementation plan](../planning/GlycoLens_17_Webapp_Implementation_Plan.md
 | GL-P09-008 — Follow-up error calculation | P0 | U | Small known predicted/actual arrays with gaps. Compute displayed errors and coverage. | Independent expected error calculation; missing points handled by documented policy without overstated completeness. |
 | GL-P09-009 — Outcome persistence and history | P0 | C+B | Eligible owned actual outcome. Save/retry/read and query later similar meals. | One durable outcome with available_at and provenance; retrieval includes it only after availability. |
 | GL-P09-010 — Scenario and follow-up usability | P1 | B+M | Dense scenarios, small viewport and no-data state. Use keyboard/chart table and read explanatory copy. | All values/comparisons accessible; uncertainty/research boundary explicit; no clinical success claim. |
+| GL-P09-011 — Controlled meal-response sensitivity | P0 | U+C | Frozen synthetic contexts, profiles/portions and repeated identical baselines from the [protocol](meal-response-validation-protocol.md). Run the real cached adapter with captured inputs. | Reproducible complete matrix and failure accounting, finite ordered quantiles, input isolation and reviewed sensitivity/invariance/stability; no causal or monotonic guarantee. |
+| GL-P09-012 — Matching-outcome meal accuracy | P0 | C | Separately approved untouched matching-outcome windows and predeclared criteria. Compare persistence/CGM-only/full context. | Horizon/trajectory error, interval coverage/width, failure rate and participant uncertainty reported by eligible strata; no reused consumed test cohorts or unmatched replay truth. |
 
 ## P10 - Hosted deployment, resilience and release acceptance
 

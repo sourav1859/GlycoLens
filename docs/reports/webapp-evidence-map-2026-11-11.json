@@ -1,0 +1,88 @@
+{
+  "reason": "Corrected traceability of early observation labels without altering observed/model outputs; combined cases remain partial",
+  "examples": [
+    {
+      "report": "p04-meal-integration-2026-11-11.json",
+      "original_case": "GL-P04-015",
+      "actual_catalog_case": "GL-P04-012",
+      "observation": "idempotent save"
+    },
+    {
+      "report": "p05-p06-source-integration-2026-11-11.json",
+      "original_case": "GL-P05-010",
+      "actual_catalog_case": "GL-P05-008",
+      "observation": "frozen history after context replacement"
+    },
+    {
+      "report": "p08-privacy-integration-2026-11-11.json",
+      "original_case": "GL-P08-009",
+      "actual_catalog_case": "GL-P08-008",
+      "observation": "trusted event creation"
+    }
+  ],
+  "ledger_authority": "../testing/webapp-validation-results.json",
+  "original_artifacts_retained": true,
+  "observation_map": {
+    "p04-meal-integration-2026-11-11.json": [
+      [
+        "GL-P04-009",
+        "GL-P04-010"
+      ],
+      [
+        "GL-P04-012"
+      ],
+      [
+        "GL-P04-015"
+      ],
+      [
+        "GL-P04-013",
+        "GL-P04-014",
+        "GL-P04-019"
+      ],
+      [
+        "GL-P04-015"
+      ]
+    ],
+    "p05-p06-source-integration-2026-11-11.json": [
+      [
+        "GL-P05-001"
+      ],
+      [
+        "GL-P06-001"
+      ],
+      [
+        "GL-P06-009"
+      ],
+      [
+        "GL-P05-005",
+        "GL-P05-006",
+        "GL-P05-007",
+        "GL-P05-009"
+      ],
+      [
+        "GL-P06-006",
+        "GL-P05-008"
+      ],
+      [
+        "GL-P05-002",
+        "GL-P05-008"
+      ],
+      [
+        "GL-P06-011"
+      ]
+    ],
+    "p08-privacy-integration-2026-11-11.json": [
+      [
+        "GL-P08-008",
+        "GL-P08-010"
+      ],
+      [
+        "GL-P08-009"
+      ],
+      [
+        "GL-P08-005"
+      ]
+    ]
+  },
+  "mapping_order": "Zero-based observation order in each original report; related coverage only, not automatic full-case PASS"
+}

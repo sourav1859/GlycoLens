@@ -1,0 +1,86 @@
+{
+  "app_users": 0,
+  "migrations": [
+    {
+      "name": "initial_application_schema",
+      "version": "20260929000100",
+      "canonical_lf_sha256": "ef8c328dd303be04b9a2643834bbfbc27de1f34072e76b898ba0d276f2314772"
+    },
+    {
+      "name": "m2_application_contract",
+      "version": "20261014000100",
+      "canonical_lf_sha256": "fdbb58ff150d519f4dbee0a241ec51c0b6975f341a714c01cb812080e2a3dd7c"
+    },
+    {
+      "name": "food_cache_uniqueness",
+      "version": "20261014000200",
+      "canonical_lf_sha256": "dd34a1a02e61bbb9ac80537766511089da23bfa5705699b4e53ff8a021bcde77"
+    },
+    {
+      "name": "retrieval_chronology",
+      "version": "20261014000300",
+      "canonical_lf_sha256": "449338704981090e981ed4c8b1a2a6f048b58acba2d1cfefdf6729a80a423c33"
+    },
+    {
+      "name": "cloud_security_and_accounts",
+      "version": "20261111075416",
+      "canonical_lf_sha256": "6b893e650410a6719262c9d3eae2826015c4786c87d33dec3d41f6be6f9aea80"
+    },
+    {
+      "name": "resumable_onboarding",
+      "version": "20261111081312",
+      "canonical_lf_sha256": "1e1bc9498d603fe3ec0133cb6b235b2820004201d2535bdd78fe6929fa93bc13"
+    },
+    {
+      "name": "meal_lifecycle",
+      "version": "20261111084347",
+      "canonical_lf_sha256": "d0f10fa73988c6a15cf4472fe39977520fb68dc74f5a68c265dd7f0d93025c82"
+    },
+    {
+      "name": "source_context_and_forecast_snapshots",
+      "version": "20261111084803",
+      "canonical_lf_sha256": "fca3723a54f071625cbfefdc59283ecd6b1df39151d9c794f75f8dd5feb81da7"
+    },
+    {
+      "name": "consumed_nutrition_windows",
+      "version": "20261111085147",
+      "canonical_lf_sha256": "1fab434212b8ea5101d93c798b1e371dbf9445eeac73835d50396d7b9a36a8e2"
+    },
+    {
+      "name": "owned_application_events",
+      "version": "20261111090113",
+      "canonical_lf_sha256": "9318d467353ce1a09a857954ce83871485662f60d9f48e64d9b583728946e075"
+    },
+    {
+      "name": "portion_scenarios_and_followup",
+      "version": "20261111090528",
+      "canonical_lf_sha256": "c5b658cbc7ffdd79dd38aa4f9ed1ad1cd4fd5d29d5f7164b2e7d896778cf9d9b"
+    },
+    {
+      "name": "scenario_concurrency_guard",
+      "version": "20261111093013",
+      "canonical_lf_sha256": "68bdcb78e348da511393b6879e99c41ed37f549f7f7d3b243ae3935f760a8ade"
+    },
+    {
+      "name": "reviewed_food_fact_conflicts",
+      "version": "20261111095904",
+      "canonical_lf_sha256": "ccbe76549d6de8dc8ed2c435c37faadd108b5d63013ec7b6c83809347650642e"
+    },
+    {
+      "name": "immediate_account_deletion",
+      "version": "20261111152226",
+      "canonical_lf_sha256": "8ae5a9f4fb83c880cf2dd0dde34b4be25d7c69a461a81de5972c4efefb3c0c81"
+    }
+  ],
+  "project_ref": "ecynkzptuslkuhjikzfc",
+  "public_tables": 18,
+  "storage_objects": 0,
+  "reserved_llm_usd": 0.0076358,
+  "public_rls_tables": 18,
+  "tagged_test_users": 0,
+  "private_usage_rows": 0,
+  "private_receipt_rows": 0,
+  "synthetic_test_foods": 0,
+  "pending_artifact_jobs": 0,
+  "private_deletion_attempt_rows": 0
+}

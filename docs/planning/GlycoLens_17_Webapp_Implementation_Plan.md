@@ -1,6 +1,37 @@
 # GlycoLens phased web application implementation plan
 
-**Version:** November 11, 2026. **Status:** environment preparation started; phase acceptance gates remain open.
+November 12 source publication: [GitHub delivery authorization](../reports/github-checkpoint-delivery-2026-11-12.md) supersedes the earlier local-review hold for this checkpoint. No hosted deployment or phase acceptance is implied.
+
+November 12: shared demo/header logout and clearer simulation names are implemented; root local Compose and Linux runtime are validated. P09 now includes the separate [meal-response sensitivity and matching-outcome gates](../testing/meal-response-validation-protocol.md), both NOT_RUN. The current 146-case ledger and [follow-up evidence](../reports/demo-logout-compose-review-2026-11-12.md) retain partial phase acceptance.
+
+## Implementation checkpoint - November 11, 2026
+
+Cloud schema, trusted writes, permanent-account development Auth/onboarding and
+the responsive application shell are implemented. Common meal capture/history/
+edit/cancel, immutable Chronos forecasts, Home/daily/seven-day consumed nutrition,
+owned notifications/export, portion comparisons and genuinely later virtual
+observations now have code and scoped test evidence. The original demo moved to
+`/demo`; `/` is a public entry and private routes require account/onboarding.
+
+This is a **partial validation checkpoint**, not full phase/release acceptance.
+Corrected catalog/search/details/favorites, real email verification/recovery,
+verified anonymous upgrade, provider retention/restore, physical-device/manual accessibility,
+scratch replay/restore and hosted acceptance remain open. Keep these changes local
+for review; scratch replay is explicitly deferred. See the
+[implementation report](../reports/webapp-implementation-checkpoint-2026-11-11.md),
+[ADR 0019](../decisions/0019-trusted-cloud-writes-and-frozen-source-context.md) and
+[actual case ledger](../testing/webapp-validation-results.json). Earlier dated
+prototype/preparation evidence below remains historical.
+
+The user confirmed **immediate account deletion after explicit confirmation,
+with no recovery window**. Password reauthentication, hard Auth deletion, owned
+row cascades and retryable private-file cleanup are implemented and validated with
+synthetic accounts. See [ADR 0020](../decisions/0020-immediate-account-deletion.md)
+and [deletion evidence](../reports/account-deletion-validation-2026-11-11.md).
+Provider backup/log retention, restore reconciliation and a support contact remain
+public-release gates; there is no application undo snapshot.
+
+**Version:** November 11, 2026. **Status:** staged implementation executed in cloud development; acceptance is PARTIAL and tracked per case.
 
 Initial November 11 preparation verified the Glycolens cloud project through MCP, saved
 URL/public/private provider configuration in ignored environment files, and added
@@ -8,8 +39,7 @@ modern server-key header support with legacy fallback. Eight focused offline
 tests passed. No hosted schema, real Auth email or live food-provider test was executed.
 A later user-approved USD 5 cap covered 16 live recipe-model comparison calls;
 see [recipe validation](../reports/recipe-model-validation-2026-11-11.md).
-The 144-case ledger is unchanged: this bounded preparation does
-not pass a full phase case. See [setup evidence](../reports/cloud-env-and-email-setup-2026-11-11.md).
+The 146-case ledger now distinguishes actual implemented-checkpoint observations from pending full-phase acceptance. See [setup evidence](../reports/cloud-env-and-email-setup-2026-11-11.md).
 
 ## 1. Confirmed decisions and implementation boundary
 
@@ -18,7 +48,7 @@ The user confirmed:
 - One Git repository for frontend, backend and forecasting code.
 - **Cloud Supabase from now on**, using a **dedicated GlycoLens cloud development project** for application PostgreSQL, Auth, PostgREST and integration testing.
 - First-release **email/password authentication with email verification and password reset**.
-- Temporary development exception confirmed November 11: email/password signup uses automatic email confirmation in the dedicated cloud project, so development can proceed without SMTP. Live Auth settings were read and verified; application signup/login/RLS journeys remain untested. Verification/recovery email delivery remains a public-release requirement.
+- Temporary development exception confirmed November 11: email/password signup uses automatic email confirmation in the dedicated cloud project, so development can proceed without SMTP. Live Auth settings were read and verified; synthetic confirmed-user password/login/RLS/onboarding checks now pass; real signup email ownership remains unproven. Verification/recovery email delivery remains a public-release requirement.
 - Delivery of the **full agreed feature set in staged releases**, rather than a silent scope reduction.
 
 [ADR 0018](../decisions/0018-cloud-supabase-and-staged-webapp-delivery.md) records these decisions. They are also in repository AGENTS.md for future sessions. Local web/API processes and offline fixture/unit tests remain useful; a local Supabase stack is no longer the application or required integration-test target. Historical local results remain historical.
@@ -51,19 +81,20 @@ Keep secret values in ignored server `.env`, `frontend/.env.local`, a password m
 
 The first credentials needed are the cloud project URL/ref, public client key, backend key and migration-access method. LLM/nutrition credentials are not blockers for shell/Auth work; provider fixtures support development but cannot pass live-provider acceptance.
 
-New safety settings such as a cloud-project allowlist and explicit integration/paid-test switches are **planned tooling**, not existing implemented environment variables. Their final names and guards are specified in P00. Do not assume current local helpers already implement them.
+Exact-target/run-intent guards are implemented in `scripts/dev/cloud_preflight.py` and the bounded cloud harness. Paid recipe calls use a conservative cloud reservation guard. Historical local helpers do not implement the new cloud workflow and must not be used as replacements.
 
 ### Decisions and open inputs
 
 | Topic | State |
 |---|---|
 | Repository, cloud development target, initial Auth method, full staged delivery | Confirmed by the user |
-| Exact cloud project/ref/region, API-key type and migration connection method | Glycolens cloud project/MCP access and ignored URL/publishable/secret-key configuration verified November 11. Schema application/replay and CLI/CI setup remain pending |
+| Exact cloud project/ref/region, API-key type and migration connection method | Glycolens cloud project/MCP access and ignored URL/publishable/secret-key configuration verified November 11. 14 canonical migrations applied and normalized SQL hashes verified; scratch replay deferred by user; hosted CI remains pending |
 | Keep existing OpenAI parser; model and live-test budget | User selected `gpt-6-luna`, replacing `gpt-5-mini`; private model configuration/template updated and Responses/strict-schema contract retained. USD 5 total live-test cap approved. The 16-call synthetic comparison verified access and used estimated USD 0.00763580; representative accuracy/full P04 acceptance remain pending. Prior spend counts against subsequent tests; see the recipe validation report |
 | Corrected catalog readiness/access | User confirmed not ready; use labeled fixtures/providers for development and activate only after validation |
 | Hostinger/domain provisioning and target date | User confirmed VPS/domain are pending; no new fixed delivery date supplied |
 | Application namespace | Recommendation: reuse existing `public` application migrations in the dedicated project, leave managed `auth` intact, and keep the future catalog in its separately reviewed schema. If a named `glycolens` schema is preferred, decide before migration because exposure/headers/grants/client paths must change |
 | Production and scratch environment budget | Confirm before provisioning or enabling reset/restore-style acceptance; do not silently reuse production |
+| Account deletion | Confirmed: immediate after password reauthentication and explicit confirmation; no recovery window. ADR 0020 implements hard deletion and retryable private-file cleanup; provider retention/restore remain release gates |
 | Demo mode | Retain labeled synthetic/anonymous demo compatibility; permanent accounts are the primary new account path. Real patient data/Dexcom remain outside this implementation unless separately approved |
 
 API keys are not all JWTs: modern publishable/secret keys belong on the supported API-key header, while user sessions use bearer JWTs. P01 must correct any raw REST assumption that a server secret itself is a bearer JWT. [Supabase API-key guidance](https://supabase.com/docs/guides/getting-started/api-keys).
@@ -130,7 +161,7 @@ Each release declares which features/tests passed. R1/R2 delivery does not imply
 
 **Validation:** GL-P01-001 through GL-P01-012, including A/B/unauthenticated and child ownership, trusted-write fabrication attempts, RPC compatibility, migration history and unrelated-data cleanup sentinels.
 
-**Exit:** cloud project/schema verified, reviewed baseline applied with evidence, functional permitted transactions, denied unauthorized writes and no local Supabase dependency. This is the first phase that creates hosted schema; it remains unexecuted until inputs and the concrete migration review are complete.
+**Exit:** cloud project/schema verified, reviewed baseline applied with evidence, functional permitted transactions, denied unauthorized writes and no local Supabase dependency. Hosted schema is now applied; full exit remains open until remaining case coverage, including deferred scratch replay, is satisfied.
 
 ### P02 - Responsive design system and application shell
 
@@ -234,15 +265,16 @@ Each release declares which features/tests passed. R1/R2 delivery does not imply
 3. Attach actual post-meal observations only after genuine source/session availability, preserving coverage and chronology.
 4. Compute validated error/coverage summaries, persist actual outcomes with available_at and expose eligible later personal evidence.
 5. Keep units/quantiles/source/research limitations accessible in graph/table/comparison layouts.
+6. Execute the [meal-response validation protocol](../testing/meal-response-validation-protocol.md): controlled frozen-context meal/portion sensitivity and reproducibility first, then separately approved matching-outcome accuracy. Input wiring or different output alone is insufficient evidence. Current fixed simulator outcomes are not matched to arbitrary user meals; consumed primary/PEDAP cohorts remain unavailable for new independent claims.
 
-**Validation:** GL-P09-001 through GL-P09-010, with hand-computed scaling/error arrays, missing actuals, cross-source collisions and early-future retrieval rejection.
+**Validation:** GL-P09-001 through GL-P09-012, with the separate sensitivity/outcome protocol, hand-computed scaling/error arrays, missing actuals, cross-source collisions and early-future retrieval rejection.
 
 **Exit:** comparable scenarios and genuine follow-up work without inflating nutrition totals, leaking future data or recommending a dose/safe portion.
 
 ### P10 - Hosted delivery, resilience and release acceptance
 
 **Work**
-1. Begin packaging earlier: pinned Linux web/API images, isolated simulator, explicit Docker build exclusions and persistent model/replay volumes. Keep application DB/Auth managed in cloud Supabase.
+1. Use root `compose.yaml` for one-command local startup (ADR 0021), with `infra/compose.yml` retained as a separate hosting template. Begin packaging earlier: pinned Linux web/API images, isolated simulator, explicit Docker build exclusions and persistent model/replay volumes. Keep application DB/Auth managed in cloud Supabase.
 2. Configure the selected host, HTTPS reverse proxy, environment-specific public build settings, private runtime keys and exact Auth/CORS origins.
 3. Add liveness versus model/simulator/dependency readiness, bounded concurrency, CPU/thread limits and redacted monitoring. Begin with one model/API worker; process-local locks do not coordinate replicas.
 4. Run bounded cold/warm/overlap measurements against P00 budgets, reporting sample sizes and actual errors/memory/latency. No unsupported concurrency guarantee.
@@ -256,7 +288,7 @@ Each release declares which features/tests passed. R1/R2 delivery does not imply
 
 ## 5. Test execution, validation and result recording
 
-The [test-case catalog](../testing/webapp-cloud-test-cases.md) contains **144 named cases across 11 phases**, with layer, setup/action, expected result and priority. The [result ledger](../testing/webapp-validation-results.json) contains all IDs, initially **NOT_RUN**. The catalog is a test design, not implemented executable test files yet.
+The [test-case catalog](../testing/webapp-cloud-test-cases.md) contains **146 named cases across 11 phases**, with layer, setup/action, expected result and priority. The [result ledger](../testing/webapp-validation-results.json) now contains actual observations and remaining PARTIAL/BLOCKED/NOT_RUN coverage. The catalog remains the acceptance contract; executable unit/browser/cloud checks cover stated subsets without claiming every catalog case is closed.
 
 ### Feature-to-test traceability
 

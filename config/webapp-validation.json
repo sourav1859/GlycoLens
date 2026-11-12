@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0",
+  "environment": "dedicated-cloud-development",
+  "approved_project_ref": "ecynkzptuslkuhjikzfc",
+  "ordinary_api_p95_seconds_target": 1.5,
+  "warm_single_forecast_p95_seconds_target": 30,
+  "cold_readiness_seconds_target": 120,
+  "peak_host_memory_fraction_target": 0.8,
+  "baseline_synthetic_concurrency": 1,
+  "max_synthetic_test_users_per_run": 2,
+  "max_cloud_requests_per_run": 250,
+  "max_email_test_messages": 0,
+  "llm_total_approved_test_budget_usd": "5.00",
+  "llm_prior_estimated_test_spend_usd": "0.00763580",
+  "paid_calls_default_enabled": false,
+  "notes": "Engineering targets are unmeasured and not clinical or capacity guarantees. Separate explicit intent is required for cloud tests and paid calls. Scratch replay and email tests remain deferred."
+}

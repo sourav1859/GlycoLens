@@ -1,5 +1,49 @@
 # GlycoLens Milestones and Course-Aligned Schedule
 
+## November 12: explicit P09 validation and local runtime work
+
+- [x] Specify the controlled meal/portion response and separate outcome-accuracy
+  gates in [the protocol](../testing/meal-response-validation-protocol.md).
+- [ ] Execute GL-P09-011 with frozen context, labeled nutrient fixtures, repeated
+  baselines, portion/composition contrasts and full failure/sensitivity reporting.
+- [ ] Execute GL-P09-012 only with an approved untouched matching-outcome target;
+  current fixed simulator replay and consumed research test cohorts are unsuitable.
+- [x] Implement clearer demo labels, shared discoverable logout and a root local
+  Compose configuration with managed cloud Supabase; validation is tracked in the
+  [November 12 report](../reports/demo-logout-compose-review-2026-11-12.md).
+- [ ] Complete hosted readiness, physical-device/manual UAT, recovery and release
+  acceptance. Local container evidence does not close P10 or deployment.
+
+The current catalog has 146 cases. Course dates, model selection, independent
+research results and the user's deferred scratch replay decision are unchanged.
+
+## Implementation checkpoint - November 11, 2026
+
+Cloud schema, trusted writes, permanent-account development Auth/onboarding and
+the responsive application shell are implemented. Common meal capture/history/
+edit/cancel, immutable Chronos forecasts, Home/daily/seven-day consumed nutrition,
+owned notifications/export, portion comparisons and genuinely later virtual
+observations now have code and scoped test evidence. The original demo moved to
+`/demo`; `/` is a public entry and private routes require account/onboarding.
+
+This is a **partial validation checkpoint**, not full phase/release acceptance.
+Corrected catalog/search/details/favorites, real email verification/recovery,
+verified anonymous upgrade, provider retention/restore, physical-device/manual accessibility,
+scratch replay/restore and hosted acceptance remain open. Keep these changes local
+for review; scratch replay is explicitly deferred. See the
+[implementation report](../reports/webapp-implementation-checkpoint-2026-11-11.md),
+[ADR 0019](../decisions/0019-trusted-cloud-writes-and-frozen-source-context.md) and
+[actual case ledger](../testing/webapp-validation-results.json). Earlier dated
+prototype/preparation evidence below remains historical.
+
+The user confirmed **immediate account deletion after explicit confirmation,
+with no recovery window**. Password reauthentication, hard Auth deletion, owned
+row cascades and retryable private-file cleanup are implemented and validated with
+synthetic accounts. See [ADR 0020](../decisions/0020-immediate-account-deletion.md)
+and [deletion evidence](../reports/account-deletion-validation-2026-11-11.md).
+Provider backup/log retention, restore reconciliation and a support contact remain
+public-release gates; there is no application undo snapshot.
+
 ## 1. Source-of-truth dates
 
 This plan uses the **current CSCI-788 schedule PDF** for Fall 2026 dates. Older class slides are used only for the **meaning/content of Milestones 1-3**, not for their historical dates.
@@ -362,7 +406,7 @@ development from now on**, with email/password verification/reset. Its P00-P10
 phases refine the A-D checklist below; [ADR 0018](../decisions/0018-cloud-supabase-and-staged-webapp-delivery.md)
 records the environment decision. The 27-46 focused-day estimate excludes external
 waits and is not a revision of course dates or a promise to finish the expanded
-scope by November 13. The linked 144 cases begin NOT_RUN. No phase/migration/cloud
+scope by November 13. The linked 146 cases begin NOT_RUN. No phase/migration/cloud
 acceptance is complete merely because its plan is drafted.
 
 The user requested a Figma-informed documentation and architecture update. The

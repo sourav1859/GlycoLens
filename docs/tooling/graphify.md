@@ -2,6 +2,18 @@
 
 ## Status
 
+The November 12 demo/logout/local-runtime scope adds source-backed concepts for
+shared sign-out, local Compose storage and separate meal-response validation gates.
+Use the ignored evidence/status files for observed refresh results. The existing
+webapp checkpoint workflow combines local code/Markdown AST links
+with assistant-curated current webapp semantics. It sends no documents to an
+external semantic API. Current graph counts/source hashes and canonical-hub edge
+verification are kept in ignored `graphify-out/semantic-refresh-evidence.json`;
+use the status command for actual freshness. Semantic coverage is scoped to the
+current webapp decisions/evidence, not exhaustive historical media/research.
+Optional SQL AST omissions remain explicit; migrations were verified directly
+against cloud history and exercised through guarded integration tests.
+
 **Local developer graph; use Get-GraphifyStatus for current code freshness.** Graphify `0.9.69` is available from the ignored,
 repository-local `.cache/graphify-venv` environment using Python `3.12.14`. The wrappers prefer an
 explicit `GLYCOLENS_GRAPHIFY_EXECUTABLE`, then the repository-local executable, and finally a
@@ -155,3 +167,11 @@ The existing seven optional SQL-parser omissions are outside this Python-only ch
 Semantic documentation extraction/relabeling remains disabled; planning claims and
 cross-links are verified directly against source. No health data, weights, ignored
 artifacts or secrets are graph inputs, and no dataset is uploaded.
+
+## Immediate deletion semantics — November 11 follow-up
+
+The final local refresh includes ADR 0020's immediate confirmed deletion,
+source-UUID-only file cleanup retry and provider-retention/restore gates, with the
+updated case ledger and implementation report. Structural/curated semantic
+evidence remains under ignored `graphify-out/semantic-refresh-evidence.json`.
+No separate model API or external semantic backend is used for this refresh.

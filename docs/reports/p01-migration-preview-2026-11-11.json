@@ -1,0 +1,34 @@
+{
+  "target_project_ref": "ecynkzptuslkuhjikzfc",
+  "observed_public_tables": 0,
+  "observed_migrations": 0,
+  "observed_auth_users": 0,
+  "apply_strategy": "Atomic reviewed baseline and hardening; then align canonical source versions and statements in migration history. No local stack or hosted reset.",
+  "migrations": [
+    {
+      "file": "supabase/migrations/20260929000100_initial_application_schema.sql",
+      "sha256": "ef8c328dd303be04b9a2643834bbfbc27de1f34072e76b898ba0d276f2314772"
+    },
+    {
+      "file": "supabase/migrations/20261014000100_m2_application_contract.sql",
+      "sha256": "fdbb58ff150d519f4dbee0a241ec51c0b6975f341a714c01cb812080e2a3dd7c"
+    },
+    {
+      "file": "supabase/migrations/20261014000200_food_cache_uniqueness.sql",
+      "sha256": "dd34a1a02e61bbb9ac80537766511089da23bfa5705699b4e53ff8a021bcde77"
+    },
+    {
+      "file": "supabase/migrations/20261014000300_retrieval_chronology.sql",
+      "sha256": "449338704981090e981ed4c8b1a2a6f048b58acba2d1cfefdf6729a80a423c33"
+    },
+    {
+      "file": "supabase/migrations/20261111075416_cloud_security_and_accounts.sql",
+      "sha256": "ecbaacbb02554a9772eedf710a02fa102f0e005cddbd08ffbc2105ac93cd18f6"
+    }
+  ],
+  "permissions": "Owned caller-JWT SELECT; trusted invoker writes; private session boolean lookup is the sole new definer. See ADR 0019.",
+  "scratch_replay": "DEFERRED_BY_USER",
+  "schema_apply_status": "APPLIED_TO_APPROVED_CLOUD_DEVELOPMENT",
+  "history_verification": "All 12 canonical version/name/normalized-LF SQL hashes match checked-in source",
+  "evidence": "cloud-schema-checkpoint-2026-11-11.json"
+}

@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import math
 import os
+from types import SimpleNamespace
 from pathlib import Path
 
 import pytest
@@ -106,6 +107,29 @@ def test_runner_rejects_missing_source_before_execution(tmp_path: Path) -> None:
             python_executable=fake_python,
             output_json=tmp_path / "result.json",
         )
+
+
+def test_runner_preserves_virtualenv_interpreter_path(tmp_path: Path, monkeypatch) -> None:
+    # Linux venv/bin/python is commonly a symlink to the system interpreter.
+    # Resolving it before execution bypasses the venv and its isolated dependencies.
+    base = tmp_path / "system-python"
+    base.touch()
+
+    class LinkedInterpreter(type(tmp_path)):
+        def resolve(self, *args, **kwargs):
+            return base
+
+    interpreter = LinkedInterpreter(tmp_path / "venv-python")
+    interpreter.touch()
+    source = tmp_path / "source"
+    (source / "pymgipsim").mkdir(parents=True)
+    output = tmp_path / "result.json"
+    output.write_text(json.dumps(_valid_payload()), encoding="utf-8")
+    calls = []
+    monkeypatch.setattr("research.simulation.adapter._verify_upstream_commit", lambda _: None)
+    monkeypatch.setattr("research.simulation.adapter.subprocess.run", lambda command, **_: calls.append(command) or SimpleNamespace(returncode=0))
+    run_pymgipsim_scenario(source_directory=source, python_executable=interpreter, output_json=output)
+    assert calls[0][0] == str(interpreter.absolute())
 
 
 def test_pipeline_requires_explicit_upstream_execution_opt_in(monkeypatch) -> None:

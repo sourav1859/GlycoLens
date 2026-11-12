@@ -1,9 +1,49 @@
 # GlycoLens: Updated Project Summary
 
+## November 12 development update
+
+Demo actions are now **Run new simulation** / **Replay saved simulation**. Existing
+Supabase logout is exposed in the app header and demo, with anonymous confirmation
+and identity-bound draft cleanup. Root Compose provides a local web/API runtime
+with CPU forecasting, isolated simulator and external managed cloud Supabase;
+see [ADR 0021](../decisions/0021-local-compose-runtime.md). The explicit
+[meal-response protocol](../testing/meal-response-validation-protocol.md) adds
+GL-P09-011/012 to the current 146-case plan. Sensitivity and observed accuracy
+remain unexecuted; no clinical claim or model/research-test change follows.
+See the [review and actual validation](../reports/demo-logout-compose-review-2026-11-12.md).
+[GitHub delivery authorization](../reports/github-checkpoint-delivery-2026-11-12.md) supersedes the earlier local-review hold for this checkpoint. No hosted deployment or phase acceptance is implied.
+
+## Implementation checkpoint - November 11, 2026
+
+Cloud schema, trusted writes, permanent-account development Auth/onboarding and
+the responsive application shell are implemented. Common meal capture/history/
+edit/cancel, immutable Chronos forecasts, Home/daily/seven-day consumed nutrition,
+owned notifications/export, portion comparisons and genuinely later virtual
+observations now have code and scoped test evidence. The original demo moved to
+`/demo`; `/` is a public entry and private routes require account/onboarding.
+
+This is a **partial validation checkpoint**, not full phase/release acceptance.
+Corrected catalog/search/details/favorites, real email verification/recovery,
+verified anonymous upgrade, provider retention/restore, physical-device/manual accessibility,
+scratch replay/restore and hosted acceptance remain open. Keep these changes local
+for review; scratch replay is explicitly deferred. See the
+[implementation report](../reports/webapp-implementation-checkpoint-2026-11-11.md),
+[ADR 0019](../decisions/0019-trusted-cloud-writes-and-frozen-source-context.md) and
+[actual case ledger](../testing/webapp-validation-results.json). Earlier dated
+prototype/preparation evidence below remains historical.
+
+The user confirmed **immediate account deletion after explicit confirmation,
+with no recovery window**. Password reauthentication, hard Auth deletion, owned
+row cascades and retryable private-file cleanup are implemented and validated with
+synthetic accounts. See [ADR 0020](../decisions/0020-immediate-account-deletion.md)
+and [deletion evidence](../reports/account-deletion-validation-2026-11-11.md).
+Provider backup/log retention, restore reconciliation and a support contact remain
+public-release gates; there is no application undo snapshot.
+
 The user confirmed one repository and **cloud Supabase from now on**, using a
 dedicated development project and email/password with verification/reset. The
 [detailed implementation plan](GlycoLens_17_Webapp_Implementation_Plan.md) delivers
-the full agreed UI/features in stages, with 144 designed cases and evidence gates.
+the full agreed UI/features in stages, with 146 designed cases and evidence gates.
 The user selected OpenAI `gpt-6-luna` on November 11, replacing `gpt-5-mini` for
 structured recipe extraction, with a USD 5 total live-test cap. The bounded
 [smoke comparison](../reports/recipe-model-validation-2026-11-11.md) verified API

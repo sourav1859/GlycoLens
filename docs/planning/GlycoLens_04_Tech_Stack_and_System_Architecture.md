@@ -1,5 +1,48 @@
 # GlycoLens Tech Stack and System Architecture
 
+## November 12: one-command local containers
+
+Root `compose.yaml` starts Next.js plus one FastAPI worker with
+`docker compose up --build -d --wait`. Chronos remains the existing CPU adapter;
+py-mgipsim has an isolated Linux interpreter and pinned upstream source inside the
+API image. Managed cloud Supabase remains external. No local database or separate
+forecasting service is introduced. Model weights mount read-only; private simulator
+artifacts persist in the existing host bind directory, shared with the PowerShell API
+so deletion cleanup cannot acknowledge files in a different empty store. Public frontend configuration is baked at build
+time, while private keys enter the API only at runtime. See [ADR 0021](../decisions/0021-local-compose-runtime.md)
+and [local instructions](../../infra/README.md). Liveness does not prove model/cloud
+readiness; an explicit opt-in smoke exercises the real simulator and cached model.
+Hosting template `infra/compose.yml`, HTTPS/domain, restore and hosted capacity
+acceptance remain separate. Logout reuses managed Auth and existing revoked-session
+API/RLS checks; header/demo controls add no custom password/logout API.
+
+## Implementation checkpoint - November 11, 2026
+
+Cloud schema, trusted writes, permanent-account development Auth/onboarding and
+the responsive application shell are implemented. Common meal capture/history/
+edit/cancel, immutable Chronos forecasts, Home/daily/seven-day consumed nutrition,
+owned notifications/export, portion comparisons and genuinely later virtual
+observations now have code and scoped test evidence. The original demo moved to
+`/demo`; `/` is a public entry and private routes require account/onboarding.
+
+This is a **partial validation checkpoint**, not full phase/release acceptance.
+Corrected catalog/search/details/favorites, real email verification/recovery,
+verified anonymous upgrade, provider retention/restore, physical-device/manual accessibility,
+scratch replay/restore and hosted acceptance remain open. Keep these changes local
+for review; scratch replay is explicitly deferred. See the
+[implementation report](../reports/webapp-implementation-checkpoint-2026-11-11.md),
+[ADR 0019](../decisions/0019-trusted-cloud-writes-and-frozen-source-context.md) and
+[actual case ledger](../testing/webapp-validation-results.json). Earlier dated
+prototype/preparation evidence below remains historical.
+
+The user confirmed **immediate account deletion after explicit confirmation,
+with no recovery window**. Password reauthentication, hard Auth deletion, owned
+row cascades and retryable private-file cleanup are implemented and validated with
+synthetic accounts. See [ADR 0020](../decisions/0020-immediate-account-deletion.md)
+and [deletion evidence](../reports/account-deletion-validation-2026-11-11.md).
+Provider backup/log retention, restore reconciliation and a support contact remain
+public-release gates; there is no application undo snapshot.
+
 November 11 integration preparation: cloud MCP access and private environment
 configuration are verified; hosted application schema/Auth remain pending.
 Privileged food caching now prefers `SUPABASE_SECRET_KEY` on the `apikey` header

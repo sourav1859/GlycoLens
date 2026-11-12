@@ -1,0 +1,50 @@
+{
+  "executed_at_utc": "2026-11-11T08:58:01.929756+00:00",
+  "run_id": "gl_1963ddb377444ea0b079c02b",
+  "project_ref": "ecynkzptuslkuhjikzfc",
+  "requests": 106,
+  "email_messages": 0,
+  "paid_provider_calls": 0,
+  "results": [
+    {
+      "case_id": "GL-P05-001",
+      "status": "PASSED",
+      "observed": "Real pinned py-mgipsim execution saved only pre-origin CGM/insulin in an owned source partition"
+    },
+    {
+      "case_id": "GL-P06-001",
+      "status": "PASSED",
+      "observed": "Planned meal contributed zero; confirmed eaten 250 g fixture yielded exactly 450 kcal / 75 g carbs on Home and Nutrition"
+    },
+    {
+      "case_id": "GL-P06-011",
+      "status": "PASSED",
+      "observed": "Default day came from source clock, not wall date; latest glucose matched owned clock"
+    },
+    {
+      "case_id": "GL-P05-004",
+      "status": "PASSED",
+      "observed": "Real cached pinned Chronos C3 produced 24 validated points; cloud save/read/retry preserved result and denied B"
+    },
+    {
+      "case_id": "GL-P06-006",
+      "status": "PASSED",
+      "observed": "Edited eaten meal updated shared aggregate to 225 kcal; saved forecast retained original meal revision/input"
+    },
+    {
+      "case_id": "GL-P05-010",
+      "status": "PASSED",
+      "observed": "Same-clock replay created new partition; existing forecast history remained byte-equivalent after meal edit/cancel and source replacement"
+    },
+    {
+      "case_id": "GL-P06-012",
+      "status": "PASSED",
+      "observed": "Source switch excluded earlier meals/forecasts; cancelled meal left eaten aggregate; another owner had unavailable rather than zero-filled source"
+    }
+  ],
+  "execution_error_class": null,
+  "failure_location": null,
+  "cleanup_error_class": null,
+  "cleanup_completed": true,
+  "suite": "real-source-model"
+}

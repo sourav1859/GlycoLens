@@ -1,0 +1,85 @@
+{
+  "reviewed_at_utc": "2026-11-12T06:07:37.521533+00:00",
+  "scope": "Local uncommitted UX/Auth wiring, plan and Linux runtime review; no complete phase closure",
+  "python": {
+    "passed": 171,
+    "skipped": 1,
+    "skip_reason": "Opt-in two-run upstream reproducibility test; real Linux single-run smoke is separate"
+  },
+  "frontend": {
+    "unit_passed": 24,
+    "lint": "PASS",
+    "types": "PASS",
+    "production_build": "PASS"
+  },
+  "browser": {
+    "passed": 26,
+    "projects": [
+      "desktop",
+      "mobile"
+    ],
+    "real_cloud": false
+  },
+  "runtime": {
+    "compose_services": [
+      "api",
+      "web"
+    ],
+    "validation_ports": {
+      "web": 3100,
+      "api": 8100
+    },
+    "images": {
+      "api": {
+        "id": "sha256:19aa866aced99171b260c24202538a3572c836343dd57f07dce603e98dba5ca9",
+        "size_bytes": 633757516,
+        "user": "10001:10001"
+      },
+      "web": {
+        "id": "sha256:2536f21eafe61e3d87ce8dfd903103b2c19bd5d88f9f2632a923d399a81f4244",
+        "size_bytes": 99520519,
+        "user": "node"
+      }
+    },
+    "web_image_scan": {
+      "files_checked": 1687,
+      "private_findings": 0,
+      "uid": 1000
+    },
+    "server_secrets_absent_from_web_config_image_and_history": true,
+    "model_mount_read_only": true,
+    "persistent_shared_simulation_bind": true,
+    "cleanup_worker_disabled_for_validation": true,
+    "http": {
+      "/": 200,
+      "/demo": 200,
+      "/auth/sign-in": 200
+    },
+    "api_liveness": 200,
+    "unauthenticated_private_api": 401,
+    "cors_allowed_origin": 200,
+    "cors_unapproved_origin": 400,
+    "restart_http_and_volume_persistence": "PASS",
+    "cloud_requests": 0,
+    "llm_calls": 0,
+    "stopped_after_validation": true,
+    "cloud_request_scope": "Final controlled foreground/runtime validation only; cleanup worker disabled. Earlier normal startup background queue polls were not counted."
+  },
+  "simulator_model_smoke": {
+    "status": "PASS",
+    "simulator_samples": 288,
+    "forecast_points": 24,
+    "model": "amazon/chronos-2",
+    "model_revision": "29ec3766d36d6f73f0696f85560a422f50e8498c",
+    "torch": "2.14.0+cpu",
+    "cpu_only": true,
+    "elapsed_seconds": 28.66,
+    "cloud_requests": 0,
+    "llm_calls": 0
+  },
+  "api_contract": "PASS_UNCHANGED",
+  "paid_llm_calls": 0,
+  "cloud_schema_changes": 0,
+  "meal_response_sensitivity": "NOT_RUN",
+  "matching_outcome_accuracy": "NOT_RUN"
+}

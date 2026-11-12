@@ -38,6 +38,7 @@ Implementation and documentation must not diverge. Documentation-only wording co
 - Preserve versioned migrations under `supabase/migrations/`; inspect the exact cloud target and preview reviewed changes before controlled apply. Never reset a hosted database or run broad test cleanup. Use run-scoped synthetic fixtures and explicit cloud-target guards.
 - Historical local Supabase instructions/results remain historical. Do not run `Configure-LocalDemo.ps1`, local start/reset wrappers or overwrite cloud keys with local values as the new workflow. Offline unit/fixture tests remain allowed; they do not prove cloud integration acceptance.
 - Keep secret values in ignored/private configuration. No credentials or cloud schema are created merely by the plan. See ADR 0018 and the cloud setup guide for current prerequisites.
+- Account deletion decision, November 11: delete immediately after fresh password verification and explicit confirmation, with no recovery window. Hard-delete managed Auth and owned app data; retry scoped private source-file cleanup without retaining an account snapshot. Do not promise instant provider backup/log erasure. See ADR 0020; test only tagged disposable accounts.
 
 - Preserve the modular-monolith architecture unless the planning documents are deliberately revised.
 - Keep forecasting models behind a common adapter interface.

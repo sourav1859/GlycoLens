@@ -9,6 +9,7 @@ from uuid import UUID
 from fastapi import HTTPException
 
 from backend.app.db.client import UserSession, database_call
+from backend.app.db.trusted import trusted_call
 from backend.app.services.inference.demo import forecast_to_response
 from research.models.adapters import (
     Chronos2ForecastAdapter,
@@ -89,23 +90,39 @@ def forecast_meal(session: UserSession, meal_id: UUID, key: UUID):
         if not rows:
             raise HTTPException(404, "Meal not found in your demo session")
         meal = rows[0]
+        if not meal.get("source_session_id") or meal.get("state") == "cancelled":
+            raise HTTPException(422, "Choose a source context and a reviewed active meal")
+        source = str(UUID(meal["source_session_id"]))
         origin = meal["recorded_at"]
-        existing = database_call(session, f"forecasts?idempotency_key=eq.{key}&select=id,meal_id")
+        sources = database_call(session, f"source_sessions?id=eq.{source}&select=metadata")
+        coverage = sources[0]["metadata"].get("inference_context_end") if sources else None
+        if not coverage or datetime.fromisoformat(
+            origin.replace("Z", "+00:00")
+        ) > datetime.fromisoformat(coverage.replace("Z", "+00:00")):
+            raise HTTPException(
+                422, "Insulin context does not cover this origin; prepare a new reviewed source"
+            )
+        existing = database_call(
+            session, f"forecasts?idempotency_key=eq.{key}&select=id,meal_id,meal_revision"
+        )
         if existing:
-            if existing[0]["meal_id"] != str(meal_id):
+            if (
+                existing[0]["meal_id"] != str(meal_id)
+                or existing[0]["meal_revision"] != meal["revision"]
+            ):
                 raise HTTPException(409, "This request key belongs to another meal")
             return {"forecast_id": existing[0]["id"], "reused": True}
         cgm = database_call(
             session,
             "cgm_readings?recorded_at=lte."
             + quote(origin, safe="")
-            + "&source=eq.simulation&order=recorded_at.desc&limit=24",
+            + f"&source=eq.simulation&source_session_id=eq.{source}&order=recorded_at.desc&limit=24",
         )
         insulin = database_call(
             session,
             "insulin_events?recorded_at=lte."
             + quote(origin, safe="")
-            + "&source=eq.simulation&order=recorded_at&limit=500",
+            + f"&source=eq.simulation&source_session_id=eq.{source}&order=recorded_at&limit=600",
         )
         request = build_request(meal, cgm, insulin)
         if MODEL is None:
@@ -116,12 +133,13 @@ def forecast_meal(session: UserSession, meal_id: UUID, key: UUID):
         response = forecast_to_response(
             request, result, data_mode="simulated", context_configuration=SELECTED_CONTEXT.value
         )
-        forecast_id = database_call(
+        forecast_id = trusted_call(
             session,
-            "rpc/save_forecast",
+            "rpc/app_commit_forecast",
             method="POST",
             payload={
                 "p_meal": str(meal_id),
+                "p_revision": meal["revision"],
                 "p_key": str(key),
                 "p_model": result.model_id,
                 "p_version": result.model_version,
@@ -130,6 +148,13 @@ def forecast_meal(session: UserSession, meal_id: UUID, key: UUID):
                 "p_latency": result.latency_ms,
                 "p_provenance": {"source": "simulated", "feature_version": FEATURE_VERSION},
                 "p_points": [p.model_dump() for p in response.forecast],
+                "p_input": {
+                    "meal": meal,
+                    "history": cgm,
+                    "insulin": insulin,
+                    "source_session_id": source,
+                    "response": response.model_dump(mode="json"),
+                },
             },
         )
         return {

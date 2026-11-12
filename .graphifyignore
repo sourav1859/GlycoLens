@@ -10,6 +10,7 @@ data/samples/
 artifacts/
 node_modules/
 .next/
+.next-e2e/
 .venv/
 venv/
 dist/

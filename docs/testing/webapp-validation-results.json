@@ -1,17 +1,17 @@
 {
   "schema_version": "1.0",
-  "plan_version": "2026-11-10",
+  "plan_version": "2026-11-12",
   "plan": "../planning/GlycoLens_17_Webapp_Implementation_Plan.md",
   "catalog": "webapp-cloud-test-cases.md",
-  "execution_status": "NOT_STARTED",
-  "case_count": 144,
-  "notes": "Planning only. No listed application/cloud test has been executed in this documentation cycle. Historical test passes are not new evidence.",
+  "execution_status": "IMPLEMENTED_PARTIAL_VALIDATION",
+  "case_count": 146,
+  "notes": "Local development checkpoint. PASS applies only to stated catalog coverage; PARTIAL does not close a phase. Original harness labels are mapped by actual observations, not imported blindly. No push/public release. See canonical evidence map.",
   "phases": [
     {
       "id": "P00",
       "title": "Baseline, configuration and CI",
-      "implementation_status": "NOT_STARTED",
-      "validation_status": "NOT_RUN",
+      "implementation_status": "IMPLEMENTED_PARTIAL",
+      "validation_status": "PARTIAL",
       "case_count": 8,
       "case_ids": [
         "GL-P00-001",
@@ -22,13 +22,19 @@
         "GL-P00-006",
         "GL-P00-007",
         "GL-P00-008"
-      ]
+      ],
+      "result_counts": {
+        "PASS": 5,
+        "PARTIAL": 2,
+        "BLOCKED": 1,
+        "NOT_RUN": 0
+      }
     },
     {
       "id": "P01",
       "title": "Cloud Supabase, schema and trusted data boundaries",
-      "implementation_status": "NOT_STARTED",
-      "validation_status": "NOT_RUN",
+      "implementation_status": "IMPLEMENTED_PARTIAL",
+      "validation_status": "PARTIAL",
       "case_count": 12,
       "case_ids": [
         "GL-P01-001",
@@ -43,13 +49,19 @@
         "GL-P01-010",
         "GL-P01-011",
         "GL-P01-012"
-      ]
+      ],
+      "result_counts": {
+        "PASS": 6,
+        "PARTIAL": 5,
+        "BLOCKED": 1,
+        "NOT_RUN": 0
+      }
     },
     {
       "id": "P02",
       "title": "Responsive shell and shared UI",
-      "implementation_status": "NOT_STARTED",
-      "validation_status": "NOT_RUN",
+      "implementation_status": "IMPLEMENTED_PARTIAL",
+      "validation_status": "PARTIAL",
       "case_count": 10,
       "case_ids": [
         "GL-P02-001",
@@ -62,13 +74,19 @@
         "GL-P02-008",
         "GL-P02-009",
         "GL-P02-010"
-      ]
+      ],
+      "result_counts": {
+        "PASS": 0,
+        "PARTIAL": 7,
+        "BLOCKED": 3,
+        "NOT_RUN": 0
+      }
     },
     {
       "id": "P03",
       "title": "Permanent Auth and minimal onboarding",
-      "implementation_status": "NOT_STARTED",
-      "validation_status": "NOT_RUN",
+      "implementation_status": "IMPLEMENTED_PARTIAL",
+      "validation_status": "PARTIAL",
       "case_count": 17,
       "case_ids": [
         "GL-P03-001",
@@ -88,13 +106,19 @@
         "GL-P03-015",
         "GL-P03-016",
         "GL-P03-017"
-      ]
+      ],
+      "result_counts": {
+        "PASS": 7,
+        "PARTIAL": 4,
+        "BLOCKED": 6,
+        "NOT_RUN": 0
+      }
     },
     {
       "id": "P04",
       "title": "Meal capture, logging, barcode and recipe analysis",
-      "implementation_status": "NOT_STARTED",
-      "validation_status": "NOT_RUN",
+      "implementation_status": "IMPLEMENTED_PARTIAL",
+      "validation_status": "PARTIAL",
       "case_count": 19,
       "case_ids": [
         "GL-P04-001",
@@ -116,13 +140,19 @@
         "GL-P04-017",
         "GL-P04-018",
         "GL-P04-019"
-      ]
+      ],
+      "result_counts": {
+        "PASS": 0,
+        "PARTIAL": 17,
+        "BLOCKED": 2,
+        "NOT_RUN": 0
+      }
     },
     {
       "id": "P05",
       "title": "Simulation, forecasts and historical evidence",
-      "implementation_status": "NOT_STARTED",
-      "validation_status": "NOT_RUN",
+      "implementation_status": "IMPLEMENTED_PARTIAL",
+      "validation_status": "PARTIAL",
       "case_count": 15,
       "case_ids": [
         "GL-P05-001",
@@ -140,13 +170,19 @@
         "GL-P05-013",
         "GL-P05-014",
         "GL-P05-015"
-      ]
+      ],
+      "result_counts": {
+        "PASS": 0,
+        "PARTIAL": 15,
+        "BLOCKED": 0,
+        "NOT_RUN": 0
+      }
     },
     {
       "id": "P06",
       "title": "Home feed and nutrition aggregation",
-      "implementation_status": "NOT_STARTED",
-      "validation_status": "NOT_RUN",
+      "implementation_status": "IMPLEMENTED_PARTIAL",
+      "validation_status": "PARTIAL",
       "case_count": 12,
       "case_ids": [
         "GL-P06-001",
@@ -161,13 +197,19 @@
         "GL-P06-010",
         "GL-P06-011",
         "GL-P06-012"
-      ]
+      ],
+      "result_counts": {
+        "PASS": 0,
+        "PARTIAL": 11,
+        "BLOCKED": 0,
+        "NOT_RUN": 1
+      }
     },
     {
       "id": "P07",
       "title": "Validated catalog, search, detail and favorites",
-      "implementation_status": "NOT_STARTED",
-      "validation_status": "NOT_RUN",
+      "implementation_status": "DEPENDENCY_GATED",
+      "validation_status": "BLOCKED",
       "case_count": 15,
       "case_ids": [
         "GL-P07-001",
@@ -185,13 +227,19 @@
         "GL-P07-013",
         "GL-P07-014",
         "GL-P07-015"
-      ]
+      ],
+      "result_counts": {
+        "PASS": 0,
+        "PARTIAL": 0,
+        "BLOCKED": 15,
+        "NOT_RUN": 0
+      }
     },
     {
       "id": "P08",
       "title": "Profile, settings, privacy and notifications",
-      "implementation_status": "NOT_STARTED",
-      "validation_status": "NOT_RUN",
+      "implementation_status": "IMPLEMENTED_PARTIAL",
+      "validation_status": "PARTIAL",
       "case_count": 13,
       "case_ids": [
         "GL-P08-001",
@@ -207,14 +255,20 @@
         "GL-P08-011",
         "GL-P08-012",
         "GL-P08-013"
-      ]
+      ],
+      "result_counts": {
+        "PASS": 2,
+        "PARTIAL": 10,
+        "BLOCKED": 1,
+        "NOT_RUN": 0
+      }
     },
     {
       "id": "P09",
       "title": "Portion comparison and later actual outcomes",
-      "implementation_status": "NOT_STARTED",
-      "validation_status": "NOT_RUN",
-      "case_count": 10,
+      "implementation_status": "IMPLEMENTED_PARTIAL",
+      "validation_status": "PARTIAL",
+      "case_count": 12,
       "case_ids": [
         "GL-P09-001",
         "GL-P09-002",
@@ -225,14 +279,22 @@
         "GL-P09-007",
         "GL-P09-008",
         "GL-P09-009",
-        "GL-P09-010"
-      ]
+        "GL-P09-010",
+        "GL-P09-011",
+        "GL-P09-012"
+      ],
+      "result_counts": {
+        "PASS": 2,
+        "PARTIAL": 8,
+        "BLOCKED": 0,
+        "NOT_RUN": 2
+      }
     },
     {
       "id": "P10",
       "title": "Hosted deployment, resilience and release acceptance",
-      "implementation_status": "NOT_STARTED",
-      "validation_status": "NOT_RUN",
+      "implementation_status": "PREPARATION_PARTIAL",
+      "validation_status": "PARTIAL",
       "case_count": 13,
       "case_ids": [
         "GL-P10-001",
@@ -248,1593 +310,2095 @@
         "GL-P10-011",
         "GL-P10-012",
         "GL-P10-013"
-      ]
+      ],
+      "result_counts": {
+        "PASS": 0,
+        "PARTIAL": 8,
+        "BLOCKED": 5,
+        "NOT_RUN": 0
+      }
     }
   ],
   "cases": [
     {
       "id": "GL-P00-001",
       "phase": "P00",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PASS",
+      "actual": "Pinned local toolchain, redaction/target guards, deliberate contract drift and local source/lock/model/migration manifest verified.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P00-002",
       "phase": "P00",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PASS",
+      "actual": "Pinned local toolchain, redaction/target guards, deliberate contract drift and local source/lock/model/migration manifest verified.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P00-003",
       "phase": "P00",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PASS",
+      "actual": "Pinned local toolchain, redaction/target guards, deliberate contract drift and local source/lock/model/migration manifest verified.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P00-004",
       "phase": "P00",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PARTIAL",
+      "actual": "Clean offline unit suite, frontend production checks and private-file/context canaries pass; hosted jobs/full image-layer inspection remain separate.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P00-005",
       "phase": "P00",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "BLOCKED",
+      "actual": "Protected manual-job eligibility is unit tested; GitHub environment/branch protection and hosted execution not enabled while changes stay local.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P00-006",
       "phase": "P00",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PASS",
+      "actual": "Pinned local toolchain, redaction/target guards, deliberate contract drift and local source/lock/model/migration manifest verified.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P00-007",
       "phase": "P00",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PARTIAL",
+      "actual": "Clean offline unit suite, frontend production checks and private-file/context canaries pass; hosted jobs/full image-layer inspection remain separate.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P00-008",
       "phase": "P00",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PASS",
+      "actual": "Pinned local toolchain, redaction/target guards, deliberate contract drift and local source/lock/model/migration manifest verified.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P01-001",
       "phase": "P01",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PASS",
+      "actual": "Approved initially empty cloud target; canonical migrations/hashes, permitted atomic RPCs, idempotent bootstrap and scoped cleanup verified.",
+      "evidence": [
+        "../reports/cloud-schema-checkpoint-2026-11-11.json"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P01-002",
       "phase": "P01",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PASS",
+      "actual": "Approved initially empty cloud target; canonical migrations/hashes, permitted atomic RPCs, idempotent bootstrap and scoped cleanup verified.",
+      "evidence": [
+        "../reports/cloud-schema-checkpoint-2026-11-11.json"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P01-003",
       "phase": "P01",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PASS",
+      "actual": "Approved initially empty cloud target; canonical migrations/hashes, permitted atomic RPCs, idempotent bootstrap and scoped cleanup verified.",
+      "evidence": [
+        "../reports/cloud-schema-checkpoint-2026-11-11.json"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P01-004",
       "phase": "P01",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Real A/B/JWT/RLS/trusted-write/invalid-record/outage assertions passed; complete adversarial matrix and separate failed-migration rehearsal remain required.",
+      "evidence": [
+        "../reports/p01-cloud-integration-validated-2026-11-11.json"
+      ],
+      "run_id": "gl_1d895f4ca9d4404abf6ecf9e",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T08:07:57.277555+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P01-005",
       "phase": "P01",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "BLOCKED",
+      "actual": "Fresh scratch replay explicitly deferred by user; development project was not reset.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P01-006",
       "phase": "P01",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Real A/B/JWT/RLS/trusted-write/invalid-record/outage assertions passed; complete adversarial matrix and separate failed-migration rehearsal remain required.",
+      "evidence": [
+        "../reports/p01-cloud-integration-validated-2026-11-11.json"
+      ],
+      "run_id": "gl_1d895f4ca9d4404abf6ecf9e",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T08:07:57.277555+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P01-007",
       "phase": "P01",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Real A/B/JWT/RLS/trusted-write/invalid-record/outage assertions passed; complete adversarial matrix and separate failed-migration rehearsal remain required.",
+      "evidence": [
+        "../reports/p01-cloud-integration-validated-2026-11-11.json"
+      ],
+      "run_id": "gl_1d895f4ca9d4404abf6ecf9e",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T08:07:57.277555+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P01-008",
       "phase": "P01",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PASS",
+      "actual": "Approved initially empty cloud target; canonical migrations/hashes, permitted atomic RPCs, idempotent bootstrap and scoped cleanup verified.",
+      "evidence": [
+        "../reports/cloud-schema-checkpoint-2026-11-11.json"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P01-009",
       "phase": "P01",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Real A/B/JWT/RLS/trusted-write/invalid-record/outage assertions passed; complete adversarial matrix and separate failed-migration rehearsal remain required.",
+      "evidence": [
+        "../reports/p01-cloud-integration-validated-2026-11-11.json"
+      ],
+      "run_id": "gl_1d895f4ca9d4404abf6ecf9e",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T08:07:57.277555+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P01-010",
       "phase": "P01",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PASS",
+      "actual": "Approved initially empty cloud target; canonical migrations/hashes, permitted atomic RPCs, idempotent bootstrap and scoped cleanup verified.",
+      "evidence": [
+        "../reports/cloud-schema-checkpoint-2026-11-11.json"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P01-011",
       "phase": "P01",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Real A/B/JWT/RLS/trusted-write/invalid-record/outage assertions passed; complete adversarial matrix and separate failed-migration rehearsal remain required.",
+      "evidence": [
+        "../reports/p01-cloud-integration-validated-2026-11-11.json"
+      ],
+      "run_id": "gl_1d895f4ca9d4404abf6ecf9e",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T08:07:57.277555+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P01-012",
       "phase": "P01",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PASS",
+      "actual": "Approved initially empty cloud target; canonical migrations/hashes, permitted atomic RPCs, idempotent bootstrap and scoped cleanup verified.",
+      "evidence": [
+        "../reports/cloud-schema-checkpoint-2026-11-11.json"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P02-001",
       "phase": "P02",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PARTIAL",
+      "actual": "Browser navigation/reload/dialog focus and 320\u20131920 shell matrix passed; all-route/orientation/unsaved-input variants not fully exhausted.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P02-002",
       "phase": "P02",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PARTIAL",
+      "actual": "Browser navigation/reload/dialog focus and 320\u20131920 shell matrix passed; all-route/orientation/unsaved-input variants not fully exhausted.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P02-003",
       "phase": "P02",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PARTIAL",
+      "actual": "Browser navigation/reload/dialog focus and 320\u20131920 shell matrix passed; all-route/orientation/unsaved-input variants not fully exhausted.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P02-004",
       "phase": "P02",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "BLOCKED",
+      "actual": "Physical keyboard/safe area, screen-reader and zoom/manual accessibility UAT require manual/device review.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P02-005",
       "phase": "P02",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PARTIAL",
+      "actual": "Browser navigation/reload/dialog focus and 320\u20131920 shell matrix passed; all-route/orientation/unsaved-input variants not fully exhausted.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P02-006",
       "phase": "P02",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "BLOCKED",
+      "actual": "Physical keyboard/safe area, screen-reader and zoom/manual accessibility UAT require manual/device review.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P02-007",
       "phase": "P02",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "BLOCKED",
+      "actual": "Physical keyboard/safe area, screen-reader and zoom/manual accessibility UAT require manual/device review.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P02-008",
       "phase": "P02",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PARTIAL",
+      "actual": "Honest async/unknown states, chart/table and unit tests, original GlycoLens branding and visual inspection completed; complete state/contrast/manual matrix remains.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P02-009",
       "phase": "P02",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PARTIAL",
+      "actual": "Honest async/unknown states, chart/table and unit tests, original GlycoLens branding and visual inspection completed; complete state/contrast/manual matrix remains.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P02-010",
       "phase": "P02",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PARTIAL",
+      "actual": "Honest async/unknown states, chart/table and unit tests, original GlycoLens branding and visual inspection completed; complete state/contrast/manual matrix remains.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P03-001",
       "phase": "P03",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "BLOCKED",
+      "actual": "Development auto-confirm is active. Real email/expiry/recovery/resend/abuse evidence and verified anonymous continuity are pending; no email sent.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P03-002",
       "phase": "P03",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "BLOCKED",
+      "actual": "Development auto-confirm is active. Real email/expiry/recovery/resend/abuse evidence and verified anonymous continuity are pending; no email sent.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P03-003",
       "phase": "P03",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PARTIAL",
+      "actual": "Cloud sign-in/isolation and browser routing/client-cache/safe-return-path checks passed; full tabs/redirect allowlist/managed password-policy acceptance remains.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P03-004",
       "phase": "P03",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "BLOCKED",
+      "actual": "Development auto-confirm is active. Real email/expiry/recovery/resend/abuse evidence and verified anonymous continuity are pending; no email sent.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P03-005",
       "phase": "P03",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "BLOCKED",
+      "actual": "Development auto-confirm is active. Real email/expiry/recovery/resend/abuse evidence and verified anonymous continuity are pending; no email sent.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P03-006",
       "phase": "P03",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PASS",
+      "actual": "Real cloud refresh/exact-session revocation, resumable ordered required steps, skip/review/CAS and versioned acknowledgement passed; browser resume/skip also passed.",
+      "evidence": [
+        "../reports/p03-account-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_8ebf19b00779479eb4cc6f14",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T08:30:10.712288+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P03-007",
       "phase": "P03",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PARTIAL",
+      "actual": "Existing cloud revocation/isolation evidence retained. New desktop/mobile SDK fixture journeys verify header logout, POST Auth logout, credential removal, other-tab protected redirect, anonymous confirm/cancel, demo draft cleanup and blocked private navigation. A new real cloud browser A-to-B switching journey was not executed.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md",
+        "../reports/demo-logout-compose-review-2026-11-12.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:1afbbd122ee29bfc",
+      "executed_at": "2026-11-12T06:07:37.521533+00:00",
+      "defect": null,
+      "execution_revision_note": "November 12 local source manifest; new fixture/container evidence only, historical cloud provenance retained separately.",
+      "reviewed_publication_revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:8c0152149ff37c63"
     },
     {
       "id": "GL-P03-008",
       "phase": "P03",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PARTIAL",
+      "actual": "Cloud sign-in/isolation and browser routing/client-cache/safe-return-path checks passed; full tabs/redirect allowlist/managed password-policy acceptance remains.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P03-009",
       "phase": "P03",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PARTIAL",
+      "actual": "Cloud sign-in/isolation and browser routing/client-cache/safe-return-path checks passed; full tabs/redirect allowlist/managed password-policy acceptance remains.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P03-010",
       "phase": "P03",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PASS",
+      "actual": "Real cloud refresh/exact-session revocation, resumable ordered required steps, skip/review/CAS and versioned acknowledgement passed; browser resume/skip also passed.",
+      "evidence": [
+        "../reports/p03-account-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_8ebf19b00779479eb4cc6f14",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T08:30:10.712288+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P03-011",
       "phase": "P03",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PASS",
+      "actual": "Real cloud refresh/exact-session revocation, resumable ordered required steps, skip/review/CAS and versioned acknowledgement passed; browser resume/skip also passed.",
+      "evidence": [
+        "../reports/p03-account-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_8ebf19b00779479eb4cc6f14",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T08:30:10.712288+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P03-012",
       "phase": "P03",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PASS",
+      "actual": "Real cloud refresh/exact-session revocation, resumable ordered required steps, skip/review/CAS and versioned acknowledgement passed; browser resume/skip also passed.",
+      "evidence": [
+        "../reports/p03-account-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_8ebf19b00779479eb4cc6f14",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T08:30:10.712288+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P03-013",
       "phase": "P03",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PASS",
+      "actual": "Real cloud refresh/exact-session revocation, resumable ordered required steps, skip/review/CAS and versioned acknowledgement passed; browser resume/skip also passed.",
+      "evidence": [
+        "../reports/p03-account-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_8ebf19b00779479eb4cc6f14",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T08:30:10.712288+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P03-014",
       "phase": "P03",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PASS",
+      "actual": "Real cloud refresh/exact-session revocation, resumable ordered required steps, skip/review/CAS and versioned acknowledgement passed; browser resume/skip also passed.",
+      "evidence": [
+        "../reports/p03-account-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_8ebf19b00779479eb4cc6f14",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T08:30:10.712288+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P03-015",
       "phase": "P03",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "BLOCKED",
+      "actual": "Development auto-confirm is active. Real email/expiry/recovery/resend/abuse evidence and verified anonymous continuity are pending; no email sent.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P03-016",
       "phase": "P03",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PASS",
+      "actual": "Real cloud refresh/exact-session revocation, resumable ordered required steps, skip/review/CAS and versioned acknowledgement passed; browser resume/skip also passed.",
+      "evidence": [
+        "../reports/p03-account-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_8ebf19b00779479eb4cc6f14",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T08:30:10.712288+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P03-017",
       "phase": "P03",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "BLOCKED",
+      "actual": "Development auto-confirm is active. Real email/expiry/recovery/resend/abuse evidence and verified anonymous continuity are pending; no email sent.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P04-001",
       "phase": "P04",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Bounded live USDA/OFF read access and 100-g facts verified; OFF now requires configured project contact for uncached reads, plus staging/package/device acceptance.",
+      "evidence": [
+        "../reports/p04-provider-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_c4a66186809b42f49d0df979",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:37:27.582975+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P04-002",
       "phase": "P04",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Bounded live USDA/OFF read access and 100-g facts verified; OFF now requires configured project contact for uncached reads, plus staging/package/device acceptance.",
+      "evidence": [
+        "../reports/p04-provider-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_c4a66186809b42f49d0df979",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:37:27.582975+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P04-003",
       "phase": "P04",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "BLOCKED",
+      "actual": "Real camera permission/capture/denial/navigation behavior needs supported physical phone/HTTPS testing; manual fallback code exists.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P04-004",
       "phase": "P04",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "BLOCKED",
+      "actual": "Real camera permission/capture/denial/navigation behavior needs supported physical phone/HTTPS testing; manual fallback code exists.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P04-005",
       "phase": "P04",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PARTIAL",
+      "actual": "Strict parser/privacy/failure fixtures and prior bounded synthetic extraction evidence exist; common review UI implemented, representative live extraction/grounding matrix pending.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P04-006",
       "phase": "P04",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PARTIAL",
+      "actual": "Strict parser/privacy/failure fixtures and prior bounded synthetic extraction evidence exist; common review UI implemented, representative live extraction/grounding matrix pending.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P04-007",
       "phase": "P04",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PARTIAL",
+      "actual": "Strict parser/privacy/failure fixtures and prior bounded synthetic extraction evidence exist; common review UI implemented, representative live extraction/grounding matrix pending.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P04-008",
       "phase": "P04",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PARTIAL",
+      "actual": "Strict parser/privacy/failure fixtures and prior bounded synthetic extraction evidence exist; common review UI implemented, representative live extraction/grounding matrix pending.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P04-009",
       "phase": "P04",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Cloud lifecycle/math/frozen-facts/rollback/CAS/cancel tests plus browser fractional yield/review/draft recovery passed. Full case variants (foreign edits, copy/date, interruption, provider/device) remain.",
+      "evidence": [
+        "../reports/p04-meal-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_42796808d2354c4da33e3ff8",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T08:51:43.034862+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P04-010",
       "phase": "P04",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Cloud lifecycle/math/frozen-facts/rollback/CAS/cancel tests plus browser fractional yield/review/draft recovery passed. Full case variants (foreign edits, copy/date, interruption, provider/device) remain.",
+      "evidence": [
+        "../reports/p04-meal-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_42796808d2354c4da33e3ff8",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T08:51:43.034862+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P04-011",
       "phase": "P04",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Cloud lifecycle/math/frozen-facts/rollback/CAS/cancel tests plus browser fractional yield/review/draft recovery passed. Full case variants (foreign edits, copy/date, interruption, provider/device) remain.",
+      "evidence": [
+        "../reports/p04-meal-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_42796808d2354c4da33e3ff8",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T08:51:43.034862+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P04-012",
       "phase": "P04",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Cloud lifecycle/math/frozen-facts/rollback/CAS/cancel tests plus browser fractional yield/review/draft recovery passed. Full case variants (foreign edits, copy/date, interruption, provider/device) remain.",
+      "evidence": [
+        "../reports/p04-meal-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_42796808d2354c4da33e3ff8",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T08:51:43.034862+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P04-013",
       "phase": "P04",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Cloud lifecycle/math/frozen-facts/rollback/CAS/cancel tests plus browser fractional yield/review/draft recovery passed. Full case variants (foreign edits, copy/date, interruption, provider/device) remain.",
+      "evidence": [
+        "../reports/p04-meal-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_42796808d2354c4da33e3ff8",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T08:51:43.034862+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P04-014",
       "phase": "P04",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Cloud lifecycle/math/frozen-facts/rollback/CAS/cancel tests plus browser fractional yield/review/draft recovery passed. Full case variants (foreign edits, copy/date, interruption, provider/device) remain.",
+      "evidence": [
+        "../reports/p04-meal-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_42796808d2354c4da33e3ff8",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T08:51:43.034862+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P04-015",
       "phase": "P04",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Cloud lifecycle/math/frozen-facts/rollback/CAS/cancel tests plus browser fractional yield/review/draft recovery passed. Full case variants (foreign edits, copy/date, interruption, provider/device) remain.",
+      "evidence": [
+        "../reports/p04-meal-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_42796808d2354c4da33e3ff8",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T08:51:43.034862+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P04-016",
       "phase": "P04",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Cloud lifecycle/math/frozen-facts/rollback/CAS/cancel tests plus browser fractional yield/review/draft recovery passed. Full case variants (foreign edits, copy/date, interruption, provider/device) remain. New atomic stale-review/copy cloud regression passed; current UI sends reviewed-fact guards.",
+      "evidence": [
+        "../reports/p04-meal-integration-2026-11-11.json",
+        "../reports/p04-reviewed-facts-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_f0dcf2db72724dd1bafa5a6a",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T10:02:51.741093+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P04-017",
       "phase": "P04",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Cloud lifecycle/math/frozen-facts/rollback/CAS/cancel tests plus browser fractional yield/review/draft recovery passed. Full case variants (foreign edits, copy/date, interruption, provider/device) remain.",
+      "evidence": [
+        "../reports/p04-meal-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_42796808d2354c4da33e3ff8",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T08:51:43.034862+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P04-018",
       "phase": "P04",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Cloud lifecycle/math/frozen-facts/rollback/CAS/cancel tests plus browser fractional yield/review/draft recovery passed. Full case variants (foreign edits, copy/date, interruption, provider/device) remain.",
+      "evidence": [
+        "../reports/p04-meal-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_42796808d2354c4da33e3ff8",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T08:51:43.034862+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P04-019",
       "phase": "P04",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Cloud lifecycle/math/frozen-facts/rollback/CAS/cancel tests plus browser fractional yield/review/draft recovery passed. Full case variants (foreign edits, copy/date, interruption, provider/device) remain. New atomic stale-review/copy cloud regression passed; current UI sends reviewed-fact guards.",
+      "evidence": [
+        "../reports/p04-meal-integration-2026-11-11.json",
+        "../reports/p04-reviewed-facts-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_f0dcf2db72724dd1bafa5a6a",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T10:02:51.741093+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P05-001",
       "phase": "P05",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Real pinned simulator/Chronos C3 cloud execution, immutable source/revision/read/retry and isolation passed; offline shape/leakage and display-unit tests passed. Combined runtime/browser/failure/history variants remain.",
+      "evidence": [
+        "../reports/p05-p06-source-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_1963ddb377444ea0b079c02b",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T08:58:01.929756+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P05-002",
       "phase": "P05",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Real pinned simulator/Chronos C3 cloud execution, immutable source/revision/read/retry and isolation passed; offline shape/leakage and display-unit tests passed. Combined runtime/browser/failure/history variants remain.",
+      "evidence": [
+        "../reports/p05-p06-source-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_1963ddb377444ea0b079c02b",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T08:58:01.929756+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P05-003",
       "phase": "P05",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Real pinned simulator/Chronos C3 cloud execution, immutable source/revision/read/retry and isolation passed; offline shape/leakage and display-unit tests passed. Combined runtime/browser/failure/history variants remain.",
+      "evidence": [
+        "../reports/p05-p06-source-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_1963ddb377444ea0b079c02b",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T08:58:01.929756+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P05-004",
       "phase": "P05",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Real pinned simulator/Chronos C3 cloud execution, immutable source/revision/read/retry and isolation passed; offline shape/leakage and display-unit tests passed. Combined runtime/browser/failure/history variants remain.",
+      "evidence": [
+        "../reports/p05-p06-source-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_1963ddb377444ea0b079c02b",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T08:58:01.929756+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P05-005",
       "phase": "P05",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Real pinned simulator/Chronos C3 cloud execution, immutable source/revision/read/retry and isolation passed; offline shape/leakage and display-unit tests passed. Combined runtime/browser/failure/history variants remain.",
+      "evidence": [
+        "../reports/p05-p06-source-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_1963ddb377444ea0b079c02b",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T08:58:01.929756+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P05-006",
       "phase": "P05",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Real pinned simulator/Chronos C3 cloud execution, immutable source/revision/read/retry and isolation passed; offline shape/leakage and display-unit tests passed. Combined runtime/browser/failure/history variants remain.",
+      "evidence": [
+        "../reports/p05-p06-source-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_1963ddb377444ea0b079c02b",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T08:58:01.929756+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P05-007",
       "phase": "P05",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Real pinned simulator/Chronos C3 cloud execution, immutable source/revision/read/retry and isolation passed; offline shape/leakage and display-unit tests passed. Combined runtime/browser/failure/history variants remain.",
+      "evidence": [
+        "../reports/p05-p06-source-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_1963ddb377444ea0b079c02b",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T08:58:01.929756+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P05-008",
       "phase": "P05",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Real pinned simulator/Chronos C3 cloud execution, immutable source/revision/read/retry and isolation passed; offline shape/leakage and display-unit tests passed. Combined runtime/browser/failure/history variants remain.",
+      "evidence": [
+        "../reports/p05-p06-source-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_1963ddb377444ea0b079c02b",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T08:58:01.929756+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P05-009",
       "phase": "P05",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Real pinned simulator/Chronos C3 cloud execution, immutable source/revision/read/retry and isolation passed; offline shape/leakage and display-unit tests passed. Combined runtime/browser/failure/history variants remain.",
+      "evidence": [
+        "../reports/p05-p06-source-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_1963ddb377444ea0b079c02b",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T08:58:01.929756+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P05-010",
       "phase": "P05",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PARTIAL",
+      "actual": "Single-flight/coverage guards and honest unavailable handling implemented; full overlap/timeout/cancellation/freshness browser matrix not executed.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P05-011",
       "phase": "P05",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PARTIAL",
+      "actual": "Single-flight/coverage guards and honest unavailable handling implemented; full overlap/timeout/cancellation/freshness browser matrix not executed.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P05-012",
       "phase": "P05",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Real pinned simulator/Chronos C3 cloud execution, immutable source/revision/read/retry and isolation passed; offline shape/leakage and display-unit tests passed. Combined runtime/browser/failure/history variants remain.",
+      "evidence": [
+        "../reports/p05-p06-source-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_1963ddb377444ea0b079c02b",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T08:58:01.929756+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P05-013",
       "phase": "P05",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Real pinned simulator/Chronos C3 cloud execution, immutable source/revision/read/retry and isolation passed; offline shape/leakage and display-unit tests passed. Combined runtime/browser/failure/history variants remain.",
+      "evidence": [
+        "../reports/p05-p06-source-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_1963ddb377444ea0b079c02b",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T08:58:01.929756+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P05-014",
       "phase": "P05",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Real pinned simulator/Chronos C3 cloud execution, immutable source/revision/read/retry and isolation passed; offline shape/leakage and display-unit tests passed. Combined runtime/browser/failure/history variants remain.",
+      "evidence": [
+        "../reports/p05-p06-source-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_1963ddb377444ea0b079c02b",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T08:58:01.929756+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P05-015",
       "phase": "P05",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Real pinned simulator/Chronos C3 cloud execution, immutable source/revision/read/retry and isolation passed; offline shape/leakage and display-unit tests passed. Combined runtime/browser/failure/history variants remain.",
+      "evidence": [
+        "../reports/p05-p06-source-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_1963ddb377444ea0b079c02b",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T08:58:01.929756+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P06-001",
       "phase": "P06",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Shared aggregate and populated browser reflow passed. Cloud proved 25-hour boundaries, 30-row pagination-independent totals, partial fiber, timezone regrouping and source partition; 23/24/25-hour unit bounds passed. Remaining full-case variants stay open.",
+      "evidence": [
+        "../reports/p06-p09-aggregation-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_73b6c83943294105a7daf307",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:33:00.070857+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P06-002",
       "phase": "P06",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Shared aggregate and populated browser reflow passed. Cloud proved 25-hour boundaries, 30-row pagination-independent totals, partial fiber, timezone regrouping and source partition; 23/24/25-hour unit bounds passed. Remaining full-case variants stay open.",
+      "evidence": [
+        "../reports/p06-p09-aggregation-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_73b6c83943294105a7daf307",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:33:00.070857+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P06-003",
       "phase": "P06",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Shared aggregate and populated browser reflow passed. Cloud proved 25-hour boundaries, 30-row pagination-independent totals, partial fiber, timezone regrouping and source partition; 23/24/25-hour unit bounds passed. Remaining full-case variants stay open.",
+      "evidence": [
+        "../reports/p06-p09-aggregation-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_73b6c83943294105a7daf307",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:33:00.070857+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P06-004",
       "phase": "P06",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Shared aggregate and populated browser reflow passed. Cloud proved 25-hour boundaries, 30-row pagination-independent totals, partial fiber, timezone regrouping and source partition; 23/24/25-hour unit bounds passed. Remaining full-case variants stay open.",
+      "evidence": [
+        "../reports/p06-p09-aggregation-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_73b6c83943294105a7daf307",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:33:00.070857+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P06-005",
       "phase": "P06",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Shared aggregate and populated browser reflow passed. Cloud proved 25-hour boundaries, 30-row pagination-independent totals, partial fiber, timezone regrouping and source partition; 23/24/25-hour unit bounds passed. Remaining full-case variants stay open.",
+      "evidence": [
+        "../reports/p06-p09-aggregation-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_73b6c83943294105a7daf307",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:33:00.070857+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P06-006",
       "phase": "P06",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Shared aggregate and populated browser reflow passed. Cloud proved 25-hour boundaries, 30-row pagination-independent totals, partial fiber, timezone regrouping and source partition; 23/24/25-hour unit bounds passed. Remaining full-case variants stay open.",
+      "evidence": [
+        "../reports/p06-p09-aggregation-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_73b6c83943294105a7daf307",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:33:00.070857+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P06-007",
       "phase": "P06",
       "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "actual": "No default target is invented. Optional goal display schema exists; entry/edit/effective-history acceptance remains unimplemented/unexecuted.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
       "executed_at": null,
-      "defect": null
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P06-008",
       "phase": "P06",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Shared aggregate and populated browser reflow passed. Cloud proved 25-hour boundaries, 30-row pagination-independent totals, partial fiber, timezone regrouping and source partition; 23/24/25-hour unit bounds passed. Remaining full-case variants stay open.",
+      "evidence": [
+        "../reports/p06-p09-aggregation-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_73b6c83943294105a7daf307",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:33:00.070857+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P06-009",
       "phase": "P06",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Shared aggregate and populated browser reflow passed. Cloud proved 25-hour boundaries, 30-row pagination-independent totals, partial fiber, timezone regrouping and source partition; 23/24/25-hour unit bounds passed. Remaining full-case variants stay open.",
+      "evidence": [
+        "../reports/p06-p09-aggregation-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_73b6c83943294105a7daf307",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:33:00.070857+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P06-010",
       "phase": "P06",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Shared aggregate and populated browser reflow passed. Cloud proved 25-hour boundaries, 30-row pagination-independent totals, partial fiber, timezone regrouping and source partition; 23/24/25-hour unit bounds passed. Remaining full-case variants stay open.",
+      "evidence": [
+        "../reports/p06-p09-aggregation-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_73b6c83943294105a7daf307",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:33:00.070857+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P06-011",
       "phase": "P06",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Shared aggregate and populated browser reflow passed. Cloud proved 25-hour boundaries, 30-row pagination-independent totals, partial fiber, timezone regrouping and source partition; 23/24/25-hour unit bounds passed. Remaining full-case variants stay open.",
+      "evidence": [
+        "../reports/p06-p09-aggregation-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_73b6c83943294105a7daf307",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:33:00.070857+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P06-012",
       "phase": "P06",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Shared aggregate and populated browser reflow passed. Cloud proved 25-hour boundaries, 30-row pagination-independent totals, partial fiber, timezone regrouping and source partition; 23/24/25-hour unit bounds passed. Remaining full-case variants stay open.",
+      "evidence": [
+        "../reports/p06-p09-aggregation-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_73b6c83943294105a7daf307",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:33:00.070857+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P07-001",
       "phase": "P07",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "BLOCKED",
+      "actual": "Corrected catalog release is not available. Search/details/favorites show explicit dependency states; no catalog admission/import/live-data acceptance claimed.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P07-002",
       "phase": "P07",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "BLOCKED",
+      "actual": "Corrected catalog release is not available. Search/details/favorites show explicit dependency states; no catalog admission/import/live-data acceptance claimed.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P07-003",
       "phase": "P07",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "BLOCKED",
+      "actual": "Corrected catalog release is not available. Search/details/favorites show explicit dependency states; no catalog admission/import/live-data acceptance claimed.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P07-004",
       "phase": "P07",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "BLOCKED",
+      "actual": "Corrected catalog release is not available. Search/details/favorites show explicit dependency states; no catalog admission/import/live-data acceptance claimed.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P07-005",
       "phase": "P07",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "BLOCKED",
+      "actual": "Corrected catalog release is not available. Search/details/favorites show explicit dependency states; no catalog admission/import/live-data acceptance claimed.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P07-006",
       "phase": "P07",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "BLOCKED",
+      "actual": "Corrected catalog release is not available. Search/details/favorites show explicit dependency states; no catalog admission/import/live-data acceptance claimed.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P07-007",
       "phase": "P07",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "BLOCKED",
+      "actual": "Corrected catalog release is not available. Search/details/favorites show explicit dependency states; no catalog admission/import/live-data acceptance claimed.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P07-008",
       "phase": "P07",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "BLOCKED",
+      "actual": "Corrected catalog release is not available. Search/details/favorites show explicit dependency states; no catalog admission/import/live-data acceptance claimed.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P07-009",
       "phase": "P07",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "BLOCKED",
+      "actual": "Corrected catalog release is not available. Search/details/favorites show explicit dependency states; no catalog admission/import/live-data acceptance claimed.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P07-010",
       "phase": "P07",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "BLOCKED",
+      "actual": "Corrected catalog release is not available. Search/details/favorites show explicit dependency states; no catalog admission/import/live-data acceptance claimed.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P07-011",
       "phase": "P07",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "BLOCKED",
+      "actual": "Corrected catalog release is not available. Search/details/favorites show explicit dependency states; no catalog admission/import/live-data acceptance claimed.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P07-012",
       "phase": "P07",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "BLOCKED",
+      "actual": "Corrected catalog release is not available. Search/details/favorites show explicit dependency states; no catalog admission/import/live-data acceptance claimed.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P07-013",
       "phase": "P07",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "BLOCKED",
+      "actual": "Corrected catalog release is not available. Search/details/favorites show explicit dependency states; no catalog admission/import/live-data acceptance claimed.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P07-014",
       "phase": "P07",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "BLOCKED",
+      "actual": "Corrected catalog release is not available. Search/details/favorites show explicit dependency states; no catalog admission/import/live-data acceptance claimed.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P07-015",
       "phase": "P07",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "BLOCKED",
+      "actual": "Corrected catalog release is not available. Search/details/favorites show explicit dependency states; no catalog admission/import/live-data acceptance claimed.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P08-001",
       "phase": "P08",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Profile/preference and trusted notification ownership/dedup/read checks passed; development notices and responsive surfaces implemented. Complete policy/support/manual/lifecycle/pagination variants remain.",
+      "evidence": [
+        "../reports/p08-privacy-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_1dbf0cb1fd3e446ba3d46fec",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:05:14.365140+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P08-002",
       "phase": "P08",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Profile/preference and trusted notification ownership/dedup/read checks passed; development notices and responsive surfaces implemented. Complete policy/support/manual/lifecycle/pagination variants remain.",
+      "evidence": [
+        "../reports/p08-privacy-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_1dbf0cb1fd3e446ba3d46fec",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:05:14.365140+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P08-003",
       "phase": "P08",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Profile/preference and trusted notification ownership/dedup/read checks passed; development notices and responsive surfaces implemented. Complete policy/support/manual/lifecycle/pagination variants remain.",
+      "evidence": [
+        "../reports/p08-privacy-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_1dbf0cb1fd3e446ba3d46fec",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:05:14.365140+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P08-004",
       "phase": "P08",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "BLOCKED",
+      "actual": "Sensitive credential/verified recovery and permanent deletion depend on email and retention/recovery decisions. Deletion is explicitly disabled.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P08-005",
       "phase": "P08",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PASS",
+      "actual": "Bounded no-store own-account export included snapshots and denied unauthenticated/foreign data; no keys/JWTs included.",
+      "evidence": [
+        "../reports/p08-privacy-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_1dbf0cb1fd3e446ba3d46fec",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:05:14.365140+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P08-006",
       "phase": "P08",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PASS",
+      "actual": "Immediate password-confirmed hard deletion with no recovery window passed two-owner cloud FK/private-usage/receipt/session/refresh checks, explicit confirmation, bounded attempts, injected file cleanup retry and desktop/mobile cross-tab browser cleanup. Provider backups/logs/restore remain separate release gates; MFA is refused.",
+      "evidence": [
+        "../reports/account-deletion-validation-2026-11-11.md",
+        "../reports/p08-account-deletion-cloud-2026-11-11.json",
+        "../reports/p08-deletion-schema-2026-11-11.json"
+      ],
+      "run_id": "gl_ca6939db727a46f6b456bdfb",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T15:33:32.433017+00:00",
+      "defect": null,
+      "execution_revision_note": "Deletion cloud pre-run source digest captured separately; final reviewed source adds offline-tested MFA/outage guards. See deletion report.",
+      "cloud_execution_source_digest": "36833e06a8a201b8dd3d56ee4a0421c9d4f00ea872d5e729f1ae8997c68a0e5a"
     },
     {
       "id": "GL-P08-007",
       "phase": "P08",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Profile/preference and trusted notification ownership/dedup/read checks passed; development notices and responsive surfaces implemented. Complete policy/support/manual/lifecycle/pagination variants remain. Immediate deletion and cross-tab/route cleanup now pass; final provider retention/support and remaining release/manual variants stay open.",
+      "evidence": [
+        "../reports/p08-privacy-integration-2026-11-11.json",
+        "../reports/account-deletion-validation-2026-11-11.md"
+      ],
+      "run_id": "gl_1dbf0cb1fd3e446ba3d46fec",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:05:14.365140+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P08-008",
       "phase": "P08",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Profile/preference and trusted notification ownership/dedup/read checks passed; development notices and responsive surfaces implemented. Complete policy/support/manual/lifecycle/pagination variants remain.",
+      "evidence": [
+        "../reports/p08-privacy-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_1dbf0cb1fd3e446ba3d46fec",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:05:14.365140+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P08-009",
       "phase": "P08",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Profile/preference and trusted notification ownership/dedup/read checks passed; development notices and responsive surfaces implemented. Complete policy/support/manual/lifecycle/pagination variants remain.",
+      "evidence": [
+        "../reports/p08-privacy-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_1dbf0cb1fd3e446ba3d46fec",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:05:14.365140+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P08-010",
       "phase": "P08",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Profile/preference and trusted notification ownership/dedup/read checks passed; development notices and responsive surfaces implemented. Complete policy/support/manual/lifecycle/pagination variants remain.",
+      "evidence": [
+        "../reports/p08-privacy-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_1dbf0cb1fd3e446ba3d46fec",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:05:14.365140+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P08-011",
       "phase": "P08",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Profile/preference and trusted notification ownership/dedup/read checks passed; development notices and responsive surfaces implemented. Complete policy/support/manual/lifecycle/pagination variants remain.",
+      "evidence": [
+        "../reports/p08-privacy-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_1dbf0cb1fd3e446ba3d46fec",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:05:14.365140+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P08-012",
       "phase": "P08",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Profile/preference and trusted notification ownership/dedup/read checks passed; development notices and responsive surfaces implemented. Complete policy/support/manual/lifecycle/pagination variants remain. Immediate deletion and cross-tab/route cleanup now pass; final provider retention/support and remaining release/manual variants stay open.",
+      "evidence": [
+        "../reports/p08-privacy-integration-2026-11-11.json",
+        "../reports/account-deletion-validation-2026-11-11.md"
+      ],
+      "run_id": "gl_1dbf0cb1fd3e446ba3d46fec",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:05:14.365140+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P08-013",
       "phase": "P08",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Profile/preference and trusted notification ownership/dedup/read checks passed; development notices and responsive surfaces implemented. Complete policy/support/manual/lifecycle/pagination variants remain.",
+      "evidence": [
+        "../reports/p08-privacy-integration-2026-11-11.json"
+      ],
+      "run_id": "gl_1dbf0cb1fd3e446ba3d46fec",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:05:14.365140+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P09-001",
       "phase": "P09",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PASS",
+      "actual": "Independent unit oracles verified portion arithmetic, invalid limits, 24-point MAE and inclusive interval coverage; canonical inputs unchanged.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P09-002",
       "phase": "P09",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Real frozen-context 50/75/100% results, exact 100% baseline, no consumption inflation, delayed actual availability and persisted outcome passed; concurrent DB cap passed. Full source-collision/error/UI/device matrix remains.",
+      "evidence": [
+        "../reports/p09-scenario-integration-validated-2026-11-11.json"
+      ],
+      "run_id": "gl_27507c56876847009264ba60",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:15:13.477574+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P09-003",
       "phase": "P09",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Real frozen-context 50/75/100% results, exact 100% baseline, no consumption inflation, delayed actual availability and persisted outcome passed; concurrent DB cap passed. Full source-collision/error/UI/device matrix remains.",
+      "evidence": [
+        "../reports/p09-scenario-integration-validated-2026-11-11.json"
+      ],
+      "run_id": "gl_27507c56876847009264ba60",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:15:13.477574+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P09-004",
       "phase": "P09",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Real frozen-context 50/75/100% results, exact 100% baseline, no consumption inflation, delayed actual availability and persisted outcome passed; concurrent DB cap passed. Full source-collision/error/UI/device matrix remains.",
+      "evidence": [
+        "../reports/p09-scenario-integration-validated-2026-11-11.json"
+      ],
+      "run_id": "gl_27507c56876847009264ba60",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:15:13.477574+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P09-005",
       "phase": "P09",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Real frozen-context 50/75/100% results, exact 100% baseline, no consumption inflation, delayed actual availability and persisted outcome passed; concurrent DB cap passed. Full source-collision/error/UI/device matrix remains.",
+      "evidence": [
+        "../reports/p09-scenario-integration-validated-2026-11-11.json"
+      ],
+      "run_id": "gl_27507c56876847009264ba60",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:15:13.477574+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P09-006",
       "phase": "P09",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Real frozen-context 50/75/100% results, exact 100% baseline, no consumption inflation, delayed actual availability and persisted outcome passed; concurrent DB cap passed. Full source-collision/error/UI/device matrix remains.",
+      "evidence": [
+        "../reports/p09-scenario-integration-validated-2026-11-11.json"
+      ],
+      "run_id": "gl_27507c56876847009264ba60",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:15:13.477574+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P09-007",
       "phase": "P09",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Real frozen-context 50/75/100% results, exact 100% baseline, no consumption inflation, delayed actual availability and persisted outcome passed; concurrent DB cap passed. Full source-collision/error/UI/device matrix remains.",
+      "evidence": [
+        "../reports/p09-scenario-integration-validated-2026-11-11.json"
+      ],
+      "run_id": "gl_27507c56876847009264ba60",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:15:13.477574+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P09-008",
       "phase": "P09",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PASS",
+      "actual": "Independent unit oracles verified portion arithmetic, invalid limits, 24-point MAE and inclusive interval coverage; canonical inputs unchanged.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P09-009",
       "phase": "P09",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Real frozen-context 50/75/100% results, exact 100% baseline, no consumption inflation, delayed actual availability and persisted outcome passed; concurrent DB cap passed. Full source-collision/error/UI/device matrix remains.",
+      "evidence": [
+        "../reports/p09-scenario-integration-validated-2026-11-11.json"
+      ],
+      "run_id": "gl_27507c56876847009264ba60",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:15:13.477574+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P09-010",
       "phase": "P09",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
-      "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "status": "PARTIAL",
+      "actual": "Real frozen-context 50/75/100% results, exact 100% baseline, no consumption inflation, delayed actual availability and persisted outcome passed; concurrent DB cap passed. Full source-collision/error/UI/device matrix remains.",
+      "evidence": [
+        "../reports/p09-scenario-integration-validated-2026-11-11.json"
+      ],
+      "run_id": "gl_27507c56876847009264ba60",
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:15:13.477574+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P10-001",
       "phase": "P10",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PARTIAL",
+      "actual": "Built Linux web/API with frozen CPU PyTorch, isolated pinned simulator and no copied host venv. Both healthy in local Docker; real 288-point simulator and 24-point cached Chronos smoke passed. Hosted target and full cloud browser integration remain open.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md",
+        "../reports/demo-logout-compose-review-2026-11-12.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:1afbbd122ee29bfc",
+      "executed_at": "2026-11-12T06:07:37.521533+00:00",
+      "defect": null,
+      "execution_revision_note": "November 12 local source manifest; new fixture/container evidence only, historical cloud provenance retained separately.",
+      "reviewed_publication_revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:8c0152149ff37c63"
     },
     {
       "id": "GL-P10-002",
       "phase": "P10",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PARTIAL",
+      "actual": "1,687 web files checked with zero private findings; server keys absent from web config/image metadata/history. Public loopback API/Auth configuration and CORS verified. Complete all-layer vulnerability audit, hosted origins and stale-config release gate remain open.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md",
+        "../reports/demo-logout-compose-review-2026-11-12.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:1afbbd122ee29bfc",
+      "executed_at": "2026-11-12T06:07:37.521533+00:00",
+      "defect": null,
+      "execution_revision_note": "November 12 local source manifest; new fixture/container evidence only, historical cloud provenance retained separately.",
+      "reviewed_publication_revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:8c0152149ff37c63"
     },
     {
       "id": "GL-P10-003",
       "phase": "P10",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "BLOCKED",
+      "actual": "Hosted domain/VPS/SMTP, authorized scratch restore and physical/manual UAT not available. No deployment or production smoke executed.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P10-004",
       "phase": "P10",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PARTIAL",
+      "actual": "HTTP liveness and explicit real simulator/cached CPU model smoke passed separately. Dependency-aware endpoint, failure/readiness matrix and cloud outage readiness remain open.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md",
+        "../reports/demo-logout-compose-review-2026-11-12.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:1afbbd122ee29bfc",
+      "executed_at": "2026-11-12T06:07:37.521533+00:00",
+      "defect": null,
+      "execution_revision_note": "November 12 local source manifest; new fixture/container evidence only, historical cloud provenance retained separately.",
+      "reviewed_publication_revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:8c0152149ff37c63"
     },
     {
       "id": "GL-P10-005",
       "phase": "P10",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PARTIAL",
+      "actual": "Local builds/templates and relevant offline/cloud/browser evidence exist; complete Linux API/simulator, readiness/resources/restart/outage/image and full hosted journey remain required.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P10-006",
       "phase": "P10",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PARTIAL",
+      "actual": "Local API/web restart recovered HTTP; scoped sentinel survived in shared host simulation bind; model mount read-only. Host reboot, full saved-cloud replay/result recovery and backup restore are not established.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md",
+        "../reports/demo-logout-compose-review-2026-11-12.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:1afbbd122ee29bfc",
+      "executed_at": "2026-11-12T06:07:37.521533+00:00",
+      "defect": null,
+      "execution_revision_note": "November 12 local source manifest; new fixture/container evidence only, historical cloud provenance retained separately.",
+      "reviewed_publication_revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:8c0152149ff37c63"
     },
     {
       "id": "GL-P10-007",
       "phase": "P10",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PARTIAL",
+      "actual": "Local builds/templates and relevant offline/cloud/browser evidence exist; complete Linux API/simulator, readiness/resources/restart/outage/image and full hosted journey remain required.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P10-008",
       "phase": "P10",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "BLOCKED",
+      "actual": "Hosted domain/VPS/SMTP, authorized scratch restore and physical/manual UAT not available. No deployment or production smoke executed.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P10-009",
       "phase": "P10",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "BLOCKED",
+      "actual": "Hosted domain/VPS/SMTP, authorized scratch restore and physical/manual UAT not available. No deployment or production smoke executed.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P10-010",
       "phase": "P10",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PARTIAL",
+      "actual": "Local builds/templates and relevant offline/cloud/browser evidence exist; complete Linux API/simulator, readiness/resources/restart/outage/image and full hosted journey remain required.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P10-011",
       "phase": "P10",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "BLOCKED",
+      "actual": "Hosted domain/VPS/SMTP, authorized scratch restore and physical/manual UAT not available. No deployment or production smoke executed.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P10-012",
       "phase": "P10",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "PARTIAL",
+      "actual": "Local builds/templates and relevant offline/cloud/browser evidence exist; complete Linux API/simulator, readiness/resources/restart/outage/image and full hosted journey remain required.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
-      "executed_at": null,
-      "defect": null
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
     },
     {
       "id": "GL-P10-013",
       "phase": "P10",
-      "status": "NOT_RUN",
-      "actual": null,
-      "evidence": [],
+      "status": "BLOCKED",
+      "actual": "Hosted domain/VPS/SMTP, authorized scratch restore and physical/manual UAT not available. No deployment or production smoke executed.",
+      "evidence": [
+        "../reports/webapp-implementation-checkpoint-2026-11-11.md"
+      ],
       "run_id": null,
-      "revision": null,
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+      "executed_at": "2026-11-11T09:46:42.298558+00:00",
+      "defect": null,
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
+    },
+    {
+      "id": "GL-P09-011",
+      "phase": "P09",
+      "status": "NOT_RUN",
+      "actual": "Planned frozen-context portion/composition/repeat experiment in the new protocol; real model sensitivity matrix not executed.",
+      "evidence": [
+        "meal-response-validation-protocol.md",
+        "../reports/demo-logout-compose-review-2026-11-12.md"
+      ],
+      "run_id": null,
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:1afbbd122ee29bfc",
       "executed_at": null,
-      "defect": null
+      "defect": null,
+      "execution_revision_note": "Protocol added in this checkpoint; execution not claimed.",
+      "reviewed_publication_revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:8c0152149ff37c63"
+    },
+    {
+      "id": "GL-P09-012",
+      "phase": "P09",
+      "status": "NOT_RUN",
+      "actual": "Matching-outcome accuracy protocol planned; no untouched approved evaluation target or new accuracy result. Fixed arbitrary-meal replay and consumed cohorts are unsuitable.",
+      "evidence": [
+        "meal-response-validation-protocol.md",
+        "../reports/demo-logout-compose-review-2026-11-12.md"
+      ],
+      "run_id": null,
+      "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:1afbbd122ee29bfc",
+      "executed_at": null,
+      "defect": null,
+      "execution_revision_note": "Protocol added in this checkpoint; execution not claimed.",
+      "reviewed_publication_revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:8c0152149ff37c63"
     }
-  ]
+  ],
+  "latest_checkpoint": {
+    "report": "../reports/demo-logout-compose-review-2026-11-12.md",
+    "manifest": "../reports/webapp-release-manifest-2026-11-12.json",
+    "case_counts": {
+      "PASS": 22,
+      "PARTIAL": 87,
+      "BLOCKED": 34,
+      "NOT_RUN": 3
+    }
+  },
+  "publication": {
+    "authorized": "2026-11-12",
+    "scope": "commit/push checkpoint; not hosted deployment",
+    "manifest": "../reports/webapp-release-manifest-2026-11-12.json"
+  }
 }

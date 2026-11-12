@@ -12,7 +12,7 @@ test.beforeEach(async ({ page }) => {
   await page.route("**/api/v1/**", async route => {
     const path = new URL(route.request().url()).pathname;
     let json: unknown = {};
-    if (path.endsWith("/demo/session")) json = { user_id: "synthetic" };
+    if (path.endsWith("/demo/session")) json = { user_id: "10000000-0000-4000-8000-000000000001" };
     else if (path.endsWith("/simulation/scenario")) json = { forecast_origin: origin, execution: "live", notice: "Synthetic browser-test fixture" };
     else if (path.endsWith("/timeline")) json = { cgm: Array.from({ length: 24 }, (_, i) => ({ recorded_at: new Date(Date.parse(origin) - i * 300000).toISOString(), glucose_mg_dl: 120, source: "simulation" })) };
     else if (path.includes("/foods/")) json = path.includes("/search") ? { foods: [food], source: "cache" } : food;
@@ -30,9 +30,11 @@ test.beforeEach(async ({ page }) => {
 });
 
 test("confirmed meal reaches a validated forecast and earlier history", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/demo");
   await page.getByRole("button", { name: "Choose virtual patient" }).click();
-  await page.getByRole("button", { name: "Run live scenario" }).click();
+  const simulation = page.waitForRequest(request => request.url().endsWith("/simulation/scenario"));
+  await page.getByRole("button", { name: "Run new simulation" }).click();
+  expect((await simulation).postDataJSON()).toEqual({ replay: false });
   await expect(page.getByText("Latest simulated glucose:")).toBeVisible();
   await page.getByRole("button", { name: "Search foods", exact: true }).click();
   await page.getByRole("button", { name: "Add ingredient" }).click();
@@ -47,8 +49,17 @@ test("confirmed meal reaches a validated forecast and earlier history", async ({
   await page.screenshot({ path: `../.cache/m2-browser-${test.info().project.name}.png`, fullPage: true });
 });
 
+test("saved simulation replay uses the replay request", async ({ page }) => {
+  await page.goto("/demo");
+  await page.getByRole("button", { name: "Choose virtual patient" }).click();
+  const replay = page.waitForRequest(request => request.url().endsWith("/simulation/scenario"));
+  await page.getByRole("button", { name: "Replay saved simulation" }).click();
+  expect((await replay).postDataJSON()).toEqual({ replay: true });
+  await expect(page.getByText("Latest simulated glucose:")).toBeVisible();
+});
+
 test("recipe extraction stays editable and barcode accepts manual fallback", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/demo");
   await page.getByRole("button", { name: "Choose virtual patient" }).click();
   await page.getByRole("button", { name: "Recipe text", exact: true }).click();
   await page.getByLabel("Home recipe").fill("100 g rice, two servings");

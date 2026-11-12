@@ -1,5 +1,45 @@
 # GlycoLens Risks, Safety Boundaries, and Scope Controls
 
+## November 12: meal-response and local runtime boundaries
+
+A forecast changing after a portion change does not establish an accurate or causal
+meal response. Use [the separate sensitivity/outcome gates](../testing/meal-response-validation-protocol.md);
+the fixed replay is not ground truth for arbitrary user meals. Preserve research
+labels, uncertainty and the consumed-cohort boundary. An invariant/unstable model
+response must be reported as a limitation, not hidden by successful input wiring.
+Local Compose publishes loopback ports only, keeps private credentials in API
+runtime configuration and retains source artifacts in the existing shared host directory.
+All API deletion workers must see the same complete source store. Liveness
+cannot establish model, cloud, provider or restore readiness. Anonymous sign-out
+warns about identity loss; account-switch/logout must discard private UI drafts.
+
+## Implementation checkpoint - November 11, 2026
+
+Cloud schema, trusted writes, permanent-account development Auth/onboarding and
+the responsive application shell are implemented. Common meal capture/history/
+edit/cancel, immutable Chronos forecasts, Home/daily/seven-day consumed nutrition,
+owned notifications/export, portion comparisons and genuinely later virtual
+observations now have code and scoped test evidence. The original demo moved to
+`/demo`; `/` is a public entry and private routes require account/onboarding.
+
+This is a **partial validation checkpoint**, not full phase/release acceptance.
+Corrected catalog/search/details/favorites, real email verification/recovery,
+verified anonymous upgrade, provider retention/restore, physical-device/manual accessibility,
+scratch replay/restore and hosted acceptance remain open. Keep these changes local
+for review; scratch replay is explicitly deferred. See the
+[implementation report](../reports/webapp-implementation-checkpoint-2026-11-11.md),
+[ADR 0019](../decisions/0019-trusted-cloud-writes-and-frozen-source-context.md) and
+[actual case ledger](../testing/webapp-validation-results.json). Earlier dated
+prototype/preparation evidence below remains historical.
+
+The user confirmed **immediate account deletion after explicit confirmation,
+with no recovery window**. Password reauthentication, hard Auth deletion, owned
+row cascades and retryable private-file cleanup are implemented and validated with
+synthetic accounts. See [ADR 0020](../decisions/0020-immediate-account-deletion.md)
+and [deletion evidence](../reports/account-deletion-validation-2026-11-11.md).
+Provider backup/log retention, restore reconciliation and a support contact remain
+public-release gates; there is no application undo snapshot.
+
 ## Current cloud development and test boundary
 
 [ADR 0018](../decisions/0018-cloud-supabase-and-staged-webapp-delivery.md) and
@@ -38,7 +78,7 @@ chart text/tables, keyboard/focus recovery, visible units, safe-area/keyboard
 clearance and 320px reflow. A screenshot or limited viewport test is not proof
 of accessibility or complete responsive acceptance. New schema/API features need
 grants/RLS, server-owned derived writes, idempotency and cross-user tests before use.
-These controls are design requirements; no new runtime verification is claimed.
+Cloud owner/trusted-write, source partition, frozen forecast and eaten-total controls now have scoped runtime evidence. Remaining manual/accessibility/physical-device and complete-case checks are listed in the current ledger.
 
 November 6 catalog boundary: recipe data remains deferred during upstream correction.
 The [migration strategy](../reports/azure-to-supabase-catalog-migration-strategy-2026-11-06.md)

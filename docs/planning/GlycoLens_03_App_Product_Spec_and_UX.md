@@ -1,5 +1,43 @@
 # GlycoLens App Product Specification and UX
 
+## November 12: demo controls and discoverable logout
+
+The demo uses **Run new simulation** and **Replay saved simulation**. Both keep
+the fixed virtual-patient clock; replay requires a simulation saved on this server.
+Neither label implies a live CGM connection or a new user-meal simulator protocol.
+Sign out is available in the responsive app header and demo account bar, reusing
+Supabase Auth logout. Anonymous users must confirm losing identity access. Private
+routes and demo drafts clear on identity changes, including another tab signing out.
+Meal inputs reaching the model are distinct from validated meal-response quality;
+see the [P09 protocol](../testing/meal-response-validation-protocol.md).
+
+## Implementation checkpoint - November 11, 2026
+
+Cloud schema, trusted writes, permanent-account development Auth/onboarding and
+the responsive application shell are implemented. Common meal capture/history/
+edit/cancel, immutable Chronos forecasts, Home/daily/seven-day consumed nutrition,
+owned notifications/export, portion comparisons and genuinely later virtual
+observations now have code and scoped test evidence. The original demo moved to
+`/demo`; `/` is a public entry and private routes require account/onboarding.
+
+This is a **partial validation checkpoint**, not full phase/release acceptance.
+Corrected catalog/search/details/favorites, real email verification/recovery,
+verified anonymous upgrade, provider retention/restore, physical-device/manual accessibility,
+scratch replay/restore and hosted acceptance remain open. Keep these changes local
+for review; scratch replay is explicitly deferred. See the
+[implementation report](../reports/webapp-implementation-checkpoint-2026-11-11.md),
+[ADR 0019](../decisions/0019-trusted-cloud-writes-and-frozen-source-context.md) and
+[actual case ledger](../testing/webapp-validation-results.json). Earlier dated
+prototype/preparation evidence below remains historical.
+
+The user confirmed **immediate account deletion after explicit confirmation,
+with no recovery window**. Password reauthentication, hard Auth deletion, owned
+row cascades and retryable private-file cleanup are implemented and validated with
+synthetic accounts. See [ADR 0020](../decisions/0020-immediate-account-deletion.md)
+and [deletion evidence](../reports/account-deletion-validation-2026-11-11.md).
+Provider backup/log retention, restore reconciliation and a support contact remain
+public-release gates; there is no application undo snapshot.
+
 Implementation follows [plan 17](GlycoLens_17_Webapp_Implementation_Plan.md): one
 repo, dedicated cloud Supabase development, verified email/password accounts and
 the full feature set in staged releases. All routes/flows below map to its phase
@@ -202,22 +240,22 @@ Functions:
 
 ### Implementation status and scope
 
-The executable entry remains one meal workflow at `/`. Its anonymous Supabase session is authenticated and owner-scoped; permanent-account login/registration and personal onboarding are not implemented. The local simulator/meal/Chronos/numeric-retrieval flow is integrated. Live nutrition-provider configuration and physical camera acceptance remain open. Do not describe the M1 synthetic-only screen or offline-only simulator as the current application.
+The executable app now has a public entry, permanent-account development Auth, resumable onboarding and an authenticated responsive route shell. The earlier integrated workflow remains at `/demo`. Cloud-backed meals, immutable forecasts, consumed nutrition and account activity have scoped evidence; real email delivery, corrected catalog, physical camera and full release acceptance remain open.
 
 The target page inventory and delivery order are defined in [architecture section 2](../architecture/responsive-webapp-ui.md#2-navigation-and-route-contract). New product pages are planned until their code and acceptance evidence exist.
 
 | Area | Target experience | Current implementation boundary |
 |---|---|---|
-| Account/onboarding | Registration, confirmation/recovery, resumable preferences/source/review | Anonymous demo Auth only; permanent account UI/state missing |
-| Home | Source/clock, latest glucose, graph/forecast, eaten nutrition, daily meals and recipe discovery | Context and forecast embedded; dashboard/aggregate missing |
-| Search and details | Database recipe/product tabs, filters, details and source facts | Embedded provider food lookup; corrected catalog/details pending |
-| Meal log | Daily slots/history, reviewed entry, edit/cancel, source snapshots | Confirm/save/read embedded; list/edit/cancel/revisions pending |
-| Scan / analyze | Barcode plus manual fallback; editable recipe text resolved to food facts | Embedded input paths; dedicated pages pending; physical camera gate open |
-| Forecasts | History/detail, uncertainty, summaries, similar outcomes and scenario comparison | Create/read/chart/numeric matches exist; history page/compare/follow-up pending |
-| Nutrition | Shared daily totals, seven-day trend and optional goal display | Meal totals exist; consumed-day aggregate/page missing |
-| Profile/settings | Account, units/timezone, source, privacy, logout and preferences | Dedicated pages missing |
-| Favorites/notifications | Typed saved catalog items and owned nonclinical in-app events | Missing |
-| Help/privacy/errors | Accurate research/data explanations and recoverable route states | Basic embedded statuses; dedicated pages/boundaries pending |
+| Account/onboarding | Registration, confirmation/recovery, resumable preferences/source/review | Dev email/password + resumable cloud onboarding implemented; real email/verified upgrade pending |
+| Home | Source/clock, latest glucose, graph/forecast, eaten nutrition, daily meals and recipe discovery | Cloud source/clock, glucose, eligible forecast and eaten aggregates implemented; discovery waits for catalog |
+| Search and details | Database recipe/product tabs, filters, details and source facts | Provider composer implemented; database catalog/detail activation pending |
+| Meal log | Daily slots/history, reviewed entry, edit/cancel, source snapshots | Owned list/detail/revision-safe edit/cancel and frozen ingredient facts implemented; broader pagination/date acceptance ongoing |
+| Scan / analyze | Barcode plus manual fallback; editable recipe text resolved to food facts | Dedicated scan/analyzer routes and common composer implemented; physical camera/live-provider acceptance pending |
+| Forecasts | History/detail, uncertainty, summaries, similar outcomes and scenario comparison | Owned list/detail, frozen context, scenario/follow-up implementation; complete UX/timeout matrix pending |
+| Nutrition | Shared daily totals, seven-day trend and optional goal display | Shared consumed-day and seven-day aggregate/table implemented; optional-goal editing pending |
+| Profile/settings | Account, units/timezone, source, privacy, logout and preferences | Profile/preferences, source/unit/timezone, logout and bounded export implemented; immediate password-confirmed deletion implemented; provider backup/log/restore gates remain |
+| Favorites/notifications | Typed saved catalog items and owned nonclinical in-app events | Owned trusted notifications implemented; catalog favorites pending |
+| Help/privacy/errors | Accurate research/data explanations and recoverable route states | Public notices and route recovery implemented; support contact and provider backup/log retention detail pending |
 
 ### Flow 1 - account and minimal onboarding
 

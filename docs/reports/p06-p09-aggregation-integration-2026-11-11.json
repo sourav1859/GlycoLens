@@ -1,0 +1,40 @@
+{
+  "executed_at_utc": "2026-11-11T09:33:00.070857+00:00",
+  "run_id": "gl_73b6c83943294105a7daf307",
+  "project_ref": "ecynkzptuslkuhjikzfc",
+  "requests": 51,
+  "email_messages": 0,
+  "paid_provider_calls": 0,
+  "results": [
+    {
+      "case_id": "GL-P06-005",
+      "status": "PASSED",
+      "observed": "30 eaten rows totaled 3000 kcal/300 g carbs despite 20-card pagination; planned/cancelled 999-kcal sentinels excluded"
+    },
+    {
+      "case_id": "GL-P06-002",
+      "status": "PASSED",
+      "observed": "25-hour New York fall-back day included UTC 04:00 start through next-day 04:59 and excluded exact UTC 05:00 end"
+    },
+    {
+      "case_id": "GL-P06-004",
+      "status": "PASSED",
+      "observed": "One unknown fiber yielded null full total, 29-g known subtotal and exactly one missing-meal count"
+    },
+    {
+      "case_id": "GL-P06-003",
+      "status": "PASSED",
+      "observed": "Changing timezone regrouped immutable instants from 30 to 29 eaten rows on the selected day"
+    },
+    {
+      "case_id": "GL-P09-004",
+      "status": "PASSED",
+      "observed": "12 concurrent trusted synthetic DB saves produced exactly 10 rows and two 429 rejections under the per-parent lock; no model calls"
+    }
+  ],
+  "execution_error_class": null,
+  "failure_location": null,
+  "cleanup_error_class": null,
+  "cleanup_completed": true,
+  "suite": "aggregation-and-concurrency"
+}

@@ -1,5 +1,17 @@
 # GlycoLens Scientific Method and Evaluation Plan
 
+## November 12: application meal-response validation gate
+
+Existing context-ablation and portion-calculation plans do not close application
+meal-response validation. The [P09 protocol](../testing/meal-response-validation-protocol.md)
+predeclares frozen-context portion/composition contrasts, repeated identical inputs,
+input snapshots, trajectory/quantile changes and failures (GL-P09-011). Separately,
+GL-P09-012 requires genuinely matching observed outcomes and an untouched approved
+evaluation protocol for accuracy. Both are planned, not executed. The fixed demo
+simulator's preset meals are not changed by the user's meal; its later trajectory
+cannot validate that proposed meal. No model change, mandatory monotonic response,
+causal claim or reuse of consumed primary/PEDAP test sets is authorized.
+
 This document maps GlycoLens directly to the scientific-method structure required by the CSCI-788 course material:
 
 > Introduction -> Background -> Analysis -> Solution/Hypothesis -> System/Experimentation/Synthesis -> Results -> Conclusions -> Future Work

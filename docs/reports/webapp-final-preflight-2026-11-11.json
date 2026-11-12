@@ -1,0 +1,45 @@
+{
+  "approved_project_ref": "ecynkzptuslkuhjikzfc",
+  "cloud_configuration_ready": true,
+  "configuration_present": {
+    "GLYCOLENS_CLOUD_PROJECT_REF": true,
+    "LLM_API_KEY": true,
+    "LLM_MODEL": true,
+    "OPEN_FOOD_FACTS_USER_AGENT": true,
+    "SUPABASE_ANON_KEY": true,
+    "SUPABASE_SECRET_KEY": true,
+    "SUPABASE_SERVICE_ROLE_KEY": false,
+    "SUPABASE_URL": true,
+    "USDA_FDC_API_KEY": true
+  },
+  "contains_credentials": false,
+  "local_supabase_required": false,
+  "open_food_facts_contact_ready": false,
+  "python_version": "3.12.5",
+  "research_dataset_required": false,
+  "supported_python": true,
+  "target_identity_valid": true,
+  "toolchain_ready": true,
+  "tools": {
+    "docker": {
+      "available": true,
+      "version": "Docker version 28.4.0, build d8eb465"
+    },
+    "node": {
+      "available": true,
+      "version": "v22.14.0"
+    },
+    "pnpm": {
+      "available": true,
+      "version": "10.0.0"
+    },
+    "supabase": {
+      "available": true,
+      "version": "2.31.4"
+    },
+    "uv": {
+      "available": true,
+      "version": "uv 0.9.18 (0cee76417 2025-12-16)"
+    }
+  }
+}

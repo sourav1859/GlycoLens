@@ -1,0 +1,30 @@
+{
+  "executed_at_utc": "2026-11-11T09:05:14.365140+00:00",
+  "run_id": "gl_1dbf0cb1fd3e446ba3d46fec",
+  "project_ref": "ecynkzptuslkuhjikzfc",
+  "requests": 74,
+  "email_messages": 0,
+  "paid_provider_calls": 0,
+  "results": [
+    {
+      "case_id": "GL-P08-009",
+      "status": "PASSED",
+      "observed": "Trusted meal event was deduplicated on retry; browser could not fabricate system event"
+    },
+    {
+      "case_id": "GL-P08-010",
+      "status": "PASSED",
+      "observed": "B saw no A events and could not mark A read; A mark-read was idempotent"
+    },
+    {
+      "case_id": "GL-P08-005",
+      "status": "PASSED",
+      "observed": "Bounded no-store export included only owned records and snapshots, excluded JWTs and denied unauthenticated access"
+    }
+  ],
+  "execution_error_class": null,
+  "failure_location": null,
+  "cleanup_error_class": null,
+  "cleanup_completed": true,
+  "suite": "privacy-notifications"
+}

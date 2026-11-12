@@ -1,0 +1,43 @@
+"""Owned, nonclinical application events; no email or push dispatch."""
+
+from uuid import UUID
+from fastapi import APIRouter, Depends, Query
+from pydantic import BaseModel, ConfigDict, Field
+from backend.app.db.client import UserSession, database_call, user_session
+from backend.app.db.trusted import trusted_call
+
+router = APIRouter(prefix="/api/v1/notifications", tags=["notifications"])
+
+
+class ReadNotifications(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    ids: list[UUID] = Field(min_length=1, max_length=100)
+
+
+@router.get("")
+def notifications(
+    offset: int = Query(0, ge=0, le=10000), session: UserSession = Depends(user_session)
+):
+    rows = database_call(
+        session,
+        f"notifications?select=id,kind,entity_id,created_at,read_at&order=created_at.desc,id.desc&limit=51&offset={offset}",
+    )
+    for row in rows:
+        prefix = {
+            "meal_saved": "/meals/",
+            "forecast_ready": "/forecasts/",
+            "source_ready": "/home",
+        }[row["kind"]]
+        row["href"] = prefix + (
+            str(UUID(row["entity_id"])) if row["kind"] != "source_ready" else ""
+        )
+    return {"notifications": rows[:50], "has_more": len(rows) > 50}
+
+
+@router.patch("/read")
+def read(body: ReadNotifications, session: UserSession = Depends(user_session)):
+    return {
+        "updated": trusted_call(
+            session, "rpc/app_read_notifications", payload={"p_ids": [str(i) for i in body.ids]}
+        )
+    }

@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  distDir: process.env.GLYCOLENS_E2E === "1" ? ".next-e2e" : ".next",
+  output: "standalone",
   agentRules: false,
   allowedDevOrigins: ["127.0.0.1"],
 };

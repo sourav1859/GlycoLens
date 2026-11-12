@@ -45,3 +45,12 @@ test("renders an accessible forecast, uncertainty band, summaries, and safety no
   expect(screen.getByText("143 mg/dL")).toBeVisible();
   expect(screen.getByText(/Synthetic demonstration only/)).toBeVisible();
 });
+
+test("converts axis and summaries together without changing canonical input", () => {
+  render(<ForecastChart data={fixture} unit="mmol/L"/>);
+  expect(screen.getByText("6.9 mmol/L")).toBeVisible();
+  expect(screen.getByText("7.3 mmol/L")).toBeVisible();
+  expect(screen.getByText("7.9 mmol/L")).toBeVisible();
+  expect(screen.getByText("mmol/L",{exact:true})).toBeVisible();
+  expect(fixture.summary.minute_30_mg_dl).toBe(125);
+});

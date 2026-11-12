@@ -1,30 +1,46 @@
 # GlycoLens
 
-Current implementation direction: **one repository and a dedicated cloud Supabase
-development project**, with email/password verification/reset and full features in
-staged releases. The [phase plan](docs/planning/GlycoLens_17_Webapp_Implementation_Plan.md)
-defines prerequisites, 11 phases and validation gates, supported by
-[144 test cases](docs/testing/webapp-cloud-test-cases.md) and a
-[NOT_RUN result ledger](docs/testing/webapp-validation-results.json).
-[ADR 0018](docs/decisions/0018-cloud-supabase-and-staged-webapp-delivery.md)
-and [cloud setup](docs/tooling/cloud-supabase-setup.md) supersede local Supabase as
-the target for new application work. November 11: MCP project/database access and
-ignored cloud environment configuration are verified; modern backend API-key
-headers have focused offline coverage. Schema application, permanent Auth, SMTP
-and live-provider acceptance remain pending. See the
-[environment setup evidence](docs/reports/cloud-env-and-email-setup-2026-11-11.md).
-Recipe extraction is configured for OpenAI `gpt-6-luna` through server-only
-`LLM_MODEL`. Under the approved USD 5 total cap, the bounded
-[live recipe comparison](docs/reports/recipe-model-validation-2026-11-11.md)
-verified access and passed eight synthetic cases per model. Representative
-accuracy and complete live application acceptance remain separate gates.
+## Start the local app with Docker
 
-November 10: the [Nutri-App Figma review](docs/reports/figma-reference-review-2026-11-10.md)
-covers all 44 unique supplied nodes. The [responsive UI architecture](docs/architecture/responsive-webapp-ui.md)
-and [ADR 0017](docs/decisions/0017-responsive-webapp-and-figma-reference-boundary.md)
-define the planned account/onboarding flow, shared navigation, page inventory,
-components and desktop/tablet/mobile acceptance. The executable app remains the
-existing meal-to-forecast workflow; this update delivers documentation, not new screens.
+With Docker Desktop running, the existing ignored root `.env` configured and the
+reviewed Chronos cache in `artifacts/models/huggingface`, run from this directory:
+
+```powershell
+docker compose up --build -d --wait
+```
+
+Open <http://127.0.0.1:3000>; the API is <http://127.0.0.1:8000>.
+Stop manually launched services on those ports first, or use the documented port
+overrides. `docker compose down` stops the stack and retains simulation data.
+Cloud Supabase remains external and needs internet. The first build downloads
+dependencies; this is a built-image workflow. See [prerequisites, runtime smoke,
+replay and troubleshooting](infra/README.md), [ADR 0021](docs/decisions/0021-local-compose-runtime.md)
+and [November 12 validation](docs/reports/demo-logout-compose-review-2026-11-12.md).
+
+Current development: **one repo, managed cloud Supabase**, permanent email/password
+accounts and minimal resumable onboarding, responsive routes, reviewed meal
+capture/history/edit/cancel, frozen Chronos forecasts, Home/nutrition, owned
+notifications/export and portion/later-observation workflows. The original demo is
+at `/demo`. See the [implementation checkpoint](docs/reports/webapp-implementation-checkpoint-2026-11-11.md),
+[phase plan](docs/planning/GlycoLens_17_Webapp_Implementation_Plan.md),
+[146-case actual ledger](docs/testing/webapp-validation-results.json) and
+[cloud setup](docs/tooling/cloud-supabase-setup.md).
+
+This is a development checkpoint with partial phase acceptance. Corrected catalog,
+real email delivery, verified anonymous upgrade, provider retention/restore, physical/manual
+UAT, scratch replay/restore and hosted acceptance remain open. The user authorized
+[GitHub publication of this checkpoint](docs/reports/github-checkpoint-delivery-2026-11-12.md)
+on November 12; the earlier local-review hold is superseded. Public deployment
+remains a separate gate.
+OpenAI recipe extraction uses server-only `gpt-6-luna`; no new paid calls were made
+in these implementation checks. Prior estimated USD 0.00763580 counts against the
+approved USD 5 test cap. Figma patterns were adapted to GlycoLens, with no copied
+Nutri-App assets/branding or sample nutrition facts.
+
+Immediate password-confirmed account deletion now has no recovery window. See
+[ADR 0020](docs/decisions/0020-immediate-account-deletion.md) and
+[validation](docs/reports/account-deletion-validation-2026-11-11.md). Provider
+backup/log retention and restore reconciliation remain public-release gates.
 
 The [repository strategy and development-readiness review](docs/reports/repository-strategy-and-development-readiness-2026-11-10.md)
 recommends retaining the monorepo and identifies the environment, CI, contract,

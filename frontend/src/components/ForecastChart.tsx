@@ -11,7 +11,8 @@ function polyline(points: ChartPoint[]): string {
   return points.map((point) => `${point.x.toFixed(2)},${point.y.toFixed(2)}`).join(" ");
 }
 
-export function ForecastChart({ data }: { data: ForecastResponse }) {
+export function ForecastChart({ data, unit="mg/dL" }: { data: ForecastResponse; unit?:"mg/dL"|"mmol/L" }) {
+  const format=(value:number)=>unit==="mmol/L"?(value/18.0182).toFixed(1):Math.round(value);
   const chartContainer = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const container = chartContainer.current;
@@ -73,7 +74,7 @@ export function ForecastChart({ data }: { data: ForecastResponse }) {
           role="img"
           aria-labelledby="forecast-chart-title forecast-chart-description"
         >
-          <title id="forecast-chart-title">Synthetic two-hour glucose forecast</title>
+          <title id="forecast-chart-title">{data.data_mode==="simulated"?"Virtual-patient two-hour glucose forecast":"Synthetic two-hour glucose forecast"}</title>
           <desc id="forecast-chart-description">
             Observed glucose history followed by a median forecast with a shaded q10 to q90
             uncertainty interval. Values are synthetic and are not treatment guidance.
@@ -88,7 +89,7 @@ export function ForecastChart({ data }: { data: ForecastResponse }) {
                 className="chart-grid"
               />
               <text x={PADDING.left - 10} y={scaleY(value) + 4} className="chart-label" textAnchor="end">
-                {value}
+                {format(value)}
               </text>
             </g>
           ))}
@@ -111,7 +112,7 @@ export function ForecastChart({ data }: { data: ForecastResponse }) {
               </text>
             </g>
           ))}
-          <text x={16} y={18} className="chart-axis-title">mg/dL</text>
+          <text x={16} y={18} className="chart-axis-title">{unit}</text>
           <text x={WIDTH / 2} y={HEIGHT - 10} className="chart-axis-title" textAnchor="middle">
             Minutes relative to forecast start
           </text>
@@ -128,9 +129,9 @@ export function ForecastChart({ data }: { data: ForecastResponse }) {
       </div>
 
       <dl className="forecast-summary">
-        <div><dt>30 min</dt><dd>{Math.round(data.summary.minute_30_mg_dl)} mg/dL</dd></div>
-        <div><dt>60 min</dt><dd>{Math.round(data.summary.minute_60_mg_dl)} mg/dL</dd></div>
-        <div><dt>120 min</dt><dd>{Math.round(data.summary.minute_120_mg_dl)} mg/dL</dd></div>
+        <div><dt>30 min</dt><dd>{format(data.summary.minute_30_mg_dl)} {unit}</dd></div>
+        <div><dt>60 min</dt><dd>{format(data.summary.minute_60_mg_dl)} {unit}</dd></div>
+        <div><dt>120 min</dt><dd>{format(data.summary.minute_120_mg_dl)} {unit}</dd></div>
       </dl>
       <p className="safety-notice">{data.notice}</p>
     </section>

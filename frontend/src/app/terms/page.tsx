@@ -1,0 +1,2 @@
+import Link from "next/link";
+export default function Page() { return <main className="public-main"><article className="surface"><p className="eyebrow">GLYCOLENS ? DEVELOPMENT</p><h1>Research prototype usage</h1><p>Use this application for research and education with simulated information. Estimates may be inaccurate or unavailable. They are not medical advice, a meal-safety assessment, or a basis for changing medication. Public-release terms and delivery acceptance remain pending.</p><Link className="button" href="/home">Back to your space</Link></article></main>; }

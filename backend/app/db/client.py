@@ -16,7 +16,7 @@ class UserSession:
 
 def user_session(authorization: str | None = Header(default=None)) -> UserSession:
     if not authorization or not authorization.startswith("Bearer "):
-        raise HTTPException(401, "A demo session is required")
+        raise HTTPException(401, "Sign in to access your application records")
     token = authorization[7:]
     try:
         response = httpx.get(
@@ -28,6 +28,19 @@ def user_session(authorization: str | None = Header(default=None)) -> UserSessio
             timeout=10,
         )
         if response.status_code != 200:
+            raise HTTPException(401, "Session is invalid or expired")
+        active = httpx.post(
+            required_setting("SUPABASE_URL").rstrip("/") + "/rest/v1/rpc/current_session_active",
+            headers={
+                "apikey": required_setting("SUPABASE_ANON_KEY"),
+                "Authorization": authorization,
+            },
+            json={},
+            timeout=10,
+        )
+        if active.status_code != 200:
+            raise HTTPException(503, "Session validation is unavailable")
+        if active.json() is not True:
             raise HTTPException(401, "Session is invalid or expired")
         return UserSession(token, response.json()["id"])
     except (RuntimeError, httpx.HTTPError, KeyError, ValueError):

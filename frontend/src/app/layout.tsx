@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
 import "./globals.css";
+import "./responsive.css";
+import { AccountProvider } from "../features/auth/AccountProvider";
 
 export const metadata: Metadata = {
   title: "GlycoLens",
@@ -12,7 +14,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body><AccountProvider>{children}</AccountProvider></body>
     </html>
   );
 }

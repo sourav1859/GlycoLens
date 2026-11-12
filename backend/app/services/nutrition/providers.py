@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import math
 import os
+import re
 from urllib.parse import quote
 
 import httpx
@@ -159,9 +160,15 @@ def resolve_barcode(barcode: str, session: UserSession) -> dict:
     cached = database_call(session, f"foods?barcode=eq.{barcode}&limit=1")
     if cached:
         return cached[0]
+    agent = os.environ.get("OPEN_FOOD_FACTS_USER_AGENT", "").strip()
+    if not re.fullmatch(r"GlycoLens/[\w.]+ \([^\s()@]+@[^\s()@]+\.[^\s()@]+\)", agent):
+        raise HTTPException(
+            503,
+            "Live barcode lookup needs the project contact configured; use food search meanwhile",
+        )
     payload = provider_request(
         f"https://world.openfoodfacts.org/api/v2/product/{barcode}.json",
-        headers={"User-Agent": os.environ.get("OPEN_FOOD_FACTS_USER_AGENT", "GlycoLens/0.1")},
+        headers={"User-Agent": agent},
     )
     if payload.get("status") != 1:
         raise HTTPException(404, "Barcode not found; try food search")

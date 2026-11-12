@@ -1,5 +1,9 @@
 # Cloud Supabase setup and prerequisite handoff
 
+## Applied cloud development checkpoint
+
+The initially empty schema described below now has 14 canonical migrations and 18 public RLS tables. Test users/foods were scoped and cleaned; no user records remain from validation. Use the new guarded runners, never local reset helpers. Scratch replay is deferred and changes remain local for review. See [evidence](../reports/webapp-implementation-checkpoint-2026-11-11.md).
+
 ## Verified preparation - November 11, 2026
 
 The dedicated `Glycolens` project (`ecynkzptuslkuhjikzfc`, `us-west-2`) is
@@ -27,7 +31,7 @@ unproven. Account for prior spend before further paid calls. See the
 [recipe validation report](../reports/recipe-model-validation-2026-11-11.md).
 Nutrition facts still come from validated providers.
 Eight focused offline tests passed; see [setup evidence](../reports/cloud-env-and-email-setup-2026-11-11.md).
-Hosted schema, cloud-user RLS, live providers and real email delivery remain open.
+Hosted application schema and synthetic cloud-user/RLS/workflow checks now have implementation evidence. Live providers, real email delivery and complete release acceptance remain open. See the implementation checkpoint and ADR 0019.
 
 ## Temporary development Auth configuration - November 11, 2026
 
@@ -160,3 +164,14 @@ References: [Resend Supabase SMTP](https://resend.com/docs/send-with-supabase-sm
 - Explicit hosted target selection and CLI versions: [local/hosted projects](https://supabase.com/docs/guides/local-development/local-and-hosted-projects), [CLI reference](https://supabase.com/docs/reference/cli/introduction).
 - Real verification/recovery delivery: [custom SMTP](https://supabase.com/docs/guides/auth/auth-smtp), [password Auth](https://supabase.com/docs/guides/auth/passwords).
 - Schema/authorization assertions: [database testing](https://supabase.com/docs/guides/database/testing).
+
+## Immediate deletion operations
+
+Migration `20261111152226` implements the user-approved no-recovery policy; see
+[ADR 0020](../decisions/0020-immediate-account-deletion.md). Keep the API's private
+source volume mounted and its default cleanup worker running. Its 30-second loop
+retries source-UUID-only jobs after transient filesystem errors/restarts. Monitor
+backlog with server-only `app_deletion_artifacts`; never expose the queue to the
+browser. `GLYCOLENS_DELETION_CLEANUP_WORKER=0` is a controlled-test override, not a
+production setting. Zero pending jobs was verified after synthetic cleanup.
+Provider backup/log retention and restore reconciliation are still release gates.

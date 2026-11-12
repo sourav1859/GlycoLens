@@ -1,0 +1,40 @@
+{
+  "executed_at_utc": "2026-11-11T08:51:43.034862+00:00",
+  "run_id": "gl_42796808d2354c4da33e3ff8",
+  "project_ref": "ecynkzptuslkuhjikzfc",
+  "requests": 59,
+  "email_messages": 0,
+  "paid_provider_calls": 0,
+  "results": [
+    {
+      "case_id": "GL-P04-009",
+      "status": "PASSED",
+      "observed": "125 g from repeated 100+25 g items produced 225 kcal / 37.5 g carbs; unknown fiber remained null"
+    },
+    {
+      "case_id": "GL-P04-015",
+      "status": "PASSED",
+      "observed": "Identical retry reused meal/revision; changed body with same key was rejected 409"
+    },
+    {
+      "case_id": "GL-P04-019",
+      "status": "PASSED",
+      "observed": "Other owner could read neither meal nor revision; browser writes remain revoked"
+    },
+    {
+      "case_id": "GL-P04-013",
+      "status": "PASSED",
+      "observed": "Edit used frozen food facts, incremented revision and rejected stale update; invalid food rolled back completely"
+    },
+    {
+      "case_id": "GL-P04-014",
+      "status": "PASSED",
+      "observed": "Cancellation preserved three immutable revisions; repeated cancellation reused receipt; permanent removal is not exposed"
+    }
+  ],
+  "execution_error_class": null,
+  "failure_location": null,
+  "cleanup_error_class": null,
+  "cleanup_completed": true,
+  "suite": "meal-lifecycle"
+}

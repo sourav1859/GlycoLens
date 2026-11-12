@@ -1,55 +1,65 @@
 # Responsive web application and UI architecture
 
+## November 12 implemented UX follow-up
+
+Sign out is discoverable in the shared header on desktop/tablet/mobile and in the
+demo account bar. It reuses Supabase logout; anonymous sessions require confirmation.
+The demo subtree is keyed by account identity, so another tab signing out discards
+drafts, results and camera state. Private routes retain the AccountGate boundary.
+Demo controls are **Run new simulation** and **Replay saved simulation**, with an
+explicit fixed-clock/server-replay explanation. See [actual validation](../reports/demo-logout-compose-review-2026-11-12.md).
+
+## Implemented development status
+
+See the [November 11 checkpoint](../reports/webapp-implementation-checkpoint-2026-11-11.md) and [ADR 0019](../decisions/0019-trusted-cloud-writes-and-frozen-source-context.md). The route table distinguishes implemented code from catalog/email/manual/hosted acceptance.
+
 Execution now follows [plan 17](../planning/GlycoLens_17_Webapp_Implementation_Plan.md)
 and [ADR 0018](../decisions/0018-cloud-supabase-and-staged-webapp-delivery.md): one
 repo, dedicated cloud Supabase development and email/password verification/reset,
 with full features delivered in stages. Local prototype results are historical;
-cloud schema/configuration/acceptance remain to be implemented. The plan maps
+cloud schema/configuration are implemented; full acceptance remains open. The plan maps
 these routes/components/data contracts to named test and evidence gates.
 
-**Date:** November 10, 2026. **Status:** design contract for incremental implementation; no application code, migration or deployment is delivered by this document.
+**Date:** November 11, 2026. **Status:** design contract with an implemented development checkpoint; full release acceptance remains open.
 
 The living [product specification](../planning/GlycoLens_03_App_Product_Spec_and_UX.md) owns product scope. This document defines its route, component, data and responsive contracts. [ADR 0017](../decisions/0017-responsive-webapp-and-figma-reference-boundary.md) records the decision. The [Figma review](../reports/figma-reference-review-2026-11-10.md) separates observed designs from these GlycoLens design choices.
 
 ## 1. Baseline and constraints
 
-The current browser entry is `frontend/src/app/page.tsx`, which renders `features/meal/MealWorkflow.tsx`. It supports authenticated anonymous demo sessions, simulator/replay context, food search/barcode/recipe-text input, confirmed meal persistence, Chronos C3 inference and numeric historical matches. `components/ForecastChart.tsx` uses SVG; `app/globals.css` is plain CSS. Existing mobile styling and contained chart scrolling do not establish a complete responsive multi-page application.
-
-There are no implemented permanent-account screens, resumable onboarding, catalog recipe/product pages, daily dashboard aggregation, favorites or notification center. The four checked-in Supabase migrations and `/api/v1` routes remain the executable database/API truth. Descriptive schemas in earlier planning text are not additional migrations.
-
-Preserve the FastAPI modular monolith, canonical adapters under `research/models/adapters/`, verified Supabase sessions, owner RLS, deterministic nutrition math and simulator/research separation. Model selection, held-out evaluation and hosted deployment gates do not change. Catalog activation still requires the corrected release and ADR 0015 validation. A polished unavailable state is preferable to invented data.
+The browser now uses a public entry, account/Auth routes and protected `(app)` layouts. Permanent development Auth, minimal resumable onboarding, shared shell, reviewed meal routes, immutable forecasts, consumed nutrition and owned activity/export are implemented. Catalog release, email delivery, deletion policy and hosted/manual acceptance remain gated. See ADR 0019 and the implementation report for current evidence; reference designs remain reference-only.
 
 ## 2. Navigation and route contract
 
 Use one navigation definition, rendered as bottom navigation on compact screens, a compact rail on tablets and a labeled sidebar on wide screens. Primary destinations, in order: **Home, Search, Meal log, Forecasts, Nutrition**. Account controls expose Favorites, Profile, Settings, Notifications and Help on every size. Add meal is a clear action on Home and Meal log; Scan and Analyze recipe are entry methods, not competing primary destinations. Use visible labels, active states and browser back/deep links.
 
-The reference app varies its navigation between frames. GlycoLens must not reproduce that inconsistency. Route groups below are a proposed Next.js organization; names in parentheses are internal groups and do not alter URLs.
+The reference app varies its navigation between frames. GlycoLens must not reproduce that inconsistency. Route groups below are the Next.js organization and target behavior; names in parentheses are internal groups and do not alter URLs.
 
 | Route | Purpose and required behavior | Current state / delivery order |
 |---|---|---|
-| `/` | Resolve session and onboarding, then redirect to `/home`; keep a working demo entry during migration | Currently the single workflow; phase A |
-| `/auth/sign-up`, `/auth/sign-in` | Supabase-managed registration/login; confirmation and neutral errors | Missing; A |
-| `/auth/check-email`, `/auth/callback` | Confirmation/provider redirect and expired-link recovery | Missing; A |
-| `/auth/forgot-password`, `/auth/reset-password` | Recovery initiation and verified recovery session | Missing; A |
-| `/onboarding` | Versioned, resumable steps; review and completion | Missing; A |
-| `/home` | Glucose/source card, latest forecast, daily eaten-meal nutrition, recent meals, catalog discovery when available | Missing as a page; B |
-| `/search?type=recipes\|products&q=...` | Catalog-first tabs, query, validated filters, sort and pagination | Food lookup exists inside workflow; C |
-| `/recipes/[id]` | Ingredients, yield, serving basis, nutrition/source and reviewed meal action | Missing; corrected-catalog gate, C |
-| `/products/[id]` | Barcode/brand/pack, per-100-g and serving facts, ingredients and provenance | Missing; C |
-| `/meals` | Selected local date, meal slots, daily totals, paginated history | Save/read service exists, page missing; B |
-| `/meals/new`, `/meals/[id]`, `/meals/[id]/edit` | Shared composer, confirmed record and revision-safe edit/remove | Composer exists inside workflow; B; edit service pending |
-| `/scan` | Camera barcode capture, permission/error states and manual-code fallback | Input path exists; page missing and physical camera acceptance open; B |
-| `/recipes/analyze` | Editable text extraction, ingredient resolution, confirmed quantities and totals | Existing embedded path; dedicated page B |
-| `/forecasts`, `/forecasts/[id]` | History/detail, source/origin, interval, 30/60/120-minute summaries | Forecast create/read and chart exist; pages B |
-| `/forecasts/[id]/compare` | Portion scenarios with shared origin/context; no automatic meal logging | Planned original feature; phase D |
-| `/nutrition` | Daily totals and seven-day history with missingness/coverage | Missing; B |
-| `/favorites` | Saved catalog recipes/products; independent of consumed meals | Missing; C |
-| `/profile`, `/settings` | Display name/preferences, account recovery/logout, units/timezone and notification preferences | Missing; A/basic then C |
-| `/settings/connections` | Active data source, simulator/replay state; Dexcom only when implemented | Missing; A/basic then D |
-| `/settings/privacy` | Data controls and account deletion/export requests when supported; accurately disclose availability | Missing; A/basic then D lifecycle implementation |
-| `/notifications` | Owned nonclinical events, read/unread, pagination and safe deep links | Missing; C |
-| `/help`, `/privacy`, `/terms` | Research limitations, data use, source explanations and support information | Missing; A |
-| Not-found/error/loading boundaries | Shared recovery with preserved safe drafts | Basic embedded statuses only; every phase |
+| `/` | Resolve session and onboarding, then redirect to `/home`; keep a working demo entry during migration | Public entry with sign-in/sign-up/demo links; no forced public redirect |
+| `/auth/sign-up`, `/auth/sign-in` | Supabase-managed registration/login; confirmation and neutral errors | Implemented for development; real email gate open |
+| `/auth/check-email`, `/auth/callback` | Confirmation/provider redirect and expired-link recovery | Implemented UI/callback; live expired-email cases pending |
+| `/auth/forgot-password`, `/auth/reset-password` | Recovery initiation and verified recovery session | Implemented recovery UI; delivery disabled pending SMTP |
+| `/onboarding` | Versioned, resumable steps; review and completion | Implemented; real cloud resume/version/CAS evidence |
+| `/home` | Glucose/source card, latest forecast, daily eaten-meal nutrition, recent meals, catalog discovery when available | Implemented; cloud aggregate and browser fixture evidence |
+| `/search?type=recipes\|products&q=...` | Catalog-first tabs, query, validated filters, sort and pagination | Honest unavailable catalog state; corrected release required |
+| `/recipes/[id]` | Ingredients, yield, serving basis, nutrition/source and reviewed meal action | Unavailable-state route; real corrected details pending |
+| `/products/[id]` | Barcode/brand/pack, per-100-g and serving facts, ingredients and provenance | Unavailable-state route; real corrected details pending |
+| `/meals` | Selected local date, meal slots, daily totals, paginated history | Implemented list; date/slot filtering and full validation ongoing |
+| `/meals/new`, `/meals/[id]`, `/meals/[id]/edit` | Shared composer, confirmed record and revision-safe edit/remove | Implemented common composer/revisions/cancel; in-memory scoped drafts |
+| `/scan` | Camera barcode capture, permission/error states and manual-code fallback | Implemented shared barcode composer/manual fallback; phone test pending |
+| `/recipes/analyze` | Editable text extraction, ingredient resolution, confirmed quantities and totals | Implemented common draft/food-grounding composer; live acceptance pending |
+| `/forecasts`, `/forecasts/[id]` | History/detail, source/origin, interval, 30/60/120-minute summaries | Implemented scoped history and frozen detail/chart/table |
+| `/forecasts/[id]/compare` | Portion scenarios with shared origin/context; no automatic meal logging | Implemented same detail/comparison surface; bounded requested inference |
+| `/nutrition` | Daily totals and seven-day history with missingness/coverage | Implemented shared consumed totals/seven-day table |
+| `/favorites` | Saved catalog recipes/products; independent of consumed meals | Unavailable catalog state; typed favorites pending corrected catalog |
+| `/profile`, `/settings` | Display name/preferences, account recovery/logout, units/timezone and notification preferences | Implemented preferences/profile/logout; broader lifecycle acceptance partial |
+| `/settings/connections` | Active data source, simulator/replay state; Dexcom only when implemented | Implemented honest virtual-source/Dexcom availability |
+| `/settings/privacy` | Owned export and immediate password-confirmed account deletion; disclose file cleanup/provider limits | Implemented with explicit confirmation and no recovery window; ADR 0020 |
+| `/account-deleted` | Public deletion outcome with explicit pending-file state | Implemented; no private identity in URL |
+| `/notifications` | Owned nonclinical events, read/unread, pagination and safe deep links | Implemented trusted events and bounded page mark-read |
+| `/help`, `/privacy`, `/terms` | Research limitations, data use, source explanations and support information | Implemented development notices; support/retention finalization pending |
+| Not-found/error/loading boundaries | Shared recovery with preserved safe drafts | Implemented route recovery; broader manual journeys pending |
 
 Research operations stay local/restricted. Do not expose an unprotected `/research` page or add an HTTP batch-run endpoint just to populate navigation. Similarly, hide unavailable controls or explain a dependency; do not ship dead links to planned pages.
 
@@ -196,3 +206,16 @@ Acceptance before each implemented slice is called responsive:
 5. Verify catalog unavailable vs empty, extraction partial/retry, safe confirmation, immutable forecast inputs, stale/no CGM, busy/timeout and later outcomes. Do not substitute fixture-provider success for live acceptance.
 
 The detailed validation plan is in [test strategy](../testing/test-strategy.md). This documentation cycle does not rerun application/model tests or certify screens that have not been implemented.
+
+## Immediate deletion lifecycle
+
+`/settings/privacy` offers export and password-confirmed permanent deletion;
+`/account-deleted` is the public outcome page. `DELETE /api/v1/me` accepts only
+password and exact confirmation, reauthenticates the verified caller and uses
+server-only managed Auth hard deletion. It returns confirmed deletion separately
+from pending private-file cleanup. The browser clears SDK/cross-tab Auth and
+fully navigates to discard private drafts. There is no recovery window.
+Migration 14 adds private usage cascade, bounded attempt reservations and a
+source-UUID-only cleanup outbox. The API retries failed files every 30 seconds.
+See [ADR 0020](../decisions/0020-immediate-account-deletion.md) for role boundaries,
+filesystem scope, MFA refusal and provider backup/log/restore release gates.

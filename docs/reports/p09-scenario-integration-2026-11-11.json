@@ -1,0 +1,40 @@
+{
+  "executed_at_utc": "2026-11-11T09:10:01.569560+00:00",
+  "run_id": "gl_e2b10faf0d2846f5ba304766",
+  "project_ref": "ecynkzptuslkuhjikzfc",
+  "requests": 111,
+  "email_messages": 0,
+  "paid_provider_calls": 0,
+  "results": [
+    {
+      "case_id": "GL-P09-001",
+      "status": "PASSED",
+      "observed": "Real 50/75/100% predictions reused frozen origin/history/model; 100% matched baseline points exactly; scenarios did not change eaten totals"
+    },
+    {
+      "case_id": "GL-P09-004",
+      "status": "PASSED",
+      "observed": "Three owned scenarios persisted; retries reused each ID and B saw none"
+    },
+    {
+      "case_id": "GL-P09-006",
+      "status": "PASSED",
+      "observed": "Actuals unavailable before clock advance; checksum-verified reviewed trajectory supplied 24 samples only after advancing 120 minutes"
+    },
+    {
+      "case_id": "GL-P09-007",
+      "status": "PASSED",
+      "observed": "Observed MAE matched independently computed 24-point array; outcome persisted without changing frozen forecast"
+    },
+    {
+      "case_id": "GL-P09-009",
+      "status": "PASSED",
+      "observed": "Current meal's later outcome was excluded from its own earlier evidence query; source B advance was denied"
+    }
+  ],
+  "execution_error_class": null,
+  "failure_location": null,
+  "cleanup_error_class": null,
+  "cleanup_completed": true,
+  "suite": "scenarios-followup"
+}

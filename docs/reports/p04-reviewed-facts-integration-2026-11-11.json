@@ -1,0 +1,25 @@
+{
+  "executed_at_utc": "2026-11-11T10:02:51.741093+00:00",
+  "run_id": "gl_f0dcf2db72724dd1bafa5a6a",
+  "project_ref": "ecynkzptuslkuhjikzfc",
+  "requests": 37,
+  "email_messages": 0,
+  "paid_provider_calls": 0,
+  "results": [
+    {
+      "case_id": "GL-P04-019",
+      "status": "PASSED",
+      "observed": "A changed food cache caused atomic 409 with no meal; refresh required re-review; edits retained frozen 999-kcal facts while copied draft used current 1000-kcal facts"
+    },
+    {
+      "case_id": "GL-P04-016",
+      "status": "PASSED",
+      "observed": "Copy read exposes current trusted ingredient facts separately from original frozen snapshots; new meal used reviewed refreshed facts and did not rewrite original"
+    }
+  ],
+  "execution_error_class": null,
+  "failure_location": null,
+  "cleanup_error_class": null,
+  "cleanup_completed": true,
+  "suite": "reviewed-fact-conflicts"
+}

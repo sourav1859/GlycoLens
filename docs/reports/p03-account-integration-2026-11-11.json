@@ -1,0 +1,61 @@
+{
+  "executed_at_utc": "2026-11-11T08:30:10.712288+00:00",
+  "run_id": "gl_8ebf19b00779479eb4cc6f14",
+  "project_ref": "ecynkzptuslkuhjikzfc",
+  "requests": 84,
+  "email_messages": 0,
+  "paid_provider_calls": 0,
+  "results": [
+    {
+      "case_id": "GL-P03-010",
+      "status": "PASSED",
+      "observed": "Server rejected skipping required setup; accepted explicit IANA timezone/unit confirmation"
+    },
+    {
+      "case_id": "GL-P03-014",
+      "status": "PASSED",
+      "observed": "Stale onboarding revision returned HTTP 409 without overwriting saved values"
+    },
+    {
+      "case_id": "GL-P03-006",
+      "status": "PASSED",
+      "observed": "Real refresh succeeded; logged-out session JWT lost API and direct Data API row access even while another A session existed"
+    },
+    {
+      "case_id": "GL-P03-011",
+      "status": "PASSED",
+      "observed": "Saved progress/timezone/unit survived logout and a fresh password sign-in"
+    },
+    {
+      "case_id": "GL-P03-012",
+      "status": "PASSED",
+      "observed": "Optional nickname/preferences/goals were skipped; no medical/body fields or default nutrition target were required"
+    },
+    {
+      "case_id": "GL-P03-013",
+      "status": "PASSED",
+      "observed": "Review edit persisted the new timezone/unit without erasing later completed steps"
+    },
+    {
+      "case_id": "GL-P03-016",
+      "status": "PASSED",
+      "observed": "Completion required the current acknowledged notice; repeat completion was idempotent and acknowledgement was owner-scoped"
+    },
+    {
+      "case_id": "GL-P03-003",
+      "status": "PASSED",
+      "observed": "Real password sign-in returned independent completed/incomplete account states for routing; browser routing covered separately"
+    },
+    {
+      "case_id": "GL-P03-007",
+      "status": "PASSED",
+      "observed": "Logout revoked the selected session and A updates did not appear in B; client cache clearing covered separately"
+    }
+  ],
+  "execution_error_class": null,
+  "failure_location": null,
+  "cleanup_error_class": null,
+  "cleanup_completed": true,
+  "email_verification_and_recovery": "NOT_RUN_SMTP_DEFERRED",
+  "anonymous_upgrade": "NOT_RUN_REQUIRES_VERIFIED_LINKING"
+}

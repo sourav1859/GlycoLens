@@ -1,9 +1,9 @@
 import { expect, test } from "@playwright/test";
 
 test("local real Auth, live simulator and selected pretrained forecast", async ({ page }) => {
-  test.skip(!process.env.GLYCOLENS_LIVE_E2E, "Set GLYCOLENS_LIVE_E2E=1 after local setup; this executes the real model and simulator");
+  test.skip(true, "Historical local-stack test. Use the explicitly guarded cloud harness; do not enable this unscoped anonymous/model path.");
   test.setTimeout(180000);
-  await page.goto("/");
+  await page.goto("/demo");
   await page.getByRole("button", { name: "Choose virtual patient" }).click();
   await page.getByRole("button", { name: "Run live scenario" }).click();
   await expect(page.getByText("Latest simulated glucose:")).toBeVisible({ timeout: 120000 });

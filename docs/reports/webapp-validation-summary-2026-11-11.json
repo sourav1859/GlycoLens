@@ -1,0 +1,76 @@
+{
+  "reviewed_revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
+  "offline_python": {
+    "passed": 160,
+    "network_denial_plugin": true,
+    "clean_locked_environment_packages": 25,
+    "command": "uv run --no-sync python -m pytest -p scripts.quality.offline_pytest backend/tests tests/quality tests/contract tests/database tests/research/models/test_forecast_adapters.py -q"
+  },
+  "frontend": {
+    "unit_passed": 24,
+    "lint": "PASS",
+    "types": "PASS",
+    "production_build": "PASS"
+  },
+  "browser": {
+    "stats": {
+      "startTime": "2026-11-11T15:46:09.533Z",
+      "duration": 33822.413,
+      "expected": 20,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "live_cloud": false,
+    "configuration": "synthetic-supabase.example.invalid; all relevant Auth/API fixtures intercepted",
+    "runtime": "Playwright 1.64.1 / Chromium 1248"
+  },
+  "web_image": {
+    "image_id": "sha256:11ea2fc8225754fdc5b53a5ba169ba099937e7a5f6ce4e0716fc9a261de763c8",
+    "public_build_configuration": "synthetic example.invalid only; never deploy this image",
+    "runtime_root_http_status": 200,
+    "runtime_inspection": {
+      "files_checked": 1676,
+      "private_findings": 0,
+      "uid": 1000
+    },
+    "temporary_container_cleaned": true,
+    "scope": "web runtime only; not complete image layer/API/simulator/hosted acceptance",
+    "scope_note": "Earlier packaging image predates the account deletion UI; not rebuilt in this follow-up. Current Next production build passed. Rebuild exact source image before release."
+  },
+  "cloud_schema": {
+    "migrations": 14,
+    "public_rls_tables": 18,
+    "final_cleanup_users": 0,
+    "final_cleanup_test_foods": 0
+  },
+  "case_counts": {
+    "PASS": 22,
+    "PARTIAL": 87,
+    "BLOCKED": 34,
+    "NOT_RUN": 1
+  },
+  "public_file_check": {
+    "files_checked": 549,
+    "findings": 0,
+    "image_exclusions_missing": 0
+  },
+  "skill_validation": {
+    "passed": 9,
+    "failed": 0
+  },
+  "emails_sent": 0,
+  "new_paid_llm_calls": 0,
+  "full_release_acceptance": "NOT_MET",
+  "hosted_ci": "NOT_RUN_LOCAL_REVIEW_ONLY",
+  "deletion_cloud": {
+    "run_id": "gl_ca6939db727a46f6b456bdfb",
+    "http_requests": 116,
+    "cleanup_completed": true,
+    "pending_artifact_jobs": 0,
+    "public_rls_tables": 18,
+    "security_advisor_info_findings": 4,
+    "new_paid_calls": 0,
+    "emails_sent": 0
+  }
+}

@@ -184,7 +184,8 @@ def run_pymgipsim_scenario(
 
     scenario = scenario or PyMgipsimScenario()
     source_directory = source_directory.resolve()
-    python_executable = python_executable.resolve()
+    # Preserve the venv entry point: resolving a Linux symlink bypasses the venv.
+    python_executable = python_executable.absolute()
     output_json = output_json.resolve()
 
     if not (source_directory / "pymgipsim").is_dir():

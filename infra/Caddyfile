@@ -1,0 +1,17 @@
+{$GLYCOLENS_DOMAIN} {
+    encode gzip zstd
+    header {
+        X-Content-Type-Options nosniff
+        Referrer-Policy strict-origin-when-cross-origin
+        Permissions-Policy "camera=(self), microphone=(), geolocation=()"
+    }
+    handle /api/* {
+        reverse_proxy 127.0.0.1:8000
+    }
+    handle /health {
+        reverse_proxy 127.0.0.1:8000
+    }
+    handle {
+        reverse_proxy 127.0.0.1:3000
+    }
+}

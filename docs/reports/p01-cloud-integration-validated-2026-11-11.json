@@ -1,0 +1,63 @@
+{
+  "executed_at_utc": "2026-11-11T08:07:57.277555+00:00",
+  "project_ref": "ecynkzptuslkuhjikzfc",
+  "run_id": "gl_1d895f4ca9d4404abf6ecf9e",
+  "synthetic_users_max": 2,
+  "requests": 53,
+  "email_messages": 0,
+  "paid_provider_calls": 0,
+  "results": [
+    {
+      "case_id": "GL-P01-010",
+      "status": "PASSED",
+      "observed": "Repeated API bootstrap created one owner profile/preferences/onboarding state"
+    },
+    {
+      "case_id": "GL-P01-001",
+      "status": "PASSED",
+      "observed": "Modern public key, password JWT, verified API session and modern trusted server key worked; invalid/missing JWT rejected"
+    },
+    {
+      "case_id": "GL-P01-006",
+      "status": "PASSED",
+      "observed": "A reads owned meal; B reads no A parent/child/preferences; anonymous and invalid JWT access denied"
+    },
+    {
+      "case_id": "GL-P01-007",
+      "status": "PASSED",
+      "observed": "Direct totals/forecast/outcome/catalog writes and trusted RPC calls denied to browser JWT; editable metadata did not escalate access"
+    },
+    {
+      "case_id": "GL-P01-008",
+      "status": "PASSED",
+      "observed": "Verified API atomic meal save calculated trusted totals; identical request key returned same meal"
+    },
+    {
+      "case_id": "GL-P01-009",
+      "status": "PASSED",
+      "observed": "Independent 250g oracle returned 450 kcal/75g carbs; zero grams and invalid timezone rejected; failed multi-item save rolled back parent/children"
+    },
+    {
+      "case_id": "GL-P01-004",
+      "status": "PARTIAL",
+      "observed": "Application idempotency and failed transaction rollback passed; separate failed-migration rehearsal remains pending"
+    },
+    {
+      "case_id": "GL-P01-011",
+      "status": "PASSED",
+      "observed": "Injected Auth timeout produced safe 503; restored real cloud read succeeded"
+    },
+    {
+      "case_id": "GL-P01-012",
+      "status": "PASSED",
+      "observed": "Scoped cleanup of A preserved B sentinel meal; deleted A lost API access. Final cleanup verifies run tags and recorded IDs only"
+    }
+  ],
+  "execution_error_class": null,
+  "cleanup_error_class": null,
+  "last_http_status": 200,
+  "failure_location": null,
+  "failure_http_status": null,
+  "cleanup_completed": true,
+  "scratch_replay": "DEFERRED_BY_USER"
+}

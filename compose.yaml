@@ -1,0 +1,55 @@
+name: glycolens-local
+services:
+  api:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile.api
+    env_file: .env
+    environment:
+      GLYCOLENS_CORS_ORIGINS: http://127.0.0.1:${GLYCOLENS_WEB_PORT:-3000},http://localhost:${GLYCOLENS_WEB_PORT:-3000}
+      GLYCOLENS_SIMULATOR_SOURCE_DIR: /opt/pymgipsim
+      GLYCOLENS_SIMULATOR_PYTHON: /opt/simulator/bin/python
+      HF_HUB_OFFLINE: '1'
+      OMP_NUM_THREADS: '2'
+      MKL_NUM_THREADS: '2'
+      NUMBA_NUM_THREADS: '2'
+      GLYCOLENS_DELETION_CLEANUP_WORKER: ${GLYCOLENS_DELETION_CLEANUP_WORKER:-1}
+    ports: ['127.0.0.1:${GLYCOLENS_API_PORT:-8000}:8000']
+    volumes:
+      - type: bind
+        source: ${GLYCOLENS_MODEL_CACHE:-./artifacts/models/huggingface}
+        target: /app/artifacts/models/huggingface
+        read_only: true
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ${GLYCOLENS_SIMULATION_ARTIFACTS:-./artifacts/simulation}
+        target: /app/artifacts/simulation
+        bind:
+          create_host_path: false
+    init: true
+    restart: unless-stopped
+    security_opt: [no-new-privileges:true]
+    cap_drop: [ALL]
+  web:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile.web
+      args:
+        NEXT_PUBLIC_SUPABASE_URL: ${SUPABASE_URL:?Set the cloud Supabase URL in .env}
+        NEXT_PUBLIC_SUPABASE_ANON_KEY: ${SUPABASE_ANON_KEY:?Set the publishable Supabase key in .env}
+        NEXT_PUBLIC_API_URL: http://127.0.0.1:${GLYCOLENS_API_PORT:-8000}
+    depends_on:
+      api:
+        condition: service_healthy
+    ports: ['127.0.0.1:${GLYCOLENS_WEB_PORT:-3000}:3000']
+    healthcheck:
+      test: ['CMD', 'node', '-e', "fetch('http://127.0.0.1:3000/').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 15s
+      timeout: 5s
+      start_period: 30s
+      retries: 5
+    init: true
+    restart: unless-stopped
+    security_opt: [no-new-privileges:true]
+    cap_drop: [ALL]

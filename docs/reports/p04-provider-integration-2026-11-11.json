@@ -1,0 +1,25 @@
+{
+  "executed_at_utc": "2026-11-11T09:37:27.582975+00:00",
+  "run_id": "gl_c4a66186809b42f49d0df979",
+  "project_ref": "ecynkzptuslkuhjikzfc",
+  "requests": 22,
+  "email_messages": 0,
+  "paid_provider_calls": 0,
+  "results": [
+    {
+      "case_id": "GL-P04-001",
+      "status": "PARTIAL",
+      "observed": "Live USDA search/detail reached approved source and cached explicit 100-g nutrient basis; one picked candidate, no meal or clinical inference"
+    },
+    {
+      "case_id": "GL-P04-002",
+      "status": "PARTIAL",
+      "observed": "Live manual GTIN lookup returned explicit community-source 100-g facts; package-label and phone-camera verification remain required"
+    }
+  ],
+  "execution_error_class": null,
+  "failure_location": null,
+  "cleanup_error_class": null,
+  "cleanup_completed": true,
+  "suite": "bounded-live-food-providers"
+}

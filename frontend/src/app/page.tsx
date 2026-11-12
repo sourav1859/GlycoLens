@@ -1,16 +1,7 @@
-import { MealWorkflow } from "../features/meal/MealWorkflow";
+import Link from "next/link";
+import { Brand } from "../components/layout/AppShell";
+import { Icon } from "../components/ui/Icon";
 
-export default function Home() {
-  return (
-    <main>
-      <section className="hero" aria-labelledby="page-title">
-        <p className="eyebrow">Meal understanding · Virtual-patient research prototype</p>
-        <h1 id="page-title">GlycoLens</h1>
-        <p>
-          Review meal nutrition and explore an uncertain glucose forecast with a simulated patient.
-        </p>
-      </section>
-      <MealWorkflow />
-    </main>
-  );
+export default function Welcome() {
+  return <main className="public-main"><header className="welcome-header"><Brand/><nav aria-label="Account"><Link className="text-link" href="/auth/sign-in">Sign in</Link><Link className="button compact" href="/auth/sign-up">Create account</Link></nav></header><section className="welcome-hero"><div><p className="eyebrow">A MEAL-CENTERED VIEW OF GLUCOSE</p><h1>Your meals.<br/>More context.<br/><span>A clearer view.</span></h1><p>Review food facts, keep a meal log and explore uncertain glucose forecasts with a virtual patient.</p><div className="form-actions"><Link className="button" href="/auth/sign-up">Make yourself at home<Icon name="arrow"/></Link><Link className="button secondary" href="/demo">Explore the demo</Link></div><p className="small muted">A research and education prototype. No treatment or insulin-dosing advice.</p></div><aside className="welcome-overview surface"><span className="status-badge">YOUR EVERYDAY, TOGETHER</span>{[["meal","Review your meal","Food sources and portions, made explicit."],["chart","Explore the forecast","See estimates, intervals and the context behind them."],["nutrition","Understand your intake","Consumed meals and nutrition, with missing data clearly labeled."]].map(([icon,title,text])=><div className="welcome-feature" key={icon}><span className="icon-tile"><Icon name={icon}/></span><div><h2>{title}</h2><p>{text}</p></div></div>)}<p className="notice-panel">Start with a few app preferences. No diagnosis, medication or body measurements required.</p></aside></section><footer className="app-footer"><span>GlycoLens · Research and education</span><span><Link href="/help">How it works</Link><Link href="/privacy">Data notice</Link></span></footer></main>;
 }
