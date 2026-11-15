@@ -222,6 +222,7 @@ class CloudHarness:
             self.save_manifest()
             assert self.request("POST", "/rest/v1/foods", admin=True, body=food).status_code == 201
             body = {
+                "workspace": "personal",
                 "name": "Synthetic cloud meal",
                 "recorded_at": "2026-01-01T12:00:00Z",
                 "items": [{"food_id": food_id, "grams": 250}],
@@ -363,7 +364,7 @@ class CloudHarness:
                 user_db.httpx, "get", side_effect=httpx.TimeoutException("synthetic outage")
             ):
                 assert api.get("/api/v1/timeline", headers=auth_a).status_code == 503
-            assert api.get("/api/v1/timeline", headers=auth_a).status_code == 200
+            assert api.get("/api/v1/meals", headers=auth_a).status_code == 200
             self.record(
                 "GL-P01-011",
                 "Injected Auth timeout produced safe 503; restored real cloud read succeeded",

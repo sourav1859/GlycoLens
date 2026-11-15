@@ -25,6 +25,7 @@ class PrivacyHarness(CloudHarness):
             for headers in (ha, hb):
                 assert api.post("/api/v1/me/bootstrap", headers=headers, json={}).status_code == 200
             body = dict(
+                workspace="personal",
                 name="Synthetic notification meal",
                 recorded_at="2026-01-01T12:00:00Z",
                 confirmed=True,

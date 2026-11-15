@@ -174,3 +174,5 @@
   .app-footer { margin-top: 30px; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+.model-picker { margin-block: 1rem; min-width: 0; }
+.model-version { overflow-wrap: anywhere; }

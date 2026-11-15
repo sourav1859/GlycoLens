@@ -12,6 +12,9 @@
   "max_email_test_messages": 0,
   "llm_total_approved_test_budget_usd": "5.00",
   "llm_prior_estimated_test_spend_usd": "0.00763580",
+  "llm_reconciled_known_estimated_test_spend_usd": "0.00769040",
+  "llm_unreconciled_test_cost_reserve_usd": "0.01",
+  "llm_server_conservative_reserved_usd_at_checkpoint": "0.02763580",
   "paid_calls_default_enabled": false,
   "notes": "Engineering targets are unmeasured and not clinical or capacity guarantees. Separate explicit intent is required for cloud tests and paid calls. Scratch replay and email tests remain deferred."
 }

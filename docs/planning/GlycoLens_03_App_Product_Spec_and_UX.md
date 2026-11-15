@@ -1,5 +1,32 @@
 # GlycoLens App Product Specification and UX
 
+## November 14: personal and simulation workspaces implemented
+
+Personal Home/Meal log/Nutrition show current dates and personal consumption. Virtual run/replay/advance, session history and research model selection live under `/demo`, with an explicit exit. Old simulated detail links resolve their true workspace; drafts and stale requests are isolated. Profile/settings no longer present a global active-source selector. [Actual validation](../reports/workspace-separation-validation-2026-11-14.md) and [44-case ledger](../testing/workspace-separation-results.json): **28 PASS, 16 PARTIAL**. Changes remain local; human Chrome and other qualified gates are not claimed complete.
+
+## November 14: local LightGBM selection enabled for user review
+
+At the user's request, the existing local development runtime now exposes **LightGBM · research option** alongside default Chronos. The ignored local enablement flag is true; the running API's native bundle/digest/read-only mount were verified and real synthetic inference returned 24 ordered points. The shipped environment template remains disabled by default. This is a user-authorized local research exposure for manual testing, not completed L0–L4 acceptance, production enablement or a model default change. All existing history/artifact/owner checks remain enforced.
+
+An existing meal attached to the short one-day source remains ineligible for native inference. Explicitly prepare the 48-hour research source and save a new reviewed meal at that source's clock; existing meal/source snapshots are unchanged. Current carbohydrates are the native meal predictor; matching-outcome accuracy and transferred interval coverage remain unvalidated. [Enablement and verification](../reports/local-lightgbm-enablement-2026-11-14.md). November 12 off-state descriptions below are historical checkpoints; their outstanding acceptance results remain valid.
+
+## November 12 implementation outcome — current status
+
+Demo and saved-meal screens now expose an explicit research model selector, keeping Chronos selected initially. LightGBM requests require the separate 48h research source; short-history errors offer that explicit action. Model/input versions, current-carbohydrate-only limitations, interval kind and accessible signed-value table are visible. Unknown food facts remain unknown; recipe name/quantity/unit edits clear review and saved forecast eligibility. The Chronos result/help disclose the failed synthetic meal-response capability. [Actual UI/API evidence](../reports/lightgbm-app-validation-2026-11-12.md); Chromium fixtures are not Chrome/manual or device acceptance. The human Chrome/keyboard/zoom gate remains pending; physical camera stays deferred.
+
+The dated planning/checkpoint entries below remain historical where they describe unexecuted work.
+
+## November 12: planned opt-in model and Chrome scope
+
+[Plan 18](GlycoLens_18_M2_Closure_and_LightGBM_Integration.md) adds a future explicit research-model selector: Chronos remains
+default, and LightGBM is offered only with verified 24h source history and full
+model/feature/calibration identity. Explain its current-carbohydrate-only meal
+input and symmetric marginal intervals; do not imply protein/fat/fiber predict
+the frozen candidate. Keep the short demo usable and start the longer protocol
+only by explicit choice. Chrome/manual-barcode journeys are in current acceptance;
+physical-camera testing is deferred by user and remains unpassed future scope.
+This is a UI plan, not an implemented selector or new acceptance result.
+
 ## November 12: demo controls and discoverable logout
 
 The demo uses **Run new simulation** and **Replay saved simulation**. Both keep

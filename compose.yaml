@@ -10,6 +10,9 @@ services:
       GLYCOLENS_SIMULATOR_SOURCE_DIR: /opt/pymgipsim
       GLYCOLENS_SIMULATOR_PYTHON: /opt/simulator/bin/python
       HF_HUB_OFFLINE: '1'
+      GLYCOLENS_LIGHTGBM_BUNDLE_DIR: /app/artifacts/models/lightgbm
+      GLYCOLENS_LIGHTGBM_ENABLED: ${GLYCOLENS_LIGHTGBM_ENABLED:-false}
+      GLYCOLENS_LIGHTGBM_MANIFEST_SHA256: ${GLYCOLENS_LIGHTGBM_MANIFEST_SHA256:-}
       OMP_NUM_THREADS: '2'
       MKL_NUM_THREADS: '2'
       NUMBA_NUM_THREADS: '2'
@@ -22,6 +25,10 @@ services:
         read_only: true
         bind:
           create_host_path: false
+      - type: bind
+        source: ${GLYCOLENS_LIGHTGBM_BUNDLE:-./artifacts/models/lightgbm}
+        target: /app/artifacts/models/lightgbm
+        read_only: true
       - type: bind
         source: ${GLYCOLENS_SIMULATION_ARTIFACTS:-./artifacts/simulation}
         target: /app/artifacts/simulation

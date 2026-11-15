@@ -44,6 +44,7 @@ class ReviewedFactsHarness(CloudHarness):
                 == 201
             )
             body = dict(
+                workspace="personal",
                 name="Synthetic reviewed meal",
                 recorded_at="2026-01-01T12:00:00Z",
                 confirmed=True,

@@ -1,8 +1,37 @@
 # GlycoLens phased web application implementation plan
 
+## November 14: personal and simulation workspaces implemented
+
+Plan 19 corrections to P01/P03/P04/P06/P07/P08/P09 are implemented: explicit workspace/source writes, current personal clock, independent totals/history, scoped drafts/requests and context-aware links/export. Earlier account-global source descriptions are historical where they control ordinary data; old result ledgers do not automatically pass this new contract. [Actual validation](../reports/workspace-separation-validation-2026-11-14.md) and [44-case ledger](../testing/workspace-separation-results.json): **28 PASS, 16 PARTIAL**. Changes remain local; human Chrome and other qualified gates are not claimed complete.
+
+## November 14: local LightGBM selection enabled for user review
+
+At the user's request, the existing local development runtime now exposes **LightGBM · research option** alongside default Chronos. The ignored local enablement flag is true; the running API's native bundle/digest/read-only mount were verified and real synthetic inference returned 24 ordered points. The shipped environment template remains disabled by default. This is a user-authorized local research exposure for manual testing, not completed L0–L4 acceptance, production enablement or a model default change. All existing history/artifact/owner checks remain enforced.
+
+An existing meal attached to the short one-day source remains ineligible for native inference. Explicitly prepare the 48-hour research source and save a new reviewed meal at that source's clock; existing meal/source snapshots are unchanged. Current carbohydrates are the native meal predictor; matching-outcome accuracy and transferred interval coverage remain unvalidated. [Enablement and verification](../reports/local-lightgbm-enablement-2026-11-14.md). November 12 off-state descriptions below are historical checkpoints; their outstanding acceptance results remain valid.
+
+## November 12 implementation outcome — current status
+
+The supplemental C/L implementation is now present and tested through actual provider/API/cloud/CPU paths; [the 58-case ledger](../testing/m2-closure-lightgbm-results.json) records passes, partial evidence, failures and human blockers. Default Chronos is unchanged; native LightGBM/48h context/v2 signed bands/UI/export and disable/restart recovery are implemented. **GL-P09-011 completed but Chronos capability failed**; GL-P09-012 remains NOT_RUN. The 146-case ledger records that failure without importing supplemental passes or erasing prior publication history. [Actual report](../reports/m2-closure-validation-2026-11-12.md). Chrome/manual UAT, native presentation rehearsal/sign-off, normal native enablement and separate public-release dependencies remain open. Current changes stay local for review.
+
+The dated planning/checkpoint entries below remain historical where they describe unexecuted work.
+
+## November 12: supplemental closure/model plan and device scope
+
+[Plan 18](GlycoLens_18_M2_Closure_and_LightGBM_Integration.md) supplies a detailed current-revision M2 closure track and separate
+gated LightGBM integration track, with [58 designed tests](../testing/m2-closure-lightgbm-test-cases.md)
+and a separate ledger (initially all NOT_RUN at planning time). It retains Chronos as default and requires a distinct
+longer scenario, verified training-compatible inputs and versioned calibrated-band
+contracts before opt-in enablement. No implementation/model promotion follows from
+the plan. The user selected Chrome acceptance and explicitly deferred physical
+camera; GL-P04-003/004 retain future acceptance with DEFERRED_BY_USER disposition,
+not PASS. Browser fallback/manual barcode stays in current scope. Existing private
+credentials and newly configured OFF contact are available; do not request keys
+again. Broader P00-P10 acceptance and release gates remain distinct from M2.
+
 November 12 source publication: [GitHub delivery authorization](../reports/github-checkpoint-delivery-2026-11-12.md) supersedes the earlier local-review hold for this checkpoint. No hosted deployment or phase acceptance is implied.
 
-November 12: shared demo/header logout and clearer simulation names are implemented; root local Compose and Linux runtime are validated. P09 now includes the separate [meal-response sensitivity and matching-outcome gates](../testing/meal-response-validation-protocol.md), both NOT_RUN. The current 146-case ledger and [follow-up evidence](../reports/demo-logout-compose-review-2026-11-12.md) retain partial phase acceptance.
+November 12: shared demo/header logout and clearer simulation names are implemented; root local Compose and Linux runtime are validated. P09 now includes the separate [meal-response sensitivity and matching-outcome gates](../testing/meal-response-validation-protocol.md), originally both NOT_RUN; current sensitivity failure is recorded above. The current 146-case ledger and [follow-up evidence](../reports/demo-logout-compose-review-2026-11-12.md) retain partial phase acceptance.
 
 ## Implementation checkpoint - November 11, 2026
 
@@ -200,9 +229,9 @@ Each release declares which features/tests passed. R1/R2 delivery does not imply
 5. Implement daily/paginated meal history, edit/cancel/remove confirmation and copy-as-new-draft semantics. Keep source/session ownership and unknown nutrients explicit.
 6. Activate only reviewed live provider paths after key/configuration/unit/provenance tests. Enforce approved LLM request/spend caps and no patient context in provider requests.
 
-**Validation:** GL-P04-001 through GL-P04-019. Independently calculated gram/yield/fraction/repeated-ingredient oracles, failure atomicity, real phone camera and bounded real USDA/LLM evidence are required as applicable.
+**Validation:** GL-P04-001 through GL-P04-019. Independently calculated gram/yield/fraction/repeated-ingredient oracles, failure atomicity, bounded real USDA/LLM evidence and Chrome/manual-barcode coverage are required. Physical-camera evidence is deferred by the November 12 user scope decision, retained for future full-device acceptance.
 
-**Exit:** every entry path leads to the same durable reviewed meal contract; consumption/history/edit/retry semantics pass. Fixtures cannot close live-provider or physical-camera gates.
+**Exit:** every entry path leads to the same durable reviewed meal contract; consumption/history/edit/retry semantics pass. Fixtures cannot close live-provider gates; physical-camera acceptance remains explicitly deferred and unpassed.
 
 ### P05 - Cloud-backed source context, forecast and personal history
 
@@ -212,7 +241,7 @@ Each release declares which features/tests passed. R1/R2 delivery does not imply
 3. Retain the pinned model/common adapter, bounded single-flight execution, safe unavailable/busy/retry behavior and model identity.
 4. Add immutable meal revision/context/input snapshot or verifiable references/hash before exposing editable historical evidence. Existing reads must not rebuild an old result's history from unrelated replacement rows.
 5. Extract forecast list/detail and numeric historical retrieval into dedicated routes, with source/date/owner pagination and no future-outcome contamination.
-6. Present median/interval, source/freshness, 30/60/120-minute values, display-unit conversion and chart table. Do not introduce clinical confidence grades or promote the separate LightGBM research result.
+6. Present median/interval, source/freshness, 30/60/120-minute values, display-unit conversion and chart table. Do not introduce clinical confidence grades or automatically promote research results. Plan 18 separately gates the user-approved opt-in LightGBM option; Chronos stays default.
 
 **Validation:** GL-P05-001 through GL-P05-015. Offline contract/leakage/invalid-grid tests plus real cloud save/read/retry and actual approved model/simulator runs; no training/reselection.
 

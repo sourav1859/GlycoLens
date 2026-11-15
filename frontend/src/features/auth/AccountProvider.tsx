@@ -7,6 +7,9 @@ import { api } from "../../lib/application-api";
 import { isAccount, type Account } from "../../lib/account";
 import { AsyncState } from "../../components/ui/AsyncState";
 
+import { MealDrafts } from "../meal/MealDrafts";
+import { WorkspaceProvider } from "../simulation/Workspace";
+
 type State = { session: Session | null; account: Account | null; initializing: boolean; error: string; recovery: boolean; applyAccount: (value: unknown) => void; reload: () => Promise<void>; signOut: () => Promise<void>; clearDeletedAccount: (owner: string) => Promise<void> };
 const Context = createContext<State | null>(null);
 
@@ -65,7 +68,7 @@ export function AccountProvider({ children }: { children: ReactNode }) {
     if (failure && after.data.session) throw new Error("Your account was deleted. Close this window and sign out to clear this browser.");
     setAccount(null); setSession(null); setError(""); setRecovery(false);
   }
-  return <Context.Provider value={{ session, account: visibleAccount, initializing, error, recovery, applyAccount, reload, signOut, clearDeletedAccount }}>{children}</Context.Provider>;
+  return <Context.Provider value={{ session, account: visibleAccount, initializing, error, recovery, applyAccount, reload, signOut, clearDeletedAccount }}><WorkspaceProvider key={userId??"guest"}><MealDrafts>{children}</MealDrafts></WorkspaceProvider></Context.Provider>;
 }
 
 export function useAccount() { const state = useContext(Context); if (!state) throw new Error("Account provider missing"); return state; }
@@ -81,5 +84,5 @@ export function AccountGate({ children }: { children: ReactNode }) {
   }, [session, account, initializing, path, router]);
   if (error) return <main className="public-main"><AsyncState title="Your account is temporarily unavailable" message={error} error retry={() => void reload().catch(() => {})} /></main>;
   if (initializing || !session || !account || (!account.onboarding.completed_at && path !== "/onboarding") || (account.onboarding.completed_at && path === "/onboarding")) return <main className="public-main"><AsyncState title="Opening your space…" /></main>;
-  return <div key={`${account.user_id}:${account.preferences.source_mode}:${account.preferences.source_session_id ?? "none"}`}>{children}</div>;
+  return <div key={account.user_id}>{children}</div>;
 }

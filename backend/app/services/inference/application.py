@@ -1,7 +1,6 @@
 """Validated past-only application context and process-cached selected model."""
 
 from datetime import datetime, timedelta
-from pathlib import Path
 from threading import Lock
 from urllib.parse import quote
 from uuid import UUID
@@ -12,18 +11,15 @@ from backend.app.db.client import UserSession, database_call
 from backend.app.db.trusted import trusted_call
 from backend.app.services.inference.demo import forecast_to_response
 from research.models.adapters import (
-    Chronos2ForecastAdapter,
     ContextConfiguration,
     ForecastRequest,
     TimePoint,
 )
 from research.models.adapters.base import CovariateSeries
-from research.models.adapters.covariates import FEATURE_VERSION
+from backend.app.services.inference.registry import resolve_model
 
 
-ROOT = Path(__file__).resolve().parents[4]
 MODEL_LOCK = Lock()
-MODEL = None
 SELECTED_CONTEXT = ContextConfiguration.CGM_INSULIN_NUTRITION
 
 
@@ -81,8 +77,15 @@ def build_request(meal: dict, cgm: list[dict], insulin: list[dict]) -> ForecastR
     return ForecastRequest(history, past_covariates=covariates, known_covariates=tuple(nutrients))
 
 
-def forecast_meal(session: UserSession, meal_id: UUID, key: UUID):
-    global MODEL
+def build_model_request(spec, meal, cgm, insulin, metadata):
+    if spec.key == "lightgbm":
+        from .tabular_context import build_tabular_request
+
+        return build_tabular_request(meal, cgm, insulin, metadata)
+    return build_request(meal, cgm, insulin)
+
+
+def forecast_meal(session: UserSession, meal_id: UUID, key: UUID, model_key: str = "chronos"):
     if not MODEL_LOCK.acquire(blocking=False):
         raise HTTPException(429, "Model is busy; retry shortly")
     try:
@@ -90,11 +93,15 @@ def forecast_meal(session: UserSession, meal_id: UUID, key: UUID):
         if not rows:
             raise HTTPException(404, "Meal not found in your demo session")
         meal = rows[0]
+        if meal.get("workspace") == "personal":
+            raise HTTPException(422, "No personal glucose connector is enabled. Use the separate virtual simulation for research forecasts.")
+        spec = resolve_model(model_key)
         if not meal.get("source_session_id") or meal.get("state") == "cancelled":
             raise HTTPException(422, "Choose a source context and a reviewed active meal")
         source = str(UUID(meal["source_session_id"]))
         origin = meal["recorded_at"]
         sources = database_call(session, f"source_sessions?id=eq.{source}&select=metadata")
+        metadata = sources[0]["metadata"] if sources else {}
         coverage = sources[0]["metadata"].get("inference_context_end") if sources else None
         if not coverage or datetime.fromisoformat(
             origin.replace("Z", "+00:00")
@@ -103,20 +110,27 @@ def forecast_meal(session: UserSession, meal_id: UUID, key: UUID):
                 422, "Insulin context does not cover this origin; prepare a new reviewed source"
             )
         existing = database_call(
-            session, f"forecasts?idempotency_key=eq.{key}&select=id,meal_id,meal_revision"
+            session,
+            f"forecasts?idempotency_key=eq.{key}&select=id,meal_id,meal_revision,model_id,model_version,input_snapshot",
         )
         if existing:
             if (
                 existing[0]["meal_id"] != str(meal_id)
                 or existing[0]["meal_revision"] != meal["revision"]
+                or existing[0]["model_id"] != spec.identity["model_id"]
+                or existing[0]["model_version"] != spec.identity["model_version"]
+                or existing[0].get("input_snapshot", {}).get("model_identity", spec.identity)
+                != spec.identity
             ):
-                raise HTTPException(409, "This request key belongs to another meal")
+                raise HTTPException(
+                    409, "This request key belongs to a different meal or model configuration"
+                )
             return {"forecast_id": existing[0]["id"], "reused": True}
         cgm = database_call(
             session,
             "cgm_readings?recorded_at=lte."
             + quote(origin, safe="")
-            + f"&source=eq.simulation&source_session_id=eq.{source}&order=recorded_at.desc&limit=24",
+            + f"&source=eq.simulation&source_session_id=eq.{source}&order=recorded_at.desc&limit={spec.history_samples}",
         )
         insulin = database_call(
             session,
@@ -124,14 +138,15 @@ def forecast_meal(session: UserSession, meal_id: UUID, key: UUID):
             + quote(origin, safe="")
             + f"&source=eq.simulation&source_session_id=eq.{source}&order=recorded_at&limit=600",
         )
-        request = build_request(meal, cgm, insulin)
-        if MODEL is None:
-            model = Chronos2ForecastAdapter(cache_dir=ROOT / "artifacts/models/huggingface")
-            model.load()
-            MODEL = model
-        result = MODEL.predict(request)
+        request = build_model_request(spec, meal, cgm, insulin, metadata)
+        result = spec.predict(request)
+        context = "cgm_insulin_carbohydrates" if spec.key == "lightgbm" else SELECTED_CONTEXT.value
         response = forecast_to_response(
-            request, result, data_mode="simulated", context_configuration=SELECTED_CONTEXT.value
+            request,
+            result,
+            data_mode="simulated",
+            context_configuration=context,
+            provenance=spec.identity,
         )
         forecast_id = trusted_call(
             session,
@@ -143,16 +158,22 @@ def forecast_meal(session: UserSession, meal_id: UUID, key: UUID):
                 "p_key": str(key),
                 "p_model": result.model_id,
                 "p_version": result.model_version,
-                "p_context": SELECTED_CONTEXT.value,
+                "p_context": context,
                 "p_origin": origin,
                 "p_latency": result.latency_ms,
-                "p_provenance": {"source": "simulated", "feature_version": FEATURE_VERSION},
+                "p_provenance": {
+                    "source": "simulated",
+                    "feature_version": spec.identity["feature_version"],
+                    "model_identity": spec.identity,
+                },
                 "p_points": [p.model_dump() for p in response.forecast],
                 "p_input": {
                     "meal": meal,
                     "history": cgm,
                     "insulin": insulin,
                     "source_session_id": source,
+                    "source_metadata": metadata,
+                    "model_identity": spec.identity,
                     "response": response.model_dump(mode="json"),
                 },
             },

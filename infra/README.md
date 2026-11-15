@@ -1,5 +1,15 @@
 # Local application containers
 
+## November 14 local research exposure
+
+The user requested LightGBM in the current local UI. Its ignored root `.env` now enables the option and the existing `glycolens-local` API was recreated on port 8000, with web 3000 retained. The verified narrow bundle stays read-only; Chronos remains default. Only this private local configuration changed; `.env.example` still defaults to false. Reload the meal/demo page to recheck capabilities. Prepare the 48-hour source and save a new meal before native inference; old short-source meals remain unchanged. Formal acceptance and production exposure remain pending. See [verification](../docs/reports/local-lightgbm-enablement-2026-11-14.md). The November 12 off-state descriptions below are historical.
+
+## Optional native research model — November 12
+
+The root API image now includes frozen `chronos` and `refinement` dependency groups. Chronos remains default. `GLYCOLENS_LIGHTGBM_ENABLED=false` is the ordinary setting. Native loading additionally requires the approved exported serving bundle at `GLYCOLENS_LIGHTGBM_BUNDLE` (host default `artifacts/models/lightgbm`) and its exact `GLYCOLENS_LIGHTGBM_MANIFEST_SHA256`; Compose mounts that narrow directory read-only at server `GLYCOLENS_LIGHTGBM_BUNDLE_DIR`. No research dataset/joblib mount or separate model service is needed. Export only trusted frozen artifacts with `scripts/dev/export_lightgbm_bundle.py`; never substitute an unreviewed digest/model. Missing or corrupt bundles reject native inference without fallback.
+
+The isolated review stack `glycolens-implementation-check` at web 3102/API 8102 uses `.cache/compose-model-validation.env` as a non-secret override after the existing `.env`; it alone enables the research option. Native requests require explicit 48h simulation preparation. Disabling/recreating the API preserves existing owned native reads and default Chronos. No migration runs on container startup. [Actual packaging/performance/recovery](../docs/reports/lightgbm-app-validation-2026-11-12.md). Full Chrome/hosted resource acceptance remains open; do not copy review enablement into normal/public settings.
+
 From the repository root with Docker Desktop's Linux engine running:
 
 ```powershell

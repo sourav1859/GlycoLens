@@ -12,6 +12,7 @@ from backend.app.db.trusted import trusted_call
 from backend.app.services.retrieval.numeric import similar_meals
 from backend.app.services.nutrition.windows import day_bounds
 from urllib.parse import quote
+from backend.app.services.workspaces import Workspace, meal_partition, owned_source
 
 
 router = APIRouter(prefix="/api/v1", tags=["application"])
@@ -36,6 +37,8 @@ class MealItem(BaseModel):
 
 class MealSave(BaseModel):
     model_config = ConfigDict(extra="forbid")
+    workspace: Literal["personal", "simulation"]
+    source_session_id: UUID | None = None
     name: str = Field(min_length=1, max_length=200)
     recorded_at: datetime
     idempotency_key: UUID
@@ -75,6 +78,10 @@ class MealSave(BaseModel):
 
     @model_validator(mode="after")
     def consumption_contract(self):
+        if (self.workspace == "simulation") != (self.source_session_id is not None):
+            raise ValueError(
+                "Simulation requires an explicit source; personal meals cannot use one"
+            )
         if (self.state == "logged") != (self.consumed_at is not None):
             raise ValueError("Only logged meals require consumed_at")
         if len(str(self.input_snapshot)) > 16000:
@@ -128,15 +135,14 @@ def list_meals(
     offset: int = Query(default=0, ge=0, le=10000),
     day: date | None = None,
     slot: Literal["breakfast", "lunch", "dinner", "snack"] | None = None,
+    workspace: Workspace = "personal",
+    source_session_id: UUID | None = None,
     session: UserSession = Depends(user_session),
 ):
     if day and not 1970 <= day.year <= 2100:
         raise HTTPException(422, "Choose a local day between 1970 and 2100")
-    preferences = database_call(
-        session, "user_preferences?select=source_session_id,timezone&limit=1"
-    )
-    source = preferences[0].get("source_session_id") if preferences else None
-    partition = "eq." + str(UUID(source)) if source else "is.null"
+    preferences = database_call(session, "user_preferences?select=timezone&limit=1")
+    partition = meal_partition(session, workspace, source_session_id)
     filters = ""
     if day and preferences:
         start, end = day_bounds(day, preferences[0]["timezone"])
@@ -146,10 +152,15 @@ def list_meals(
         filters += "&meal_type=eq." + slot
     rows = database_call(
         session,
-        f"meals?select=*&source_session_id={partition}&order=recorded_at.desc,id.desc&limit={limit + 1}&offset={offset}"
+        f"meals?select=*&{partition}&order=recorded_at.desc,id.desc&limit={limit + 1}&offset={offset}"
         + filters,
     )
-    return {"meals": rows[:limit], "has_more": len(rows) > limit, "source_session_id": source}
+    return {
+        "meals": rows[:limit],
+        "has_more": len(rows) > limit,
+        "workspace": workspace,
+        "source_session_id": str(source_session_id) if source_session_id else None,
+    }
 
 
 @router.patch("/meals/{meal_id}")
@@ -171,6 +182,8 @@ def cancel_meal(meal_id: UUID, body: MealCancel, session: UserSession = Depends(
             "p_revision": body.revision,
             "p_key": str(body.idempotency_key),
             "p_values": {
+                "workspace": meal["workspace"],
+                "source_session_id": meal["source_session_id"],
                 "name": meal["name"],
                 "recorded_at": meal["recorded_at"],
                 "state": "cancelled",
@@ -192,11 +205,15 @@ def get_meal(meal_id: UUID, session: UserSession = Depends(user_session)):
 
 
 @router.get("/timeline")
-def timeline(session: UserSession = Depends(user_session)):
-    preferences = database_call(session, "user_preferences?select=source_session_id&limit=1")
-    source = preferences[0].get("source_session_id") if preferences else None
-    partition = "&source_session_id=" + ("eq." + str(UUID(source)) if source else "is.null")
+def timeline(
+    source_session_id: UUID,
+    workspace: Literal["simulation"] = "simulation",
+    session: UserSession = Depends(user_session),
+):
+    source = owned_source(session, source_session_id)["id"]
+    partition = "&source_session_id=eq." + str(source)
     return {
+        "workspace": "simulation",
         "source_session_id": source,
         "cgm": database_call(
             session,

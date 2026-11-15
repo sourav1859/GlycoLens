@@ -9,6 +9,7 @@ from backend.app.api.meals import MealSave, MealUpdate
 
 def body(**values):
     return dict(
+        workspace="personal",
         name="Reviewed meal",
         recorded_at="2026-01-01T12:00:00Z",
         confirmed=True,

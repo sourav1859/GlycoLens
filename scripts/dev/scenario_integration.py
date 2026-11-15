@@ -34,6 +34,8 @@ class ScenarioHarness(CloudHarness):
                 "/api/v1/meals",
                 headers=ha,
                 json=dict(
+                    workspace="simulation",
+                    source_session_id=sid,
                     name="Synthetic scenario meal",
                     recorded_at=at,
                     consumed_at=at,
@@ -53,7 +55,9 @@ class ScenarioHarness(CloudHarness):
             fid = forecast.json()["forecast_id"]
             baseline = api.get(f"/api/v1/forecasts/{fid}", headers=ha).json()
             assert not api.get(f"/api/v1/forecasts/{fid}/actuals", headers=ha).json()["available"]
-            before = api.get("/api/v1/nutrition", headers=ha).json()["days"]
+            before = api.get(
+                f"/api/v1/nutrition?workspace=simulation&source_session_id={sid}", headers=ha
+            ).json()["days"]
             for multiplier in (0.5, 0.75, 1.0):
                 payload = {"multiplier": multiplier, "idempotency_key": str(uuid4())}
                 result = api.post(f"/api/v1/forecasts/{fid}/scenarios", headers=ha, json=payload)
@@ -69,7 +73,12 @@ class ScenarioHarness(CloudHarness):
                 )
                 if multiplier == 1:
                     assert saved["response"]["forecast"] == baseline["forecast"]["forecast"]
-            assert api.get("/api/v1/nutrition", headers=ha).json()["days"] == before
+            assert (
+                api.get(
+                    f"/api/v1/nutrition?workspace=simulation&source_session_id={sid}", headers=ha
+                ).json()["days"]
+                == before
+            )
             assert (
                 len(api.get(f"/api/v1/forecasts/{fid}/scenarios", headers=ha).json()["scenarios"])
                 == 3

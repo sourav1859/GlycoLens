@@ -4,9 +4,9 @@ import { login, mockAccount } from "./account-fixture";
 async function fixture(page:Page) {
  await mockAccount(page);
  const food={id:"20000000-0000-4000-8000-000000000001",name:"Synthetic reviewed food with a long descriptive source name",source:"synthetic_fixture",source_food_id:"fixture",nutrient_basis_g:100,calories:180,carbs_g:30,protein_g:6,fat_g:4,fiber_g:null};
- const meal={id:"30000000-0000-4000-8000-000000000001",name:"Fixture meal",state:"logged",recorded_at:"2026-01-01T12:00:00Z",consumed_at:"2026-01-01T12:00:00Z",revision:1,source_session_id:"40000000-0000-4000-8000-000000000001",meal_type:null,meal_items:[{food_id:food.id,grams:125,foods:food}],nutrition_provenance:{food_snapshots:[{...food,food_id:food.id,grams:125}]},calories:225,carbs_g:37.5,protein_g:7.5,fat_g:5,fiber_g:null};
+ const meal={workspace:"personal",id:"30000000-0000-4000-8000-000000000001",name:"Fixture meal",state:"logged",recorded_at:"2026-01-01T12:00:00Z",consumed_at:"2026-01-01T12:00:00Z",revision:1,source_session_id:null,meal_type:null,meal_items:[{food_id:food.id,grams:125,foods:food}],nutrition_provenance:{food_snapshots:[{...food,food_id:food.id,grams:125}]},calories:225,carbs_g:37.5,protein_g:7.5,fat_g:5,fiber_g:null};
  let saved:Record<string,unknown>|undefined;
- const summary={available:true,timezone:"UTC",day:"2026-01-01",source:{id:meal.source_session_id,clock_at:meal.recorded_at,mode:"simulation"},days:[{day:"2026-01-01",meal_count:1,nutrients:Object.fromEntries(["calories","carbs_g","protein_g","fat_g","fiber_g"].map(f=>[f,{total:f==="fiber_g"?null:f==="calories"?225:f==="carbs_g"?37.5:f==="protein_g"?7.5:5,known_total:f==="fiber_g"?0:225,known_meals:f==="fiber_g"?0:1,missing_meals:f==="fiber_g"?1:0}]))}],meals:[meal],goals:[],latest_glucose:[{recorded_at:meal.recorded_at,glucose_mg_dl:120}],forecasts:[]};
+ const summary={workspace:"personal",available:true,timezone:"UTC",day:"2026-01-01",source:null,days:[{day:"2026-01-01",meal_count:1,nutrients:Object.fromEntries(["calories","carbs_g","protein_g","fat_g","fiber_g"].map(f=>[f,{total:f==="fiber_g"?null:f==="calories"?225:f==="carbs_g"?37.5:f==="protein_g"?7.5:5,known_total:f==="fiber_g"?0:225,known_meals:f==="fiber_g"?0:1,missing_meals:f==="fiber_g"?1:0}]))}],meals:[meal],goals:[],latest_glucose:[],forecasts:[]};
  await page.route("**/api/v1/**",async route=>{
    const path=new URL(route.request().url()).pathname;
    if(path==="/api/v1/home"||path==="/api/v1/nutrition"){await route.fulfill({json:summary});return;}
@@ -38,7 +38,7 @@ test("common composer reviews fractional yield and preserves unknown nutrients",
  await page.getByRole("button",{name:"Save reviewed meal"}).click();await expect(page).toHaveURL(new RegExp(`/meals/${f.meal.id}$`));
  expect(f.saved()?.items).toMatchObject([{food_id:"20000000-0000-4000-8000-000000000001",grams:31.25}]);expect(f.saved()?.state).toBe("planned");expect(f.saved()?.consumed_at).toBeNull();
  await expect(page.getByText("This meal is excluded from eaten totals.",{exact:false})).toBeVisible();
- await expect(page.getByRole("button",{name:"Run selected forecast"})).toBeDisabled();
+ await expect(page.getByRole("button",{name:"Run selected forecast"})).toHaveCount(0);
 });
 
 test("populated Home and Nutrition reflow with unknown facts and no prescribed goals",async({page})=>{

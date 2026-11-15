@@ -26,12 +26,17 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument("--upstream-commit", required=True)
     parser.add_argument("--random-seed", type=int, required=True)
     parser.add_argument("--internal-context-output", type=Path)
+    parser.add_argument(
+        "--protocol",
+        choices=("m1_fixed_meal_day", "lightgbm_warmup_48h_v1"),
+        default="m1_fixed_meal_day",
+    )
     return parser.parse_args()
 
 
-def _scenario_args(random_seed: int) -> argparse.Namespace:
+def _scenario_args(random_seed: int, days: int = 1) -> argparse.Namespace:
     args = generate_parser_cli().parse_args([])
-    args.number_of_days = 1
+    args.number_of_days = days
     args.sampling_time = 5
     args.random_seed = random_seed
     args.model_name = "T1DM.ExtHovorka"
@@ -57,12 +62,17 @@ def _scenario_args(random_seed: int) -> argparse.Namespace:
 
 
 def _run(
-    random_seed: int, upstream_commit: str, internal_context_output: Path | None = None
+    random_seed: int,
+    upstream_commit: str,
+    internal_context_output: Path | None = None,
+    protocol: str = "m1_fixed_meal_day",
 ) -> dict[str, object]:
     Path(results_path).mkdir(parents=True, exist_ok=True)
     _, _, _, work_directory = simulation_folder.create_simulation_results_folder(results_path)
     scenario = load_scenario(str(Path(default_settings_path) / "scenario_default.json"))
-    args = _scenario_args(random_seed)
+    long = protocol == "lightgbm_warmup_48h_v1"
+    days = 2 if long else 1
+    args = _scenario_args(random_seed, days)
 
     scenario = generate_simulation_settings_main(scenario, args, work_directory)
     scenario = generate_virtual_subjects_main(scenario, args, work_directory)
@@ -85,7 +95,7 @@ def _run(
         positive_meals = [
             (float(t), float(v)) for t, v in zip(meal_times, meal_magnitudes) if v > 0
         ]
-        origin = int(np.ceil(positive_meals[1][0] / 5) * 5)
+        origin = int(np.ceil(positive_meals[4 if long else 1][0] / 5) * 5)
         events = []
         for event_type, signal, source_unit, kind in (
             ("basal", scenario.inputs.basal_insulin, "U/h", "R"),
@@ -124,14 +134,14 @@ def _run(
         )
 
     return {
-        "schema_version": "1.0",
+        "schema_version": "2.0" if long else "1.0",
         "source": "py-mgipsim",
         "upstream_commit": upstream_commit,
-        "scenario_name": "m1_fixed_meal_day",
+        "scenario_name": protocol,
         "model": "T1DM.ExtHovorka",
         "controller": "OpenLoop",
         "random_seed": random_seed,
-        "duration_minutes": 1440,
+        "duration_minutes": 1440 * days,
         "sample_interval_minutes": 5,
         "sample_count": int(values.size),
         "meal_event_count": meal_count,
@@ -152,7 +162,9 @@ def _run(
 
 def main() -> None:
     args = _parse_args()
-    payload = _run(args.random_seed, args.upstream_commit, args.internal_context_output)
+    payload = _run(
+        args.random_seed, args.upstream_commit, args.internal_context_output, args.protocol
+    )
     args.output_json.parent.mkdir(parents=True, exist_ok=True)
     args.output_json.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
 

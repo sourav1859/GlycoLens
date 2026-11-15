@@ -1,0 +1,30 @@
+import { expect,test } from "@playwright/test";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
+
+test("real cloud login, current personal day, cached virtual history and exit",async({page})=>{
+ const fixture=JSON.parse(readFileSync(resolve("../.cache/workspace-browser-fixture.json"),"utf8"));
+ expect(fixture.project_ref).toBe("ecynkzptuslkuhjikzfc");
+ let requests=0;
+ await page.route("**/api/v1/**",async route=>{const url=new URL(route.request().url());expect(url.origin).toBe("http://127.0.0.1:8000");if(++requests>24)throw new Error("Live UI API request cap reached");await route.continue();});
+ await page.goto("/auth/sign-in");await page.getByLabel("Email address").fill(fixture.email);await page.getByLabel("Password",{exact:true}).fill(fixture.password);
+ await page.getByRole("button",{name:"Sign in",exact:true}).click();await expect(page).toHaveURL(/\/home$/);
+ const today=new Intl.DateTimeFormat("en-CA",{timeZone:"America/New_York"}).format(new Date());
+ await expect(page.getByLabel("Local day")).toHaveValue(today);
+ await expect(page.getByText("Personal browser acceptance meal",{exact:true})).toBeVisible();
+ await page.screenshot({path:"../.cache/workspace-live-personal.png",fullPage:true});
+ await page.getByRole("link",{name:"Open virtual simulation",exact:true}).click();
+ await page.getByRole("combobox",{name:/Simulation protocol/}).selectOption("lightgbm_warmup_48h_v1");
+ await page.getByRole("button",{name:"Replay saved simulation",exact:true}).click();
+ await expect(page.getByText(/Latest simulated glucose/)).toBeVisible({timeout:45000});
+ await expect(page.getByText(/Virtual clock:.*2026/)).toBeVisible();
+ await page.screenshot({path:"../.cache/workspace-live-simulation.png",fullPage:true});
+ await page.getByRole("link",{name:"Simulation meals",exact:true}).click();
+ await expect(page.getByText("Earlier browser virtual meal",{exact:true})).toBeVisible();
+ await expect(page.getByText("Personal browser acceptance meal",{exact:true})).toHaveCount(0);
+ await page.getByRole("link",{name:"Exit simulation",exact:true}).click();
+ await expect(page).toHaveURL(/\/home$/);await expect(page.getByLabel("Local day")).toHaveValue(today);
+ await expect(page.getByText("Personal browser acceptance meal",{exact:true})).toBeVisible();
+ await page.getByRole("button",{name:"Sign out",exact:true}).click();await expect(page).toHaveURL(/\/auth\/sign-in/);
+ expect(requests).toBeLessThanOrEqual(24);
+});

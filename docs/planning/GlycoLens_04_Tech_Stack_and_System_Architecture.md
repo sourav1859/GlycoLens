@@ -1,5 +1,34 @@
 # GlycoLens Tech Stack and System Architecture
 
+## November 14: personal and simulation workspaces implemented
+
+Forward cloud migration `20261114173109` adds constrained meal workspace classification, preserving old evidence, and explicit trusted scope/source writes plus a shared scoped aggregate. Source creation no longer changes global app preferences. Owner/RLS, immutable forecast inputs and common adapters remain enforced. Same Auth, monorepo and Compose services. [Actual validation](../reports/workspace-separation-validation-2026-11-14.md) and [44-case ledger](../testing/workspace-separation-results.json): **28 PASS, 16 PARTIAL**. Changes remain local; human Chrome and other qualified gates are not claimed complete.
+
+## November 14: local LightGBM selection enabled for user review
+
+At the user's request, the existing local development runtime now exposes **LightGBM · research option** alongside default Chronos. The ignored local enablement flag is true; the running API's native bundle/digest/read-only mount were verified and real synthetic inference returned 24 ordered points. The shipped environment template remains disabled by default. This is a user-authorized local research exposure for manual testing, not completed L0–L4 acceptance, production enablement or a model default change. All existing history/artifact/owner checks remain enforced.
+
+An existing meal attached to the short one-day source remains ineligible for native inference. Explicitly prepare the 48-hour research source and save a new reviewed meal at that source's clock; existing meal/source snapshots are unchanged. Current carbohydrates are the native meal predictor; matching-outcome accuracy and transferred interval coverage remain unvalidated. [Enablement and verification](../reports/local-lightgbm-enablement-2026-11-14.md). November 12 off-state descriptions below are historical checkpoints; their outstanding acceptance results remain valid.
+
+## November 12 implementation outcome — current status
+
+One FastAPI process now owns an allowlisted versioned registry shared by ordinary and portion inference, with bounded locks and explicit readiness failures. Authenticated `GET /api/v1/forecasts/models` advertises capabilities; POST forecasts accepts allowlisted optional `model_key`, default Chronos. The native loader verifies a narrow server-selected read-only bundle; the 48h simulator uses a distinct protocol/cache. Model-specific builders freeze units/masks/chronology and full model/calibration identity into idempotent cloud snapshots. Forward migration `20261113031950` enables backward-compatible v2 calibrated signed intervals and RPC identity validation, with invoker/service-only grants retained. Root CPU Compose packages both dependencies, no new service or local Supabase. [Architecture and actual checks](../reports/lightgbm-app-validation-2026-11-12.md). Ordinary native gate remains false; isolated review only.
+
+The dated planning/checkpoint entries below remain historical where they describe unexecuted work.
+
+## November 12: planned common-registry model integration
+
+Keep FastAPI and common adapters; do not create a separate LightGBM service.
+[Plan 18](GlycoLens_18_M2_Closure_and_LightGBM_Integration.md) specifies a server-owned registry shared by ordinary/scenario
+inference, model-specific context builders and immutable bundle/feature/calibration
+identity. LightGBM needs a real trusted-artifact loader, compatible pinned CPU
+dependencies and narrow read-only serving bundle mount. The new synthetic protocol
+must provide 24h past history plus withheld future without changing old replay.
+Version API/SQL/frontend interval semantics before enablement: saved calibrated
+bands can exceed current bounds, and clipping/equal placeholders are unacceptable.
+No schema/model/runtime change is executed by this documentation. Managed cloud
+Supabase remains the only current app database target.
+
 ## November 12: one-command local containers
 
 Root `compose.yaml` starts Next.js plus one FastAPI worker with

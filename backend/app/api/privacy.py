@@ -18,7 +18,9 @@ class DeleteAccountRequest(BaseModel):
 
 @router.delete("")
 def delete_own_account(body: DeleteAccountRequest, session: UserSession = Depends(user_session)):
-    return delete_account(session, body.password.get_secret_value(), body.confirmation.get_secret_value())
+    return delete_account(
+        session, body.password.get_secret_value(), body.confirmation.get_secret_value()
+    )
 
 
 EXPORT_TABLES = (
@@ -74,7 +76,8 @@ def export_account(session: UserSession = Depends(user_session)):
     # Child snapshots include food facts and frozen forecast points; no global catalog dump.
     return JSONResponse(
         {
-            "schema_version": "1.0",
+            "schema_version": "1.1",
+            "workspace_contract": "Meals carry personal/simulation/legacy_unclassified origin; child history and forecasts retain the owning meal/source context. Virtual timestamps are not personal dates.",
             "exported_at": datetime.now(timezone.utc).isoformat(),
             "user_id": session.user_id,
             "records": records,

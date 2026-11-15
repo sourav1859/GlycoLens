@@ -1,5 +1,25 @@
 # GlycoLens Project Specification Draft
 
+## November 14: personal and simulation workspaces implemented
+
+Independent personal meal logging/current dates and a labeled synthetic simulation workspace are implemented under one account. Synthetic history remains discoverable without being relabeled as personal consumption. Scientific/model/cohort/calibration results are unchanged; public-release acceptance is still separate. [Actual validation](../reports/workspace-separation-validation-2026-11-14.md) and [44-case ledger](../testing/workspace-separation-results.json): **28 PASS, 16 PARTIAL**. Changes remain local; human Chrome and other qualified gates are not claimed complete.
+
+## November 12 implementation outcome — current status
+
+The implemented monorepo now supports default Chronos and explicit native LightGBM through the common authenticated connector, preserving immutable model/source/meal identity, separate 48h synthetic history, calibrated signed intervals, accessible provenance/table and same-model scenarios/export. Real provider/API/cloud/CPU container paths were exercised; [actual acceptance](../reports/m2-closure-validation-2026-11-12.md) remains partial. **Chronos failed synthetic meal-response capability**; LightGBM sensitivity is not accuracy. No model default change, new cohort experiment or clinical claim. Chrome/manual review, presenter rehearsal/sign-off and normal native enablement remain pending; public release dependencies are unchanged.
+
+The dated planning/checkpoint entries below remain historical where they describe unexecuted work.
+
+## November 12: phased closure and research option
+
+[Plan 18](GlycoLens_18_M2_Closure_and_LightGBM_Integration.md) records the accepted implementation direction: original M2
+closure through provider/Chrome/evidence gates, plus a separate opt-in frozen
+LightGBM integration track. Chronos remains default; a versioned longer synthetic
+scenario and validated feature/interval contracts precede enablement. Physical
+camera is deferred by user, while manual barcode remains in current scope. This
+does not change research hypotheses/results, authorize a clinical claim, reopen
+consumed cohorts or declare full milestone/release acceptance.
+
 ## November 12 development update
 
 Demo actions are now **Run new simulation** / **Replay saved simulation**. Existing

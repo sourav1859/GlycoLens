@@ -1,5 +1,9 @@
 # GlycoLens
 
+## November 14: personal and simulation workspaces implemented
+
+Personal meal logging and current timezone-aware dates are independent of the `/demo` virtual workspace. Earlier simulated meals remain under Simulation meals/Saved sessions. Cloud-dev migration is applied and local Compose is updated. See [Plan 19](docs/planning/GlycoLens_19_Personal_and_Simulation_Workspaces.md) and [actual validation](docs/reports/workspace-separation-validation-2026-11-14.md); automated evidence is recorded, manual acceptance remains partial.
+
 ## Start the local app with Docker
 
 With Docker Desktop running, the existing ignored root `.env` configured and the

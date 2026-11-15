@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends git libgomp1 &&
 RUN groupadd --gid 10001 glycolens && useradd --uid 10001 --gid 10001 --create-home glycolens
 WORKDIR /app
 COPY pyproject.toml uv.lock ./
-RUN uv sync --frozen --no-dev --group chronos --no-install-project
+RUN uv sync --frozen --no-dev --group chronos --group refinement --no-install-project
 COPY research/simulation/pymgipsim-requirements.lock /opt/simulator-requirements.lock
 RUN uv venv /opt/simulator --python /usr/local/bin/python && uv pip sync --python /opt/simulator/bin/python /opt/simulator-requirements.lock
 # Source-only simulator has its own incompatible dependency graph and verified Git commit.
@@ -16,7 +16,10 @@ RUN mkdir -p /opt/pymgipsim/SimulationResults && chown 10001:10001 /opt/pymgipsi
 COPY backend ./backend
 COPY research ./research
 COPY scripts/dev/check_container_runtime.py ./scripts/dev/check_container_runtime.py
-RUN mkdir -p /app/artifacts/simulation /app/artifacts/models/huggingface && chown -R 10001:10001 /app/artifacts
+COPY scripts/dev/validate_meal_response.py ./scripts/dev/validate_meal_response.py
+COPY scripts/dev/summarize_meal_response.py ./scripts/dev/summarize_meal_response.py
+COPY config/meal-response-validation.json config/webapp-validation.json ./config/
+RUN mkdir -p /app/artifacts/simulation /app/artifacts/models/huggingface /app/artifacts/models/lightgbm && chown -R 10001:10001 /app/artifacts
 USER 10001:10001
 HEALTHCHECK --interval=30s --timeout=5s --start-period=30s CMD ["/app/.venv/bin/python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health',timeout=3)"]
 CMD ["/app/.venv/bin/python", "-m", "uvicorn", "backend.app.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1"]

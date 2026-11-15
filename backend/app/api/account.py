@@ -17,7 +17,7 @@ class PreferenceValues(BaseModel):
     model_config = ConfigDict(extra="forbid")
     timezone: str | None = Field(default=None, max_length=100)
     glucose_unit: Literal["mg/dL", "mmol/L"] | None = None
-    source_mode: Literal["simulation", "replay"] | None = None
+    source_mode: Literal["personal", "simulation", "replay"] | None = None
     display_name: str | None = Field(default=None, min_length=1, max_length=100)
     food_preferences: list[str] | None = Field(default=None, max_length=20)
 

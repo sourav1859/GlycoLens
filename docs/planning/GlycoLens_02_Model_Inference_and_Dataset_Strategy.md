@@ -1,5 +1,22 @@
 # GlycoLens Model Inference and Dataset Strategy
 
+## November 12 implementation outcome — current status
+
+The app now resolves an allowlisted shared model registry for ordinary and portion forecasts. Chronos C3 remains default (24 readings, recorded nutrition channels). Opt-in frozen native LightGBM uses `metabonet_tabular_v1`, 288 readings and current carbohydrates only, plus historical insulin/carbohydrates and presence masks. Trusted bundle/calibration digests precede serving; no runtime pickle, refit, remote fetch or consumed-cohort access. Separate 48h synthetic context, source availability and basal rate-to-amount conversion are implemented. v2 signed calibrated marginal bands stay distinct from native Chronos quantiles. [Integration evidence](../reports/lightgbm-app-validation-2026-11-12.md). **Synthetic Chronos meal-response capability failed** at 0.001 mg/dL; native shows limited carbohydrate sensitivity. No default promotion or new accuracy result follows.
+
+The dated planning/checkpoint entries below remain historical where they describe unexecuted work.
+
+## November 12: application candidate integration boundary
+
+The frozen MetaboNet LightGBM candidate may be integrated as an **opt-in research
+option**, while Chronos remains default. [Plan 18](GlycoLens_18_M2_Closure_and_LightGBM_Integration.md) and
+[ADR 0022](../decisions/0022-opt-in-lightgbm-research-integration.md) gate loading,
+training-compatible 288-sample context/masks/insulin amounts, carbohydrate-only
+current-meal semantics and saved marginal calibration. Existing two-hour app
+context is insufficient; use a separately versioned longer synthetic scenario.
+No runtime switch, weight refit, recalibration or consumed-cohort reevaluation
+is performed by the plan. Candidate descriptions below retain their research history.
+
 ## 1. Objective
 
 Select the pretrained forecasting approach that best fits a **meal-centered T1D inference task** without requiring large custom model training.
@@ -24,7 +41,7 @@ The selected model must be judged on:
 | **TimesFM-2.5** | Mature/stable fallback; 200M; quantile head/XReg | Evaluated in current glucose TSFM work | XReg | No | **Fallback if 3.0 integration is unstable** |
 | **CGMformer** | CGM-specific pretrained embeddings | Strong postprandial diet paper; public checkpoint | Downstream fusion, not direct general TS covariate API | Encoder no; diet head yes | **Exploratory candidate** |
 | **GlucoFM** | CGM-specific dual-stream model; strong PPGR results | Very strong/current | Frozen embeddings + context in published work | Official weights not public | **Literature benchmark / revisit later** |
-| **LightGBM** | Small task-specific model | Prior T1D PPGR evidence | Natural tabular features | Yes, modest | **Baseline/residual only** |
+| **LightGBM** | Small task-specific model | Frozen MetaboNet direct-model results with limitations | Training-specific tabular event/mask features | Existing modest trained bundle | **Research candidate; opt-in app integration planned, Chronos default** |
 | **LSTM** | Supervised sequence model | Strong full-shot benchmark when enough labels exist | Flexible | Yes | **Not required** |
 
 ## 3. Important 2026 update: TimesFM-3

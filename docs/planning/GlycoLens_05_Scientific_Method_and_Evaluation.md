@@ -1,5 +1,23 @@
 # GlycoLens Scientific Method and Evaluation Plan
 
+## November 12 implementation outcome — current status
+
+The frozen synthetic matrix completed 236/236 predictions with three histories, meal/portion/composition contrasts and repeated identical inputs. At the earlier predeclared 0.001 mg/dL tolerance, **Chronos was invariant in 60/60 eligible contrasts: FAIL_INVARIANT** (max endpoint change 0.0000076294 mg/dL). LightGBM was invariant in 6/51 carbohydrate-changing contrasts; fat/protein/fiber-only invariance is expected because those current-meal features are unused. Exact repeats had zero spread. [Full interpretation](../reports/meal-response-sensitivity-2026-11-12.md). GL-P09-011 records capability failure despite engineering success. GL-P09-012 matching-outcome accuracy remains NOT_RUN: preset simulator future is not truth for arbitrary meals, and consumed cohorts were not reopened. No refit, calibration update or threshold tuning occurred.
+
+The dated planning/checkpoint entries below remain historical where they describe unexecuted work.
+
+## November 12: model integration is not a new accuracy study
+
+[Plan 18](GlycoLens_18_M2_Closure_and_LightGBM_Integration.md) permits synthetic feature/prediction parity, repeatability and
+sensitivity checks for the frozen LightGBM candidate, with Chronos still default.
+It does not refit weights/calibration, reopen consumed primary/PEDAP tests or compare
+different-cohort MAEs as a head-to-head model win. Saved symmetric participant
+calibration has no verified synthetic/personal coverage guarantee. Fat/protein/fiber-
+only changes should leave this carbohydrate-only candidate unchanged; report the
+limitation. GL-P09-011 sensitivity is separate from GL-P09-012 matching-outcome
+accuracy, which remains pending a new approved protocol/source. The old simulator's
+preset later meals cannot validate an arbitrary proposed meal.
+
 ## November 12: application meal-response validation gate
 
 Existing context-ablation and portion-calculation plans do not close application

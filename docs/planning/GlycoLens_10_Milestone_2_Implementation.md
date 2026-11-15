@@ -1,5 +1,34 @@
 # Milestone 2 approved implementation and evidence ledger
 
+## November 14: personal and simulation workspaces implemented
+
+The Plan 19 corrective implementation separates virtual/personal data and clocks and restores discoverable simulation history. Real model/API/cloud and browser evidence supplements original M2 records; it does not close prior manual/presenter/accuracy or release gates. [Actual validation](../reports/workspace-separation-validation-2026-11-14.md) and [44-case ledger](../testing/workspace-separation-results.json): **28 PASS, 16 PARTIAL**. Changes remain local; human Chrome and other qualified gates are not claimed complete.
+
+## November 14: local LightGBM selection enabled for user review
+
+At the user's request, the existing local development runtime now exposes **LightGBM · research option** alongside default Chronos. The ignored local enablement flag is true; the running API's native bundle/digest/read-only mount were verified and real synthetic inference returned 24 ordered points. The shipped environment template remains disabled by default. This is a user-authorized local research exposure for manual testing, not completed L0–L4 acceptance, production enablement or a model default change. All existing history/artifact/owner checks remain enforced.
+
+An existing meal attached to the short one-day source remains ineligible for native inference. Explicitly prepare the 48-hour research source and save a new reviewed meal at that source's clock; existing meal/source snapshots are unchanged. Current carbohydrates are the native meal predictor; matching-outcome accuracy and transferred interval coverage remain unvalidated. [Enablement and verification](../reports/local-lightgbm-enablement-2026-11-14.md). November 12 off-state descriptions below are historical checkpoints; their outstanding acceptance results remain valid.
+
+## November 12 implementation outcome — current status
+
+[Plan 18 engineering](GlycoLens_18_M2_Closure_and_LightGBM_Integration.md) is delivered locally: grounded live-provider/API journeys, native opt-in connector, separate 48h scenario, versioned cloud intervals, research UI and CPU Compose/recovery. [Actual report](../reports/m2-closure-validation-2026-11-12.md) and [58-case results](../testing/m2-closure-lightgbm-results.json) replace the planning-only status below. **GL-P09-011 executed and failed Chronos meal-response capability**; GL-P09-012 remains NOT_RUN. API successes do not close Chrome-dependent phases 5/8/9 or presenter acceptance. Normal native enablement remains off. No new push authorization or full M2 closure; physical camera and scratch replay stay deferred.
+
+The dated planning/checkpoint entries below remain historical where they describe unexecuted work.
+
+## November 12: current closure scope and prerequisite reconciliation
+
+[Plan 18](GlycoLens_18_M2_Closure_and_LightGBM_Integration.md) and its [58-case catalog](../testing/m2-closure-lightgbm-test-cases.md)
+define C0-C3 current-revision/provider/Chrome/sensitivity/presentation closure and
+separate L0-L4 optional LightGBM work. USDA/LLM/cloud private configuration already
+exists; the user-approved OFF contact is now configured privately. Prior component
+smokes do not close all live browser/provider journeys. Chrome/manual barcode is
+the current target; physical-camera testing is explicitly deferred, never passed.
+Native presentation/rehearsal and final acceptance remain open. Chronos is still
+the app default; LightGBM integration is planned separately, not a new M2 blocker.
+This dated update supersedes stale missing-credential/camera-blocker statements
+in older historical entries without rewriting their recorded evidence.
+
 ## November 12 development update
 
 Demo actions are now **Run new simulation** / **Replay saved simulation**. Existing
@@ -102,17 +131,17 @@ The October 16 M2 and November 13 M3 course dates remain unchanged; overlap is a
 | 2 | Batch evaluator and TimesFM | Matched C0 validation for persistence/Chronos/TimesFM, metrics and explicit failure accounting | Complete |
 | 3 | Covariate adapters and ablation | Real C0-C3 inputs; matched validation; provisional selection frozen before test | Complete |
 | 4 | Demo Auth, persistence, timeline | Session isolation; atomic/idempotent saves; migrations/RLS checks | Complete |
-| 5 | Nutrition and recipes | Search/barcode/LLM extraction; confirmation; deterministic totals and provenance | Implemented/offline tested; live provider configuration pending |
+| 5 | Nutrition and recipes | Search/barcode/LLM extraction; confirmation; deterministic totals and provenance | Implemented; private provider configuration present; representative/current live journey acceptance pending |
 | 6 | Live py-mgipsim | Authenticated bounded execution; simulated clock; past-only internal context; labeled replay | Complete |
 | 7 | Forecast API | Real selected model, validated and persisted 24-point forecasts; safe failures | Complete |
 | 8 | Screens and numeric retrieval | All required input paths, mobile flow, same-user past-outcome retrieval | Implemented; real fixture-food flow and browser input contracts pass; live nutrition paths await Phase 5 |
-| 9 | Verification and closure | Held-out results, full acceptance evidence, report and presentation | Held-out evaluation, core checks, report and presentation draft ready; full closure pending live providers, camera and final acceptance |
+| 9 | Verification and closure | Held-out results, full acceptance evidence, report and presentation | Held-out evaluation, core checks, report and presentation draft ready; full closure pending representative live journeys and final acceptance; camera deferred by user November 12 |
 
 Each phase updates affected planning documents, tests, ADRs and this ledger. Evidence
 must distinguish implemented code, offline tests, real integrations and scientific results.
 No phase is marked complete merely because scaffolding exists.
 
-## Prerequisites
+## Historical October 14 prerequisites
 
 Python 3.12/uv, Node 22/pnpm 10, local Docker/Supabase, pinned local dataset,
 checkpoint access/storage, existing isolated simulator environment, USDA key,
@@ -171,14 +200,15 @@ acceptance are listed as M3 carry-forward work in the
 [milestone schedule](GlycoLens_06_Milestones_and_Schedule.md#corrected-nutrition-catalog-migration-from-milestone-2).
 This placement preserves the unresolved M2 nutrition gates and the correction hold.
 
-The user must privately configure USDA_FDC_API_KEY, LLM_API_KEY and LLM_MODEL and
-confirm the recipe provider/model. An OpenAI Responses adapter is prepared; another
-provider requires its supported structured-output adapter. Open Food Facts and local
-Supabase configuration are prepared. Live USDA search/detail and real recipe extraction
-still need execution, provenance checks and browser verification. Camera hardware
-capture is implemented but has not been physically exercised; manual barcode entry
-and mocked barcode contracts are verified. Presentation material must disclose this
-status rather than assert full milestone completion.
+Current prerequisite reconciliation (November 12): USDA/OpenAI/cloud keys and
+selected recipe model are configured privately; the approved OFF contact has now
+been added to ignored `.env` and passes the value-free format check. Restart the
+API before exercising that setting. Earlier bounded USDA/recipe component smokes
+do not prove representative/current Chrome -> real provider -> save -> forecast
+journeys. Plan 18 C0-C3 defines remaining oracles, provenance/failure checks and
+presentation acceptance. Physical-camera capture is implemented but untested and
+explicitly deferred by user; manual barcode/browser fallback remain in scope.
+Disclose actual evidence and deferrals rather than asserting full completion.
 
 ## Scope and safeguards
 

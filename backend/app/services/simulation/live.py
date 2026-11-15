@@ -13,14 +13,23 @@ from fastapi import HTTPException
 
 from backend.app.db.client import UserSession, database_call
 from backend.app.db.trusted import trusted_call
-from research.simulation.adapter import PYMGIPSIM_COMMIT, PyMgipsimResult, run_pymgipsim_scenario
+from research.simulation.adapter import (
+    PYMGIPSIM_COMMIT,
+    PyMgipsimLongScenario,
+    reviewed_result,
+    run_pymgipsim_scenario,
+)
 
 
 ROOT = Path(__file__).resolve().parents[4]
 SCENARIO_LOCK = Lock()
 
 
-def live_scenario(session: UserSession, *, replay: bool = False):
+def live_scenario(
+    session: UserSession, *, replay: bool = False, protocol: str = "m1_fixed_meal_day"
+):
+    if protocol not in {"m1_fixed_meal_day", "lightgbm_warmup_48h_v1"}:
+        raise HTTPException(422, "Unsupported reviewed simulation protocol")
     if not SCENARIO_LOCK.acquire(blocking=False):
         raise HTTPException(429, "A simulator scenario is already running; retry shortly")
     source_id = None
@@ -28,13 +37,16 @@ def live_scenario(session: UserSession, *, replay: bool = False):
     try:
         directory = ROOT / "artifacts/simulation/app"
         directory.mkdir(parents=True, exist_ok=True)
-        output, internal = directory / "scenario.json", directory / "context.json"
+        long = protocol == "lightgbm_warmup_48h_v1"
+        cache_directory = directory / "long48_v1" if long else directory
+        cache_directory.mkdir(parents=True, exist_ok=True)
+        output, internal = cache_directory / "scenario.json", cache_directory / "context.json"
         if replay:
             if not output.is_file() or not internal.is_file():
                 raise HTTPException(
                     404, "No reviewed replay is available; run the live scenario first"
                 )
-            result = PyMgipsimResult.from_json(output)
+            result = reviewed_result(output)
         else:
             result = run_pymgipsim_scenario(
                 source_directory=Path(
@@ -57,12 +69,20 @@ def live_scenario(session: UserSession, *, replay: bool = False):
                 ),
                 output_json=output,
                 internal_context_output=internal,
+                scenario=PyMgipsimLongScenario() if long else None,
             )
+        if result.scenario_name != protocol:
+            raise ValueError("Reviewed replay protocol differs")
         context = json.loads(internal.read_text(encoding="utf-8"))
         if context["upstream_commit"] != PYMGIPSIM_COMMIT:
             raise ValueError("unreviewed internal context")
         origin = int(context["origin_minute"])
-        if not 120 <= origin <= 1200 or origin % 5:
+        if (
+            not (1440 if long else 120)
+            <= origin
+            <= (result.duration_minutes - 120 if long else 1200)
+            or origin % 5
+        ):
             raise ValueError("invalid simulation origin")
         epoch = datetime(2026, 1, 1, tzinfo=timezone.utc)
         rows = [
@@ -73,7 +93,7 @@ def live_scenario(session: UserSession, *, replay: bool = False):
                 "source": "simulation",
             }
             for p in result.trajectory
-            if p.minute <= origin
+            if p.minute <= origin and (not long or p.minute >= origin - 1435)
         ]
         insulin = []
         for event in context["insulin_events"]:
@@ -115,6 +135,26 @@ def live_scenario(session: UserSession, *, replay: bool = False):
                     "inference_context_end": (epoch + timedelta(minutes=origin)).isoformat(),
                     "trajectory_sha256": hashlib.sha256(saved_output).hexdigest(),
                     "context_sha256": hashlib.sha256(saved_context).hexdigest(),
+                    **(
+                        {
+                            "event_coverage_start": epoch.isoformat(),
+                            "event_coverage_end": (epoch + timedelta(minutes=origin)).isoformat(),
+                            "meal_events": [
+                                {
+                                    "recorded_at": (
+                                        epoch + timedelta(minutes=e["minute"])
+                                    ).isoformat(),
+                                    "carbs_g": e["carbs_g"],
+                                }
+                                for e in context["meal_events"]
+                                if e["minute"] <= origin
+                            ],
+                            "insulin_semantics": "simulator_U_per_hour_rate_integrated_to_IU_per_5min_v1",
+                            "transfer_notice": "Synthetic insulin semantics; clinical transfer and interval coverage unverified",
+                        }
+                        if long
+                        else {}
+                    ),
                 },
             },
         )
@@ -139,10 +179,12 @@ def live_scenario(session: UserSession, *, replay: bool = False):
             # A concurrent account deletion can reject the final FK-bound write.
             # Remove only this newly generated UUID, never the shared replay.
             from backend.app.services.account_deletion import remove_source_artifacts
+
             try:
                 remove_source_artifacts(source_id)
             except (OSError, ValueError):
                 import logging
+
                 logging.getLogger(__name__).warning("Uncommitted synthetic source cleanup failed")
         SCENARIO_LOCK.release()
 
@@ -167,7 +209,7 @@ def advance_source(session: UserSession, source_id, minutes: int, expected_clock
             "trajectory_sha256"
         ) or hashlib.sha256(context_bytes).hexdigest() != source["metadata"].get("context_sha256"):
             raise ValueError("source checksum changed")
-        result = PyMgipsimResult.from_json(directory / "scenario.json")
+        result = reviewed_result(directory / "scenario.json")
         context = json.loads(context_bytes)
         previous = datetime.fromisoformat(source["clock_at"].replace("Z", "+00:00"))
         clock = previous + timedelta(minutes=minutes)

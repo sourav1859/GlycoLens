@@ -5,6 +5,9 @@ from __future__ import annotations
 import math
 import os
 import re
+from collections import deque
+from threading import Lock
+from time import monotonic
 from urllib.parse import quote
 
 import httpx
@@ -15,6 +18,31 @@ from backend.app.db.client import UserSession, database_call
 
 
 NUTRIENTS = {1008: "calories", 1005: "carbs_g", 1003: "protein_g", 1004: "fat_g", 1079: "fiber_g"}
+_OFF_READS = deque()
+_OFF_LOCK = Lock()
+
+
+def admit_off_read():
+    """One API worker: bound uncached product reads to 15/minute, no retry storm."""
+    now = monotonic()
+    with _OFF_LOCK:
+        while _OFF_READS and now - _OFF_READS[0] >= 60:
+            _OFF_READS.popleft()
+        if len(_OFF_READS) >= 15:
+            raise HTTPException(
+                429, "Barcode provider read limit reached; wait a minute or use cached food search"
+            )
+        _OFF_READS.append(now)
+
+
+def validate_gtin(code):
+    if not re.fullmatch(r"[0-9]+", code) or len(code) not in {8, 12, 13, 14}:
+        raise HTTPException(422, "Enter a GTIN-8, UPC-12, EAN-13 or GTIN-14 barcode")
+    total = sum(
+        int(digit) * (3 if i % 2 == 0 else 1) for i, digit in enumerate(reversed(code[:-1]))
+    )
+    if (10 - total % 10) % 10 != int(code[-1]):
+        raise HTTPException(422, "Barcode check digit is invalid; review the package code")
 
 
 def valid_amount(value):
@@ -157,6 +185,7 @@ def resolve_usda(identifier: int, session: UserSession) -> dict:
 
 
 def resolve_barcode(barcode: str, session: UserSession) -> dict:
+    validate_gtin(barcode)
     cached = database_call(session, f"foods?barcode=eq.{barcode}&limit=1")
     if cached:
         return cached[0]
@@ -166,6 +195,9 @@ def resolve_barcode(barcode: str, session: UserSession) -> dict:
             503,
             "Live barcode lookup needs the project contact configured; use food search meanwhile",
         )
+    admit_off_read()
+    # Existing v2 per-100g schema retained deliberately; v3.5 changes nutrition shape.
+    # Version compatibility and provider deprecation remain documented, not guessed.
     payload = provider_request(
         f"https://world.openfoodfacts.org/api/v2/product/{barcode}.json",
         headers={"User-Agent": agent},

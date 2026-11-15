@@ -1,5 +1,20 @@
 # Approved model refinement protocol and execution ledger
 
+## November 12 implementation outcome — current status
+
+The frozen winning model was exported and integrated into the app as a server-verified native LightGBM research option. Four handcrafted parity requests had zero endpoint error; no training, recalibration or reserved-cohort rows were used. Full model/bundle/calibration identity and carbohydrate-only semantics are persisted, with 24h history and separate 48h synthetic source. [Serving validation](../reports/lightgbm-app-validation-2026-11-12.md) is distinct from the completed research phases below and cannot reopen consumed primary/PEDAP selection. The synthetic response diagnostic supports limited native carbohydrate sensitivity and failed default Chronos meal-response capability; neither is new matching-outcome accuracy. Chronos remains default, ordinary native gate false.
+
+The dated planning/checkpoint entries below remain historical where they describe unexecuted work.
+
+## November 12: application follow-through, not another research phase
+
+The completed refinement findings remain frozen. [Plan 18](GlycoLens_18_M2_Closure_and_LightGBM_Integration.md) introduces
+additional application-integration phases L0-L4 for an explicitly selected frozen
+LightGBM research option; these are not reruns of research Phases 1-6. Chronos
+remains default. Synthetic compatibility/sensitivity checks do not refit point
+weights/calibration or reopen consumed test cohorts. Future accuracy needs a new
+approved matching-outcome protocol/source.
+
 Execution started October 16, 2026 following user approval in this conversation.
 The user clarified that +/-10 mg/dL is an aspirational error tolerance, not a
 maximum-error acceptance guarantee. The forecast remains 24 five-minute readings

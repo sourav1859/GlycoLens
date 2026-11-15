@@ -1,5 +1,33 @@
 # GlycoLens Milestones and Course-Aligned Schedule
 
+## November 14: personal and simulation workspaces implemented
+
+Plan 19 W0–W4 engineering is implemented. W5 has real cloud/API/CPU and Chromium fixture/live-browser evidence; manual Chrome/performance/failure-rehearsal/variant acceptance remains partial. No full M2, release or deadline-completion claim follows. [Actual validation](../reports/workspace-separation-validation-2026-11-14.md) and [44-case ledger](../testing/workspace-separation-results.json): **28 PASS, 16 PARTIAL**. Changes remain local; human Chrome and other qualified gates are not claimed complete.
+
+## November 14: local LightGBM selection enabled for user review
+
+At the user's request, the existing local development runtime now exposes **LightGBM · research option** alongside default Chronos. The ignored local enablement flag is true; the running API's native bundle/digest/read-only mount were verified and real synthetic inference returned 24 ordered points. The shipped environment template remains disabled by default. This is a user-authorized local research exposure for manual testing, not completed L0–L4 acceptance, production enablement or a model default change. All existing history/artifact/owner checks remain enforced.
+
+An existing meal attached to the short one-day source remains ineligible for native inference. Explicitly prepare the 48-hour research source and save a new reviewed meal at that source's clock; existing meal/source snapshots are unchanged. Current carbohydrates are the native meal predictor; matching-outcome accuracy and transferred interval coverage remain unvalidated. [Enablement and verification](../reports/local-lightgbm-enablement-2026-11-14.md). November 12 off-state descriptions below are historical checkpoints; their outstanding acceptance results remain valid.
+
+## November 12 implementation outcome — current status
+
+Plan 18 C0-C2 and L0-L4 engineering is implemented and has scoped real provider/cloud/CPU runtime evidence. L0/L1 core packaging/context tests pass; combined Chrome, failure-variant, exact-revision, resource and manual gates remain partial. C2 sensitivity execution completed with **Chronos meal-response capability FAIL**, so it cannot be checked off as successful capability. C3 evidence/Markdown claims are reconciled; native deck, actual rehearsal and owner acceptance remain open. [Phase disposition and actual cases](../reports/m2-closure-validation-2026-11-12.md). Ordinary native enablement stays off; no full M2/P09 closure or deadline change. Physical camera and separate scratch replay remain deferred; catalog/email/hosting and new matching-outcome accuracy remain separate prerequisites.
+
+The dated planning/checkpoint entries below remain historical where they describe unexecuted work.
+
+## November 12: remaining M2 closure and separate LightGBM track
+
+Use [plan 18](GlycoLens_18_M2_Closure_and_LightGBM_Integration.md): C0-C3 cover current-revision/provider/Chrome/sensitivity
+evidence and presentation/acceptance reconciliation; L0-L4 cover additional opt-in
+LightGBM integration. Existing credentials and the privately configured OFF contact
+allow engineering work to proceed. User-selected Chrome/manual entry is in scope;
+physical-camera testing is deferred to future scope, not passed. Native presentation
+review/rehearsal still needs presenter input. LightGBM is not a new original-M2
+prerequisite and does not replace Chronos by default. These estimates do not revise
+course deadlines; corrected catalog/SMTP/hosting/scratch and prospective accuracy
+remain separately gated. At planning time all 58 new cases were NOT_RUN; use the current result ledger above.
+
 ## November 12: explicit P09 validation and local runtime work
 
 - [x] Specify the controlled meal/portion response and separate outcome-accuracy

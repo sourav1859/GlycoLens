@@ -20,3 +20,7 @@ Use this directory for concise records of important technical decisions. Name re
 - [0016 - Initial Hostinger KVM 2 deployment with managed Supabase](0016-initial-hostinger-kvm2-managed-supabase.md)
 - [0017 - Responsive application shell and Figma reference boundary](0017-responsive-webapp-and-figma-reference-boundary.md)
 - [0018 - Cloud Supabase and staged web application delivery](0018-cloud-supabase-and-staged-webapp-delivery.md)
+- [0019 - Trusted cloud writes and frozen source context](0019-trusted-cloud-writes-and-frozen-source-context.md)
+- [0020 - Immediate account deletion](0020-immediate-account-deletion.md)
+- [0021 - One-command local Compose runtime](0021-local-compose-runtime.md)
+- [0022 - Opt-in LightGBM research integration](0022-opt-in-lightgbm-research-integration.md)

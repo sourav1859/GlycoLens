@@ -26,8 +26,7 @@
       "result_counts": {
         "PASS": 5,
         "PARTIAL": 2,
-        "BLOCKED": 1,
-        "NOT_RUN": 0
+        "BLOCKED": 1
       }
     },
     {
@@ -53,8 +52,7 @@
       "result_counts": {
         "PASS": 6,
         "PARTIAL": 5,
-        "BLOCKED": 1,
-        "NOT_RUN": 0
+        "BLOCKED": 1
       }
     },
     {
@@ -76,10 +74,8 @@
         "GL-P02-010"
       ],
       "result_counts": {
-        "PASS": 0,
         "PARTIAL": 7,
-        "BLOCKED": 3,
-        "NOT_RUN": 0
+        "BLOCKED": 3
       }
     },
     {
@@ -108,10 +104,9 @@
         "GL-P03-017"
       ],
       "result_counts": {
-        "PASS": 7,
-        "PARTIAL": 4,
         "BLOCKED": 6,
-        "NOT_RUN": 0
+        "PARTIAL": 4,
+        "PASS": 7
       }
     },
     {
@@ -142,10 +137,8 @@
         "GL-P04-019"
       ],
       "result_counts": {
-        "PASS": 0,
         "PARTIAL": 17,
-        "BLOCKED": 2,
-        "NOT_RUN": 0
+        "NOT_RUN": 2
       }
     },
     {
@@ -172,10 +165,7 @@
         "GL-P05-015"
       ],
       "result_counts": {
-        "PASS": 0,
-        "PARTIAL": 15,
-        "BLOCKED": 0,
-        "NOT_RUN": 0
+        "PARTIAL": 15
       }
     },
     {
@@ -199,9 +189,7 @@
         "GL-P06-012"
       ],
       "result_counts": {
-        "PASS": 0,
         "PARTIAL": 11,
-        "BLOCKED": 0,
         "NOT_RUN": 1
       }
     },
@@ -229,10 +217,7 @@
         "GL-P07-015"
       ],
       "result_counts": {
-        "PASS": 0,
-        "PARTIAL": 0,
-        "BLOCKED": 15,
-        "NOT_RUN": 0
+        "BLOCKED": 15
       }
     },
     {
@@ -257,17 +242,16 @@
         "GL-P08-013"
       ],
       "result_counts": {
-        "PASS": 2,
         "PARTIAL": 10,
         "BLOCKED": 1,
-        "NOT_RUN": 0
+        "PASS": 2
       }
     },
     {
       "id": "P09",
       "title": "Portion comparison and later actual outcomes",
       "implementation_status": "IMPLEMENTED_PARTIAL",
-      "validation_status": "PARTIAL",
+      "validation_status": "PARTIAL_WITH_FAILURE",
       "case_count": 12,
       "case_ids": [
         "GL-P09-001",
@@ -286,8 +270,8 @@
       "result_counts": {
         "PASS": 2,
         "PARTIAL": 8,
-        "BLOCKED": 0,
-        "NOT_RUN": 2
+        "FAIL": 1,
+        "NOT_RUN": 1
       }
     },
     {
@@ -312,10 +296,8 @@
         "GL-P10-013"
       ],
       "result_counts": {
-        "PASS": 0,
         "PARTIAL": 8,
-        "BLOCKED": 5,
-        "NOT_RUN": 0
+        "BLOCKED": 5
       }
     }
   ],
@@ -604,7 +586,7 @@
       "id": "GL-P02-001",
       "phase": "P02",
       "status": "PARTIAL",
-      "actual": "Browser navigation/reload/dialog focus and 320\u20131920 shell matrix passed; all-route/orientation/unsaved-input variants not fully exhausted.",
+      "actual": "Browser navigation/reload/dialog focus and 320–1920 shell matrix passed; all-route/orientation/unsaved-input variants not fully exhausted.",
       "evidence": [
         "../reports/webapp-implementation-checkpoint-2026-11-11.md"
       ],
@@ -618,7 +600,7 @@
       "id": "GL-P02-002",
       "phase": "P02",
       "status": "PARTIAL",
-      "actual": "Browser navigation/reload/dialog focus and 320\u20131920 shell matrix passed; all-route/orientation/unsaved-input variants not fully exhausted.",
+      "actual": "Browser navigation/reload/dialog focus and 320–1920 shell matrix passed; all-route/orientation/unsaved-input variants not fully exhausted.",
       "evidence": [
         "../reports/webapp-implementation-checkpoint-2026-11-11.md"
       ],
@@ -632,7 +614,7 @@
       "id": "GL-P02-003",
       "phase": "P02",
       "status": "PARTIAL",
-      "actual": "Browser navigation/reload/dialog focus and 320\u20131920 shell matrix passed; all-route/orientation/unsaved-input variants not fully exhausted.",
+      "actual": "Browser navigation/reload/dialog focus and 320–1920 shell matrix passed; all-route/orientation/unsaved-input variants not fully exhausted.",
       "evidence": [
         "../reports/webapp-implementation-checkpoint-2026-11-11.md"
       ],
@@ -660,7 +642,7 @@
       "id": "GL-P02-005",
       "phase": "P02",
       "status": "PARTIAL",
-      "actual": "Browser navigation/reload/dialog focus and 320\u20131920 shell matrix passed; all-route/orientation/unsaved-input variants not fully exhausted.",
+      "actual": "Browser navigation/reload/dialog focus and 320–1920 shell matrix passed; all-route/orientation/unsaved-input variants not fully exhausted.",
       "evidence": [
         "../reports/webapp-implementation-checkpoint-2026-11-11.md"
       ],
@@ -1011,8 +993,8 @@
     {
       "id": "GL-P04-003",
       "phase": "P04",
-      "status": "BLOCKED",
-      "actual": "Real camera permission/capture/denial/navigation behavior needs supported physical phone/HTTPS testing; manual fallback code exists.",
+      "status": "NOT_RUN",
+      "actual": "No physical-device acceptance run. Deferred by user November 12; existing browser/manual fallback evidence does not prove capture/permission behavior on a real phone.",
       "evidence": [
         "../reports/webapp-implementation-checkpoint-2026-11-11.md"
       ],
@@ -1020,13 +1002,17 @@
       "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
       "executed_at": "2026-11-11T09:46:42.298558+00:00",
       "defect": null,
-      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release.",
+      "scope_disposition": "DEFERRED_BY_USER",
+      "scope_decision_date": "2026-11-12",
+      "scope_reason": "User selected Chrome testing and deferred live physical-camera testing to future scope. Manual barcode and browser fallback remain required.",
+      "prior_status_before_scope_decision": "BLOCKED"
     },
     {
       "id": "GL-P04-004",
       "phase": "P04",
-      "status": "BLOCKED",
-      "actual": "Real camera permission/capture/denial/navigation behavior needs supported physical phone/HTTPS testing; manual fallback code exists.",
+      "status": "NOT_RUN",
+      "actual": "No physical-device acceptance run. Deferred by user November 12; existing browser/manual fallback evidence does not prove capture/permission behavior on a real phone.",
       "evidence": [
         "../reports/webapp-implementation-checkpoint-2026-11-11.md"
       ],
@@ -1034,7 +1020,11 @@
       "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:6d71be516d299127",
       "executed_at": "2026-11-11T09:46:42.298558+00:00",
       "defect": null,
-      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release."
+      "execution_revision_note": "Current reviewed manifest; earlier cloud run worktree hashes not captured. Revalidate a recorded revision for release.",
+      "scope_disposition": "DEFERRED_BY_USER",
+      "scope_decision_date": "2026-11-12",
+      "scope_reason": "User selected Chrome testing and deferred live physical-camera testing to future scope. Manual barcode and browser fallback remain required.",
+      "prior_status_before_scope_decision": "BLOCKED"
     },
     {
       "id": "GL-P04-005",
@@ -2356,17 +2346,17 @@
     {
       "id": "GL-P09-011",
       "phase": "P09",
-      "status": "NOT_RUN",
-      "actual": "Planned frozen-context portion/composition/repeat experiment in the new protocol; real model sensitivity matrix not executed.",
+      "status": "FAIL",
+      "actual": "Executed236/236 synthetic predictions. Chronos invariant in60/60 eligible changed-input contrasts at predeclared0.001mg/dL: capabilityFAIL_INVARIANT despite engineering/repeatability pass. LightGBM limited carbohydrate sensitivity; no accuracy claim.",
       "evidence": [
         "meal-response-validation-protocol.md",
-        "../reports/demo-logout-compose-review-2026-11-12.md"
+        "../reports/meal-response-sensitivity-2026-11-12.md"
       ],
       "run_id": null,
       "revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:1afbbd122ee29bfc",
-      "executed_at": null,
-      "defect": null,
-      "execution_revision_note": "Protocol added in this checkpoint; execution not claimed.",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": "CHRONOS_MEAL_RESPONSE_INVARIANT",
+      "execution_revision_note": "Current reviewed source manifest; actual raw matrix carries frozen inputs/model identities, not a complete start-time dirty-tree manifest.",
       "reviewed_publication_revision": "c36493d9b05ac729c4e66fb03b5ca6a05261d919+reviewed-local:8c0152149ff37c63"
     },
     {
@@ -2400,5 +2390,34 @@
     "authorized": "2026-11-12",
     "scope": "commit/push checkpoint; not hosted deployment",
     "manifest": "../reports/webapp-release-manifest-2026-11-12.json"
+  },
+  "scope_update_2026_11_12": {
+    "plan": "../planning/GlycoLens_18_M2_Closure_and_LightGBM_Integration.md",
+    "decision": "Chrome now; physical-camera acceptance deferred by user, retained as future scope and not passed.",
+    "case_counts": {
+      "PASS": 22,
+      "PARTIAL": 87,
+      "BLOCKED": 32,
+      "NOT_RUN": 5
+    },
+    "note": "Latest_checkpoint and publication are historical execution/delivery records; this is a scope disposition update, not a new test run."
+  },
+  "implementation_checkpoint_2026_11_12": {
+    "report": "../reports/m2-closure-validation-2026-11-12.md",
+    "supplemental_ledger": "m2-closure-lightgbm-results.json",
+    "case_counts": {
+      "PASS": 22,
+      "PARTIAL": 87,
+      "BLOCKED": 32,
+      "NOT_RUN": 4,
+      "FAIL": 1
+    },
+    "note": "Prior publication/checkpoint counts are historical. Only GL-P09-011 actual status changed here; camera scope deferral remains unpassed."
+  },
+  "workspace_contract_update": {
+    "date": "2026-11-14",
+    "plan": "GlycoLens_19_Personal_and_Simulation_Workspaces.md",
+    "ledger": "workspace-separation-results.json",
+    "note": "Historical outcomes unchanged; implicit global-source/default-date observations do not establish new personal/simulation acceptance."
   }
 }

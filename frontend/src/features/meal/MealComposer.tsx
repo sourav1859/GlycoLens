@@ -8,12 +8,14 @@ import { useAccount } from "../auth/AccountProvider";
 import { PageIntro } from "../../components/layout/PageIntro";
 import { AsyncState } from "../../components/ui/AsyncState";
 
+import { useWorkspace } from "../simulation/Workspace";
 import { useMealDrafts } from "./MealDrafts";
 
 type Ingredient = { name:string; quantity:number; unit:string; needs_review:boolean };
 export function MealComposer({ initialMode="search", mealId, copyId }: { initialMode?:string; mealId?:string; copyId?:string }) {
   const { account } = useAccount(), router=useRouter();
-  const drafts=useMealDrafts(),draftKey=mealId?`edit:${mealId}`:copyId?`copy:${copyId}`:"new";
+  const {workspace,simulation,base,source}=useWorkspace();
+  const drafts=useMealDrafts(),draftKey=`${account?.user_id}:${workspace}:${mealId?`edit:${mealId}`:copyId?`copy:${copyId}`:simulation?source?.id??"none":"new"}`;
   const [initialDraft]=useState(()=>drafts.read(draftKey));
   const [mode,setMode]=useState(initialDraft?.mode??initialMode), [query,setQuery]=useState(initialDraft?.query??""), [code,setCode]=useState(initialDraft?.code??""), [recipe,setRecipe]=useState(initialDraft?.recipe??"");
   const [items,setItems]=useState<DraftItem[]>(initialDraft?.items??[]), [foods,setFoods]=useState<Food[]>(initialDraft?.foods??[]), [ingredients,setIngredients]=useState<Ingredient[]>(initialDraft?.ingredients??[]);
@@ -27,17 +29,19 @@ export function MealComposer({ initialMode="search", mealId, copyId }: { initial
   useEffect(() => {
     if(initialDraft)return;
     let active=true;
-    void api(mealId || copyId ? `/meals/${mealId || copyId}` : "/nutrition").then(value => {
+    void api(mealId || copyId ? `/meals/${mealId || copyId}` : simulation&&source?`/simulation/sources/${source.id}`:"/nutrition").then(value => {
       if (!active) return;
       if (mealId || copyId) {
         if (!Array.isArray(value) || !isMeal(value[0])) throw new Error("Meal unavailable");
-        const original=value[0]; setMeal(mealId ? original : undefined); setName(copyId ? `Copy of ${original.name}`.slice(0,200) : original.name);
+        const original=value[0];
+        if(original.workspace!==workspace){router.replace(`${original.workspace==="personal"?"":"/demo"}/meals/${original.id}`);return;}
+        setMeal(mealId ? original : undefined); setName(copyId ? `Copy of ${original.name}`.slice(0,200) : original.name);
         const copied=copyId?original.meal_items?.map(row=>({food:row.foods,grams:row.grams})):original.nutrition_provenance.food_snapshots.map(f=>({food:{...f,id:f.food_id},grams:f.grams}));if(!copied?.every(i=>isFood(i.food)&&i.food.id))throw new Error("Current food facts are unavailable; review the foods again");setItems(copied);
-        setMealType(original.meal_type??"");setAt(original.recorded_at); setConsumedAt(original.consumed_at??original.recorded_at); setState(mealId && original.state==="logged" ? "logged" : "planned");
-      } else if (value.source?.clock_at) setAt(value.source.clock_at);
+        setMealType(original.meal_type??"");setAt(copyId&&!simulation?new Date().toISOString():original.recorded_at); setConsumedAt(copyId?"":original.consumed_at??original.recorded_at); setState(mealId && original.state==="logged" ? "logged" : "planned");
+      } else if(simulation) {if(!source||!value.clock_at)throw new Error("Open a saved simulation session before adding a virtual meal");setAt(value.clock_at);} else setAt(new Date().toISOString());
     }).catch(reason=>{if(active)setError(reason instanceof Error?reason.message:"Meal unavailable");});
     return ()=>{active=false;};
-  }, [mealId,copyId,initialDraft]);
+  }, [mealId,copyId,initialDraft,simulation,source,workspace,router]);
   useEffect(()=>{if(items.length||recipe||query||code||name!=="My meal")drafts.write(draftKey,{mode,query,code,recipe,items,foods,ingredients,name,servings,portion,at,consumedAt,state,meal,requestKey:requestKey.current,mealType});},[drafts,draftKey,mode,query,code,recipe,items,foods,ingredients,name,servings,portion,at,consumedAt,state,meal,mealType]);
   useEffect(()=>{if(!items.length)return;const warn=(event:BeforeUnloadEvent)=>{event.preventDefault();event.returnValue="";};window.addEventListener("beforeunload",warn);return()=>window.removeEventListener("beforeunload",warn);},[items.length]);
   function changed() { setConfirmed(false); requestKey.current=""; }
@@ -71,16 +75,16 @@ export function MealComposer({ initialMode="search", mealId, copyId }: { initial
       {items.map((item,index)=><div className="ingredient-row" key={index}><div><strong>{item.food.name}</strong><p className="small muted">{item.food.source}</p></div><label>Ingredient grams in recipe<input type="number" min="0.001" max="10000" step="any" value={item.grams} onChange={e=>{setItems(items.map((v,i)=>i===index?{...v,grams:Number(e.target.value)}:v));changed();}}/></label><button className="button secondary compact" onClick={()=>{setItems(items.filter((_,i)=>i!==index));changed();}}>Remove</button></div>)}
       <dl className="nutrition-totals">{nutrientFields.map(f=><div key={f}><dt>{f.replace("_g","")}</dt><dd>{items.length?displayNutrient(totals?.[f]):"—"} {f==="calories"?"kcal":"g"}</dd></div>)}</dl>
       <p className="small muted">Unknown nutrients remain unknown. Complete carbohydrate, protein, fat and fiber facts are required for forecasting.</p>
-      <label>Meal time with timezone<input value={at} onChange={e=>{setAt(e.target.value);changed();}} placeholder="2026-01-01T12:00:00Z"/><span className="small muted">Use the source clock for virtual data. Include Z or an explicit offset. Profile timezone: {account?.preferences.timezone}.</span></label>
+      <label>Meal time with timezone<input value={at} onChange={e=>{setAt(e.target.value);changed();}} placeholder="ISO date/time with Z or offset"/><span className="small muted">{simulation?"Virtual meal: use this simulation’s clock.":"Personal meal: current time is filled in automatically."} Include Z or an explicit offset. Profile timezone: {account?.preferences.timezone}.</span></label>
       <label>Meal slot<select value={mealType} onChange={e=>{setMealType(e.target.value);changed();}}><option value="">Unspecified</option>{["breakfast","lunch","dinner","snack"].map(s=><option key={s} value={s}>{s}</option>)}</select></label>
       <label>Status<select value={state} onChange={e=>{setState(e.target.value as "planned"|"logged");changed();}}><option value="planned">Planned — exclude from eaten totals</option><option value="logged">Eaten — include in nutrition</option></select></label>
       {state==="logged"&&<label>Eaten time with timezone<input value={consumedAt||at} onChange={e=>{setConsumedAt(e.target.value);changed();}}/></label>}
-      <p className="small muted">Unsaved drafts stay in memory during app navigation. Reloading or closing the browser discards them. Signing out or changing source clears drafts.</p>
+      <p className="small muted">Unsaved drafts stay in memory during app navigation. Reloading or closing the browser discards them. Personal and simulation drafts are separate. Signing out clears private drafts.</p>
       <label className="confirmation"><input type="checkbox" checked={confirmed} onChange={e=>setConfirmed(e.target.checked)}/>I reviewed the food matches, grams, yield, time, status and sources.</label>
       <button className="button" disabled={!!busy||!confirmed||!valid||!name.trim()} onClick={()=>void action("Saving reviewed meal",async()=>{
         if(!requestKey.current)requestKey.current=crypto.randomUUID();
         drafts.write(draftKey,{mode,query,code,recipe,items,foods,ingredients,name,servings,portion,at,consumedAt,state,meal,requestKey:requestKey.current,mealType});
-        const result=await api(mealId?`/meals/${mealId}`:"/meals",{method:mealId?"PATCH":"POST",body:JSON.stringify({name,recorded_at:at,state,meal_type:mealType||null,consumed_at:state==="logged"?(consumedAt||at):null,confirmed:true,idempotency_key:requestKey.current,items:items.map(i=>({food_id:i.food.id,grams:i.grams/servings*portion,expected_facts:expectedFacts(i.food)})),input_snapshot:{entry_method:mode,servings,portion,confirmed:true},...(mealId?{revision:meal?.revision}:{})})});drafts.clear(draftKey);router.push(`/meals/${result.meal_id}`);router.refresh();
+        const result=await api(mealId?`/meals/${mealId}`:"/meals",{method:mealId?"PATCH":"POST",body:JSON.stringify({workspace,source_session_id:meal?.source_session_id??(simulation?source?.id:null),name,recorded_at:at,state,meal_type:mealType||null,consumed_at:state==="logged"?(consumedAt||at):null,confirmed:true,idempotency_key:requestKey.current,items:items.map(i=>({food_id:i.food.id,grams:i.grams/servings*portion,expected_facts:expectedFacts(i.food)})),input_snapshot:{entry_method:mode,servings,portion,confirmed:true},...(mealId?{revision:meal?.revision}:{})})});drafts.clear(draftKey);router.push(`${base}/meals/${result.meal_id}`);router.refresh();
       })}>{mealId?"Save new revision":"Save reviewed meal"}</button>
     </section></div></>;
 }

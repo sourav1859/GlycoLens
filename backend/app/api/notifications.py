@@ -22,15 +22,26 @@ def notifications(
         session,
         f"notifications?select=id,kind,entity_id,created_at,read_at&order=created_at.desc,id.desc&limit=51&offset={offset}",
     )
+    meal_ids = [str(UUID(row["entity_id"])) for row in rows if row["kind"] == "meal_saved"]
+    meals = (
+        database_call(session, "meals?select=id,workspace&id=in.(" + ",".join(meal_ids) + ")")
+        if meal_ids
+        else []
+    )
+    scopes = {meal["id"]: meal["workspace"] for meal in meals}
     for row in rows:
-        prefix = {
-            "meal_saved": "/meals/",
-            "forecast_ready": "/forecasts/",
-            "source_ready": "/home",
-        }[row["kind"]]
-        row["href"] = prefix + (
-            str(UUID(row["entity_id"])) if row["kind"] != "source_ready" else ""
+        workspace = (
+            scopes.get(row["entity_id"], "legacy_unclassified")
+            if row["kind"] == "meal_saved"
+            else "simulation"
         )
+        prefix = {
+            "meal_saved": ("" if workspace == "personal" else "/demo") + "/meals/",
+            "forecast_ready": "/demo/forecasts/",
+            "source_ready": "/demo/sessions/",
+        }[row["kind"]]
+        row["workspace"] = workspace
+        row["href"] = prefix + str(UUID(row["entity_id"]))
     return {"notifications": rows[:50], "has_more": len(rows) > 50}
 
 

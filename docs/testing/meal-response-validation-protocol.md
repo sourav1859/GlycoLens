@@ -1,6 +1,10 @@
 # Meal and portion response validation
 
-Status: **planned, not executed**. Added November 12, 2026 under P09/M3.
+## Executed result — November 12
+
+The frozen matrix is now executed; see [actual results](../reports/meal-response-sensitivity-2026-11-12.md). Engineering completion/repeatability passed, but **GL-P09-011 Chronos meal-response capability FAIL_INVARIANT** at the original 0.001 mg/dL tolerance. Native LightGBM shows limited carbohydrate-only synthetic sensitivity. GL-P09-012 matching-outcome accuracy remains NOT_RUN; no consumed cohort was reused. The protocol below is the original pre-execution specification, not a claim that execution is still pending.
+
+Original planning status: **planned, not executed at protocol creation**. Added November 12, 2026 under P09/M3.
 This evaluates the application Chronos-2 adapter, not the recipe-extraction LLM.
 
 ## Why this gate is separate

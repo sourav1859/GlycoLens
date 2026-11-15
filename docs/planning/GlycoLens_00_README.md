@@ -1,5 +1,37 @@
 # GlycoLens Capstone Planning Pack
 
+## November 14: GitHub checkpoint authorization
+
+The user authorized committing and pushing the current implementation checkpoint on `main`, superseding the local-review hold for these changes. [Delivery scope and checks](../reports/github-checkpoint-delivery-2026-11-14.md) cover Plans 18 and 19. Publishing source does not close partial acceptance gates or deploy a hosted application. Earlier local-only notes below describe their dated checkpoints.
+
+## November 14: personal and simulation workspaces implemented
+
+[Plan 19](GlycoLens_19_Personal_and_Simulation_Workspaces.md) engineering is implemented: ordinary app dates/meals are personal and current; `/demo` retains isolated virtual clocks and discoverable history. The guarded cloud migration is applied; local Compose is updated. [Actual validation](../reports/workspace-separation-validation-2026-11-14.md) and [44-case ledger](../testing/workspace-separation-results.json): **28 PASS, 16 PARTIAL**. Changes remain local; human Chrome and other qualified gates are not claimed complete.
+
+## November 14: local LightGBM selection enabled for user review
+
+At the user's request, the existing local development runtime now exposes **LightGBM · research option** alongside default Chronos. The ignored local enablement flag is true; the running API's native bundle/digest/read-only mount were verified and real synthetic inference returned 24 ordered points. The shipped environment template remains disabled by default. This is a user-authorized local research exposure for manual testing, not completed L0–L4 acceptance, production enablement or a model default change. All existing history/artifact/owner checks remain enforced.
+
+An existing meal attached to the short one-day source remains ineligible for native inference. Explicitly prepare the 48-hour research source and save a new reviewed meal at that source's clock; existing meal/source snapshots are unchanged. Current carbohydrates are the native meal predictor; matching-outcome accuracy and transferred interval coverage remain unvalidated. [Enablement and verification](../reports/local-lightgbm-enablement-2026-11-14.md). November 12 off-state descriptions below are historical checkpoints; their outstanding acceptance results remain valid.
+
+## November 12 implementation outcome — current status
+
+The approved [Plan 18](GlycoLens_18_M2_Closure_and_LightGBM_Integration.md) is now implemented through real provider/API/cloud and CPU Compose paths. Chronos remains default; frozen native LightGBM, a separate 48h scenario, model-specific history/features, v2 calibrated bands and research UI are implemented. Ordinary native enablement stays off; the isolated review stack enables it. [Actual evidence](../reports/m2-closure-validation-2026-11-12.md) and the [58-case ledger](../testing/m2-closure-lightgbm-results.json) supersede the planning-only status below. **Chronos failed the synthetic meal-response capability gate**; matching-outcome accuracy remains untested. Chrome/manual review, presenter rehearsal/sign-off and normal enablement remain open. Current changes stay local; no push or hosted release.
+
+The dated planning/checkpoint entries below remain historical where they describe unexecuted work.
+
+## November 12: M2 closure and optional model integration plan
+
+[Plan 18](GlycoLens_18_M2_Closure_and_LightGBM_Integration.md) separates original M2 provider/Chrome/presentation closure
+from additional opt-in LightGBM integration. The user confirmed **Chronos default,
+LightGBM opt-in, a separate longer synthetic scenario and Chrome acceptance**;
+physical-camera testing is deferred to future scope. The approved OFF application
+contact is now configured privately; no new provider key is needed. The plan has
+[58 designed tests](../testing/m2-closure-lightgbm-test-cases.md), initially NOT_RUN at planning time in a
+separate ledger. No model switch, training, migration or new live acceptance is
+claimed; planned changes remain local for review. Historical dated status below
+does not override these newer scope/configuration decisions.
+
 ## November 12 development update
 
 Demo actions are now **Run new simulation** / **Replay saved simulation**. Existing

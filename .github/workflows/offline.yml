@@ -17,7 +17,7 @@ jobs:
         with:
           python-version: '3.12.5'
       - run: python -m pip install uv==0.9.18
-      - run: uv sync --frozen --group dev
+      - run: uv sync --frozen --group dev --group refinement
       - run: uv run --no-sync python -m pytest -p scripts.quality.offline_pytest backend/tests tests/quality tests/contract tests/database tests/research/models/test_forecast_adapters.py tests/research/test_pymgipsim.py -q
       - run: uv run --no-sync python -m scripts.quality.check_api_contract
       - run: uv run --no-sync python -m scripts.quality.check_public_files

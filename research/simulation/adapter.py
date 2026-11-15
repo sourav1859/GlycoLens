@@ -9,6 +9,7 @@ import subprocess
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
+from typing import ClassVar
 
 PYMGIPSIM_REPOSITORY = "https://github.com/illinoistech-itm/py-mgipsim.git"
 PYMGIPSIM_COMMIT = "b985f8c2ea385d1b2b8480957b730866e07772f1"
@@ -56,6 +57,34 @@ class GlucosePoint:
 
 
 @dataclass(frozen=True, slots=True)
+class PyMgipsimLongScenario(PyMgipsimScenario):
+    """Separate reviewed 48h protocol; the original scenario remains strict."""
+
+    name: str = "lightgbm_warmup_48h_v1"
+    duration_days: int = 2
+
+    def __post_init__(self):
+        if (
+            self.name,
+            self.duration_days,
+            self.random_seed,
+            self.sample_interval_minutes,
+            self.virtual_subject_file,
+            self.model,
+            self.controller,
+        ) != (
+            "lightgbm_warmup_48h_v1",
+            2,
+            20260929,
+            5,
+            "Patient_1.json",
+            "T1DM.ExtHovorka",
+            "OpenLoop",
+        ):
+            raise ValueError("Only the reviewed 48-hour research protocol is supported")
+
+
+@dataclass(frozen=True, slots=True)
 class PyMgipsimResult:
     """Validated, privacy-safe result exported from the upstream simulator."""
 
@@ -77,6 +106,12 @@ class PyMgipsimResult:
     glucose_start_mg_dl: float
     glucose_end_mg_dl: float
     trajectory: tuple[GlucosePoint, ...]
+    expected_schema: ClassVar[str] = "1.0"
+    expected_scenario: ClassVar[str] = "m1_fixed_meal_day"
+    expected_duration: ClassVar[int] = 1440
+    expected_samples: ClassVar[int] = 288
+    expected_meals: ClassVar[int] = 3
+    expected_carbs: ClassVar[float] = 210.0
 
     @classmethod
     def from_payload(cls, payload: dict[str, Any]) -> PyMgipsimResult:
@@ -125,22 +160,22 @@ class PyMgipsimResult:
         return cls.from_payload(payload)
 
     def validate(self) -> None:
-        if self.schema_version != RESULT_SCHEMA_VERSION:
+        if self.schema_version != self.expected_schema:
             raise PyMgipsimError("Unsupported py-mgipsim result schema")
         if self.source != "py-mgipsim" or self.upstream_commit != PYMGIPSIM_COMMIT:
             raise PyMgipsimError("Unexpected py-mgipsim source provenance")
-        if self.scenario_name != "m1_fixed_meal_day":
+        if self.scenario_name != self.expected_scenario:
             raise PyMgipsimError("Unexpected simulation scenario")
         if self.model != "T1DM.ExtHovorka" or self.controller != "OpenLoop":
             raise PyMgipsimError("Unexpected simulation model or controller")
         if self.random_seed != 20260929:
             raise PyMgipsimError("Unexpected simulation random seed")
-        if self.duration_minutes != 1440 or self.sample_interval_minutes != 5:
+        if self.duration_minutes != self.expected_duration or self.sample_interval_minutes != 5:
             raise PyMgipsimError("Unexpected simulation time grid")
-        if self.sample_count != len(self.trajectory) or self.sample_count != 288:
+        if self.sample_count != len(self.trajectory) or self.sample_count != self.expected_samples:
             raise PyMgipsimError("Unexpected simulation sample count")
-        if self.meal_event_count != 3 or not math.isclose(
-            self.meal_carbohydrate_total_g, 210.0, abs_tol=1e-6
+        if self.meal_event_count != self.expected_meals or not math.isclose(
+            self.meal_carbohydrate_total_g, self.expected_carbs, abs_tol=1e-6
         ):
             raise PyMgipsimError("Unexpected fixed-meal protocol")
 
@@ -169,6 +204,26 @@ class PyMgipsimResult:
         for name, expected in expected_summary.items():
             if not math.isclose(reported_summary[name], expected, rel_tol=1e-9, abs_tol=1e-6):
                 raise PyMgipsimError("Simulation glucose summary is inconsistent")
+
+
+class PyMgipsimLongResult(PyMgipsimResult):
+    expected_schema = "2.0"
+    expected_scenario = "lightgbm_warmup_48h_v1"
+    expected_duration = 2880
+    expected_samples = 576
+    expected_meals = 6
+    expected_carbs = 420.0
+
+
+def reviewed_result(path: Path):
+    """Dispatch only versioned reviewed protocols; old parser still rejects long data."""
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    cls = (
+        PyMgipsimLongResult
+        if payload.get("scenario_name") == "lightgbm_warmup_48h_v1"
+        else PyMgipsimResult
+    )
+    return cls.from_payload(payload)
 
 
 def run_pymgipsim_scenario(
@@ -206,6 +261,8 @@ def run_pymgipsim_scenario(
         "--random-seed",
         str(scenario.random_seed),
     ]
+    if isinstance(scenario, PyMgipsimLongScenario):
+        command += ["--protocol", scenario.name]
     if internal_context_output is not None:
         internal_context_output = internal_context_output.resolve()
         allowed = Path(__file__).resolve().parents[2] / "artifacts/simulation"
@@ -232,7 +289,10 @@ def run_pymgipsim_scenario(
     if completed.returncode != 0:
         raise PyMgipsimError("py-mgipsim subprocess returned a nonzero status")
 
-    return PyMgipsimResult.from_json(output_json)
+    result = reviewed_result(output_json)
+    if result.scenario_name != scenario.name:
+        raise PyMgipsimError("Simulation result protocol differs from request")
+    return result
 
 
 def _verify_upstream_commit(source_directory: Path) -> None:

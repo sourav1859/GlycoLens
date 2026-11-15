@@ -34,7 +34,6 @@ test("anonymous demo logout requires confirmation and clears the draft across ta
   const other = await context.newPage();
   await mockAccount(other);
   await other.goto("/demo");
-  await other.getByRole("button", { name: "Choose virtual patient" }).click();
   await other.getByLabel("Meal name").fill("Private synthetic draft");
   page.once("dialog", dialog => dialog.dismiss());
   await page.getByRole("button", { name: "Sign out", exact: true }).click();

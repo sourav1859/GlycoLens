@@ -1,5 +1,19 @@
 # Milestone 2 approved presentation outline
 
+## November 12 implementation claim correction
+
+The app now integrates an explicitly selected frozen LightGBM research option through the same backend, while Chronos remains default. Separate 48h synthetic context, current-carbohydrate-only features and saved calibrated marginal bands are implemented. Live provider/API/cloud and CPU runtime evidence is recorded in [the closure report](m2-closure-validation-2026-11-12.md). **Chronos failed the synthetic meal/portion capability diagnostic**; native sensitivity does not establish accuracy. Do not compare different-cohort MAEs as a head-to-head result or imply a default replacement. Chrome/manual acceptance, native deck review and actual presenter rehearsal/sign-off remain pending; physical camera stays deferred. This Markdown correction does not assert that the existing v4 PowerPoint was edited/rendered or rehearsed.
+
+## November 12 planning status
+
+[Plan 18](../planning/GlycoLens_18_M2_Closure_and_LightGBM_Integration.md) defines
+remaining current-revision provider/Chrome/evidence checks and presenter review.
+Required private credentials/contact are configured; this is not complete live
+journey acceptance. Physical camera is deferred by user. Chronos remains the app
+default and LightGBM is planned as an opt-in research option. The November 3 deck
+and speech below are historical artifacts; no native deck edit or new rehearsal
+is performed by this planning update. C3 must reconcile claims before final use.
+
 Revised November 3, 2026 at the user’s request for a plain-language 7–8 minute
 speech, targeting 7:30. The previously approved ten main slides and four backups
 remain. The latest notes use the Milestone 1 progress-report style with brief

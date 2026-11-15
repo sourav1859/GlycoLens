@@ -1,5 +1,36 @@
 # GlycoLens: Updated Project Summary
 
+## November 14: GitHub checkpoint authorization
+
+The user authorized committing and pushing the current implementation checkpoint on `main`, superseding the local-review hold for these changes. [Delivery scope and checks](../reports/github-checkpoint-delivery-2026-11-14.md) cover Plans 18 and 19. Publishing source does not close partial acceptance gates or deploy a hosted application. Earlier local-only notes below describe their dated checkpoints.
+
+## November 14: personal and simulation workspaces implemented
+
+One account now has independent personal and simulation workspaces. Personal logging/totals work without CGM, using current profile-local days; virtual readings/forecasts and their original timestamps stay in `/demo`. Existing virtual meals remain in simulation history. [Actual validation](../reports/workspace-separation-validation-2026-11-14.md) and [44-case ledger](../testing/workspace-separation-results.json): **28 PASS, 16 PARTIAL**. Changes remain local; human Chrome and other qualified gates are not claimed complete.
+
+## November 14: local LightGBM selection enabled for user review
+
+At the user's request, the existing local development runtime now exposes **LightGBM · research option** alongside default Chronos. The ignored local enablement flag is true; the running API's native bundle/digest/read-only mount were verified and real synthetic inference returned 24 ordered points. The shipped environment template remains disabled by default. This is a user-authorized local research exposure for manual testing, not completed L0–L4 acceptance, production enablement or a model default change. All existing history/artifact/owner checks remain enforced.
+
+An existing meal attached to the short one-day source remains ineligible for native inference. Explicitly prepare the 48-hour research source and save a new reviewed meal at that source's clock; existing meal/source snapshots are unchanged. Current carbohydrates are the native meal predictor; matching-outcome accuracy and transferred interval coverage remain unvalidated. [Enablement and verification](../reports/local-lightgbm-enablement-2026-11-14.md). November 12 off-state descriptions below are historical checkpoints; their outstanding acceptance results remain valid.
+
+## November 12 implementation outcome — current status
+
+The approved integration now runs through the shared backend connector: Chronos remains default; explicit native LightGBM uses 288 CGM samples, training-compatible masks/insulin amounts/previous carbs and current carbohydrates only. A separate 48h virtual protocol preserves the old demo. Persisted v2 results retain full model/calibration identity and signed marginal bands. Native serving is enabled only in the isolated review stack, with ordinary configuration off. [Actual validation](../reports/m2-closure-validation-2026-11-12.md) replaces the planning-only status below. The synthetic matrix completed, but **Chronos was effectively invariant across all 60 eligible meal contrasts**, so its meal-response capability failed; LightGBM has limited synthetic carbohydrate sensitivity, not established accuracy. Chrome/manual UAT, presenter review and acceptance remain open; no push/deployment.
+
+The dated planning/checkpoint entries below remain historical where they describe unexecuted work.
+
+## November 12: accepted integration direction
+
+Chronos remains the implemented/default app model. The user approved an optional
+LightGBM research path through the existing common adapter, with a separate longer
+synthetic scenario; it was **planned, not enabled at this earlier planning checkpoint**. [Plan 18](GlycoLens_18_M2_Closure_and_LightGBM_Integration.md) records the
+24h history, insulin unit/mask, current-carbohydrate-only, artifact and calibrated
+interval contract gates. Research gains are not a direct cross-cohort model
+comparison. Original M2 live provider/Chrome/evidence work proceeds separately.
+Chrome is the current browser target; physical camera is explicitly deferred.
+The approved OFF contact is configured in ignored `.env`, without publishing it.
+
 ## November 12 development update
 
 Demo actions are now **Run new simulation** / **Replay saved simulation**. Existing

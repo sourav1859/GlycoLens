@@ -12,15 +12,18 @@ function polyline(points: ChartPoint[]): string {
 }
 
 export function ForecastChart({ data, unit="mg/dL" }: { data: ForecastResponse; unit?:"mg/dL"|"mmol/L" }) {
+  const calibrated = data.interval_kind === "calibrated_marginal_80";
+  const intervalLabel = calibrated ? "Calibrated marginal 80% interval" : "q10–q90 interval";
+  const visibleHistory = data.history.slice(-24);
   const format=(value:number)=>unit==="mmol/L"?(value/18.0182).toFixed(1):Math.round(value);
   const chartContainer = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const container = chartContainer.current;
     if (container) container.scrollLeft = container.scrollWidth - container.clientWidth;
   }, [data]);
-  const allMinutes = [...data.history.map((point) => point.minute), ...data.forecast.map((point) => point.minute)];
+  const allMinutes = [...visibleHistory.map((point) => point.minute), ...data.forecast.map((point) => point.minute)];
   const allValues = [
-    ...data.history.map((point) => point.value_mg_dl),
+    ...visibleHistory.map((point) => point.value_mg_dl),
     ...data.forecast.flatMap((point) => [point.q10_mg_dl, point.q90_mg_dl]),
   ];
   const minMinute = Math.min(...allMinutes);
@@ -37,7 +40,7 @@ export function ForecastChart({ data, unit="mg/dL" }: { data: ForecastResponse; 
   const scaleY = (value: number) =>
     PADDING.top + ((maxValue - value) / (maxValue - minValue)) * innerHeight;
 
-  const historyPoints = data.history.map((point) => ({
+  const historyPoints = visibleHistory.map((point) => ({
     x: scaleX(point.minute),
     y: scaleY(point.value_mg_dl),
   }));
@@ -62,7 +65,7 @@ export function ForecastChart({ data, unit="mg/dL" }: { data: ForecastResponse; 
     <section className="forecast-card" aria-labelledby="forecast-heading">
       <div className="forecast-heading-row">
         <div>
-          <p className="eyebrow">{data.data_mode === "simulated" ? "Simulated patient · Pretrained model forecast" : "Synthetic API demonstration"}</p>
+          <p className="eyebrow">{data.data_mode === "simulated" ? calibrated ? "Simulated patient · LightGBM research forecast" : "Simulated patient · Pretrained model forecast" : "Synthetic API demonstration"}</p>
           <h2 id="forecast-heading">Two-hour glucose forecast</h2>
         </div>
         <span className="model-badge">{data.model_id}</span>
@@ -76,8 +79,8 @@ export function ForecastChart({ data, unit="mg/dL" }: { data: ForecastResponse; 
         >
           <title id="forecast-chart-title">{data.data_mode==="simulated"?"Virtual-patient two-hour glucose forecast":"Synthetic two-hour glucose forecast"}</title>
           <desc id="forecast-chart-description">
-            Observed glucose history followed by a median forecast with a shaded q10 to q90
-            uncertainty interval. Values are synthetic and are not treatment guidance.
+            Observed glucose history followed by a median forecast with a shaded {intervalLabel}.
+            Values are simulated and are not treatment guidance.
           </desc>
           {yTicks.map((value) => (
             <g key={value}>
@@ -125,7 +128,7 @@ export function ForecastChart({ data, unit="mg/dL" }: { data: ForecastResponse; 
       <div className="chart-legend" aria-label="Chart legend">
         <span><i className="legend-line history" />Observed history</span>
         <span><i className="legend-line forecast" />Median forecast</span>
-        <span><i className="legend-band" />q10–q90 interval</span>
+        <span><i className="legend-band" />{intervalLabel}</span>
       </div>
 
       <dl className="forecast-summary">
@@ -134,6 +137,8 @@ export function ForecastChart({ data, unit="mg/dL" }: { data: ForecastResponse; 
         <div><dt>120 min</dt><dd>{format(data.summary.minute_120_mg_dl)} {unit}</dd></div>
       </dl>
       <p className="safety-notice">{data.notice}</p>
+      {data.provenance&&<details><summary>Model inputs and version</summary><p className="small">{data.provenance.inputs.join("; ")}. Used {data.provenance.history_samples} history readings; chart shows the latest two hours.</p><p className="small model-version">Model version: {data.model_version}<br/>Features: {data.provenance.feature_version}{calibrated&&<><br/>Calibration: {data.provenance.calibration_sha256}</>}</p></details>}
+      <details><summary>Forecast data table</summary><div className="table-scroll" tabIndex={0} role="region" aria-label="Forecast values; scroll for all columns"><table><caption>{intervalLabel} and median ({unit})</caption><thead><tr><th>Minutes</th><th>{calibrated?"Lower band":"q10"}</th><th>Median</th><th>{calibrated?"Upper band":"q90"}</th></tr></thead><tbody>{data.forecast.map(p=><tr key={p.minute}><th>+{p.minute}</th>{[p.q10_mg_dl,p.q50_mg_dl,p.q90_mg_dl].map((n,i)=><td key={i}>{format(n)}</td>)}</tr>)}</tbody></table></div></details>
     </section>
   );
 }

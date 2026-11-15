@@ -1,5 +1,33 @@
 # GlycoLens Risks, Safety Boundaries, and Scope Controls
 
+## November 14: personal and simulation workspaces implemented
+
+Virtual rows cannot become personal totals by selecting a source, changing a date or retrying in another workspace. Ambiguous legacy rows remain read-only; old virtual timestamps are preserved. Personal forecasts have no enabled real source and cannot borrow simulator context. Research limitations remain unchanged; no new accuracy or clinical claim. [Actual validation](../reports/workspace-separation-validation-2026-11-14.md) and [44-case ledger](../testing/workspace-separation-results.json): **28 PASS, 16 PARTIAL**. Changes remain local; human Chrome and other qualified gates are not claimed complete.
+
+## November 14: local LightGBM selection enabled for user review
+
+At the user's request, the existing local development runtime now exposes **LightGBM · research option** alongside default Chronos. The ignored local enablement flag is true; the running API's native bundle/digest/read-only mount were verified and real synthetic inference returned 24 ordered points. The shipped environment template remains disabled by default. This is a user-authorized local research exposure for manual testing, not completed L0–L4 acceptance, production enablement or a model default change. All existing history/artifact/owner checks remain enforced.
+
+An existing meal attached to the short one-day source remains ineligible for native inference. Explicitly prepare the 48-hour research source and save a new reviewed meal at that source's clock; existing meal/source snapshots are unchanged. Current carbohydrates are the native meal predictor; matching-outcome accuracy and transferred interval coverage remain unvalidated. [Enablement and verification](../reports/local-lightgbm-enablement-2026-11-14.md). November 12 off-state descriptions below are historical checkpoints; their outstanding acceptance results remain valid.
+
+## November 12 implementation outcome — current status
+
+The synthetic diagnostic found a concrete limitation: default Chronos changes effectively none of its outputs when tested meals/portions change. Result/help disclose failed meal-response capability; no useful meal effect, personal accuracy, causality or treatment claim is allowed. Native LightGBM is opt-in, current-carbohydrate-only, with saved marginal bands whose transfer to the simulator/person is unvalidated. Serving verifies artifacts and owner/source snapshots, excludes future/late events and preserves unknown masks/units. Ordinary enablement is false pending combined Chrome/manual acceptance. [Safety and evidence](../reports/m2-closure-validation-2026-11-12.md). Computer Use stopped on unverifiable browser URL; no bypass was attempted. Physical camera remains user-deferred.
+
+The dated planning/checkpoint entries below remain historical where they describe unexecuted work.
+
+## November 12: opt-in model trust and accepted device deferral
+
+[Plan 18](GlycoLens_18_M2_Closure_and_LightGBM_Integration.md) requires trusted checksum-verified serving artifacts before
+deserialization, unit/record-mask/availability parity, owner-bound immutable model
+identities and explicit model readiness. Do not load client-supplied pickles, pad
+missing 24h history, rename insulin rates as amounts, silently fall back models or
+clip calibrated interval endpoints. Saved research calibration is not a synthetic
+or personal coverage guarantee. Physical-camera validation is explicitly deferred
+by user; no camera acceptance is inferred from Chrome/manual-barcode tests. OFF is
+read-only provider grounding with private application contact, attribution and
+unknown-nutrient handling; user meals/photos are not uploaded in this scope.
+
 ## November 12: meal-response and local runtime boundaries
 
 A forecast changing after a portion change does not establish an accurate or causal

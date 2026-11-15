@@ -30,6 +30,7 @@ def forecast_to_response(
     *,
     data_mode: str = "synthetic_demo",
     context_configuration: str = "cgm_only",
+    provenance: dict | None = None,
 ) -> ForecastResponse:
     """Map the canonical model contract to relative-time chart transport data."""
 
@@ -56,6 +57,9 @@ def forecast_to_response(
     )
     lookup = {point.minute: point.q50_mg_dl for point in forecast}
     return ForecastResponse(
+        schema_version="2.0" if provenance else "1.0",
+        provenance=provenance,
+        interval_kind=provenance["interval_kind"] if provenance else "model_quantiles",
         data_mode=data_mode,
         model_id=result.model_id,
         model_version=result.model_version,
@@ -69,7 +73,11 @@ def forecast_to_response(
         ),
         notice=DEMO_NOTICE
         if data_mode == "synthetic_demo"
-        else "Simulated patient context. Model forecasts are uncertain research estimates, not clinical guidance or insulin-dosing advice.",
+        else (
+            "Simulated patient context. Calibrated symmetric marginal 80% bands; synthetic-transfer coverage and individual coverage are unverified. Current meal predictors use carbohydrates, not protein/fat/fiber. Research estimates only; no treatment or insulin-dosing advice."
+            if provenance and provenance["model_key"] == "lightgbm"
+            else "Simulated patient context. Chronos was effectively unchanged across the tested synthetic meal and portion contrasts; its meal-response capability check failed. Research context estimates only; accuracy is unvalidated. Not clinical guidance or insulin-dosing advice."
+        ),
     )
 
 

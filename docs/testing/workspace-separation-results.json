@@ -1,0 +1,772 @@
+{
+  "plan": "docs/planning/GlycoLens_19_Personal_and_Simulation_Workspaces.md",
+  "catalog": "docs/testing/workspace-separation-test-cases.md",
+  "created_on": "2026-11-14",
+  "scope": "implemented_personal_simulation_separation",
+  "status": "PARTIAL",
+  "implementation_status": "engineering_implemented_acceptance_partial",
+  "summary": {
+    "total": 44,
+    "PASS": 28,
+    "PARTIAL": 16,
+    "NOT_RUN": 0,
+    "FAIL": 0,
+    "BLOCKED": 0
+  },
+  "cases": [
+    {
+      "id": "WS-W0-001",
+      "phase": "W0",
+      "scenario": "Clock contract with frozen now and independent virtual clock",
+      "layer_and_target": "Unit / TIME",
+      "expected": "Personal now changes only with wall clock; simulation time changes only with selected source/advance; UTC round-trip exact.",
+      "status": "PARTIAL",
+      "observed": "Personal live/local-day helpers and fixed virtual protocols verified; full owned-clock advancement and UTC round-trip variants not all replayed.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W0-002",
+      "phase": "W0",
+      "scenario": "Normal and simulation API/route scope schemas",
+      "layer_and_target": "Contract / API",
+      "expected": "Invalid/missing mutation scope rejected before writes; personal reads cannot implicitly select latest virtual source.",
+      "status": "PASS",
+      "observed": "Explicit personal/simulation write contracts pass; missing or inconsistent scope is rejected. Personal reads do not select global virtual context.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W0-003",
+      "phase": "W0",
+      "scenario": "Synthetic migration baseline manifest",
+      "layer_and_target": "Integration / DB",
+      "expected": "Count, IDs, timestamp/revision/forecast/receipt digests captured for tagged fixtures only; unknown legacy classification represented.",
+      "status": "PARTIAL",
+      "observed": "Migration before/after assertion preserved original meal fields. A separately saved complete tagged baseline of all revision/forecast/receipt digests and ambiguous legacy rows remains incomplete.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W0-004",
+      "phase": "W0",
+      "scenario": "Reproduce current coupling before fixes",
+      "layer_and_target": "Regression / API+STATE",
+      "expected": "Tests expose preference-changing run, hidden old-session history and virtual personal default day; record failing baseline then passing corrected run.",
+      "status": "PARTIAL",
+      "observed": "Red baseline recorded 5 failures/3 passes for implicit writes and virtual/default-day coupling; default history pre-fix was diagnosed rather than all variants captured as failing tests.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W1-001",
+      "phase": "W1",
+      "scenario": "Forward migration on guarded dev target",
+      "layer_and_target": "Cloud / DB",
+      "expected": "Exact target/version reviewed; migration succeeds once and is recorded; unrelated owners untouched. Scratch replay stays separately deferred.",
+      "status": "PASS",
+      "observed": "Guarded cloud dry run then version 20261114173109 applied; preservation assertion passed and old services were stopped during transition.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W1-002",
+      "phase": "W1",
+      "scenario": "Known simulated and uncertain null-source legacy rows",
+      "layer_and_target": "Cloud / DB",
+      "expected": "Known rows become simulation; uncertain rows remain labeled legacy, excluded from personal totals and available for review.",
+      "status": "PARTIAL",
+      "observed": "Known owned virtual-source rows classified; uncertain null-origin branch is preserved by migration but lacks a dedicated pre-migration fixture rehearsal.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W1-003",
+      "phase": "W1",
+      "scenario": "Preserve old evidence",
+      "layer_and_target": "Cloud / DB",
+      "expected": "IDs, instants, nutrients, revisions, immutable forecast JSON and existing receipt request/result digests match baseline.",
+      "status": "PARTIAL",
+      "observed": "All original meal fields fingerprinted transactionally; no old snapshot/receipt rewrite. Independent full-table frozen-result/receipt digest baseline was not captured.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W1-004",
+      "phase": "W1",
+      "scenario": "Invalid workspace/source combinations",
+      "layer_and_target": "Cloud / DB",
+      "expected": "Personal+virtual source, simulation without source, foreign owner's source and edit reparenting rejected atomically.",
+      "status": "PASS",
+      "observed": "Actual cloud tests rejected foreign sources, personal/source mismatch, record reparenting and legacy reclassification edits.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W1-005",
+      "phase": "W1",
+      "scenario": "RLS, grants and direct Data API bypass attempts",
+      "layer_and_target": "Security / DB",
+      "expected": "A cannot read/write B; exposed grants remain least privilege, no callable privileged RPC escalation; direct writes cannot bypass consistency.",
+      "status": "PASS",
+      "observed": "Actual owned reads and grants verified: other owner denied; browser direct writes and trusted write RPC denied; scoped aggregate executable under owner RLS.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W1-006",
+      "phase": "W1",
+      "scenario": "New source creation and replay",
+      "layer_and_target": "Cloud / DB",
+      "expected": "Creates owned source/data without changing global app selection, personal records or another tab's context.",
+      "status": "PASS",
+      "observed": "Both real live protocols left personal totals/day independent; both real cached protocols left the exact personal preference object, revision and source pointer unchanged.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W1-007",
+      "phase": "W1",
+      "scenario": "Scoped nutrition aggregate with null facts and state changes",
+      "layer_and_target": "Cloud / DB",
+      "expected": "Exact known totals; unknown remains unknown; planned/cancelled excluded; edit/log/cancel revises correct scope only.",
+      "status": "PASS",
+      "observed": "Actual planned/logged/cancelled lifecycle, missing fiber and full 32-row source aggregate preserved independent totals; DST and timezone regrouping matched independent oracles.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W1-008",
+      "phase": "W1",
+      "scenario": "Migration transaction failure and recovery",
+      "layer_and_target": "Cloud synthetic / DB",
+      "expected": "Controlled synthetic failure leaves no partial classification; forward correction preserves data. No hosted reset or broad cleanup.",
+      "status": "PARTIAL",
+      "observed": "Complete migration dry run rolled back successfully before apply. Deliberate failed-DDL injection remains unexecuted; no hosted reset performed.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W2-001",
+      "phase": "W2",
+      "scenario": "Personal meal lifecycle with no source",
+      "layer_and_target": "API+cloud / API",
+      "expected": "Save planned, confirm eaten, edit and cancel work; personal history and three shared totals agree, without starting simulation.",
+      "status": "PASS",
+      "observed": "Actual no-source personal create/log/cancel and replay-safe saves passed; real UI showed current New York day, the personal eaten meal and correct 180 kcal.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W2-002",
+      "phase": "W2",
+      "scenario": "Short/long source saves with explicit scope",
+      "layer_and_target": "API+cloud / API",
+      "expected": "Each meal retains its selected owned source regardless of global prefs or another concurrent run.",
+      "status": "PASS",
+      "observed": "Actual short/long virtual meals retained explicitly selected source IDs despite later source creation; 288-sample long context remained distinct.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W2-003",
+      "phase": "W2",
+      "scenario": "Old mutation client omits scope",
+      "layer_and_target": "Contract / API",
+      "expected": "Stable actionable validation error; zero rows/revisions/receipts created, no hidden classification as personal.",
+      "status": "PASS",
+      "observed": "Actual missing-workspace write returned 422 before storage, confirmed by Pydantic and API tests.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W2-004",
+      "phase": "W2",
+      "scenario": "Retry, stale revision and cross-scope key reuse",
+      "layer_and_target": "API+cloud / DB",
+      "expected": "Exact retry one result; key reused with another scope/body conflicts; stale edit conflicts, no duplicate meals. Historical receipts remain interpretable.",
+      "status": "PASS",
+      "observed": "Actual identical retry returned same meal/revision; cross-workspace key conflict and stale edits returned 409; cancellation retry preserved three immutable revisions. Historical receipts were not rewritten.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W2-005",
+      "phase": "W2",
+      "scenario": "Session and meal/forecast history pagination",
+      "layer_and_target": "API+cloud / API",
+      "expected": "All A's simulated sessions discoverable across pages; optional filters correct; no personal/B rows; overlapping virtual dates labeled by source.",
+      "status": "PARTIAL",
+      "observed": "Both old/new owned sources and all simulated meals remained reachable; 32-meal pagination passed. Multi-page session/forecast catalogs above 20 sources remain untested.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W2-006",
+      "phase": "W2",
+      "scenario": "Timeline, clock advance and forged source IDs",
+      "layer_and_target": "Security / API",
+      "expected": "Explicit owned simulation source required; personal/B-source access denied; no global fallback or advancing unrelated sessions.",
+      "status": "PASS",
+      "observed": "Both real owned replay timelines returned pre-origin samples; other-owner timelines/source lookup/clock advancement denied. Offline personal/missing-source timeline contract rejects with 422.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W2-007",
+      "phase": "W2",
+      "scenario": "Personal forecast without real glucose",
+      "layer_and_target": "Contract / API+MODEL",
+      "expected": "Clear unavailable/eligibility response; no simulated history, forecast or private model input silently attached.",
+      "status": "PASS",
+      "observed": "Actual personal forecast request rejected 422 after simulations existed; normal UI shows no glucose connector and never substitutes synthetic data.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W2-008",
+      "phase": "W2",
+      "scenario": "Forecast/scenario/actual/retrieval scope mismatch",
+      "layer_and_target": "API+cloud / MODEL",
+      "expected": "Wrong owner/source/workspace denied; one frozen origin/context/model retained; future values excluded from predictors and retrieval.",
+      "status": "PARTIAL",
+      "observed": "Both actual adapters and existing past-only model context regressions passed; full combined scenario/actual/retrieval wrong-scope and future-availability variants were not all re-executed.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W2-009",
+      "phase": "W2",
+      "scenario": "Notification and historical detail links",
+      "layer_and_target": "API+cloud / API",
+      "expected": "Link resolves true workspace/record/source; old links remain owned/readable, never presented as personal consumption.",
+      "status": "PASS",
+      "observed": "Actual notifications linked personal records to /meals and simulated records to /demo; owned old detail URLs redirected to simulation correctly in browser tests.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W2-010",
+      "phase": "W2",
+      "scenario": "Export and immediate account deletion",
+      "layer_and_target": "Cloud disposable user / API",
+      "expected": "Export labels both workspaces/legacy and retains original provenance; password+confirmation deletion removes all owned rows/files, B unchanged.",
+      "status": "PASS",
+      "observed": "Actual export included both workspaces/frozen model responses; password-confirmed deletion revoked owner access, preserved other-owner sentinel and removed replay source files; cleanup queue observed empty.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W3-001",
+      "phase": "W3",
+      "scenario": "Personal Home/Nutrition without source",
+      "layer_and_target": "Component+browser / APP",
+      "expected": "Current profile-local day shown, useful empty totals and meal action; no simulated reading/run/replay/advance controls.",
+      "status": "PASS",
+      "observed": "Real production-browser/cloud Home showed current New York day, personal eaten meal and unconnected glucose state. Fixture desktop/mobile verified no virtual controls and current day.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W3-002",
+      "phase": "W3",
+      "scenario": "Create, eat, edit and copy timestamps",
+      "layer_and_target": "Unit+browser / APP",
+      "expected": "New uses now; eaten explicit; edit preserves chosen historical instant; copy is new planned draft with current time and new key.",
+      "status": "PARTIAL",
+      "observed": "Current personal create and planned copy/status paths passed; all timestamp edit/copy selections and assertions remain incomplete.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W3-003",
+      "phase": "W3",
+      "scenario": "UTC+14, UTC-10 and midnight windows",
+      "layer_and_target": "Unit/property / TIME",
+      "expected": "Same UTC instant groups into correct local day; half-open boundaries have no omission/double counting.",
+      "status": "PASS",
+      "observed": "UTC+14/-10 date cases and adjacent local-day half-open boundaries passed; cloud timezone regrouping preserved instants.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W3-004",
+      "phase": "W3",
+      "scenario": "DST spring/fall",
+      "layer_and_target": "Unit / TIME",
+      "expected": "Real 23h/25h local days and repeated-hour instants handled; no assumed 24h day or timestamp rewrite.",
+      "status": "PASS",
+      "observed": "23/25-hour DST unit boundaries and repeated-hour frontend dates passed; actual 25-hour cloud aggregate correctly included/excluded midnight boundaries.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W3-005",
+      "phase": "W3",
+      "scenario": "Midnight, background resume and profile timezone change",
+      "layer_and_target": "Component+browser / TIME+STATE",
+      "expected": "Default today refreshes correctly; explicit history date remains labeled history; stored timestamps untouched.",
+      "status": "PARTIAL",
+      "observed": "Midnight/timezone unit rollover and browser historical-date reset passed. Explicit focus/background-resume and every retained-history-date variant remain incomplete.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W3-006",
+      "phase": "W3",
+      "scenario": "New-user onboarding and settings",
+      "layer_and_target": "Browser / APP",
+      "expected": "Timezone can be confirmed/corrected; ordinary personal use requires no simulation choice or CGM, existing onboarding resumes safely.",
+      "status": "PASS",
+      "observed": "Real cloud account completed personal onboarding via API; six responsive-shell/onboarding/protected-route fixture cases passed, including resume after reload and optional-step skipping.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W3-007",
+      "phase": "W3",
+      "scenario": "Planned versus eaten discoverability",
+      "layer_and_target": "Browser / APP",
+      "expected": "Saved planned meal immediately visible in history; only confirmed eaten contributes to daily totals; state/selected-day explanation clear.",
+      "status": "PASS",
+      "observed": "Reviewed personal save remains planned unless explicitly eaten; browser planned history/detail and actual lifecycle counts keep planned/cancelled out of nutrition.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W3-008",
+      "phase": "W3",
+      "scenario": "Network error/loading and logout/account change",
+      "layer_and_target": "Component+browser / STATE",
+      "expected": "No old owner's/simulation data flashed; failed request offers retry; private state clears on logout and identity switch.",
+      "status": "PASS",
+      "observed": "Mixed-response negative UI tests fail closed without showing virtual meals; desktop/mobile logout cleared identity-bound private state across tabs; error/retry states remain available.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W4-001",
+      "phase": "W4",
+      "scenario": "Both protocols run and replay",
+      "layer_and_target": "API+browser / SIM",
+      "expected": "Distinct owned sources, visible virtual banner/session/clock; deterministic epoch and protocol checksum unchanged.",
+      "status": "PASS",
+      "observed": "Both actual live protocols and real cached replays completed with original fixed epoch; virtual banners/clock and source IDs visible; no rebasing of saved trajectories.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W4-002",
+      "phase": "W4",
+      "scenario": "Exit, browser Back, refresh, bookmark and normal deep link",
+      "layer_and_target": "Browser / SIM+STATE",
+      "expected": "Ordinary routes always use personal now/timezone/data; no exit-server-write dependency; Auth retained.",
+      "status": "PASS",
+      "observed": "Desktop/mobile exit/back/reload and historical personal-date reset passed. Real local cloud-browser exit restored today without logout or preference mutation.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W4-003",
+      "phase": "W4",
+      "scenario": "Two tabs, one reruns/advances simulation",
+      "layer_and_target": "Browser / STATE",
+      "expected": "Personal tab unchanged; explicit source in simulation tab stays consistent; no account-global selection mutation.",
+      "status": "PASS",
+      "observed": "Desktop/mobile two-tab tests retained personal day through another tab simulation; backend actual run/replay preference object remained independent.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W4-004",
+      "phase": "W4",
+      "scenario": "Slow response arrives after exit or source switch",
+      "layer_and_target": "Browser controlled network / STATE",
+      "expected": "Aborted/obsolete response cannot repopulate wrong workspace, draft, day or timeline.",
+      "status": "PASS",
+      "observed": "Exit invalidates request generation immediately; delayed simulated response after exit was ignored on both desktop/mobile and personal data/date remained intact.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W4-005",
+      "phase": "W4",
+      "scenario": "New simulation and earlier saved history",
+      "layer_and_target": "Browser / SIM",
+      "expected": "Earlier planned/eaten meals/forecasts remain discoverable via all-session history; selected-session totals exclude other sessions.",
+      "status": "PASS",
+      "observed": "Actual older/newer virtual source meals remained discoverable after later runs; real browser found an earlier virtual meal after a new long replay and personal list excluded it.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W4-006",
+      "phase": "W4",
+      "scenario": "Legacy detail URL and scope-aware links",
+      "layer_and_target": "Browser / SIM+APP",
+      "expected": "Owned simulated bookmark opens visibly simulated context and correct origin; forbidden IDs expose no details.",
+      "status": "PASS",
+      "observed": "Old owned ordinary detail URL resolved to its actual simulation route; other-owner record read returned no data.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W4-007",
+      "phase": "W4",
+      "scenario": "Unsaved personal and simulation drafts",
+      "layer_and_target": "Browser / STATE",
+      "expected": "Keys isolated by owner/workspace/source; enter/exit doesn't overwrite personal draft; unsaved-change choice preserves intended draft.",
+      "status": "PARTIAL",
+      "observed": "Personal draft survived enter/exit on desktop/mobile; drafts now separately bounded, and pure virtual edits/unload warning implemented. Full simulated draft/unsaved-choice matrix remains incomplete.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W4-008",
+      "phase": "W4",
+      "scenario": "Chronos and eligible native LightGBM regression",
+      "layer_and_target": "Real synthetic inference / MODEL",
+      "expected": "Existing 24-point outputs ordered, frozen inputs/provenance intact; LightGBM requires 288 pre-origin samples; no synthetic history in personal results. Sensitivity is not accuracy.",
+      "status": "PASS",
+      "observed": "Both real CPU models returned 24 persisted points from their selected sources; native required 288 past samples. Existing model-context/unit tests passed; personal forecasts were denied.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W4-009",
+      "phase": "W4",
+      "scenario": "Anonymous demo session behavior",
+      "layer_and_target": "Auth fixture+cloud where enabled / SIM",
+      "expected": "Demo remains gated by existing verified session policy; exit reaches ordinary account/onboarding gate without implicit upgrade/logout or data transfer.",
+      "status": "PARTIAL",
+      "observed": "Anonymous browser fixture logout/account gate paths passed; real cloud anonymous-provider availability/exit policy not exercised.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W5-001",
+      "phase": "W5",
+      "scenario": "One-command Compose/cloud integration",
+      "layer_and_target": "Live synthetic / RUN",
+      "expected": "Exact schema/API/UI versions healthy; personal log then short/long demo then exit work against dedicated cloud dev; no local Supabase needed.",
+      "status": "PASS",
+      "observed": "Compose web/API healthy; genuine local-browser/cloud password login, current personal meal, actual long replay, old virtual history, exit and logout passed. Both real protocol/model paths also passed API/cloud checks.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W5-002",
+      "phase": "W5",
+      "scenario": "Responsive layout and accessibility",
+      "layer_and_target": "Automated viewport + manual Chrome / RUN",
+      "expected": "320/390/768/1024/1440/1920 widths, keyboard, focus and 200% zoom keep dates, exit, history controls and graph table usable. Human evidence separate from fixtures.",
+      "status": "PARTIAL",
+      "observed": "Automated 320–1920 viewport checks, shell/dialog focus and synthetic screenshot review passed. Human Chrome keyboard/200% zoom review remains open.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W5-003",
+      "phase": "W5",
+      "scenario": "Seeded history, pagination and concurrency",
+      "layer_and_target": "Integration measurement / RUN",
+      "expected": "Bounded queries/pages and representative seeded row counts recorded; existing runtime limits met, no duplicate/drop/leak under concurrent save/source creation.",
+      "status": "PARTIAL",
+      "observed": "32-row scoped aggregate/pagination and 12 concurrent scenario writes passed. Representative larger histories, resource baselines and current latency percentiles remain unmeasured.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W5-004",
+      "phase": "W5",
+      "scenario": "Controlled transition and recovery",
+      "layer_and_target": "Integration / DB+RUN",
+      "expected": "Ambiguous old writes blocked during rollout; compatible historic reads available; failure pauses new writes without data rollback or global-context regression.",
+      "status": "PARTIAL",
+      "observed": "Old services stopped, guarded schema/API/UI transition completed and missing-scope writes rejected. Deliberate runtime failure/pause/recovery rehearsal remains incomplete.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    },
+    {
+      "id": "WS-W5-005",
+      "phase": "W5",
+      "scenario": "Evidence and human acceptance",
+      "layer_and_target": "Review / RUN",
+      "expected": "Exact commands/build/schema and sanitized observed results recorded; docs/ADR/UI agree, Graphify current; pending manual/scratch/camera/accuracy gates not marked passed.",
+      "status": "PARTIAL",
+      "observed": "Docs/ADR/manifest/actual results updated; local Graphify refresh follows final edits. Human acceptance and deferred scratch/camera/accuracy gates remain separate.",
+      "evidence": [
+        "docs/reports/workspace-separation-validation-2026-11-14.md",
+        "docs/reports/workspace-separation-manifest-2026-11-14.json"
+      ],
+      "command": "See report and source-manifest validation_commands; layered observations are qualified per case.",
+      "environment": "Offline pytest/Vitest; isolated Chromium fixtures; guarded cloud-dev and local Compose; no human Chrome acceptance claimed.",
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b plus local source manifest",
+      "schema_version": "20261114173109"
+    }
+  ],
+  "limits": [
+    "Engineering implemented and cloud-dev migration applied; partial cases do not count as full acceptance.",
+    "Human Chrome, untested variants and independent scratch replay/restore remain separate.",
+    "Corrected test-harness/locator attempts are preserved and explained in the report; no paid/model accuracy claim."
+  ],
+  "updated_on": "2026-11-14"
+}

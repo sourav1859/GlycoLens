@@ -9,7 +9,7 @@ from backend.app.db.client import database_call
 from backend.app.db.trusted import trusted_call
 from backend.app.services.inference import application as inference
 from backend.app.services.inference.demo import forecast_to_response
-from research.models.adapters import Chronos2ForecastAdapter
+from backend.app.services.inference.registry import resolve_model
 
 FIELDS = ("calories", "carbs_g", "protein_g", "fat_g", "fiber_g")
 
@@ -68,16 +68,16 @@ def scenario(session, forecast_id, multiplier, key):
         if len(prior_count) >= 10:
             raise HTTPException(429, "Scenario limit reached for this forecast")
         frozen = original["input_snapshot"]
-        request = inference.build_request(
-            scaled_meal(frozen["meal"], multiplier), frozen["history"], frozen["insulin"]
+        identity = frozen.get("model_identity")
+        spec = resolve_model(identity["model_key"] if identity else "chronos", expected=identity)
+        request = inference.build_model_request(
+            spec,
+            scaled_meal(frozen["meal"], multiplier),
+            frozen["history"],
+            frozen["insulin"],
+            frozen.get("source_metadata", {}),
         )
-        if inference.MODEL is None:
-            model = Chronos2ForecastAdapter(
-                cache_dir=inference.ROOT / "artifacts/models/huggingface"
-            )
-            model.load()
-            inference.MODEL = model
-        result = inference.MODEL.predict(request)
+        result = spec.predict(request)
         if (
             result.model_id != original["model_id"]
             or result.model_version != original["model_version"]
@@ -87,7 +87,11 @@ def scenario(session, forecast_id, multiplier, key):
                 "The saved forecast uses a different model version; comparisons require identical models",
             )
         response = forecast_to_response(
-            request, result, data_mode="simulated", context_configuration=original["context_config"]
+            request,
+            result,
+            data_mode="simulated",
+            context_configuration=original["context_config"],
+            provenance=spec.identity,
         )
         saved = trusted_call(
             session,

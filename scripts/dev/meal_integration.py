@@ -47,6 +47,7 @@ class MealHarness(CloudHarness):
             )
             assert self.request("POST", "/rest/v1/foods", admin=True, body=food).status_code == 201
             body = dict(
+                workspace="personal",
                 name="Synthetic planned meal",
                 recorded_at="2026-01-01T12:00:00Z",
                 confirmed=True,

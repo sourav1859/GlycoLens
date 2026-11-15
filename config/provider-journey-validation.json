@@ -1,0 +1,18 @@
+{
+  "version": "grounded-provider-journeys-v1",
+  "search": "palak paneer",
+  "barcode": "3017620422003",
+  "recipe_text": "100 g raw spinach. Serves 1.",
+  "recipe_expected_names": ["spinach", "raw spinach", "spinach, raw", "spinach (raw)"],
+  "recipe_expected_quantity": 100,
+  "recipe_expected_unit": "g",
+  "recipe_expected_servings": 1,
+  "source_basis_g": 100,
+  "reviewed_grams": 250,
+  "max_usda_reads": 4,
+  "max_off_reads": 1,
+  "max_llm_calls": 1,
+  "prior_estimated_spend_usd": "0.00763580",
+  "total_cap_usd": "5.00",
+  "notice": "Synthetic recipe and commodity provider facts; no patient context, live camera or accuracy validation. Prior representative extraction fixtures remain separate evidence."
+}

@@ -1,8 +1,23 @@
 # Cloud web application test-case catalog
 
+November 14 contract update: [Plan 19](../planning/GlycoLens_19_Personal_and_Simulation_Workspaces.md) separates personal/current dates from explicit simulation source context. Earlier default-global-source cases/results below are historical where superseded; use the [workspace ledger](workspace-separation-results.json) for the new acceptance contract.
+
+## November 12 executed sensitivity and supplemental integration
+
+GL-P09-011 now has real frozen matrix evidence: **Chronos meal-response capability FAIL**, despite successful input wiring/repeatability; GL-P09-012 remains NOT_RUN. [Actual result](../reports/meal-response-sensitivity-2026-11-12.md). The separate [58-case supplemental ledger](m2-closure-lightgbm-results.json) tracks native/model/provider/Chrome gates without importing extra passes into this 146-case catalog. Camera remains user-deferred; API/Chromium fixture successes do not establish Chrome/manual acceptance.
+
 **Plan version:** 2026-11-10. **Status:** cases remain the acceptance contract; actual checkpoint observations and unexecuted/blocked coverage are recorded in the linked ledger. A passing subset does not close a combined-layer case or phase.
 
 The [implementation plan](../planning/GlycoLens_17_Webapp_Implementation_Plan.md) defines phase work and gates. The machine-readable [validation results](webapp-validation-results.json) records every case. Each case requires actual observations and evidence before its result changes. 146 cases cover 11 phases.
+
+## November 12 accepted camera deferral
+
+The user selected Chrome and deferred live physical-camera testing to future scope.
+GL-P04-003/004 remain in this contract with `scope_disposition: DEFERRED_BY_USER`
+and NOT_RUN in the ledger; neither is passed. C1-008 in the
+[supplemental catalog](m2-closure-lightgbm-test-cases.md) covers browser fallback
+only. Chrome/manual barcode stays in current M2 scope. The original future full-
+device requirement remains; unrelated security/data-integrity gates are unchanged.
 
 ## Execution and evidence rules
 

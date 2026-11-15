@@ -1,0 +1,1519 @@
+{
+  "schema_version": "1.0",
+  "plan_version": "2026-11-12",
+  "plan": "../planning/GlycoLens_18_M2_Closure_and_LightGBM_Integration.md",
+  "catalog": "m2-closure-lightgbm-test-cases.md",
+  "execution_status": "IMPLEMENTED_PARTIAL_VALIDATION_WITH_CAPABILITY_FAILURE",
+  "baseline_inspected": "75191e2f654d9e1cbe4a3676d2948131013ec94b",
+  "case_count": 58,
+  "result_counts": {
+    "PARTIAL": 29,
+    "PASS": 22,
+    "BLOCKED": 6,
+    "FAIL": 1
+  },
+  "notes": "Actual combined-case outcomes; no supplemental passes imported into original146-case ledger. Ordinary native enablement false; isolated local review only. Earlier runs lack complete start-time dirty-tree manifests; current reviewed manifest is not retroactive execution identity. November14: user explicitly requested local research UI exposure; that runtime now enables the verified option. The earlier ordinary-off disposition is historical and no case was upgraded.",
+  "phases": [
+    {
+      "id": "C0",
+      "case_count": 4,
+      "implementation_status": "IMPLEMENTED",
+      "validation_status": "PARTIAL",
+      "result_counts": {
+        "PARTIAL": 2,
+        "PASS": 2
+      }
+    },
+    {
+      "id": "C1",
+      "case_count": 8,
+      "implementation_status": "IMPLEMENTED",
+      "validation_status": "PARTIAL",
+      "result_counts": {
+        "PARTIAL": 7,
+        "BLOCKED": 1
+      }
+    },
+    {
+      "id": "C2",
+      "case_count": 8,
+      "implementation_status": "IMPLEMENTED",
+      "validation_status": "PARTIAL_WITH_FAILURE",
+      "result_counts": {
+        "PARTIAL": 6,
+        "BLOCKED": 1,
+        "FAIL": 1
+      }
+    },
+    {
+      "id": "C3",
+      "case_count": 4,
+      "implementation_status": "EVIDENCE_RECONCILED_MANUAL_PENDING",
+      "validation_status": "PARTIAL",
+      "result_counts": {
+        "PARTIAL": 2,
+        "BLOCKED": 2
+      }
+    },
+    {
+      "id": "L0",
+      "case_count": 6,
+      "implementation_status": "IMPLEMENTED",
+      "validation_status": "PASS",
+      "result_counts": {
+        "PASS": 6
+      }
+    },
+    {
+      "id": "L1",
+      "case_count": 8,
+      "implementation_status": "IMPLEMENTED",
+      "validation_status": "PARTIAL",
+      "result_counts": {
+        "PASS": 7,
+        "PARTIAL": 1
+      }
+    },
+    {
+      "id": "L2",
+      "case_count": 8,
+      "implementation_status": "IMPLEMENTED",
+      "validation_status": "PARTIAL",
+      "result_counts": {
+        "PASS": 4,
+        "PARTIAL": 4
+      }
+    },
+    {
+      "id": "L3",
+      "case_count": 6,
+      "implementation_status": "IMPLEMENTED",
+      "validation_status": "PARTIAL",
+      "result_counts": {
+        "PARTIAL": 4,
+        "BLOCKED": 1,
+        "PASS": 1
+      }
+    },
+    {
+      "id": "L4",
+      "case_count": 6,
+      "implementation_status": "IMPLEMENTED",
+      "validation_status": "PARTIAL",
+      "result_counts": {
+        "PASS": 2,
+        "PARTIAL": 3,
+        "BLOCKED": 1
+      }
+    }
+  ],
+  "cases": [
+    {
+      "id": "M2C-C0-001",
+      "phase": "C0",
+      "requirement": "C0",
+      "layers": [
+        "U"
+      ],
+      "fixture_and_action": "Record current source/lockfile/migration/model identities; run relevant existing baseline once.",
+      "expected": "Reproducible revision manifest; actual results separated from earlier checkpoint results and skips.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PARTIAL",
+      "actual": "Baseline/regressions and final review manifest recorded; complete dirty-tree hashes were not captured at the start of every earlier run.",
+      "evidence": [
+        "../reports/m2-closure-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "C0 / baseline",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "M2C-C0-002",
+      "phase": "C0",
+      "requirement": "C0",
+      "layers": [
+        "U",
+        "I"
+      ],
+      "fixture_and_action": "Value-free private config check; restart API; probe approved cloud/provider readiness without printing settings.",
+      "expected": "Approved cloud target matches frontend; configured OFF identity loads; no secrets/contact in tracked output; presence alone is not live acceptance.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PASS",
+      "actual": "Private values present and cloud target matched; real USDA/OFF/selected OpenAI, simulator/Chronos/native checks completed. No values/contact published.",
+      "evidence": [
+        "../reports/m2-closure-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "C0 / readiness",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "M2C-C0-003",
+      "phase": "C0",
+      "requirement": "C0",
+      "layers": [
+        "U"
+      ],
+      "fixture_and_action": "Seed prior recipe spend and concurrent requests near total/owner caps; include retry.",
+      "expected": "Prior USD 0.00763580 and existing reservations count toward USD 5 total; bounded calls stop before allowance is exceeded.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PARTIAL",
+      "actual": "Total budget/previous spend preserved; rollback-only 4.995 near-cap rejected before paid call. Concurrent/day-owner exhaustion variants remain incomplete; unresolved call has 0.01 reserve.",
+      "evidence": [
+        "../reports/m2-closure-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "C0 / budget",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "M2C-C0-004",
+      "phase": "C0",
+      "requirement": "C0",
+      "layers": [
+        "U",
+        "M"
+      ],
+      "fixture_and_action": "Freeze representative fact/extraction oracles and accepted Chrome/camera scope before new provider calls.",
+      "expected": "Expected answers precede inference; physical-camera cases remain deferred/unpassed; manual barcode and all security gates remain required.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PASS",
+      "actual": "Provider and sensitivity synthetic oracles frozen before calls; Chrome target and deferred physical camera disposition retained.",
+      "evidence": [
+        "../reports/m2-closure-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "C0 / oracle-manifest",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "M2C-C1-001",
+      "phase": "C1",
+      "requirement": "C1",
+      "layers": [
+        "U",
+        "P"
+      ],
+      "fixture_and_action": "Search/select approved USDA plain food and prepared palak-paneer item; inspect ID, basis, retrieval and attribution.",
+      "expected": "Chosen item/source identity and per-100g units match source; distinguish similarly named foods rather than treating names as equivalent recipes.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PARTIAL",
+      "actual": "Actual USDA source IDs/basis and prior palak-paneer facts inspected; API path passed. Manual distinction/label review of similarly named prepared foods remains pending.",
+      "evidence": [
+        "../reports/m2-closure-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "C1 / usda-facts",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "M2C-C1-002",
+      "phase": "C1",
+      "requirement": "C1",
+      "layers": [
+        "U"
+      ],
+      "fixture_and_action": "Synthetic per-100g facts 100 kcal, 4g carbs, 5g protein, 7g fat, 1g fiber; scale 250g, yield 2 servings, eat half one serving.",
+      "expected": "Whole 250g totals 250/10/12.5/17.5/2.5; consumed 62.5/2.5/3.125/4.375/0.625. Rounding only at display.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PARTIAL",
+      "actual": "Independent plain-food and 250g synthetic nutrient checks passed; all combined yield/half-serving variants not demonstrated in the live journey.",
+      "evidence": [
+        "../reports/m2-closure-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "C1 / scaling-oracle",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "M2C-C1-003",
+      "phase": "C1",
+      "requirement": "C1",
+      "layers": [
+        "U"
+      ],
+      "fixture_and_action": "Repeated ingredient, fractional grams, zero nutrient, absent nutrient and cup/piece quantity lacking gram conversion.",
+      "expected": "Sum repeated grams once per entry; recorded zero remains zero, unknown remains unknown; unsupported household conversion requires confirmation and cannot silently invent grams.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PARTIAL",
+      "actual": "Unknown versus zero, unsupported units and fraction/scaling regressions pass; combined representative repeats/household-review acceptance remains incomplete.",
+      "evidence": [
+        "../reports/m2-closure-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "C1 / missingness-units",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "M2C-C1-004",
+      "phase": "C1",
+      "requirement": "C1",
+      "layers": [
+        "U",
+        "P"
+      ],
+      "fixture_and_action": "Valid known GTIN with live facts, cached repeat and invalid/not-found code; verify OFF request identity/version/volume.",
+      "expected": "Correct packaged product and nutrient basis; valid contact sent server-side; cached reuse bounded; invalid input makes no provider call; not-found distinct from service error.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PARTIAL",
+      "actual": "Live and cached OFF lookup, valid/invalid GTIN pre-network rejection and quota tests pass; retain v2 compatibility limit, manual label/not-found combined variants incomplete.",
+      "evidence": [
+        "../reports/m2-closure-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "C1 / off-contract",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "M2C-C1-005",
+      "phase": "C1",
+      "requirement": "C1",
+      "layers": [
+        "U",
+        "I"
+      ],
+      "fixture_and_action": "Simulate provider timeout, 429, malformed nutrient, absent carbs and partial database/cache failure.",
+      "expected": "Bounded retries/backoff; reviewed draft preserved; no invented nutrient zero, fake successful save or leaked provider error/credential; cache/DB partial failure diagnosed.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PARTIAL",
+      "actual": "Provider timeout/config/missing facts fail safely in scoped tests; full DB/cache partial-failure and review-preservation matrix remains incomplete.",
+      "evidence": [
+        "../reports/m2-closure-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "C1 / degradation",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "M2C-C1-006",
+      "phase": "C1",
+      "requirement": "C1",
+      "layers": [
+        "U",
+        "P"
+      ],
+      "fixture_and_action": "Frozen representative recipe expected ingredient lists including repeats, nested preparation, ambiguity and malicious instructions; bounded selected-model calls.",
+      "expected": "Report ingredient recall/precision and quantity/unit/ambiguity correctness against predeclared oracle; schema validity alone cannot count as representative accuracy; no invented nutrient facts.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PARTIAL",
+      "actual": "One frozen synthetic recipe actual API extraction matches name/quantity/unit oracle; earlier selected-model cases stay separate. Representative extraction accuracy not established.",
+      "evidence": [
+        "../reports/m2-closure-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "C1 / recipe-score",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "M2C-C1-007",
+      "phase": "C1",
+      "requirement": "C1",
+      "layers": [
+        "U",
+        "I"
+      ],
+      "fixture_and_action": "Malformed/oversized/empty model output, unsupported unit and edited match after review; attempt save.",
+      "expected": "Enforce bounded structured validation, explicit user correction/review and source-backed grams; review invalidated by edits; invalid save atomic and recoverable.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PARTIAL",
+      "actual": "Structured bounds/unit/save checks and all three candidate-edit review invalidations pass in unit tests; all malformed-provider/browser recovery variants incomplete.",
+      "evidence": [
+        "../reports/m2-closure-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "C1 / recipe-validation",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "M2C-C1-008",
+      "phase": "C1",
+      "requirement": "C1",
+      "layers": [
+        "U",
+        "B"
+      ],
+      "fixture_and_action": "Chrome camera unsupported/denied fixture, then manually enter barcode and navigate away.",
+      "expected": "Usable manual fallback, no permission loop, stale update or active stream after exit; physical-camera capture is not asserted.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "BLOCKED",
+      "actual": "Actual Chrome fallback/denied camera/navigation acceptance not executed; Computer Use stopped on unverifiable browser URL. Physical capture deferred separately.",
+      "evidence": [
+        "../reports/m2-closure-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "C1 / manual-fallback",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": null,
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "M2C-C2-001",
+      "phase": "C2",
+      "requirement": "C2",
+      "layers": [
+        "P",
+        "B",
+        "I",
+        "R"
+      ],
+      "fixture_and_action": "Chrome USDA search -> source/grams review -> save -> real source -> Chronos -> owned persisted reload.",
+      "expected": "Same reviewed food/portion totals and meal revision in saved forecast snapshot; 24 ordered forecast points and matching owned reload; no mocked live component.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PARTIAL",
+      "actual": "Actual USDA/provider -> reviewed grams -> cloud save -> real Chronos -> owned reload passed through API; actual Chrome hop remains pending.",
+      "evidence": [
+        "../reports/m2-closure-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "C2 / food-journey",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "M2C-C2-002",
+      "phase": "C2",
+      "requirement": "C2",
+      "layers": [
+        "P",
+        "B",
+        "I",
+        "R"
+      ],
+      "fixture_and_action": "Enter a real approved GTIN manually; review label/source/portion; complete save and Chronos forecast.",
+      "expected": "Product facts/basis persist end to end; correct meal inputs, provenance and result after reload; no physical camera claim.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PARTIAL",
+      "actual": "Actual OFF product/cache facts -> reviewed save -> Chronos -> owned reload passed through API; Chrome/manual label review remains pending.",
+      "evidence": [
+        "../reports/m2-closure-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "C2 / barcode-journey",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "M2C-C2-003",
+      "phase": "C2",
+      "requirement": "C2",
+      "layers": [
+        "P",
+        "B",
+        "I",
+        "R"
+      ],
+      "fixture_and_action": "Parse approved synthetic recipe, correct ingredient/match/grams, confirm, save, forecast and reload.",
+      "expected": "Corrections reach source-grounded totals and immutable model snapshot; parser identity and fact sources stay distinct; bounded token/spend evidence recorded.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PARTIAL",
+      "actual": "Actual bounded selected-model extraction -> grounded food/grams -> save -> Chronos -> reload passed through API; Chrome correction flow remains pending.",
+      "evidence": [
+        "../reports/m2-closure-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "C2 / recipe-journey",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "M2C-C2-004",
+      "phase": "C2",
+      "requirement": "C2",
+      "layers": [
+        "B",
+        "I",
+        "R"
+      ],
+      "fixture_and_action": "Save/forecast double-click and retry after lost response using stable operation ID; expire/revoke session during subsequent operation.",
+      "expected": "One durable meal/result per logical operation; no partial forecast; authenticated retry safe, expired/revoked call denied and unsaved state recoverable without unauthorized write.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PARTIAL",
+      "actual": "Stable API forecast retry/conflict and immutable snapshots pass; lost-response double-click and expired/revoked Chrome recovery variants incomplete.",
+      "evidence": [
+        "../reports/m2-closure-validation-2026-11-12.md",
+        "../reports/meal-response-sensitivity-2026-11-12.md"
+      ],
+      "planned_evidence_section": "C2 / retry-auth",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "M2C-C2-005",
+      "phase": "C2",
+      "requirement": "C2",
+      "layers": [
+        "I"
+      ],
+      "fixture_and_action": "Owner B attempts owner A meal/result/points/source-context access through actual user API/RLS.",
+      "expected": "Unauthorized create/read/list denied; no child-point or existence/context disclosure; no privileged admin shortcut used to establish owner access.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PARTIAL",
+      "actual": "Actual A/B forecast create/read/list/export and child points denied/empty through user API/RLS; exhaustive source-context and revocation variants remain incomplete.",
+      "evidence": [
+        "../reports/m2-closure-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "C2 / ownership",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "M2C-C2-006",
+      "phase": "C2",
+      "requirement": "C2",
+      "layers": [
+        "B",
+        "I",
+        "R"
+      ],
+      "fixture_and_action": "Save at wall time distinct from fixed simulation; switch source/session; load forecast/history on mobile and desktop.",
+      "expected": "Virtual origin and wall time labeled separately; no future CGM or cross-session state; old result retains exact frozen context.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PARTIAL",
+      "actual": "Frozen virtual/wall timestamps and source/model snapshots persist correctly; combined mobile/desktop/source-switch manual checks pending.",
+      "evidence": [
+        "../reports/m2-closure-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "C2 / source-time",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "M2C-C2-007",
+      "phase": "C2",
+      "requirement": "C2",
+      "layers": [
+        "B",
+        "M"
+      ],
+      "fixture_and_action": "Chrome widths 320/390/768/1024/1440/1920; keyboard, 200% zoom, chart table, loading/error/empty states.",
+      "expected": "Required fields/data/actions readable and reachable; no lost content or page-width overflow; automated and human evidence distinguished from physical-device testing.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "BLOCKED",
+      "actual": "Chromium intercepted fixtures passed width/table assertions, but actual Chrome and human keyboard/200% zoom acceptance remain blocked by browser URL-verification stop.",
+      "evidence": [
+        "../reports/m2-closure-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "C2 / responsive-review",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": null,
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "M2C-C2-008",
+      "phase": "C2",
+      "requirement": "C2",
+      "layers": [
+        "U",
+        "R"
+      ],
+      "fixture_and_action": "Execute GL-P09-011 manifest: flat/falling/rising histories, meal profiles, 50/75/100/150/custom portions, 100/250g palak-paneer example, three identical repeats.",
+      "expected": "Independent input scaling and complete output deltas/repeatability/failures reported; invariant/nonmonotonic response disclosed; preset simulator future not claimed as accuracy truth.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "FAIL",
+      "actual": "236/236 predictions complete and repeats stable; Chronos invariant in 60/60 eligible contrasts at original 0.001 mg/dL tolerance. Capability FAIL_INVARIANT; native limited sensitivity, not accuracy.",
+      "evidence": [
+        "../reports/m2-closure-validation-2026-11-12.md",
+        "../reports/meal-response-sensitivity-2026-11-12.md"
+      ],
+      "planned_evidence_section": "C2 / chronos-sensitivity",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": "CHRONOS_MEAL_RESPONSE_INVARIANT",
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "M2C-C3-001",
+      "phase": "C3",
+      "requirement": "C3",
+      "layers": [
+        "U",
+        "M"
+      ],
+      "fixture_and_action": "Reconcile original M2 phase 5/8/9 requirements with current-revision C evidence and open defects.",
+      "expected": "Each requirement has actual evidence or named gap; no aggregate pass percentage substitutes for acceptance and no new feature silently expands original M2.",
+      "implementation_status": "EVIDENCE_RECONCILED_MANUAL_PENDING",
+      "status": "PARTIAL",
+      "actual": "Requirements mapped to current actual cases/known gaps and sensitivity defect. No blanket phase-5/8/9 or M2 acceptance; some exact-run revision assurance partial.",
+      "evidence": [
+        "../reports/m2-closure-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "C3 / requirement-map",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "M2C-C3-002",
+      "phase": "C3",
+      "requirement": "C3",
+      "layers": [
+        "M"
+      ],
+      "fixture_and_action": "Review current deck/notes model/provider/safety statements against frozen study and app evidence.",
+      "expected": "Chronos default versus LightGBM research clear; different cohorts not directly compared; poor accuracy/coverage, provider facts and deferred camera disclosed.",
+      "implementation_status": "EVIDENCE_RECONCILED_MANUAL_PENDING",
+      "status": "PARTIAL",
+      "actual": "Markdown notes/outline claims corrected for default/research distinction, sensitivity failure, provider evidence and camera deferral. Native v4 deck not reviewed/updated in this cycle.",
+      "evidence": [
+        "../reports/m2-closure-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "C3 / claim-review",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "M2C-C3-003",
+      "phase": "C3",
+      "requirement": "C3",
+      "layers": [
+        "M"
+      ],
+      "fixture_and_action": "Presenter opens native v4 PowerPoint, checks layout/hidden backups and rehearses current 7–8 minute notes.",
+      "expected": "Presenter-recorded native rendering/timing/readability outcome; no screenshot-only or agent-invented rehearsal sign-off.",
+      "implementation_status": "EVIDENCE_RECONCILED_MANUAL_PENDING",
+      "status": "BLOCKED",
+      "actual": "Native PowerPoint rendering and actual 7–8 minute presenter rehearsal require presenter evidence; no sign-off invented.",
+      "evidence": [
+        "../reports/m2-closure-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "C3 / presenter-review",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": null,
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "M2C-C3-004",
+      "phase": "C3",
+      "requirement": "C3",
+      "layers": [
+        "U",
+        "M"
+      ],
+      "fixture_and_action": "Review final checklist and case ledger with user/presenter; inspect scoped cleanup and private tracked diff.",
+      "expected": "Declared M2 engineering subset/deferrals explicit; final acceptance decision recorded; no physical camera, email, catalog, hosted or prospective-accuracy pass implied.",
+      "implementation_status": "EVIDENCE_RECONCILED_MANUAL_PENDING",
+      "status": "BLOCKED",
+      "actual": "Scoped fixture cleanup recorded and boundaries reviewed; final user/presenter acceptance not yet supplied.",
+      "evidence": [
+        "../reports/m2-closure-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "C3 / acceptance",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": null,
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "LGB-L0-001",
+      "phase": "L0",
+      "requirement": "L0",
+      "layers": [
+        "U"
+      ],
+      "fixture_and_action": "Valid frozen manifest plus tampered/truncated bundle, bands, feature version or missing file; attempt load.",
+      "expected": "Full serving manifest validates trusted digests before deserialization; invalid/missing identity disables option without loading or silent fallback.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PASS",
+      "actual": "Trusted manifest/digests/feature/version validation rejects missing/tampered native files and invalid bands before serving; rejection-boundary tests pass.",
+      "evidence": [
+        "../reports/lightgbm-app-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "L0 / artifact-trust",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "LGB-L0-002",
+      "phase": "L0",
+      "requirement": "L0",
+      "layers": [
+        "U",
+        "R"
+      ],
+      "fixture_and_action": "Load/export trusted winning model in pinned compatible environment; offer client path/module/URL overrides.",
+      "expected": "Only server-allowlisted artifacts load; dependencies and 31-leaf/24h/events feature recipe verified; no arbitrary pickle, network fetch or research data access.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PASS",
+      "actual": "Explicit trusted exporter plus native server-only allowlist, dependency/31-leaf/24h/events validation implemented; actual native loading passes without client paths or research rows.",
+      "evidence": [
+        "../reports/lightgbm-app-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "L0 / loader",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "LGB-L0-003",
+      "phase": "L0",
+      "requirement": "L0",
+      "layers": [
+        "U"
+      ],
+      "fixture_and_action": "Hand-specified regular CGM, masks/events/current carbs; compare training translator and serving feature vector.",
+      "expected": "Exactly 127 origin features in correct order plus horizon fraction in estimator input; equal values/NaN masks and origin-safe timing.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PASS",
+      "actual": "Synthetic canonical translator/feature parity and ordering verified: 127 origin features plus horizon fraction; masks/availability preserved.",
+      "evidence": [
+        "../reports/lightgbm-app-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "L0 / feature-parity",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "LGB-L0-004",
+      "phase": "L0",
+      "requirement": "L0",
+      "layers": [
+        "U",
+        "R"
+      ],
+      "fixture_and_action": "Evaluate original trusted in-memory adapter and proposed native serving export on frozen synthetic requests.",
+      "expected": "24 medians agree within predeclared 1e-6 mg/dL before rounding; model/version/digest exact; any mismatch blocks export enablement.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PASS",
+      "actual": "Four handcrafted real trusted-vs-native parity requests have zero endpoint error, within frozen 1e-6 tolerance; full model/bundle identity retained.",
+      "evidence": [
+        "../reports/lightgbm-app-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "L0 / point-parity",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "LGB-L0-005",
+      "phase": "L0",
+      "requirement": "L0",
+      "layers": [
+        "U",
+        "R"
+      ],
+      "fixture_and_action": "Apply saved lightgbm_direct bands to synthetic point output; tamper participant/coverage/radius dimensions and identity.",
+      "expected": "24 ordered symmetric marginal endpoints match point +/- saved radius within 1e-6; saved calibration identity required; invalid bands fail, equal placeholders not accepted as calibrated.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PASS",
+      "actual": "Actual frozen calibration parity zero error; invalid radii/dimensions/coverage/participants and signed endpoints tested, identity hash retained.",
+      "evidence": [
+        "../reports/lightgbm-app-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "L0 / calibration-parity",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "LGB-L0-006",
+      "phase": "L0",
+      "requirement": "L0",
+      "layers": [
+        "U"
+      ],
+      "fixture_and_action": "Trace test inputs/artifact loads and attempt training/refit or reserved-cohort access through serving setup.",
+      "expected": "No fit/calibration recomputation or reserved outcome projection; synthetic parity only; signed band endpoints retained and synthetic coverage guarantee explicitly absent.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PASS",
+      "actual": "Serving has no fit/joblib/research-row path; explicit trusted export uses synthetic parity only, no calibration recomputation. Limits and signed-band semantics documented.",
+      "evidence": [
+        "../reports/lightgbm-app-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "L0 / research-boundary",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "LGB-L1-001",
+      "phase": "L1",
+      "requirement": "L1",
+      "layers": [
+        "U",
+        "R"
+      ],
+      "fixture_and_action": "Generate separately versioned preferred 48h scenario; select origin after 24h and withhold >=2h future; replay twice.",
+      "expected": "288 valid pre-origin samples available, reproducible protocol/hash, future private until clock advance; no padding or unsupported upstream duration bypass.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PASS",
+      "actual": "Real separate 48h simulator yields 576 samples, origin2170min with 710min future; two Windows runs hash-identical and Linux path passes. Exact last288 past samples, no padding.",
+      "evidence": [
+        "../reports/lightgbm-app-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "L1 / long-scenario",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "LGB-L1-002",
+      "phase": "L1",
+      "requirement": "L1",
+      "layers": [
+        "U",
+        "R"
+      ],
+      "fixture_and_action": "Run original one-day scenario/replay and contract tests alongside new scenario.",
+      "expected": "Original fixed name/seed/grid/checksums and Chronos path unchanged; each source partition bound to its own protocol.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PASS",
+      "actual": "Original one-day default/seed/grid contract and replay path retained; existing tests and real Linux Chronos smoke pass with distinct protocol caches.",
+      "evidence": [
+        "../reports/lightgbm-app-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "L1 / old-replay",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "LGB-L1-003",
+      "phase": "L1",
+      "requirement": "L1",
+      "layers": [
+        "U"
+      ],
+      "fixture_and_action": "287/288/289 samples, gaps, off-grid/duplicate/late points and origin boundaries.",
+      "expected": "Exact 288 regular five-minute model inputs; insufficient/invalid history rejected specifically, never padded or borrowed from future/other source.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PASS",
+      "actual": "Exact288 context validated; short/gap/duplicate/off-grid/late-future sample boundaries fail closed or exclude unavailable readings as specified.",
+      "evidence": [
+        "../reports/lightgbm-app-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "L1 / cgm-grid",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "LGB-L1-004",
+      "phase": "L1",
+      "requirement": "L1",
+      "layers": [
+        "U"
+      ],
+      "fixture_and_action": "1.2 U/hour basal for 5min, two rate changes and partial overlaps; 2 U bolus; unknown unit.",
+      "expected": "First bin basal 0.1 U; 2min at 1.2 plus 3min at 0.6 yields 0.07 U; bolus remains 2 U. Unknown units/coverage fail explicitly.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PASS",
+      "actual": "Independent rate overlap oracles pass: 0.1U and0.07U per bin, bolus amount unchanged; unknown units rejected.",
+      "evidence": [
+        "../reports/lightgbm-app-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "L1 / insulin-units",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "LGB-L1-005",
+      "phase": "L1",
+      "requirement": "L1",
+      "layers": [
+        "U"
+      ],
+      "fixture_and_action": "Confirmed zero bolus/basal/carbs, missing record, absent coverage and recorded glucose; align presence masks.",
+      "expected": "Binary masks accurately distinguish observed zero, recorded value and unknown; unknown event summaries stay NaN as training recipe requires.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PASS",
+      "actual": "Coverage/mask tests distinguish recorded zero, value and unknown; missing event metadata fails rather than silently inventing zeros.",
+      "evidence": [
+        "../reports/lightgbm-app-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "L1 / masks",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "LGB-L1-006",
+      "phase": "L1",
+      "requirement": "L1",
+      "layers": [
+        "U"
+      ],
+      "fixture_and_action": "Previous meal, current origin meal, late-available event and future insulin/meal/CGM around five-minute boundaries.",
+      "expected": "Match training availability/bin rules; current meal counted only in current known-carb feature; future and unavailable late records excluded.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PASS",
+      "actual": "Current carbs excluded from previous history; future/late insulin/meal/CGM availability and five-minute bin boundaries covered by focused tests.",
+      "evidence": [
+        "../reports/lightgbm-app-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "L1 / chronology",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "LGB-L1-007",
+      "phase": "L1",
+      "requirement": "L1",
+      "layers": [
+        "U"
+      ],
+      "fixture_and_action": "Same absolute virtual events rendered across timezone/DST display changes and multiple owner/source partitions.",
+      "expected": "Model features unchanged by display timezone; source/owner isolation preserved; timestamps/availability and deterministic ordering exact.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PARTIAL",
+      "actual": "UTC-equivalent display offsets and spring/fall DST tests pass; A/B stored results tested separately, full multi-source live partition combination incomplete.",
+      "evidence": [
+        "../reports/lightgbm-app-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "L1 / source-clock",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "LGB-L1-008",
+      "phase": "L1",
+      "requirement": "L1",
+      "layers": [
+        "U",
+        "M"
+      ],
+      "fixture_and_action": "Compare simulator insulin/source semantics to training units/masks and document OOD limits.",
+      "expected": "Numeric conversion independently verified, biological equivalence not assumed; unsupported semantic mapping blocks option rather than labeling source-compatible.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PASS",
+      "actual": "Numeric conversion independently tested and explicit event coverage required. Biological equivalence/OOD is documented as unproven, with unsupported units/coverage blocked.",
+      "evidence": [
+        "../reports/lightgbm-app-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "L1 / semantic-review",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "LGB-L2-001",
+      "phase": "L2",
+      "requirement": "L2",
+      "layers": [
+        "U",
+        "I"
+      ],
+      "fixture_and_action": "Omit model, explicitly choose eligible LightGBM, choose unknown name and reuse loaded versions.",
+      "expected": "Omitted choice resolves Chronos; allowlisted choice resolves full pinned identity; unknown name rejected; cache keys separate bundle/feature/calibration versions.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PASS",
+      "actual": "Omitted model is pinned Chronos; explicit native allowlist/full identity supported; unknown choice rejected and cache identity includes bundle/features/calibration.",
+      "evidence": [
+        "../reports/lightgbm-app-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "L2 / registry",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "LGB-L2-002",
+      "phase": "L2",
+      "requirement": "L2",
+      "layers": [
+        "U",
+        "I"
+      ],
+      "fixture_and_action": "Missing weights/calibration/masks/24h history and busy model; request LightGBM.",
+      "expected": "Actionable unavailable/insufficient/busy error, bounded lock release and no silent fallback, fake prediction or partial result.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PASS",
+      "actual": "Missing/tampered option, history/metadata and busy/timeout cases explicitly fail; shared lock release tested, no fallback/partial persistence.",
+      "evidence": [
+        "../reports/lightgbm-app-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "L2 / capabilities",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "LGB-L2-003",
+      "phase": "L2",
+      "requirement": "L2",
+      "layers": [
+        "U",
+        "I"
+      ],
+      "fixture_and_action": "Ordered finite calibrated interval with q10=-5, median=40, upper=85; old v1 Chronos result; unordered/nonfinite input.",
+      "expected": "Reviewed v2 API/DB/frontend/export round-trip preserves signed lower endpoint; valid history remains separately constrained; invalid intervals rejected; v1 reads unchanged.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PARTIAL",
+      "actual": "Python/SQL/frontend signed-tail and legacy-v1 roundtrips pass; actual export preserves full v2 response. Every unordered/nonfinite SQL mutation variant not tested live.",
+      "evidence": [
+        "../reports/lightgbm-app-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "L2 / interval-contract",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "LGB-L2-004",
+      "phase": "L2",
+      "requirement": "L2",
+      "layers": [
+        "I"
+      ],
+      "fixture_and_action": "Preview reviewed forward migration against guarded cloud target; exercise ownership/RPC atomic rollback and existing forecast read.",
+      "expected": "Versioned schema/constraint/RPC change exact and backward compatible; bad request rolls back; no hosted reset. Fresh scratch replay explicitly remains deferred.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PARTIAL",
+      "actual": "Reviewed rollback preview and forward cloud migration applied without reset; owner RPC/saved results pass. Exhaustive atomic invalid mutation variants and deferred scratch replay remain open.",
+      "evidence": [
+        "../reports/lightgbm-app-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "L2 / migration",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "LGB-L2-005",
+      "phase": "L2",
+      "requirement": "L2",
+      "layers": [
+        "U",
+        "I"
+      ],
+      "fixture_and_action": "Retry logical operation with same and changed model/bundle/features/calibration/meal revision.",
+      "expected": "Same full identity deduplicates; changed identity cannot return stale model result; snapshot includes requested/resolved model, digests, context and scenario protocol.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PASS",
+      "actual": "Actual same-key same-model retry deduplicates; changed-model identity conflicts; full immutable source/meal/model/bundle/calibration snapshot retained.",
+      "evidence": [
+        "../reports/lightgbm-app-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "L2 / idempotency",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "LGB-L2-006",
+      "phase": "L2",
+      "requirement": "L2",
+      "layers": [
+        "I"
+      ],
+      "fixture_and_action": "Owner B targets owner A result/points/model snapshot; revoke session and retry.",
+      "expected": "Verified-owner API/RLS denies access/create; no child/snapshot leakage and no bypass from admin artifact loading.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PARTIAL",
+      "actual": "Two actual owners: create/read/list/export/child-point isolation passes. Session revocation variants not re-exercised for this combined model case.",
+      "evidence": [
+        "../reports/lightgbm-app-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "L2 / ownership",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "LGB-L2-007",
+      "phase": "L2",
+      "requirement": "L2",
+      "layers": [
+        "U",
+        "I"
+      ],
+      "fixture_and_action": "Run 100% and changed portion through scenarios service, change global default/model request mid-comparison.",
+      "expected": "Baseline's full frozen model/context identity reused; 100% reproduces within tolerance; cross-model comparison rejected or created as separate labeled experiment.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PASS",
+      "actual": "Real100% scenario matches baseline; changed portion reuses exact frozen full model/source context. Unknown extra model override field forbidden; no global-default substitution.",
+      "evidence": [
+        "../reports/lightgbm-app-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "L2 / scenarios",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "LGB-L2-008",
+      "phase": "L2",
+      "requirement": "L2",
+      "layers": [
+        "U",
+        "I"
+      ],
+      "fixture_and_action": "Overlapping ordinary/scenario requests, timeout, failure after inference before persistence and retry.",
+      "expected": "Both paths share intended registry/locking; bounded concurrency, released locks and atomic idempotent persistence; no partial/mixed-model forecast.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PARTIAL",
+      "actual": "Concurrent ordinary/scenario busy and timeout release tests pass; cloud retry/atomic save tested. Exact post-inference-before-commit interruption matrix incomplete.",
+      "evidence": [
+        "../reports/lightgbm-app-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "L2 / concurrency",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "LGB-L3-001",
+      "phase": "L3",
+      "requirement": "L3",
+      "layers": [
+        "B",
+        "I"
+      ],
+      "fixture_and_action": "New session on current short demo; inspect selector, request opt-in and explicitly start longer scenario.",
+      "expected": "Chronos default; LightGBM labeled research, 24h requirement actionable; no automatic replacement of current source/scenario.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PARTIAL",
+      "actual": "Selector, explicit long-source action, Chronos default and signed table passed fixture Chromium/component checks; actual Chrome short-history review pending.",
+      "evidence": [
+        "../reports/lightgbm-app-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "L3 / selection",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "LGB-L3-002",
+      "phase": "L3",
+      "requirement": "L3",
+      "layers": [
+        "B",
+        "I"
+      ],
+      "fixture_and_action": "Save LightGBM forecast, reload history/detail, switch owner/source and sign out in another tab.",
+      "expected": "Persisted result identity survives reload; no cross-owner/source draft/cache leakage; logout clears private selector/context/results.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PARTIAL",
+      "actual": "Actual stored identity/reload and A/B export isolation pass; combined cross-source/cross-tab signout browser state remains pending.",
+      "evidence": [
+        "../reports/lightgbm-app-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "L3 / identity",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "LGB-L3-003",
+      "phase": "L3",
+      "requirement": "L3",
+      "layers": [
+        "B",
+        "M"
+      ],
+      "fixture_and_action": "Inspect input explanation and equal-carbohydrate meals differing in fat/protein/fiber.",
+      "expected": "UI says current carbs are used; nutrition facts remain visible without implying unused predictors affect the frozen model.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PARTIAL",
+      "actual": "UI/help and metadata disclose carbohydrate-only current predictors; synthetic equal-carbohydrate contrasts invariant as expected. Actual Chrome explanation review pending.",
+      "evidence": [
+        "../reports/lightgbm-app-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "L3 / input-explanation",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "LGB-L3-004",
+      "phase": "L3",
+      "requirement": "L3",
+      "layers": [
+        "B",
+        "M"
+      ],
+      "fixture_and_action": "View calibrated symmetric bands, signed endpoint and unavailable-interval fixture; compare old Chronos chart.",
+      "expected": "Accurate interval kind/limitations, no unsupported calibration/personal-confidence claim or clipped chart/table data; old quantile wording remains correct.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PARTIAL",
+      "actual": "Signed calibrated table/chart, interval-kind and v1 validators pass offline/Chromium fixtures; full Chrome/unavailable-interval manual reading pending.",
+      "evidence": [
+        "../reports/lightgbm-app-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "L3 / intervals",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "LGB-L3-005",
+      "phase": "L3",
+      "requirement": "L3",
+      "layers": [
+        "B",
+        "M"
+      ],
+      "fixture_and_action": "Chart/detail/table/selector/errors at Chrome 320/390/768/1024/1440/1920, keyboard and zoom.",
+      "expected": "Critical data/actions accessible without overflow; model, meal/portion and virtual times readable; no physical-device acceptance inferred.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "BLOCKED",
+      "actual": "Width-overflow fixtures passed 320–1920 in Chromium; Google Chrome/manual keyboard/zoom gate blocked by Computer Use URL-verification stop.",
+      "evidence": [
+        "../reports/lightgbm-app-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "L3 / responsive",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": null,
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "LGB-L3-006",
+      "phase": "L3",
+      "requirement": "L3",
+      "layers": [
+        "B",
+        "I"
+      ],
+      "fixture_and_action": "Owned result export and same-model portion comparison; attempt mixed-model comparison from deep link.",
+      "expected": "Export includes immutable provenance and exact band semantics; same-model comparison coherent; mixed-model route rejected/labeled separately.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PASS",
+      "actual": "Actual owned v2 export exactly matches immutable response/provenance/bands; user B denied or empty. Same-model scenario exact; mixed-model override forbidden by schema.",
+      "evidence": [
+        "../reports/lightgbm-app-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "L3 / export-comparison",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "LGB-L4-001",
+      "phase": "L4",
+      "requirement": "L4",
+      "layers": [
+        "V",
+        "R"
+      ],
+      "fixture_and_action": "Build pinned CPU API image; inspect browser/image/mount boundaries and attempt bundle write.",
+      "expected": "Compatible LightGBM deps, narrow verified read-only bundle, no research rows/secrets/weights in frontend or tracked files; no GPU/model service required.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PASS",
+      "actual": "Actual pinned CPU image uses native Booster/read-only narrow bundle and real Linux simulator; no research-row mount/GPU/model service, public image/secret boundaries checked.",
+      "evidence": [
+        "../reports/lightgbm-app-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "L4 / packaging",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "LGB-L4-002",
+      "phase": "L4",
+      "requirement": "L4",
+      "layers": [
+        "B",
+        "I",
+        "R",
+        "V"
+      ],
+      "fixture_and_action": "Root Compose actual Chrome -> long scenario -> reviewed save -> opt-in LightGBM -> cloud reload -> portion compare.",
+      "expected": "24 ordered persisted points with correct frozen inputs/bands/identity and valid owner access; no stubbed simulator/model/cloud hop.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PARTIAL",
+      "actual": "Actual Compose HTTP -> long source -> cloud meal/native forecast/read/scenario/export passes with real hops; actual Chrome hop absent.",
+      "evidence": [
+        "../reports/lightgbm-app-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "L4 / complete-journey",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "LGB-L4-003",
+      "phase": "L4",
+      "requirement": "L4",
+      "layers": [
+        "R",
+        "V"
+      ],
+      "fixture_and_action": "Cold load plus >=20 sequential warm requests/model; record full journey, peak memory, threads, hardware, failures.",
+      "expected": "Measured median/p95/memory/failure report against predeclared environment-specific limits; no single-run/VPS capacity extrapolation; existing timeouts respected.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PARTIAL",
+      "actual": "20 sequential warm/model plus cold timings, sampled RSS, CPU threads,236/236 predictions reported; model-only scope is not full HTTP p95/VPS/multiuser acceptance.",
+      "evidence": [
+        "../reports/lightgbm-app-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "L4 / performance",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "LGB-L4-004",
+      "phase": "L4",
+      "requirement": "L4",
+      "layers": [
+        "U",
+        "R"
+      ],
+      "fixture_and_action": "Frozen LightGBM carbs/portion sensitivity, identical repeats and fat/protein/fiber-only contrasts; same protocol for Chronos.",
+      "expected": "Carbs reach correct features; repeated same inputs reproducible within tolerance; fat/protein/fiber-only changes leave LightGBM features/predictions unchanged; flat/nonmonotonic results disclosed without accuracy claim.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PASS",
+      "actual": "Frozen input/prediction matrix and independent scorer complete: limited native carbohydrate response, expected unused-feature invariance and stable repeats. Chronos capability FAIL explicitly separate, no accuracy claim.",
+      "evidence": [
+        "../reports/lightgbm-app-validation-2026-11-12.md",
+        "../reports/meal-response-sensitivity-2026-11-12.md"
+      ],
+      "planned_evidence_section": "L4 / sensitivity",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "LGB-L4-005",
+      "phase": "L4",
+      "requirement": "L4",
+      "layers": [
+        "B",
+        "I",
+        "R",
+        "V"
+      ],
+      "fixture_and_action": "Disable opt-in, restart API, corrupt optional bundle and reopen saved results; run relevant Chronos/demo/replay/logout regressions.",
+      "expected": "Chronos default continues; explicit LightGBM readiness error; historical owned results readable; no data deletion or automatic fallback.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "PARTIAL",
+      "actual": "Actual disable/recreate preserves owned native reads, rejects new native without fallback, default Chronos works; corrupt-load tests pass. Chrome/logout combined regression remains pending.",
+      "evidence": [
+        "../reports/lightgbm-app-validation-2026-11-12.md"
+      ],
+      "planned_evidence_section": "L4 / rollback-regression",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": "2026-11-13T04:30:27.190384+00:00",
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    },
+    {
+      "id": "LGB-L4-006",
+      "phase": "L4",
+      "requirement": "L4",
+      "layers": [
+        "U",
+        "M"
+      ],
+      "fixture_and_action": "Review all mandatory L cases, defects, data/secret boundaries, limitations and prospective-accuracy status before enablement.",
+      "expected": "Enable only after relevant correctness/security/integration evidence passes; consumed cohorts untouched; GL-P09-012 remains separate; no automatic default promotion.",
+      "implementation_status": "IMPLEMENTED",
+      "status": "BLOCKED",
+      "actual": "Mandatory Chrome/manual acceptance remains incomplete. The user explicitly requested local research UI exposure on November14: the local runtime now enables the verified option for that review, while the shipped default stays false. No acceptance pass, default promotion or production enablement follows.",
+      "evidence": [
+        "../reports/lightgbm-app-validation-2026-11-12.md",
+        "../reports/local-lightgbm-enablement-2026-11-14.md"
+      ],
+      "planned_evidence_section": "L4 / enablement",
+      "run_id": null,
+      "revision": "75191e2f654d9e1cbe4a3676d2948131013ec94b+uncommitted; see final-review manifest (not every run captured)",
+      "environment": "Offline Windows; Linux CPU Compose; approved cloud dev; synthetic users/inputs; Chromium fixtures only",
+      "executed_at": null,
+      "defect": null,
+      "execution_revision_note": "Outcome reviewed at this timestamp; actual execution times/run IDs are retained in linked report and ignored raw run evidence."
+    }
+  ],
+  "updated_at_utc": "2026-11-13T04:30:27.190384+00:00",
+  "local_research_exposure_2026_11_14": {
+    "user_request": "Enable the existing LightGBM option in the current local forecast UI",
+    "runtime": "glycolens-local; web3000/API8000",
+    "enabled": true,
+    "default_model": "chronos",
+    "scope": "Local manual research testing; mandatory correctness/history checks retained; not formal L0-L4 or production acceptance",
+    "evidence": "../reports/local-lightgbm-enablement-2026-11-14.md",
+    "acceptance_counts_changed": false
+  },
+  "workspace_contract_update": {
+    "date": "2026-11-14",
+    "plan": "GlycoLens_19_Personal_and_Simulation_Workspaces.md",
+    "ledger": "workspace-separation-results.json",
+    "note": "Historical outcomes unchanged; implicit global-source/default-date observations do not establish new personal/simulation acceptance."
+  }
+}

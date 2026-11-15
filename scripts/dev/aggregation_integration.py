@@ -66,6 +66,7 @@ class AggregateHarness(CloudHarness):
                     dict(
                         user_id=a["id"],
                         source_session_id=sid,
+                        workspace="simulation",
                         name="Synthetic aggregate oracle",
                         recorded_at=instant.isoformat(),
                         state="logged",
@@ -88,7 +89,10 @@ class AggregateHarness(CloudHarness):
             for state in ("planned", "cancelled"):
                 meals.append({**meals[0], "state": state, "consumed_at": None, "calories": 999})
             assert self.request("POST", "/rest/v1/meals", admin=True, body=meals).status_code == 201
-            summary = api.get("/api/v1/nutrition?day=2026-11-01", headers=headers)
+            summary = api.get(
+                f"/api/v1/nutrition?day=2026-11-01&workspace=simulation&source_session_id={sid}",
+                headers=headers,
+            )
             assert summary.status_code == 200
             day = summary.json()["days"][-1]
             assert (
@@ -101,13 +105,17 @@ class AggregateHarness(CloudHarness):
                 and day["nutrients"]["fiber_g"]["known_total"] == 29
                 and day["nutrients"]["fiber_g"]["missing_meals"] == 1
             )
-            listing = api.get("/api/v1/meals?day=2026-11-01&slot=lunch&limit=20", headers=headers)
+            listing = api.get(
+                f"/api/v1/meals?day=2026-11-01&slot=lunch&limit=20&workspace=simulation&source_session_id={sid}",
+                headers=headers,
+            )
             assert listing.status_code == 200
             assert len(listing.json()["meals"]) == 20 and listing.json()["has_more"]
             assert (
                 len(
                     api.get(
-                        "/api/v1/meals?day=2026-11-01&slot=lunch&offset=20", headers=headers
+                        f"/api/v1/meals?day=2026-11-01&slot=lunch&offset=20&workspace=simulation&source_session_id={sid}",
+                        headers=headers,
                     ).json()["meals"]
                 )
                 == 12
@@ -133,9 +141,10 @@ class AggregateHarness(CloudHarness):
                 == 200
             )
             assert (
-                api.get("/api/v1/nutrition?day=2026-11-01", headers=headers).json()["days"][-1][
-                    "meal_count"
-                ]
+                api.get(
+                    f"/api/v1/nutrition?day=2026-11-01&workspace=simulation&source_session_id={sid}",
+                    headers=headers,
+                ).json()["days"][-1]["meal_count"]
                 == 29
             )
             self.record(
@@ -172,7 +181,15 @@ class AggregateHarness(CloudHarness):
                         "p_forecast": fid,
                         "p_multiplier": 0.5,
                         "p_key": str(uuid4()),
-                        "p_response": {"synthetic_test_only": True},
+                        "p_response": {
+                            "synthetic_test_only": True,
+                            "forecast": [
+                                dict(
+                                    minute=5 * (i + 1), q10_mg_dl=100, q50_mg_dl=110, q90_mg_dl=120
+                                )
+                                for i in range(24)
+                            ],
+                        },
                     },
                 ).status_code
 
