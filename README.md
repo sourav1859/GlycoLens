@@ -1,5 +1,16 @@
 # GlycoLens
 
+## Milestone 3 presentation and advisor report
+
+Prepared November 16 for the November 17 presentation: [PowerPoint](docs/presentations/GlycoLens_Milestone_3_Presentation_2026-11-17.pptx), [timed speaker notes](docs/reports/GlycoLens_Milestone_3_Presentation_Notes.docx), and [advisor report](docs/reports/GlycoLens_Milestone_3_Advisor_Report_2026-11-16.docx). The deck has ten main slides and four hidden backups, with a 7:30 rehearsal target. The package reports core implementation, qualified test evidence and ongoing Kaggle recipe ingestion; preparation does not close outstanding acceptance or constitute a new model-accuracy study.
+
+November 14 catalog review: the [Azure gold assessment](docs/reports/azure-nutrition-catalog-assessment-2026-11-06.md)
+and [migration strategy](docs/reports/azure-to-supabase-catalog-migration-strategy-2026-11-06.md)
+now cover 33,194 source-ready recipe candidates, 5,429 ingredients, 11,397 products,
+dependency closure, quality gates and current cloud capacity. The evidence-bearing
+package is estimated at 151.90 MiB CSV / 50.61 MiB gzip. No catalog import or
+activation has occurred; source readiness does not establish verified nutrition.
+
 ## November 14: personal and simulation workspaces implemented
 
 Personal meal logging and current timezone-aware dates are independent of the `/demo` virtual workspace. Earlier simulated meals remain under Simulation meals/Saved sessions. Cloud-dev migration is applied and local Compose is updated. See [Plan 19](docs/planning/GlycoLens_19_Personal_and_Simulation_Workspaces.md) and [actual validation](docs/reports/workspace-separation-validation-2026-11-14.md); automated evidence is recorded, manual acceptance remains partial.

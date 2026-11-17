@@ -1,5 +1,146 @@
 # Azure to Supabase catalog migration strategy
 
+**Latest review: November 14, 2026, America/New_York.** This current strategy supersedes the November 6 sizing and all-whole-recipe assumptions below. It is based on the [updated assessment](azure-nutrition-catalog-assessment-2026-11-06.md) and [aggregate evidence](azure-gold-catalog-audit-2026-11-14.json). No complete export, restore, cloud data import or activation has run.
+
+## November 14 recommendation
+
+Build a **versioned compact food catalog**, selected from the external production database's `gold` schema, in GlycoLens's existing dedicated cloud development project. Keep the two projects' accounts, health records, settings and business data separate. Azure remains unchanged upstream; GlycoLens receives only a validated reference-food release.
+
+The source readiness filter is **`recipes.display_status = 'user_ready'`**, not a `user_ready` column. Select products with the same exact status and `soft_deleted_at IS NULL`; select ready ingredients independently and verify dependency closure. Retain source readiness and a separate GlycoLens validation/publication state. The source tag does not waive the outstanding findings.
+
+### Proposed release contents
+
+| Source / destination concept | Current candidate rows | Retain | Gate / reason |
+|---|---:|---|---|
+| `recipes` | 33,194 | UUID, title/description, cuisine/meal type, times/difficulty, instructions, declared yield, source/image URL, source status/timestamp | All are unowned catalog rows currently; retain a no-customer-created-row release check |
+| `recipe_ingredients` | 264,631 | Line UUID, recipe/ingredient/product IDs, order, raw quantity/unit, normalized grams, preparation, optional/preferred type | All resolve, have positive grams and reference ready ingredients; retain repeated lines |
+| `recipe_nutrition_profiles` | 33,194 | Profile UUID, recipe ID, basis, serving mass/yield, five core values, data source/timestamp | 19,111 per_recipe; 14,083 per_serving; no positive serving mass |
+| `ingredients` | 5,429 | UUID, names, category/type, USDA ID, five core values, status/timestamp | Includes 3,374 dependency ingredients plus 2,055 standalone search candidates |
+| `products` | 11,397 | UUID, name/brand/description, original/canonical GTIN, serving/package fields, five core values, source/image/product URL, status/timestamp | Validate source basis, GTIN and soft-delete state |
+| `product_ingredients` | 105,862 | Line UUID, product/ingredient IDs, order, raw/normalized quantity, preparation | Most lines are unquantified; preserve display list without invented amounts |
+| Core `nutrition_facts` | 238,988 | Fact UUID, typed entity UUID, nutrient ID, original amount/unit/basis, basis grams, source/confidence/date/timestamp | Calories, carbohydrate, protein, fat and fiber evidence; retain competing bases |
+| Compact `data_lineage` | 70,541 | UUID, typed entity UUID, source system, transformation description and ingestion/processing timestamps | Preserve all source associations; review text for unrelated identifiers before export |
+| Supporting lookups | 25 cuisines; 122 nutrient definitions; 16 categories; 11,397 category links | Stable IDs, names/codes and selected relationships | Carry cuisine parent closure; drop source retailer category IDs and silver IDs |
+| Conversion aids | 26 conversions; 77 active measures | Factor/units, aliases, density/piece/name-pattern rules, approximation/source flags | All measures are approximate; these do not authorize automatic portion conversion |
+| Optional active image metadata | 32,200 | Image UUID, recipe UUID, succeeded state, full/thumb path, checksum, source type/timestamp | Host/rights review first; no generation history or binaries |
+
+The five core nutrient codes are `calories-energy`, `total-carbohydrates`, `protein`, `total-fat`, `dietary-fiber`. Definitions are retained as source evidence; the inconsistent 1062/kcal energy mapping must not become a trusted canonical definition. Extra nutrients or product JSON/arrays can be added deliberately after defining their semantics and remeasuring; they are outside these projections.
+
+A dependency-only ingredient package uses 3,374 ingredients: 2,395 referenced by recipes, 1,883 by products, with 904 shared. All selected recipe product references are currently NULL; the exporter must still support product dependencies if this changes. Including all 5,429 ready ingredients is recommended for ingredient search because the additional 2,055 rows add only about **0.25 MiB CSV** to the measured ingredient projection. Inclusion is not publication approval.
+
+Exclude hidden/needs-review records from the initial candidate selection. If a future ready parent references an excluded child, quarantine the parent or explicitly approve that child; never silently drop the line. Exclude source users/customer IDs, vendor/store/price data, health/meal records, source business permissions, silver/bronze records, generated prompts, embeddings, medical/diet-rule claims and unrelated tables.
+
+### Measured sizes and uncertainty
+
+All MiB below are binary (1,048,576 bytes). These are explicit compact projections, not source-table mirrors.
+
+| Projection | Rows | Estimated CSV MiB | Estimated gzip MiB |
+|---|---:|---:|---:|
+| Recipes | 33,194 | 22.63 | 6.62 |
+| Recipe ingredient lines | 264,631 | 41.92 | 16.55 |
+| Recipe profiles | 33,194 | 5.51 | 2.08 |
+| All ready ingredients | 5,429 | 0.67 | 0.23 |
+| Ready products | 11,397 | 3.97 | 1.39 |
+| Product ingredient lines | 105,862 | 16.19 | 5.86 |
+| **Six-table subtotal** | **453,707** | **90.89** | **32.73** |
+| Core nutrient facts | 238,988 | 45.25 | 13.48 |
+| Compact lineage | 70,541 | 14.44 | 4.11 |
+| All supporting lookups/conversion aids | 11,663 | 1.32 | 0.28 |
+| **Candidate package with evidence** | **774,899** | **151.90** | **50.61** |
+| Optional active image paths | 32,200 | 11.55 | 3.97 |
+| **Including optional paths** | **807,099** | **163.45** | **54.58** |
+
+Unrounded totals are **95,301,925 CSV / 34,324,711 gzip bytes** for six tables, **159,274,334 / 53,063,614 bytes** including evidence/support, or **171,387,566 / 57,227,138 bytes** including optional paths. The projection details and measured sample sizes are in the evidence JSON.
+
+Method: one repeatable-read read-only sizing snapshot; exact row counts, sums of serialized JSON bytes and runtime composite-record sizes across each full projection; native PostgreSQL `COPY (...) TO STDOUT` CSV samples of at most 1,500 rows ordered by a fixed MD5 of the source UUID; in-memory gzip, then linear scaling by row count. CSV uses UTF-8, no sample header and explicit `\\N` NULL. MD5 ordering spreads the sample across UUIDs but supplies no confidence interval or guaranteed representative compression. Small supporting tables were measured in full. Compression ratios can change with ordering, chunk size and real data; final archives must be measured.
+
+For the package with evidence, the measured runtime composite-record sum is **120,113,587 bytes (114.55 MiB)** and its JSON serialization sum is **302,528,916 bytes (288.51 MiB)**. Neither is the destination heap/index size. These different representations illustrate why gzip size cannot predict database allocation.
+
+Plan approximately **130–190 MiB CSV / 45–70 MiB gzip**, plus manifest/checksums and optional paths. Reserve at least **1 GB** of private local working space for files, validation/quarantine and logs; a local restored database needs additional space. Do not retain row samples in Git.
+
+The six full source tables currently occupy **417,759,232 bytes (398.41 MiB)** with existing indexes. Adding the full source fact table alone adds **561.86 MiB**. The 16 measured source relations including lineage, lookups and image metadata occupy **1,157,054,464 bytes (1,103.45 MiB)**. These full-source allocations include unselected rows, all columns/indexes and possible bloat. Do not multiply physical size by ready-row percentage or call those numbers a filtered export size. [PostgreSQL size functions](https://www.postgresql.org/docs/16/functions-admin.html)
+
+### Current destination and capacity decision
+
+Read-only MCP inspection identified the existing **Glycolens** cloud development project, PostgreSQL **17.11**. At approximately 11:07 p.m. EST November 14, `pg_database_size(current_database())` was **15,414,963 bytes (14.70 MiB / 15.41 decimal MB)**; `public` had 18 tables and no `catalog` schema existed. No application rows, Auth records or secrets were fetched.
+
+Supabase currently advertises **500 MB database size**, **1 GB file storage** and shared CPU/500 MB RAM on Free. This does not establish this organization's actual subscription, other-database usage or physical disk headroom; those dashboard readings remain an execution gate. [Pricing](https://supabase.com/pricing), [database versus disk size](https://supabase.com/docs/guides/platform/database-size)
+
+Use the existing conservative operating gate:
+
+```text
+remeasured existing whole database bytes
++ measured incremental catalog tables, indexes and release metadata
++ 100,000,000 bytes application-growth reserve
+<= 400,000,000 bytes
+```
+
+At the observed baseline, that permits at most **284,585,037 bytes (271.40 MiB)** of incremental catalog under this project guardrail. For planning, allow roughly **180–260 MiB** for the indexed compact package with evidence, and another **15–25 MiB** if optional image metadata is retained. These are engineering allowances, not measured restores or reserved capacity. At 260 MiB, baseline + catalog + reserve is about **388.0 decimal MB**; 285 MiB would total about **414.3 MB** and fail this gate. Peak staging/index/WAL disk usage is a separate check.
+
+Thus Free is **plausible, not proven** for the compact selection. A full source-schema mirror is unsuitable. If the measured restore exceeds the gate, first omit optional paths and unnecessary indexes, or publish a smaller approved release; changing plan is a separate decision. The November 6 statement that destination baseline was unknown is now historical. No physical disk/organization-wide quota or actual import size has been measured.
+
+### Proposed target contracts
+
+Use an application-owned, initially unexposed `catalog` schema with recipes, recipe_lines, recipe_profiles, ingredients, products, product_lines, core_source_facts, source_lineage, lookups, release_manifest and validation_results. This is a design, not applied DDL. Keep canonical application `public`, managed `auth/storage` and source-production `gold` separate.
+
+Preserve source UUIDs and source relationship UUIDs. Each record also needs `release_id`, source display status, separate validation state/reason codes, import timestamp and transformation/calculation version. Distinguish singular fact entity types from plural lineage entity types through an explicit mapping; otherwise valid lineage disappears in joins. Retain original source identifiers only as provenance, without foreign keys into silver/bronze, vendors or customer records.
+
+Keep raw profile and fact values alongside any independently validated canonical values, their exact units/bases, selected evidence IDs and precedence reason. Preserve numeric precision and NULL-versus-zero. Do not deduplicate repeated recipe lines or competing fact bases. Do not use source confidence scores as GlycoLens verification.
+
+Keep copied recipe/profile servings separate until conflicts are resolved. For a validated whole-recipe profile:
+
+```text
+consumed nutrient = whole-recipe value * consumed servings / authoritative recipe yield
+```
+
+For a validated per-serving profile:
+
+```text
+consumed nutrient = per-serving value * consumed servings
+```
+
+For validated mass-based food facts:
+
+```text
+consumed nutrient = source value * consumed grams / verified source basis grams
+```
+
+Do not divide a per-serving value again, invent cooked mass, treat all product values as per-serving or apply one global energy repair. `public.foods` currently requires a gram basis; recipe serving-based logging needs a reviewed forward contract/adapter change before connection to that workflow. Preserve immutable save-time meal facts, source release and personal/simulation workspace boundaries.
+
+Start with primary keys, relationship lookup indexes, source/entity evidence indexes, validated canonical GTIN lookup and one justified name-search strategy. Do not mirror production GIN/trigram/instruction/source indexes indiscriminately. An unexposed schema plus a least-privileged backend read role is preferred; revoke browser-role access by default. If deliberately exposed later, define explicit grants and RLS and verify them with application credentials. Limit import/publication writes to the migration owner; never disable existing application RLS.
+
+### Concrete migration runbook
+
+1. **Freeze selection and source rules.** Record corrected/approved source release, exact recipe/product/ingredient UUID sets, dependency closure, licence/reuse permissions and field/basis/yield precedence. Keep generated/estimated and unresolved records quarantined. The request authorizes this audit/strategy, not publishing source-tagged records without those checks.
+
+2. **Prepare a separate exporter.** Use private source-only environment names (for example `AZURE_CATALOG_SOURCE_*`) and separately configured `GL_CATALOG_TARGET_*`; never replace GlycoLens `DATABASE_URL` with production Azure settings. Verify exact source database/schema and exact destination project before every run. Prefer a dedicated SELECT-only source identity for repeatable exports; the supplied account was forced read-only for this audit, but that does not change its account privileges. Require TLS, timeouts and secret-redacted logs.
+
+3. **Capture one consistent source snapshot.** Begin `REPEATABLE READ READ ONLY`; determine all selected IDs/dependencies inside it and export explicit projections with client-side `COPY (SELECT ...) TO STDOUT`. No server-file COPY, DDL, triggers, production functions, writes or replication slots are required. Stream tables serially; coordinated shared snapshots are an advanced alternative. A lost snapshot invalidates the package: restart rather than mixing retries from different source states. Keep the transaction bounded and abort on timeouts. [PostgreSQL COPY](https://www.postgresql.org/docs/16/sql-copy.html)
+
+4. **Create the private release package.** Write per-table UTF-8 CSV.gz plus manifest, approved/rejected ID sets, column/type/order contract, source/correction version, snapshot observation, counts, SHA-256 of compressed and canonical decompressed streams, basis rules and quality totals. Specify CSV NULL `\\N`, quoting, encoding and exact JSON/array representation; distinguish a literal text `\\N` using PostgreSQL's CSV quoting. Add headers deliberately and account for their small size. Review lineage transformation text for unrelated identifiers. No credentials, source customers, store prices or health data enter the package.
+
+5. **Validate and measure outside the running app.** Restore to an isolated disposable PostgreSQL 17 validation database, or a separately authorized cloud scratch target. This does not reinstate local Supabase as the app environment. Verify manifest hashes, expected counts, UUID/type uniqueness, FKs, canonical barcode collisions, no excluded records and correct ordered/optional recipe lines. Independently check source identity, calories/units, profile/fact precedence, yield, NULL/zero, negative values, estimated/generated flags and serving scaling. Recreate the exact intended indexes; measure table/index totals and database growth. A fixture or count match cannot establish food accuracy.
+
+6. **Preview cloud changes and recheck headroom.** Produce reviewed forward catalog DDL through the existing versioned migration workflow; verify installed CLI help/version and explicit cloud target. The current CLI v3 defaults changed, so do not reuse unverified v2 target flags. No schema SQL is applied by this report. Re-read destination baseline, plan/dashboard usage, organization quota and physical disk/staging/WAL allowance. Apply the operating gate using the restored indexed size. [CLI v3 changes](https://supabase.com/changelog/supabase-cli-v3)
+
+7. **Import an unpublished release.** Use a native direct connection, or session pooling when IPv4 requires it, with a controlled import identity. Create only reviewed catalog structures. Load lookup/base rows before dependent lines, profiles, facts and lineage. Client-side COPY is appropriate; do not import the whole production schema or use the dashboard as the main bulk loader. Start with one importer and measured 5,000–20,000-row commits; resume by manifest/table/chunk/checksum, never by assumed row order. Make retries idempotent, verify payload equality on conflicts and never overwrite a published release silently. A target import resumes from the immutable package and does not need to hold Azure open. [Connection guidance](https://supabase.com/docs/guides/database/connecting-to-postgres), [import guidance](https://supabase.com/docs/guides/database/import-data)
+
+8. **Verify before publishing.** Compare every manifest count/hash, FK/quality result and measured database size. Verify least-privileged reads, rejected browser writes and unchanged per-user RLS. Wire only admitted foods into the application adapter; verify search, valid/invalid barcode, ingredient edits, repeat ingredients, both recipe bases, conflicting yield, incomplete nutrients, provider outage and immutable saved totals. Exercise personal and simulation paths separately. New catalog data does not waive real-source forecast eligibility or prove model accuracy.
+
+9. **Activate and retain rollback.** Publish an approved release marker atomically only after acceptance; leave rejected content unavailable for calculation. Keep the exact package and schema privately as rollback evidence. If there is capacity for two releases, use a verified pointer switch; otherwise use a planned maintenance/fallback transition without exposing partial cross-table updates. Revoke an affected release from discovery without changing historical meal/forecast snapshots. Do not hold two full copies merely for convenience.
+
+10. **Refresh deliberately.** Prefer named snapshots while upstream correction continues. A delta refresh must include explicit deletions/soft-deletes, status transitions and dependency changes; `updated_at` alone is inadequate. All selected recipes currently share the same update timestamp, which is not a release certificate. Repeat source-accuracy, imported-size and application gates for every release.
+
+### Execution status and gates
+
+**Completed:** source connection/read-only proof, gold catalog metadata/profile scans, exact candidate/dependency counts, nutrient/GTIN/provenance checks, projected size measurements, current target database baseline, documentation updates.
+
+**Not performed:** full private release export, original-source/licence certification, canonical nutrition correction, restored target/index measurement, cloud DDL/data writes, feature activation, paid plan purchase or acceptance closure. These remain M3/P07 work. The current catalog is a promising migration candidate, not an approved ready-to-serve nutrition release.
+
+## Historical strategy — November 6, 2026
+
+The remaining sections preserve the earlier full-catalog study. Their counts, 737.72 MiB source footprint, 113.95/38.69 MiB six-table estimates, 150–250 MiB target allowance, all-whole-recipe assumption and unknown destination baseline are dated November 6 observations; use the November 14 analysis above for new migration decisions.
+
 **Prepared for:** Sourav Patil and the GlycoLens capstone
 
 **Evidence checked:** November 6, 2026

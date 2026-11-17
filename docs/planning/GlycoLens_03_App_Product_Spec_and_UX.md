@@ -1,5 +1,17 @@
 # GlycoLens App Product Specification and UX
 
+## November 14: catalog candidates and recipe bases
+
+The [Azure reassessment](../reports/azure-nutrition-catalog-assessment-2026-11-06.md)
+identifies 33,194 source-ready recipe candidates, 5,429 ingredient candidates and
+11,397 product candidates. Keep candidate discovery separate from validated
+calculation/publication. Recipe profiles mix whole-recipe and per-serving values;
+none has a positive serving mass. Portion UX must preserve the admitted basis and
+authoritative yield, unknown nutrients and estimated/generated provenance. Do not
+invent grams, silently divide per-serving facts again or infer allergy/medical
+safety from catalog labels. Source-ready tags do not close corrected-catalog UX or
+P07 acceptance; no provider, app flow or runtime change is made by this audit.
+
 ## November 14: personal and simulation workspaces implemented
 
 Personal Home/Meal log/Nutrition show current dates and personal consumption. Virtual run/replay/advance, session history and research model selection live under `/demo`, with an explicit exit. Old simulated detail links resolve their true workspace; drafts and stale requests are isolated. Profile/settings no longer present a global active-source selector. [Actual validation](../reports/workspace-separation-validation-2026-11-14.md) and [44-case ledger](../testing/workspace-separation-results.json): **28 PASS, 16 PARTIAL**. Changes remain local; human Chrome and other qualified gates are not claimed complete.

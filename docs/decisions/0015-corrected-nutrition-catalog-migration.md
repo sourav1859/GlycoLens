@@ -1,5 +1,32 @@
 # Corrected nutrition catalog migration
 
+## November 14 reassessment — design still proposed
+
+The [updated gold-only assessment](../reports/azure-nutrition-catalog-assessment-2026-11-06.md)
+supersedes the historical counts below. Exact source readiness is
+`display_status = 'user_ready'`: 33,194 recipes, 5,429 ingredients and 11,397
+non-deleted products. The recipe/product dependency closure is 3,374 ingredients;
+including all ready ingredients adds standalone search candidates. Preserve core
+nutrient facts and compact lineage rather than relying on denormalized columns.
+Facts use singular entity types and lineage plural types; map them explicitly.
+
+Recipe profiles now mix 19,111 whole-recipe and 14,083 per-serving records; none
+has a positive serving mass. Keep source readiness distinct from independent
+validation/publication. Generated/estimated sources, unresolved mappings/bases,
+yield conflicts, incomplete nutrients and invalid GTINs remain admission gates.
+
+The [current package estimate](../reports/azure-to-supabase-catalog-migration-strategy-2026-11-06.md)
+is 151.90 MiB CSV / 50.61 MiB gzip including evidence/lookups, with a provisional
+180–260 MiB indexed catalog allowance. Cloud baseline is 15,414,963 bytes on
+Postgres 17.11, with no catalog schema. Under the existing 400,000,000-byte
+operating budget and 100,000,000-byte growth reserve, incremental catalog capacity
+is 284,585,037 bytes at that baseline. Actual restored indexes, physical disk,
+organization usage and application acceptance remain unmeasured execution gates.
+
+The audit/strategy request does not execute export, cloud schema/data changes or
+publication. Keep the proposed isolated catalog and immutable meal-snapshot design;
+M3/P07 execution remains pending. The November 6 context below is historical.
+
 **Date:** November 6, 2026
 
 **Status:** Proposed migration design. The user confirmed future use after upstream correction; implementation and cloud activation are deferred.

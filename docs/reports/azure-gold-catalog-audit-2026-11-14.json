@@ -1,0 +1,1952 @@
+{
+  "audit_date_local": "2026-11-14",
+  "timezone": "America/New_York",
+  "scope": "External Azure production catalog; gold data only; no source or destination data writes",
+  "connection": {
+    "database": "nutripartner",
+    "version": "16.15",
+    "default_read_only": "on",
+    "transaction_read_only": "on",
+    "tls": {
+      "ssl": true,
+      "version": "TLSv1.3"
+    },
+    "observed_at": "2026-11-15 04:00:05.230516+00:00"
+  },
+  "counts": [
+    {
+      "table_name": "unit_conversions",
+      "rows": 26
+    },
+    {
+      "table_name": "product_categories",
+      "rows": 16
+    },
+    {
+      "table_name": "ingredient_measures",
+      "rows": 77
+    },
+    {
+      "table_name": "nutrition_definitions",
+      "rows": 122
+    },
+    {
+      "table_name": "cuisines",
+      "rows": 25
+    },
+    {
+      "table_name": "ingredient_synonyms",
+      "rows": 0
+    },
+    {
+      "table_name": "data_quality_scores",
+      "rows": 0
+    },
+    {
+      "table_name": "product_category_mapping",
+      "rows": 12968
+    },
+    {
+      "table_name": "products",
+      "rows": 12968
+    },
+    {
+      "table_name": "recipes",
+      "rows": 42142
+    },
+    {
+      "table_name": "recipe_nutrition_profiles",
+      "rows": 42140
+    },
+    {
+      "table_name": "ingredients",
+      "rows": 69145
+    },
+    {
+      "table_name": "product_ingredients",
+      "rows": 117025
+    },
+    {
+      "table_name": "data_lineage",
+      "rows": 146174
+    },
+    {
+      "table_name": "recipe_ingredients",
+      "rows": 350393
+    },
+    {
+      "table_name": "nutrition_facts",
+      "rows": 1427608
+    }
+  ],
+  "status_tags": [
+    {
+      "entity": "ingredients",
+      "display_status": "hidden",
+      "rows": 63716
+    },
+    {
+      "entity": "ingredients",
+      "display_status": "user_ready",
+      "rows": 5429
+    },
+    {
+      "entity": "products",
+      "display_status": "user_ready",
+      "rows": 11397
+    },
+    {
+      "entity": "products",
+      "display_status": "needs_review",
+      "rows": 1571
+    },
+    {
+      "entity": "recipes",
+      "display_status": "user_ready",
+      "rows": 33194
+    },
+    {
+      "entity": "recipes",
+      "display_status": "needs_review",
+      "rows": 8948
+    }
+  ],
+  "core_nutrient_definitions": [
+    {
+      "id": "baa94f5c-b9f1-449f-a30c-ea42fe4a6b6f",
+      "nutrient_name": "Calories/Energy",
+      "nutrient_code": "calories-energy",
+      "usda_nutrient_id": 1062,
+      "unit_name": "kcal"
+    },
+    {
+      "id": "6e067463-e2b7-419e-8f40-bcc646aa0e53",
+      "nutrient_name": "Dietary Fiber",
+      "nutrient_code": "dietary-fiber",
+      "usda_nutrient_id": 1079,
+      "unit_name": "g"
+    },
+    {
+      "id": "a8e37bb9-a68c-4525-9852-4d0216b88fae",
+      "nutrient_name": "Net Carbohydrates",
+      "nutrient_code": "net-carbohydrates",
+      "usda_nutrient_id": null,
+      "unit_name": "g"
+    },
+    {
+      "id": "f603d5c6-da11-49c8-ab44-e0035b328e9b",
+      "nutrient_name": "Percent Calories from Carbohydrates",
+      "nutrient_code": "percent-calories-fro",
+      "usda_nutrient_id": null,
+      "unit_name": "%"
+    },
+    {
+      "id": "4dc00f54-d644-4f72-ac33-aac1640f3a19",
+      "nutrient_name": "Percent Calories from Fat",
+      "nutrient_code": "percent-calories-fro",
+      "usda_nutrient_id": null,
+      "unit_name": "%"
+    },
+    {
+      "id": "2d80e72d-bb0c-4415-b43d-e8c1dce274d0",
+      "nutrient_name": "Percent Calories from Protein",
+      "nutrient_code": "percent-calories-fro",
+      "usda_nutrient_id": null,
+      "unit_name": "%"
+    },
+    {
+      "id": "b779c52e-cae9-4dd7-ad90-716f37aeeec7",
+      "nutrient_name": "Protein",
+      "nutrient_code": "protein",
+      "usda_nutrient_id": 1003,
+      "unit_name": "g"
+    },
+    {
+      "id": "9e0d98ba-a8ca-4d75-964c-aef990bed841",
+      "nutrient_name": "Total Carbohydrates",
+      "nutrient_code": "total-carbohydrates",
+      "usda_nutrient_id": 1005,
+      "unit_name": "g"
+    },
+    {
+      "id": "77b29bd0-c27a-4e9b-8c91-55c9f9bb9a49",
+      "nutrient_name": "Total Fat",
+      "nutrient_code": "total-fat",
+      "usda_nutrient_id": 1004,
+      "unit_name": "g"
+    }
+  ],
+  "checks": {
+    "ready_recipe_summary": [
+      {
+        "ready_recipes": 33194,
+        "customer_created": 0,
+        "missing_title": 0,
+        "invalid_servings": 0,
+        "empty_instructions": 0,
+        "with_source_url": 107,
+        "with_image_url": 157,
+        "min_updated_at": "2026-11-12 20:29:59.156321",
+        "max_updated_at": "2026-11-12 20:29:59.156321"
+      }
+    ],
+    "ready_instructions_types": [
+      {
+        "json_type": "array",
+        "recipes": 33194
+      }
+    ],
+    "closure_counts": [
+      {
+        "recipes": 33194,
+        "recipe_links": 264631,
+        "recipe_direct_ingredients": 2395,
+        "recipe_referenced_products": 0,
+        "selected_products": 11397,
+        "product_links": 105862,
+        "product_ingredients_distinct": 1883,
+        "closure_ingredients": 3374,
+        "profiles": 33194
+      }
+    ],
+    "ready_recipe_relationships": [
+      {
+        "missing_profile": 0,
+        "missing_links": 0,
+        "multiple_profiles": 0,
+        "servings_mismatch": 299,
+        "unresolved_links": 0,
+        "dual_links": 0
+      }
+    ],
+    "recipe_link_quality": [
+      {
+        "links": 264631,
+        "positive_grams": 264631,
+        "invalid_grams": 0,
+        "invalid_quantity": 0,
+        "not_ready_ingredient_links": 0,
+        "recipes_using_not_ready_ingredients": 0,
+        "optional_links": 185
+      }
+    ],
+    "recipe_structural_subsets": [
+      {
+        "with_links": 33194,
+        "all_grams": 33194,
+        "all_ingredients_ready": 33194,
+        "all_grams_core": 143,
+        "all_grams_core_ready": 143,
+        "carbs_reconstructable": 4934,
+        "carbs_difference_flags": 1209
+      }
+    ],
+    "ingredient_quality": [
+      {
+        "scope": "other",
+        "display_status": "user_ready",
+        "ingredients": 2055,
+        "core_nonnegative": 1149,
+        "negative_carbs": 3,
+        "fiber_gt_carbs": 1,
+        "missing_calories": 56,
+        "missing_carbs": 241,
+        "missing_protein": 274,
+        "missing_fat": 298,
+        "missing_fiber": 837
+      },
+      {
+        "scope": "dependency",
+        "display_status": "user_ready",
+        "ingredients": 3374,
+        "core_nonnegative": 1713,
+        "negative_carbs": 3,
+        "fiber_gt_carbs": 13,
+        "missing_calories": 138,
+        "missing_carbs": 475,
+        "missing_protein": 536,
+        "missing_fat": 601,
+        "missing_fiber": 1470
+      },
+      {
+        "scope": "other",
+        "display_status": "hidden",
+        "ingredients": 63716,
+        "core_nonnegative": 32178,
+        "negative_carbs": 151,
+        "fiber_gt_carbs": 116,
+        "missing_calories": 5178,
+        "missing_carbs": 11165,
+        "missing_protein": 10719,
+        "missing_fat": 10685,
+        "missing_fiber": 28786
+      }
+    ],
+    "product_quality": [
+      {
+        "display_status": "needs_review",
+        "soft_deleted": false,
+        "products": 1571,
+        "core_nonnegative": 180,
+        "core_and_serving_g": 133,
+        "positive_serving_g": 1002,
+        "serving_gt_package": 54,
+        "fiber_gt_carbs": 0,
+        "with_source_system": 0,
+        "energy_flags": 27
+      },
+      {
+        "display_status": "user_ready",
+        "soft_deleted": false,
+        "products": 11397,
+        "core_nonnegative": 10740,
+        "core_and_serving_g": 9132,
+        "positive_serving_g": 9772,
+        "serving_gt_package": 247,
+        "fiber_gt_carbs": 35,
+        "with_source_system": 0,
+        "energy_flags": 1179
+      }
+    ],
+    "ready_product_barcodes": [
+      {
+        "products": 11397,
+        "missing_gtin": 0,
+        "valid_gtin": 9691,
+        "invalid_gtin": 1706,
+        "exact_duplicate_groups": 0,
+        "canonical_duplicate_groups": 0
+      }
+    ],
+    "product_links_quality": [
+      {
+        "links": 105862,
+        "positive_grams": 21048,
+        "positive_quantity": 21048,
+        "hidden_ingredient_links": 0,
+        "products_with_links": 11397,
+        "missing_ingredient": 0
+      }
+    ],
+    "ready_fact_bases": [
+      {
+        "entity_type": "ingredient",
+        "per_amount": "per_100g",
+        "unit": "g",
+        "facts": 18338,
+        "entities": 3279,
+        "positive_basis_g": 0,
+        "negative_amount": 2
+      },
+      {
+        "entity_type": "ingredient",
+        "per_amount": "per_100g",
+        "unit": "kcal",
+        "facts": 3248,
+        "entities": 3248,
+        "positive_basis_g": 0,
+        "negative_amount": 0
+      },
+      {
+        "entity_type": "ingredient",
+        "per_amount": "per_100g",
+        "unit": "mcg",
+        "facts": 2841,
+        "entities": 1771,
+        "positive_basis_g": 0,
+        "negative_amount": 0
+      },
+      {
+        "entity_type": "ingredient",
+        "per_amount": "per_100g",
+        "unit": "mg",
+        "facts": 16591,
+        "entities": 3157,
+        "positive_basis_g": 0,
+        "negative_amount": 0
+      },
+      {
+        "entity_type": "product",
+        "per_amount": "100g",
+        "unit": "g",
+        "facts": 55,
+        "entities": 12,
+        "positive_basis_g": 0,
+        "negative_amount": 0
+      },
+      {
+        "entity_type": "product",
+        "per_amount": "100g",
+        "unit": "kcal",
+        "facts": 12,
+        "entities": 12,
+        "positive_basis_g": 0,
+        "negative_amount": 0
+      },
+      {
+        "entity_type": "product",
+        "per_amount": "100g",
+        "unit": "mcg",
+        "facts": 2,
+        "entities": 2,
+        "positive_basis_g": 0,
+        "negative_amount": 0
+      },
+      {
+        "entity_type": "product",
+        "per_amount": "100g",
+        "unit": "mg",
+        "facts": 28,
+        "entities": 8,
+        "positive_basis_g": 0,
+        "negative_amount": 0
+      },
+      {
+        "entity_type": "product",
+        "per_amount": "per_serving",
+        "unit": "g",
+        "facts": 4162,
+        "entities": 838,
+        "positive_basis_g": 0,
+        "negative_amount": 0
+      },
+      {
+        "entity_type": "product",
+        "per_amount": "per_serving",
+        "unit": "kcal",
+        "facts": 844,
+        "entities": 844,
+        "positive_basis_g": 0,
+        "negative_amount": 0
+      },
+      {
+        "entity_type": "product",
+        "per_amount": "per_serving",
+        "unit": "mcg",
+        "facts": 37,
+        "entities": 37,
+        "positive_basis_g": 0,
+        "negative_amount": 0
+      },
+      {
+        "entity_type": "product",
+        "per_amount": "per_serving",
+        "unit": "mg",
+        "facts": 3064,
+        "entities": 838,
+        "positive_basis_g": 0,
+        "negative_amount": 0
+      },
+      {
+        "entity_type": "product",
+        "per_amount": "serving",
+        "unit": "g",
+        "facts": 58759,
+        "entities": 11191,
+        "positive_basis_g": 0,
+        "negative_amount": 0
+      },
+      {
+        "entity_type": "product",
+        "per_amount": "serving",
+        "unit": "kcal",
+        "facts": 11191,
+        "entities": 11191,
+        "positive_basis_g": 0,
+        "negative_amount": 0
+      },
+      {
+        "entity_type": "product",
+        "per_amount": "serving",
+        "unit": "mcg",
+        "facts": 1165,
+        "entities": 1022,
+        "positive_basis_g": 0,
+        "negative_amount": 0
+      },
+      {
+        "entity_type": "product",
+        "per_amount": "serving",
+        "unit": "mg",
+        "facts": 39415,
+        "entities": 11105,
+        "positive_basis_g": 0,
+        "negative_amount": 0
+      },
+      {
+        "entity_type": "recipe",
+        "per_amount": "per_recipe",
+        "unit": "g",
+        "facts": 112964,
+        "entities": 19112,
+        "positive_basis_g": 0,
+        "negative_amount": 0
+      },
+      {
+        "entity_type": "recipe",
+        "per_amount": "per_recipe",
+        "unit": "kcal",
+        "facts": 19111,
+        "entities": 19111,
+        "positive_basis_g": 0,
+        "negative_amount": 0
+      },
+      {
+        "entity_type": "recipe",
+        "per_amount": "per_recipe",
+        "unit": "mg",
+        "facts": 19094,
+        "entities": 19094,
+        "positive_basis_g": 0,
+        "negative_amount": 0
+      },
+      {
+        "entity_type": "recipe",
+        "per_amount": "per_serving",
+        "unit": "g",
+        "facts": 123139,
+        "entities": 14083,
+        "positive_basis_g": 0,
+        "negative_amount": 0
+      },
+      {
+        "entity_type": "recipe",
+        "per_amount": "per_serving",
+        "unit": "kcal",
+        "facts": 14083,
+        "entities": 14083,
+        "positive_basis_g": 0,
+        "negative_amount": 0
+      },
+      {
+        "entity_type": "recipe",
+        "per_amount": "per_serving",
+        "unit": "mcg",
+        "facts": 24031,
+        "entities": 13799,
+        "positive_basis_g": 0,
+        "negative_amount": 0
+      },
+      {
+        "entity_type": "recipe",
+        "per_amount": "per_serving",
+        "unit": "mg",
+        "facts": 80638,
+        "entities": 14083,
+        "positive_basis_g": 0,
+        "negative_amount": 0
+      }
+    ],
+    "support_counts": [
+      {
+        "needed_cuisines": 23,
+        "conversions": 26,
+        "active_measures": 77,
+        "matched_ingredient_measures": 0,
+        "product_quality_scores": 0,
+        "product_category_links": 11397,
+        "referenced_recipe_images": 32200
+      }
+    ],
+    "recipe_link_units": [
+      {
+        "unit": "g",
+        "links": 207709,
+        "positive_g": 207709
+      },
+      {
+        "unit": "tsp",
+        "links": 28052,
+        "positive_g": 28052
+      },
+      {
+        "unit": "tbsp",
+        "links": 10674,
+        "positive_g": 10674
+      },
+      {
+        "unit": "milliliter",
+        "links": 7491,
+        "positive_g": 7491
+      },
+      {
+        "unit": "piece",
+        "links": 5256,
+        "positive_g": 5256
+      },
+      {
+        "unit": "clove",
+        "links": 2982,
+        "positive_g": 2982
+      },
+      {
+        "unit": "pinch",
+        "links": 1533,
+        "positive_g": 1533
+      },
+      {
+        "unit": "cup",
+        "links": 578,
+        "positive_g": 578
+      },
+      {
+        "unit": "slice",
+        "links": 356,
+        "positive_g": 356
+      }
+    ],
+    "core_fact_coverage": [
+      {
+        "entity_type": "ingredient",
+        "core_fact_rows": 13751,
+        "entities": 3303,
+        "negative_core_facts": 2
+      },
+      {
+        "entity_type": "product",
+        "core_fact_rows": 52123,
+        "entities": 11288,
+        "negative_core_facts": 0
+      },
+      {
+        "entity_type": "recipe",
+        "core_fact_rows": 164640,
+        "entities": 33194,
+        "negative_core_facts": 0
+      }
+    ],
+    "ready_profile_quality": [
+      {
+        "per_basis": "per_recipe",
+        "data_source": "300recipes",
+        "profiles": 1,
+        "complete_nonnegative": 0,
+        "positive_serving_g": 0,
+        "positive_servings": 1,
+        "fiber_gt_carbs": 0,
+        "negative_core": 0,
+        "broad_energy_flags": 0
+      },
+      {
+        "per_basis": "per_serving",
+        "data_source": "claude-generated-recipes",
+        "profiles": 2,
+        "complete_nonnegative": 2,
+        "positive_serving_g": 0,
+        "positive_servings": 2,
+        "fiber_gt_carbs": 0,
+        "negative_core": 0,
+        "broad_energy_flags": 0
+      },
+      {
+        "per_basis": "per_serving",
+        "data_source": "claude-generated-recipes-medium-confidence",
+        "profiles": 7809,
+        "complete_nonnegative": 7775,
+        "positive_serving_g": 0,
+        "positive_servings": 7809,
+        "fiber_gt_carbs": 0,
+        "negative_core": 0,
+        "broad_energy_flags": 13
+      },
+      {
+        "per_basis": "per_recipe",
+        "data_source": "indb-data",
+        "profiles": 9,
+        "complete_nonnegative": 9,
+        "positive_serving_g": 0,
+        "positive_servings": 9,
+        "fiber_gt_carbs": 0,
+        "negative_core": 0,
+        "broad_energy_flags": 0
+      },
+      {
+        "per_basis": "per_recipe",
+        "data_source": "kaggle-recipes-images",
+        "profiles": 3301,
+        "complete_nonnegative": 3161,
+        "positive_serving_g": 0,
+        "positive_servings": 3301,
+        "fiber_gt_carbs": 6,
+        "negative_core": 0,
+        "broad_energy_flags": 147
+      },
+      {
+        "per_basis": "per_recipe",
+        "data_source": "500-indian-recipes",
+        "profiles": 4,
+        "complete_nonnegative": 0,
+        "positive_serving_g": 0,
+        "positive_servings": 4,
+        "fiber_gt_carbs": 0,
+        "negative_core": 0,
+        "broad_energy_flags": 0
+      },
+      {
+        "per_basis": "per_recipe",
+        "data_source": "fruits-data",
+        "profiles": 1,
+        "complete_nonnegative": 1,
+        "positive_serving_g": 0,
+        "positive_servings": 1,
+        "fiber_gt_carbs": 0,
+        "negative_core": 0,
+        "broad_energy_flags": 0
+      },
+      {
+        "per_basis": "per_recipe",
+        "data_source": "allrecipes_full",
+        "profiles": 15510,
+        "complete_nonnegative": 14425,
+        "positive_serving_g": 0,
+        "positive_servings": 15510,
+        "fiber_gt_carbs": 13,
+        "negative_core": 0,
+        "broad_energy_flags": 510
+      },
+      {
+        "per_basis": "per_serving",
+        "data_source": "claude-generated-recipes-high-confidence",
+        "profiles": 6272,
+        "complete_nonnegative": 6230,
+        "positive_serving_g": 0,
+        "positive_servings": 6272,
+        "fiber_gt_carbs": 0,
+        "negative_core": 0,
+        "broad_energy_flags": 9
+      },
+      {
+        "per_basis": "per_recipe",
+        "data_source": "test-json-recipes",
+        "profiles": 5,
+        "complete_nonnegative": 5,
+        "positive_serving_g": 0,
+        "positive_servings": 5,
+        "fiber_gt_carbs": 0,
+        "negative_core": 0,
+        "broad_energy_flags": 1
+      },
+      {
+        "per_basis": "per_recipe",
+        "data_source": "1000-recipes-json-data-ar",
+        "profiles": 280,
+        "complete_nonnegative": 243,
+        "positive_serving_g": 0,
+        "positive_servings": 280,
+        "fiber_gt_carbs": 1,
+        "negative_core": 0,
+        "broad_energy_flags": 8
+      }
+    ],
+    "lineage_types": [
+      {
+        "entity_type": "ingredients",
+        "rows": 69241
+      },
+      {
+        "entity_type": "recipes",
+        "rows": 58811
+      },
+      {
+        "entity_type": "products",
+        "rows": 18122
+      }
+    ],
+    "lineage_case_matches": [
+      {
+        "type": "ingredient",
+        "entity_type": "ingredients",
+        "source_system": "USDA",
+        "rows": 2767,
+        "entities": 2764
+      },
+      {
+        "type": "ingredient",
+        "entity_type": "ingredients",
+        "source_system": "LLM_ESTIMATED",
+        "rows": 611,
+        "entities": 609
+      },
+      {
+        "type": "ingredient",
+        "entity_type": "ingredients",
+        "source_system": "B2C_USER_GENERATED",
+        "rows": 2,
+        "entities": 2
+      },
+      {
+        "type": "ingredient",
+        "entity_type": "ingredients",
+        "source_system": "PERMANENTLY_FAILED",
+        "rows": 1,
+        "entities": 1
+      },
+      {
+        "type": "product",
+        "entity_type": "products",
+        "source_system": "grocerydb_products_complete",
+        "rows": 7195,
+        "entities": 5896
+      },
+      {
+        "type": "product",
+        "entity_type": "products",
+        "source_system": "openfoodfacts_batch_2",
+        "rows": 3140,
+        "entities": 2561
+      },
+      {
+        "type": "product",
+        "entity_type": "products",
+        "source_system": "walmart_equivalent",
+        "rows": 2286,
+        "entities": 1903
+      },
+      {
+        "type": "product",
+        "entity_type": "products",
+        "source_system": "kroger_equivalent",
+        "rows": 1509,
+        "entities": 1255
+      },
+      {
+        "type": "product",
+        "entity_type": "products",
+        "source_system": "openfoodfacts_batch_1",
+        "rows": 1483,
+        "entities": 1171
+      },
+      {
+        "type": "product",
+        "entity_type": "products",
+        "source_system": "3000-products-batch-1",
+        "rows": 436,
+        "entities": 359
+      },
+      {
+        "type": "product",
+        "entity_type": "products",
+        "source_system": "kroger-produce",
+        "rows": 228,
+        "entities": 228
+      },
+      {
+        "type": "product",
+        "entity_type": "products",
+        "source_system": "walmart-produce",
+        "rows": 98,
+        "entities": 98
+      },
+      {
+        "type": "product",
+        "entity_type": "products",
+        "source_system": "openfoodfacts",
+        "rows": 6,
+        "entities": 6
+      },
+      {
+        "type": "product",
+        "entity_type": "products",
+        "source_system": "Grocery_DB",
+        "rows": 3,
+        "entities": 3
+      },
+      {
+        "type": "recipe",
+        "entity_type": "recipes",
+        "source_system": "allrecipes_full",
+        "rows": 22834,
+        "entities": 22285
+      },
+      {
+        "type": "recipe",
+        "entity_type": "recipes",
+        "source_system": "kaggle-recipes-images",
+        "rows": 9236,
+        "entities": 9085
+      },
+      {
+        "type": "recipe",
+        "entity_type": "recipes",
+        "source_system": "claude-generated-recipes-medium-confidence",
+        "rows": 7947,
+        "entities": 7947
+      },
+      {
+        "type": "recipe",
+        "entity_type": "recipes",
+        "source_system": "claude-generated-recipes-high-confidence",
+        "rows": 6387,
+        "entities": 6387
+      },
+      {
+        "type": "recipe",
+        "entity_type": "recipes",
+        "source_system": "1000-recipes-json-data-ar",
+        "rows": 845,
+        "entities": 836
+      },
+      {
+        "type": "recipe",
+        "entity_type": "recipes",
+        "source_system": "indb-data",
+        "rows": 650,
+        "entities": 649
+      },
+      {
+        "type": "recipe",
+        "entity_type": "recipes",
+        "source_system": "500-indian-recipes",
+        "rows": 395,
+        "entities": 393
+      },
+      {
+        "type": "recipe",
+        "entity_type": "recipes",
+        "source_system": "300recipes",
+        "rows": 177,
+        "entities": 177
+      },
+      {
+        "type": "recipe",
+        "entity_type": "recipes",
+        "source_system": "indian-recipes-after-300-test",
+        "rows": 136,
+        "entities": 136
+      },
+      {
+        "type": "recipe",
+        "entity_type": "recipes",
+        "source_system": "fruits-data",
+        "rows": 70,
+        "entities": 70
+      },
+      {
+        "type": "recipe",
+        "entity_type": "recipes",
+        "source_system": "test-json-recipes",
+        "rows": 31,
+        "entities": 31
+      },
+      {
+        "type": "recipe",
+        "entity_type": "recipes",
+        "source_system": "claude-generated-recipes",
+        "rows": 8,
+        "entities": 8
+      },
+      {
+        "type": "recipe",
+        "entity_type": "recipes",
+        "source_system": "epicurious_sample",
+        "rows": 4,
+        "entities": 4
+      },
+      {
+        "type": "recipe",
+        "entity_type": "recipes",
+        "source_system": "indb_1rec",
+        "rows": 1,
+        "entities": 1
+      }
+    ],
+    "recipe_lineage_silver": [
+      {
+        "entity_type": "recipes",
+        "source_system": "allrecipes_full",
+        "matched_recipes": 15439
+      },
+      {
+        "entity_type": "recipes",
+        "source_system": "claude-generated-recipes-medium-confidence",
+        "matched_recipes": 7947
+      },
+      {
+        "entity_type": "recipes",
+        "source_system": "claude-generated-recipes-high-confidence",
+        "matched_recipes": 6387
+      },
+      {
+        "entity_type": "recipes",
+        "source_system": "kaggle-recipes-images",
+        "matched_recipes": 3134
+      },
+      {
+        "entity_type": "recipes",
+        "source_system": "1000-recipes-json-data-ar",
+        "matched_recipes": 278
+      },
+      {
+        "entity_type": "recipes",
+        "source_system": "test-json-recipes",
+        "matched_recipes": 5
+      },
+      {
+        "entity_type": "recipes",
+        "source_system": "epicurious_sample",
+        "matched_recipes": 2
+      },
+      {
+        "entity_type": "recipes",
+        "source_system": "claude-generated-recipes",
+        "matched_recipes": 2
+      }
+    ],
+    "ready_recipe_sources": [
+      {
+        "source_type": null,
+        "data_source": "allrecipes_full",
+        "per_basis": "per_recipe",
+        "recipes": 15510,
+        "yield_conflicts": 141,
+        "incomplete": 1085
+      },
+      {
+        "source_type": null,
+        "data_source": "claude-generated-recipes-medium-confidence",
+        "per_basis": "per_serving",
+        "recipes": 7809,
+        "yield_conflicts": 0,
+        "incomplete": 34
+      },
+      {
+        "source_type": null,
+        "data_source": "claude-generated-recipes-high-confidence",
+        "per_basis": "per_serving",
+        "recipes": 6272,
+        "yield_conflicts": 0,
+        "incomplete": 42
+      },
+      {
+        "source_type": null,
+        "data_source": "kaggle-recipes-images",
+        "per_basis": "per_recipe",
+        "recipes": 3301,
+        "yield_conflicts": 143,
+        "incomplete": 140
+      },
+      {
+        "source_type": null,
+        "data_source": "1000-recipes-json-data-ar",
+        "per_basis": "per_recipe",
+        "recipes": 280,
+        "yield_conflicts": 9,
+        "incomplete": 37
+      },
+      {
+        "source_type": null,
+        "data_source": "indb-data",
+        "per_basis": "per_recipe",
+        "recipes": 9,
+        "yield_conflicts": 5,
+        "incomplete": 0
+      },
+      {
+        "source_type": null,
+        "data_source": "test-json-recipes",
+        "per_basis": "per_recipe",
+        "recipes": 5,
+        "yield_conflicts": 0,
+        "incomplete": 0
+      },
+      {
+        "source_type": null,
+        "data_source": "500-indian-recipes",
+        "per_basis": "per_recipe",
+        "recipes": 4,
+        "yield_conflicts": 1,
+        "incomplete": 4
+      },
+      {
+        "source_type": null,
+        "data_source": "claude-generated-recipes",
+        "per_basis": "per_serving",
+        "recipes": 2,
+        "yield_conflicts": 0,
+        "incomplete": 0
+      },
+      {
+        "source_type": null,
+        "data_source": "fruits-data",
+        "per_basis": "per_recipe",
+        "recipes": 1,
+        "yield_conflicts": 0,
+        "incomplete": 0
+      },
+      {
+        "source_type": null,
+        "data_source": "300recipes",
+        "per_basis": "per_recipe",
+        "recipes": 1,
+        "yield_conflicts": 0,
+        "incomplete": 1
+      }
+    ],
+    "selected_fact_sources": [
+      {
+        "entity_type": "ingredient",
+        "data_source": "USDA",
+        "facts": 34851,
+        "entities": 2745
+      },
+      {
+        "entity_type": "ingredient",
+        "data_source": "LLM_ESTIMATED",
+        "facts": 6167,
+        "entities": 634
+      },
+      {
+        "entity_type": "product",
+        "data_source": "grocerydb_products_complete",
+        "facts": 49454,
+        "entities": 5188
+      },
+      {
+        "entity_type": "product",
+        "data_source": "openfoodfacts_batch_2",
+        "facts": 22390,
+        "entities": 2390
+      },
+      {
+        "entity_type": "product",
+        "data_source": "walmart_equivalent",
+        "facts": 15900,
+        "entities": 1567
+      },
+      {
+        "entity_type": "product",
+        "data_source": "kroger_equivalent",
+        "facts": 15575,
+        "entities": 1242
+      },
+      {
+        "entity_type": "product",
+        "data_source": "openfoodfacts_batch_1",
+        "facts": 10713,
+        "entities": 1096
+      },
+      {
+        "entity_type": "product",
+        "data_source": "kroger-produce",
+        "facts": 2392,
+        "entities": 228
+      },
+      {
+        "entity_type": "product",
+        "data_source": "3000-products-batch-1",
+        "facts": 1279,
+        "entities": 140
+      },
+      {
+        "entity_type": "product",
+        "data_source": "walmart-produce",
+        "facts": 977,
+        "entities": 98
+      },
+      {
+        "entity_type": "product",
+        "data_source": "Grocery_DB",
+        "facts": 37,
+        "entities": 3
+      },
+      {
+        "entity_type": "product",
+        "data_source": "openfoodfacts",
+        "facts": 17,
+        "entities": 2
+      },
+      {
+        "entity_type": "recipe",
+        "data_source": "claude-generated-recipes-medium-confidence",
+        "facts": 135339,
+        "entities": 7947
+      },
+      {
+        "entity_type": "recipe",
+        "data_source": "allrecipes_full",
+        "facts": 121743,
+        "entities": 15397
+      },
+      {
+        "entity_type": "recipe",
+        "data_source": "claude-generated-recipes-high-confidence",
+        "facts": 108515,
+        "entities": 6387
+      },
+      {
+        "entity_type": "recipe",
+        "data_source": "kaggle-recipes-images",
+        "facts": 25267,
+        "entities": 3196
+      },
+      {
+        "entity_type": "recipe",
+        "data_source": "1000-recipes-json-data-ar",
+        "facts": 2116,
+        "entities": 270
+      },
+      {
+        "entity_type": "recipe",
+        "data_source": "claude-generated-recipes",
+        "facts": 39,
+        "entities": 5
+      },
+      {
+        "entity_type": "recipe",
+        "data_source": "test-json-recipes",
+        "facts": 39,
+        "entities": 5
+      },
+      {
+        "entity_type": "recipe",
+        "data_source": "indb-data",
+        "facts": 2,
+        "entities": 2
+      }
+    ],
+    "facts_profile_comparison": [
+      {
+        "per_basis": "per_recipe",
+        "per_amount": "per_recipe",
+        "nutrient_code": "calories-energy",
+        "facts": 19111,
+        "direct_differences": 252,
+        "direct_gt_point01": 251,
+        "serving_scaled_differences": 17671
+      },
+      {
+        "per_basis": "per_recipe",
+        "per_amount": "per_recipe",
+        "nutrient_code": "dietary-fiber",
+        "facts": 17862,
+        "direct_differences": 242,
+        "direct_gt_point01": 224,
+        "serving_scaled_differences": 16479
+      },
+      {
+        "per_basis": "per_recipe",
+        "per_amount": "per_recipe",
+        "nutrient_code": "protein",
+        "facts": 19111,
+        "direct_differences": 251,
+        "direct_gt_point01": 243,
+        "serving_scaled_differences": 17664
+      },
+      {
+        "per_basis": "per_recipe",
+        "per_amount": "per_recipe",
+        "nutrient_code": "total-carbohydrates",
+        "facts": 19111,
+        "direct_differences": 251,
+        "direct_gt_point01": 249,
+        "serving_scaled_differences": 17669
+      },
+      {
+        "per_basis": "per_recipe",
+        "per_amount": "per_recipe",
+        "nutrient_code": "total-fat",
+        "facts": 19111,
+        "direct_differences": 251,
+        "direct_gt_point01": 249,
+        "serving_scaled_differences": 17668
+      },
+      {
+        "per_basis": "per_serving",
+        "per_amount": "per_serving",
+        "nutrient_code": "calories-energy",
+        "facts": 14083,
+        "direct_differences": 0,
+        "direct_gt_point01": 0,
+        "serving_scaled_differences": 0
+      },
+      {
+        "per_basis": "per_serving",
+        "per_amount": "per_serving",
+        "nutrient_code": "dietary-fiber",
+        "facts": 14008,
+        "direct_differences": 0,
+        "direct_gt_point01": 0,
+        "serving_scaled_differences": 0
+      },
+      {
+        "per_basis": "per_serving",
+        "per_amount": "per_serving",
+        "nutrient_code": "protein",
+        "facts": 14079,
+        "direct_differences": 0,
+        "direct_gt_point01": 0,
+        "serving_scaled_differences": 0
+      },
+      {
+        "per_basis": "per_serving",
+        "per_amount": "per_serving",
+        "nutrient_code": "total-carbohydrates",
+        "facts": 14083,
+        "direct_differences": 0,
+        "direct_gt_point01": 0,
+        "serving_scaled_differences": 0
+      },
+      {
+        "per_basis": "per_serving",
+        "per_amount": "per_serving",
+        "nutrient_code": "total-fat",
+        "facts": 14081,
+        "direct_differences": 0,
+        "direct_gt_point01": 0,
+        "serving_scaled_differences": 0
+      }
+    ],
+    "closure_fact_missingness": [
+      {
+        "type": "ingredient",
+        "entities": 3374,
+        "all_core_facts": 1768,
+        "no_core_facts": 71
+      },
+      {
+        "type": "product",
+        "entities": 11397,
+        "all_core_facts": 6675,
+        "no_core_facts": 109
+      },
+      {
+        "type": "recipe",
+        "entities": 33194,
+        "all_core_facts": 31869,
+        "no_core_facts": 0
+      }
+    ],
+    "product_basis_overlap": [
+      {
+        "per_amount": "serving",
+        "products": 10509
+      },
+      {
+        "per_amount": "per_serving,serving",
+        "products": 778
+      },
+      {
+        "per_amount": "per_serving",
+        "products": 69
+      },
+      {
+        "per_amount": "100g,serving",
+        "products": 12
+      }
+    ],
+    "product_barcode_crosscheck": [
+      {
+        "gtin_vs_normalized": 9516,
+        "barcode_vs_gtin": 0,
+        "with_barcode": 0,
+        "nondigit_gtin": 0,
+        "unsupported_gtin_length": 0
+      }
+    ],
+    "recipe_quantities": [
+      {
+        "grams_quantity_disagreement": 0,
+        "lines_over_10kg": 5,
+        "orphan_ingredients": 0,
+        "with_preparation": 47083
+      }
+    ],
+    "measure_summary": [
+      {
+        "measures": 77,
+        "ingredient_specific": 0,
+        "name_patterns": 77,
+        "densities": 27,
+        "piece_weights": 50,
+        "approximate": 77,
+        "active": 77
+      }
+    ],
+    "conversion_summary": [
+      {
+        "unit_category": "cooking",
+        "source": null,
+        "is_approximate": false,
+        "conversions": 1,
+        "ingredient_specific": 0
+      },
+      {
+        "unit_category": "volume",
+        "source": null,
+        "is_approximate": false,
+        "conversions": 10,
+        "ingredient_specific": 0
+      },
+      {
+        "unit_category": "weight",
+        "source": "migration_059",
+        "is_approximate": false,
+        "conversions": 1,
+        "ingredient_specific": 0
+      },
+      {
+        "unit_category": "cooking",
+        "source": null,
+        "is_approximate": true,
+        "conversions": 2,
+        "ingredient_specific": 0
+      },
+      {
+        "unit_category": "package",
+        "source": null,
+        "is_approximate": true,
+        "conversions": 1,
+        "ingredient_specific": 0
+      },
+      {
+        "unit_category": "count",
+        "source": null,
+        "is_approximate": true,
+        "conversions": 6,
+        "ingredient_specific": 0
+      },
+      {
+        "unit_category": "weight",
+        "source": null,
+        "is_approximate": false,
+        "conversions": 5,
+        "ingredient_specific": 0
+      }
+    ],
+    "recipe_image_summary": [
+      {
+        "status": "succeeded",
+        "source_type": "generated_live",
+        "images": 23230,
+        "full_paths": 23230,
+        "thumb_paths": 23230
+      },
+      {
+        "status": "succeeded",
+        "source_type": "ingested_legacy",
+        "images": 8970,
+        "full_paths": 8970,
+        "thumb_paths": 8970
+      }
+    ],
+    "product_intersection": [
+      {
+        "gtin_core_serving_candidates": 8016,
+        "additional_screen_candidates": 6774
+      }
+    ],
+    "ready_ingredient_energy": [
+      {
+        "with_usda_id": 2772,
+        "missing_origin_type": 7,
+        "energy_flags": 13
+      }
+    ],
+    "corrected_lineage_coverage": [
+      {
+        "type": "ingredients",
+        "entities": 5429,
+        "lineage_rows": "5436",
+        "missing_lineage": 0,
+        "multiple_sources": 2,
+        "llm_estimated": 1292,
+        "user_generated": 2
+      },
+      {
+        "type": "products",
+        "entities": 11397,
+        "lineage_rows": "16384",
+        "missing_lineage": 0,
+        "multiple_sources": 1783,
+        "llm_estimated": 0,
+        "user_generated": 0
+      },
+      {
+        "type": "recipes",
+        "entities": 33194,
+        "lineage_rows": "48721",
+        "missing_lineage": 0,
+        "multiple_sources": 14408,
+        "llm_estimated": 0,
+        "user_generated": 0
+      }
+    ],
+    "ready_ingredient_fact_comparison": [
+      {
+        "nutrient_code": "calories-energy",
+        "facts": 5226,
+        "fact_fills_missing_column": 31,
+        "disagreements": 40,
+        "explicit_zero_missing_in_column": 0
+      },
+      {
+        "nutrient_code": "dietary-fiber",
+        "facts": 3155,
+        "fact_fills_missing_column": 65,
+        "disagreements": 6,
+        "explicit_zero_missing_in_column": 0
+      },
+      {
+        "nutrient_code": "protein",
+        "facts": 4605,
+        "fact_fills_missing_column": 37,
+        "disagreements": 26,
+        "explicit_zero_missing_in_column": 0
+      },
+      {
+        "nutrient_code": "total-carbohydrates",
+        "facts": 4706,
+        "fact_fills_missing_column": 32,
+        "disagreements": 40,
+        "explicit_zero_missing_in_column": 0
+      },
+      {
+        "nutrient_code": "total-fat",
+        "facts": 4533,
+        "fact_fills_missing_column": 52,
+        "disagreements": 27,
+        "explicit_zero_missing_in_column": 0
+      }
+    ],
+    "recipe_publish_screen": [
+      {
+        "complete_yield_agree": 31565,
+        "non_generated_profile_screen": 16905,
+        "per_serving_profiles_with_servings_one": 14083
+      }
+    ],
+    "product_fact_column_conflicts": [
+      {
+        "per_amount": "100g",
+        "nutrient_code": "calories-energy",
+        "facts": 12,
+        "differences": 10
+      },
+      {
+        "per_amount": "100g",
+        "nutrient_code": "dietary-fiber",
+        "facts": 4,
+        "differences": 2
+      },
+      {
+        "per_amount": "100g",
+        "nutrient_code": "protein",
+        "facts": 6,
+        "differences": 4
+      },
+      {
+        "per_amount": "100g",
+        "nutrient_code": "total-carbohydrates",
+        "facts": 12,
+        "differences": 10
+      },
+      {
+        "per_amount": "100g",
+        "nutrient_code": "total-fat",
+        "facts": 10,
+        "differences": 8
+      },
+      {
+        "per_amount": "per_serving",
+        "nutrient_code": "calories-energy",
+        "facts": 844,
+        "differences": 147
+      },
+      {
+        "per_amount": "per_serving",
+        "nutrient_code": "dietary-fiber",
+        "facts": 467,
+        "differences": 62
+      },
+      {
+        "per_amount": "per_serving",
+        "nutrient_code": "protein",
+        "facts": 751,
+        "differences": 104
+      },
+      {
+        "per_amount": "per_serving",
+        "nutrient_code": "total-carbohydrates",
+        "facts": 760,
+        "differences": 111
+      },
+      {
+        "per_amount": "per_serving",
+        "nutrient_code": "total-fat",
+        "facts": 758,
+        "differences": 111
+      },
+      {
+        "per_amount": "serving",
+        "nutrient_code": "calories-energy",
+        "facts": 11191,
+        "differences": 129
+      },
+      {
+        "per_amount": "serving",
+        "nutrient_code": "dietary-fiber",
+        "facts": 7327,
+        "differences": 135
+      },
+      {
+        "per_amount": "serving",
+        "nutrient_code": "protein",
+        "facts": 9770,
+        "differences": 115
+      },
+      {
+        "per_amount": "serving",
+        "nutrient_code": "total-carbohydrates",
+        "facts": 10602,
+        "differences": 137
+      },
+      {
+        "per_amount": "serving",
+        "nutrient_code": "total-fat",
+        "facts": 9609,
+        "differences": 139
+      }
+    ],
+    "historical_mapping_followup": [
+      {
+        "display_status": "hidden",
+        "usda_fdc_id": "1750340",
+        "ingredients": 1
+      }
+    ],
+    "barcode_normalization": [
+      {
+        "missing_normalized": 0,
+        "equivalent_when_zero_padded": 11397,
+        "not_zero_padding_equivalent": 0
+      }
+    ],
+    "current_source_sizes": [
+      {
+        "relname": "cuisines",
+        "table_bytes": 16384,
+        "index_bytes": 81920,
+        "total_bytes": 98304
+      },
+      {
+        "relname": "data_lineage",
+        "table_bytes": 30597120,
+        "index_bytes": 33177600,
+        "total_bytes": 63774720
+      },
+      {
+        "relname": "ingredient_measures",
+        "table_bytes": 49152,
+        "index_bytes": 32768,
+        "total_bytes": 81920
+      },
+      {
+        "relname": "ingredients",
+        "table_bytes": 16564224,
+        "index_bytes": 20914176,
+        "total_bytes": 37478400
+      },
+      {
+        "relname": "nutrition_definitions",
+        "table_bytes": 57344,
+        "index_bytes": 114688,
+        "total_bytes": 172032
+      },
+      {
+        "relname": "nutrition_facts",
+        "table_bytes": 243163136,
+        "index_bytes": 345989120,
+        "total_bytes": 589152256
+      },
+      {
+        "relname": "product_categories",
+        "table_bytes": 49152,
+        "index_bytes": 73728,
+        "total_bytes": 122880
+      },
+      {
+        "relname": "product_category_mapping",
+        "table_bytes": 1228800,
+        "index_bytes": 688128,
+        "total_bytes": 1916928
+      },
+      {
+        "relname": "product_images",
+        "table_bytes": 2973696,
+        "index_bytes": 4792320,
+        "total_bytes": 7766016
+      },
+      {
+        "relname": "product_ingredients",
+        "table_bytes": 33284096,
+        "index_bytes": 30072832,
+        "total_bytes": 63356928
+      },
+      {
+        "relname": "products",
+        "table_bytes": 17088512,
+        "index_bytes": 11182080,
+        "total_bytes": 28270592
+      },
+      {
+        "relname": "recipe_images",
+        "table_bytes": 65396736,
+        "index_bytes": 10747904,
+        "total_bytes": 76144640
+      },
+      {
+        "relname": "recipe_ingredients",
+        "table_bytes": 90521600,
+        "index_bytes": 73818112,
+        "total_bytes": 164339712
+      },
+      {
+        "relname": "recipe_nutrition_profiles",
+        "table_bytes": 9084928,
+        "index_bytes": 8306688,
+        "total_bytes": 17391616
+      },
+      {
+        "relname": "recipes",
+        "table_bytes": 62382080,
+        "index_bytes": 44539904,
+        "total_bytes": 106921984
+      },
+      {
+        "relname": "unit_conversions",
+        "table_bytes": 16384,
+        "index_bytes": 49152,
+        "total_bytes": 65536
+      }
+    ],
+    "post_audit_recipe_count": [
+      {
+        "observed_at": "2026-11-15 04:07:05.538140+00:00",
+        "ready_recipes": 33194,
+        "all_recipes": 42142
+      }
+    ]
+  },
+  "size_measurement": {
+    "snapshot_observed_at": "2026-11-15 04:06:05.029574+00:00",
+    "snapshot": "1284264:1284264:",
+    "tables": {
+      "recipes": {
+        "rows": 33194,
+        "sample_rows": 1500,
+        "projected_json_bytes": 31663625,
+        "projected_tuple_bytes": 22560112,
+        "sample_csv_bytes": 1072343,
+        "sample_gzip_bytes": 313895,
+        "estimated_csv_bytes": 23730236,
+        "estimated_gzip_bytes": 6946287,
+        "seconds": 1.094
+      },
+      "recipe_ingredients": {
+        "rows": 264631,
+        "sample_rows": 1500,
+        "projected_json_bytes": 98201137,
+        "projected_tuple_bytes": 30497541,
+        "sample_csv_bytes": 249127,
+        "sample_gzip_bytes": 98378,
+        "estimated_csv_bytes": 43951151,
+        "estimated_gzip_bytes": 17355912,
+        "seconds": 2.11
+      },
+      "recipe_nutrition_profiles": {
+        "rows": 33194,
+        "sample_rows": 1500,
+        "projected_json_bytes": 11358169,
+        "projected_tuple_bytes": 5102864,
+        "sample_csv_bytes": 261046,
+        "sample_gzip_bytes": 98667,
+        "estimated_csv_bytes": 5776774,
+        "estimated_gzip_bytes": 2183435,
+        "seconds": 0.562
+      },
+      "ingredients_all_ready": {
+        "rows": 5429,
+        "sample_rows": 1500,
+        "projected_json_bytes": 1730901,
+        "projected_tuple_bytes": 628701,
+        "sample_csv_bytes": 193352,
+        "sample_gzip_bytes": 67109,
+        "estimated_csv_bytes": 699805,
+        "estimated_gzip_bytes": 242890,
+        "seconds": 0.219
+      },
+      "ingredients_dependency_only": {
+        "rows": 3374,
+        "sample_rows": 1500,
+        "projected_json_bytes": 1075435,
+        "projected_tuple_bytes": 390509,
+        "sample_csv_bytes": 192913,
+        "sample_gzip_bytes": 66868,
+        "estimated_csv_bytes": 433926,
+        "estimated_gzip_bytes": 150408,
+        "seconds": 0.906
+      },
+      "products": {
+        "rows": 11397,
+        "sample_rows": 1500,
+        "projected_json_bytes": 7737656,
+        "projected_tuple_bytes": 4025320,
+        "sample_csv_bytes": 548231,
+        "sample_gzip_bytes": 191283,
+        "estimated_csv_bytes": 4165459,
+        "estimated_gzip_bytes": 1453368,
+        "seconds": 0.515
+      },
+      "product_ingredients": {
+        "rows": 105862,
+        "sample_rows": 1500,
+        "projected_json_bytes": 35599187,
+        "projected_tuple_bytes": 10605301,
+        "sample_csv_bytes": 240575,
+        "sample_gzip_bytes": 87040,
+        "estimated_csv_bytes": 16978500,
+        "estimated_gzip_bytes": 6142819,
+        "seconds": 0.828
+      },
+      "core_nutrition_facts": {
+        "rows": 238988,
+        "sample_rows": 1500,
+        "projected_json_bytes": 90632674,
+        "projected_tuple_bytes": 34377776,
+        "sample_csv_bytes": 297807,
+        "sample_gzip_bytes": 88737,
+        "estimated_csv_bytes": 47448200,
+        "estimated_gzip_bytes": 14138052,
+        "seconds": 3.875
+      },
+      "compact_lineage": {
+        "rows": 70541,
+        "sample_rows": 1500,
+        "projected_json_bytes": 23324896,
+        "projected_tuple_bytes": 11386128,
+        "sample_csv_bytes": 321916,
+        "sample_gzip_bytes": 91584,
+        "estimated_csv_bytes": 15138851,
+        "estimated_gzip_bytes": 4306951,
+        "seconds": 0.735
+      },
+      "recipe_image_paths_optional": {
+        "rows": 32200,
+        "sample_rows": 1500,
+        "projected_json_bytes": 15719082,
+        "projected_tuple_bytes": 11076800,
+        "sample_csv_bytes": 564281,
+        "sample_gzip_bytes": 193953,
+        "estimated_csv_bytes": 12113232,
+        "estimated_gzip_bytes": 4163524,
+        "seconds": 0.594
+      },
+      "cuisines": {
+        "rows": 25,
+        "sample_rows": 25,
+        "projected_json_bytes": 3834,
+        "projected_tuple_bytes": 1431,
+        "sample_csv_bytes": 1659,
+        "sample_gzip_bytes": 875,
+        "estimated_csv_bytes": 1659,
+        "estimated_gzip_bytes": 875,
+        "seconds": 0.141
+      },
+      "nutrition_definitions": {
+        "rows": 122,
+        "sample_rows": 122,
+        "projected_json_bytes": 18152,
+        "projected_tuple_bytes": 8947,
+        "sample_csv_bytes": 8690,
+        "sample_gzip_bytes": 4674,
+        "estimated_csv_bytes": 8690,
+        "estimated_gzip_bytes": 4674,
+        "seconds": 0.172
+      },
+      "product_categories": {
+        "rows": 16,
+        "sample_rows": 16,
+        "projected_json_bytes": 4970,
+        "projected_tuple_bytes": 3968,
+        "sample_csv_bytes": 3878,
+        "sample_gzip_bytes": 1992,
+        "estimated_csv_bytes": 3878,
+        "estimated_gzip_bytes": 1992,
+        "seconds": 0.14
+      },
+      "product_category_mapping": {
+        "rows": 11397,
+        "sample_rows": 1500,
+        "projected_json_bytes": 2223863,
+        "projected_tuple_bytes": 904005,
+        "sample_csv_bytes": 179030,
+        "sample_gzip_bytes": 37053,
+        "estimated_csv_bytes": 1360270,
+        "estimated_gzip_bytes": 281529,
+        "seconds": 0.406
+      },
+      "unit_conversions": {
+        "rows": 26,
+        "sample_rows": 26,
+        "projected_json_bytes": 6016,
+        "projected_tuple_bytes": 3327,
+        "sample_csv_bytes": 2509,
+        "sample_gzip_bytes": 1203,
+        "estimated_csv_bytes": 2509,
+        "estimated_gzip_bytes": 1203,
+        "seconds": 0.156
+      },
+      "ingredient_measures": {
+        "rows": 77,
+        "sample_rows": 77,
+        "projected_json_bytes": 23836,
+        "projected_tuple_bytes": 8166,
+        "sample_csv_bytes": 8352,
+        "sample_gzip_bytes": 3627,
+        "estimated_csv_bytes": 8352,
+        "estimated_gzip_bytes": 3627,
+        "seconds": 0.156
+      }
+    }
+  },
+  "totals": {
+    "six_tables": {
+      "rows": 453707,
+      "estimated_csv_bytes": 95301925,
+      "estimated_gzip_bytes": 34324711,
+      "projected_tuple_bytes": 73419839,
+      "projected_json_bytes": 186290675
+    },
+    "with_evidence": {
+      "rows": 774899,
+      "estimated_csv_bytes": 159274334,
+      "estimated_gzip_bytes": 53063614,
+      "projected_tuple_bytes": 120113587,
+      "projected_json_bytes": 302528916
+    },
+    "with_optional_image_paths": {
+      "rows": 807099,
+      "estimated_csv_bytes": 171387566,
+      "estimated_gzip_bytes": 57227138,
+      "projected_tuple_bytes": 131190387,
+      "projected_json_bytes": 318247998
+    }
+  },
+  "target": {
+    "name": "Glycolens",
+    "postgres_version": "17.11",
+    "database_bytes": 15414963,
+    "catalog_schema_exists": false,
+    "public_tables": 18,
+    "read_only": true,
+    "observed_at": "2026-11-15T04:07:29Z"
+  },
+  "limitations": [
+    "Aggregate audit batches used separate read-only transactions; not one final release snapshot.",
+    "Sizing projections share one REPEATABLE READ READ ONLY snapshot.",
+    "CSV/gzip estimates scale at most 1500 deterministic MD5-ordered rows per projection, not full exports or confidence intervals.",
+    "Projected JSON and record bytes are measured logical representations, not heap/index/disk usage.",
+    "No source-name identity validation, licence approval, full export, destination restore/import, application activation or physical disk measurement was performed.",
+    "Lineage uses plural entity types; nutrition facts use singular entity types. An initial singular lineage join and one ambiguous-column query were corrected before conclusions."
+  ]
+}

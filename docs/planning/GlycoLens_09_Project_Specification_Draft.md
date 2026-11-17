@@ -1,5 +1,9 @@
 # GlycoLens Project Specification Draft
 
+## November 16: Milestone 3 reporting artifacts
+
+The [advisor report](../reports/GlycoLens_Milestone_3_Advisor_Report_2026-11-16.md), [presentation](../presentations/GlycoLens_Milestone_3_Presentation_2026-11-17.pptx) and [timed notes](../reports/GlycoLens_Milestone_3_Presentation_Notes.md) document core implementation and its current evidence limits. They retain separate personal logging and virtual research forecasts, distinguish synthetic input sensitivity from matching-outcome accuracy, and describe ongoing Kaggle recipe ingestion. This reporting checkpoint does not revise the approved product, research method, clinical boundaries or outstanding acceptance.
+
 ## November 14: personal and simulation workspaces implemented
 
 Independent personal meal logging/current dates and a labeled synthetic simulation workspace are implemented under one account. Synthetic history remains discoverable without being relabeled as personal consumption. Scientific/model/cohort/calibration results are unchanged; public-release acceptance is still separate. [Actual validation](../reports/workspace-separation-validation-2026-11-14.md) and [44-case ledger](../testing/workspace-separation-results.json): **28 PASS, 16 PARTIAL**. Changes remain local; human Chrome and other qualified gates are not claimed complete.

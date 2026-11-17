@@ -1,5 +1,17 @@
 # GlycoLens phased web application implementation plan
 
+## November 14: P07 catalog admission evidence updated
+
+The [source-ready reassessment](../reports/azure-nutrition-catalog-assessment-2026-11-06.md)
+and [migration runbook](../reports/azure-to-supabase-catalog-migration-strategy-2026-11-06.md)
+identify exact candidate selections, dependency counts, mixed recipe bases,
+core-fact/lineage evidence and current target baseline. P07 remains pending:
+`display_status = 'user_ready'` is not an approved corrected manifest. Resolve
+nutrient authority, generated/estimated labels, serving conflicts, barcode failures
+and rights; then verify the actual indexed restore, guarded forward migration,
+unpublished import, existing RLS and GL-P07-001 through GL-P07-015. No case status,
+cloud schema, provider or runtime is changed by this audit.
+
 ## November 14: personal and simulation workspaces implemented
 
 Plan 19 corrections to P01/P03/P04/P06/P07/P08/P09 are implemented: explicit workspace/source writes, current personal clock, independent totals/history, scoped drafts/requests and context-aware links/export. Earlier account-global source descriptions are historical where they control ordinary data; old result ledgers do not automatically pass this new contract. [Actual validation](../reports/workspace-separation-validation-2026-11-14.md) and [44-case ledger](../testing/workspace-separation-results.json): **28 PASS, 16 PARTIAL**. Changes remain local; human Chrome and other qualified gates are not claimed complete.

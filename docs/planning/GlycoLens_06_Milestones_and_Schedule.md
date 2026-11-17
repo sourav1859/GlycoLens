@@ -1,5 +1,20 @@
 # GlycoLens Milestones and Course-Aligned Schedule
 
+## November 16: Milestone 3 presentation deliverables prepared
+
+Prepared the [November 17 PowerPoint](../presentations/GlycoLens_Milestone_3_Presentation_2026-11-17.pptx), [matching 7:30 speaker notes](../reports/GlycoLens_Milestone_3_Presentation_Notes.md) and [advisor report](../reports/GlycoLens_Milestone_3_Advisor_Report_2026-11-16.md). Ten main slides and four hidden backups cover core implementation and analysis since the November 3 presentation. This completes document preparation only; actual rehearsal, presenter review, manual acceptance and remaining core evidence remain open. No course date, model default or scientific outcome changes.
+
+## November 14: catalog audit refreshed; execution stays pending
+
+The [Azure assessment](../reports/azure-nutrition-catalog-assessment-2026-11-06.md)
+and [strategy](../reports/azure-to-supabase-catalog-migration-strategy-2026-11-06.md)
+now measure the source-ready selection and current cloud baseline. The 151.90 MiB
+CSV / 50.61 MiB gzip estimate includes core nutrient evidence, compact lineage and
+lookups. This updates audit/design evidence; it does not complete M3 export,
+restore, P07 import/application acceptance or alter course dates. Before execution,
+resolve source authority/rights, mixed recipe bases, yields and quality findings,
+freeze the approved UUID manifest and measure the indexed target restore.
+
 ## November 14: personal and simulation workspaces implemented
 
 Plan 19 W0–W4 engineering is implemented. W5 has real cloud/API/CPU and Chromium fixture/live-browser evidence; manual Chrome/performance/failure-rehearsal/variant acceptance remains partial. No full M2, release or deadline-completion claim follows. [Actual validation](../reports/workspace-separation-validation-2026-11-14.md) and [44-case ledger](../testing/workspace-separation-results.json): **28 PASS, 16 PARTIAL**. Changes remain local; human Chrome and other qualified gates are not claimed complete.

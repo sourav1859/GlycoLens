@@ -1,5 +1,13 @@
 # Reports
 
+Milestone 3 package prepared November 16, 2026:
+
+- [Advisor report in Word](GlycoLens_Milestone_3_Advisor_Report_2026-11-16.docx) and [Markdown](GlycoLens_Milestone_3_Advisor_Report_2026-11-16.md): core work since the November 3 presentation, M2 carry-forward progress, UI/data connections, food/recipe services, model integration, controlled sensitivity analysis, qualified testing and remaining core priorities.
+- [Timed presentation notes in Word](GlycoLens_Milestone_3_Presentation_Notes.docx) and [Markdown](GlycoLens_Milestone_3_Presentation_Notes.md): 851 words of suggested speech targeting 7:30, with backup explanations and prepared answers.
+- [Matching PowerPoint](../presentations/GlycoLens_Milestone_3_Presentation_2026-11-17.pptx): ten main slides and four hidden backups in the existing RIT theme.
+
+The documents identify ongoing recipe ingestion from thedevastator's Kaggle Recipes Dataset. They distinguish current application analysis from earlier October accuracy results and do not declare full milestone acceptance.
+
 Current delivery work is tracked in [implementation plan 17](../planning/GlycoLens_17_Webapp_Implementation_Plan.md)
 with dedicated cloud Supabase, [test cases](../testing/webapp-cloud-test-cases.md)
 and [actual-result ledger](../testing/webapp-validation-results.json). Earlier local
@@ -9,9 +17,10 @@ prototype/review evidence below is historical, not current cloud acceptance.
 
 - [November 10 Nutri-App Figma reference review](figma-reference-review-2026-11-10.md): authenticated read of all 44 unique supplied nodes, representative visual review, classification corrections and GlycoLens adaptations/exclusions. Supports the responsive UI design; no new application screens are delivered.
 
-- [November 6 Azure to Supabase catalog migration strategy](azure-to-supabase-catalog-migration-strategy-2026-11-06.md): measured source sizes, sample-based export estimates, current Free plan limits and a migration runbook. Recipe use is deferred until upstream correction and validation; no migration was executed.
+- [Azure to Supabase catalog migration strategy, updated November 14](azure-to-supabase-catalog-migration-strategy-2026-11-06.md): source-ready selection, evidence-bearing package sizes, measured destination baseline and staged migration/rollback runbook. No migration or activation was executed.
+- [November 14 gold catalog aggregate evidence](azure-gold-catalog-audit-2026-11-14.json): counts, readiness filters, quality/provenance findings and size projections; no credentials or food-row extracts.
 
-- [November 6 Azure nutrition catalog read-only assessment](azure-nutrition-catalog-assessment-2026-11-06.md): access confirmed, recipe/ingredient/product coverage, confirmed data-quality findings and proposed GlycoLens integration. No source adoption or database changes are implied.
+- [Azure nutrition catalog read-only assessment, updated November 14](azure-nutrition-catalog-assessment-2026-11-06.md): exact ready/dependency counts, mixed recipe bases, nutrient conflicts, barcode/provenance checks and limits on adoption. Historical November 6 findings remain labeled.
 
 Milestone 2 presentation prepared November 2 and revised November 3 with a
 7–8 minute speech (target 7:30) at the user’s request. The latest revision follows

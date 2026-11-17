@@ -1,5 +1,22 @@
 # GlycoLens Risks, Safety Boundaries, and Scope Controls
 
+## November 14: source readiness is not nutrition verification
+
+The [gold-only audit](../reports/azure-nutrition-catalog-assessment-2026-11-06.md)
+found 33,194 ready recipes but 299 yield conflicts, 1,343 incomplete profiles and
+mixed whole/per-serving bases. Generated-source profiles and estimated ingredient
+facts must not become verified nutrition. Six ready ingredients have negative
+carbohydrate; 1,706 ready product GTINs fail the check digit. Preserve NULLs,
+basis/units, original fact evidence and field-level source precedence. Candidate
+counts and plausibility screens are not food-accuracy or clinical approval.
+
+Use source-specific private configuration, read-only gold transactions and a
+separate reviewed destination catalog release. Never redirect the application DB
+to external production, copy source customers/health/pricing, mix workspace
+history, or publish unvalidated candidates. Secrets remain outside tracked
+artifacts. The audit made no source or cloud data/schema changes; source rights,
+restored capacity, least-privilege access and app acceptance remain gates.
+
 ## November 14: personal and simulation workspaces implemented
 
 Virtual rows cannot become personal totals by selecting a source, changing a date or retrying in another workspace. Ambiguous legacy rows remain read-only; old virtual timestamps are preserved. Personal forecasts have no enabled real source and cannot borrow simulator context. Research limitations remain unchanged; no new accuracy or clinical claim. [Actual validation](../reports/workspace-separation-validation-2026-11-14.md) and [44-case ledger](../testing/workspace-separation-results.json): **28 PASS, 16 PARTIAL**. Changes remain local; human Chrome and other qualified gates are not claimed complete.

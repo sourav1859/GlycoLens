@@ -1,5 +1,19 @@
 # GlycoLens Tech Stack and System Architecture
 
+## November 14: measured external catalog boundary
+
+The [updated migration design](../reports/azure-to-supabase-catalog-migration-strategy-2026-11-06.md)
+selects exact `gold.*.display_status = 'user_ready'` candidates and active products,
+with explicit dependency closure. Do not copy production roles, customer/vendor
+references, prices or non-gold data. Keep a separately validated, initially
+unexposed `catalog` release beside the existing application schema; preserve raw
+profile/fact evidence and map singular fact entity types to plural lineage types.
+Ready recipes mix 19,111 whole-recipe and 14,083 per-serving profiles; the current
+gram-based `public.foods` contract requires a reviewed recipe-serving adapter or
+verified cooked mass before activation. Supabase baseline is 15,414,963 bytes on
+Postgres 17.11 with no catalog schema; the indexed import allowance is provisional,
+not a restored measurement. No schema/adapter implementation or activation occurred.
+
 ## November 14: personal and simulation workspaces implemented
 
 Forward cloud migration `20261114173109` adds constrained meal workspace classification, preserving old evidence, and explicit trusted scope/source writes plus a shared scoped aggregate. Source creation no longer changes global app preferences. Owner/RLS, immutable forecast inputs and common adapters remain enforced. Same Auth, monorepo and Compose services. [Actual validation](../reports/workspace-separation-validation-2026-11-14.md) and [44-case ledger](../testing/workspace-separation-results.json): **28 PASS, 16 PARTIAL**. Changes remain local; human Chrome and other qualified gates are not claimed complete.

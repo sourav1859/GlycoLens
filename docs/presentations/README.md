@@ -1,5 +1,12 @@
 # Presentation Assets
 
+## Milestone 3 presentation
+
+- [November 17 PowerPoint](GlycoLens_Milestone_3_Presentation_2026-11-17.pptx): ten main slides and four hidden backups, using the supplied RIT masters, Arial typography and 16:9 format. Covers core implementation since the November 3 presentation, live food/recipe APIs, optional LightGBM integration, separate personal/simulation workspaces, sensitivity findings and remaining core checks.
+- [Matching Word notes](../reports/GlycoLens_Milestone_3_Presentation_Notes.docx) and [Markdown notes](../reports/GlycoLens_Milestone_3_Presentation_Notes.md): the same 851-word main-slide script embedded in PowerPoint, with a 7:30 target, emphasis points, definitions, sources and prepared questions.
+
+The deck contains recorded synthetic-account screenshots, two native editable charts, five native tables and an editable workflow. Package, layout, Arial-reference, chart-workbook and re-import checks passed. All fourteen final slides were exported through native PowerPoint for visual review; the notes and advisor report were rendered through native Word. Private build receipts and previews remain in `.cache/m3-delivery-2026-11-16/`. This is a prepared presentation package; rehearsal, owner review and remaining product acceptance are separate.
+
 This directory contains approved presentation source assets copied without altering their originals.
 
 ## Bootstrap inventory

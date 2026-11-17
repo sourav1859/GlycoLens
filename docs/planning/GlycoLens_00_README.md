@@ -1,5 +1,22 @@
 # GlycoLens Capstone Planning Pack
 
+## November 16: Milestone 3 presentation package prepared
+
+The [November 17 presentation](../presentations/GlycoLens_Milestone_3_Presentation_2026-11-17.pptx), [timed speaker notes](../reports/GlycoLens_Milestone_3_Presentation_Notes.md) and [advisor report](../reports/GlycoLens_Milestone_3_Advisor_Report_2026-11-16.md) consolidate the core implementation and analysis since the November 3 deck. The script targets 7:30 across ten main slides, with four hidden backups. Kaggle recipe ingestion is ongoing author-reported work. Document preparation changes no model default, research result or acceptance status; rehearsal and remaining core checks stay open.
+
+## November 14: Azure gold catalog reassessed
+
+The external production source remains separate from GlycoLens. A read-only
+[assessment](../reports/azure-nutrition-catalog-assessment-2026-11-06.md) verified
+`display_status = 'user_ready'`: 33,194 recipes, 5,429 ingredients and 11,397 active
+products. The recipe/product closure needs 3,374 ingredients; all ready ingredients
+can additionally support search. Readiness tags do not establish nutrition approval:
+mixed recipe bases, incomplete/estimated nutrients, yield conflicts and invalid
+GTINs remain. The [updated strategy](../reports/azure-to-supabase-catalog-migration-strategy-2026-11-06.md)
+estimates 151.90 MiB CSV / 50.61 MiB gzip including core fact evidence, lineage and
+lookups. Cloud baseline is measured; restored indexed size and publication approval
+remain gates. No full export, cloud data/schema import or app activation occurred.
+
 ## November 14: GitHub checkpoint authorization
 
 The user authorized committing and pushing the current implementation checkpoint on `main`, superseding the local-review hold for these changes. [Delivery scope and checks](../reports/github-checkpoint-delivery-2026-11-14.md) cover Plans 18 and 19. Publishing source does not close partial acceptance gates or deploy a hosted application. Earlier local-only notes below describe their dated checkpoints.
